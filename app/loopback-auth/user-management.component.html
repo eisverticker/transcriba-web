@@ -1,0 +1,23 @@
+<div *ngIf="isReleased">
+  <pagination-bar (pageChanged)="setPage($event)" [numOfPages]="numOfPages" [currentPage]="this.page"></pagination-bar>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Nutzer
+    </div>
+
+    <table class="table table-striped">
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>
+          <select class="form-control" (change)="changeRole($event, user)" [(ngModel)]="user.roles[user.roles.length-1].name" [disabled]="isLocked">
+            <option [value]="role.name" *ngFor="let role of roles;">{{ 'auth.roles.'+role.name  | translate }}</option>
+          </select>
+        </td>
+        <td class="text-right">
+          <delete-button [disabled]="isLocked" (xclick)="deleteUser(user)"></delete-button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

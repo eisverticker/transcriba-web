@@ -1,0 +1,13 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ 'title.userinfo' | translate }}
+  </div>
+  <div class="panel-body">
+    <p>{{ 'message.helloSomeone' | translate: { name: user.name } }}</p>
+    <button (click)="doLogout()" class="btn btn-primary">
+      {{ 'action.logout' | translate }}
+      <inline-spinner [active]="isLoggingOut"></inline-spinner>
+    </button>
+    <a *ngIf="user.isAdministrator()" [routerLink]="['/admin']" class="btn btn-primary">Administration</a>
+  </div>
+</div>

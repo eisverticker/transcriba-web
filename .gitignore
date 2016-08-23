@@ -1,0 +1,15 @@
+*~
+node_modules/
+typings/
+*.log
+app/*.js
+app/*.js.map
+app/**/*.js
+app/**/*.js.map
+to-do.txt
+web/js/*
+web/css/*
+web/fonts/*
+web/locales/*
+literatur/
+deprecated/

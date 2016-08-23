@@ -1,0 +1,8 @@
+<div [ngSwitch]="mode">
+  <be-patient *ngSwitchCase="'loading'"></be-patient>
+  <user-login (done)="finishLogin()" *ngSwitchCase="'unauthenticated'"></user-login>
+  <user-logout (done)="finishLogout()" *ngSwitchCase="'authenticated'"></user-logout>
+  <user-registration (done)="finishRegistration()" *ngSwitchCase="'register'"></user-registration>
+  <email-verification *ngSwitchCase="'verify'"></email-verification>
+  <password-reset (done)="finishReset()" *ngSwitchCase="'reset'"></password-reset>
+</div>
