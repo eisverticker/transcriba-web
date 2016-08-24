@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 
   <div class="container">
 
@@ -10,16 +10,21 @@
         <span class="icon-bar"></span>
       </button>
       <a [routerLinkActive]="['active']" [routerLink]="['']" class="navbar-brand">
-        <span class="glyphicon glyphicon-home"></span>
+        <img src="web/images/logo.png" />
       </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
-
         <li [routerLinkActive]="['active']" role="presentation">
-          <a [routerLink]="['/example']">Beispiel</a>
+          <a [routerLink]="['/']">Start</a>
+        </li>
+        <li [routerLinkActive]="['active']" role="presentation">
+          <a [routerLink]="['/example']">Entdecken</a>
+        </li>
+        <li [routerLinkActive]="['active']" role="presentation">
+          <a [routerLink]="['/register']">Spielen</a>
         </li>
 
       </ul>
