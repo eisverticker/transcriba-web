@@ -9,7 +9,7 @@ import { Source } from './source';
 export class SourceService{
 
   constructor(
-    private http: Http
+    private http: Http,
     private backend: BackendHelper,
     private auth: AuthService
   ){}
@@ -56,16 +56,8 @@ export class SourceService{
       'activated': source.activated
     };
 
-    this.isSaving = true;
     return this.http.put(url, data)
-    .toPromise()
-    .then(
-      () => this.isSaving = false,
-      (err) => {
-        this.isSaving = false;
-        return Promise.reject(err);
-      }
-    );
+    .toPromise();
   }
 
 }

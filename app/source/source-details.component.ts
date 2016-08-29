@@ -45,12 +45,17 @@ export class SourceDetailsComponent implements OnInit{
   }
 
   save(){
+    this.isSaving = true;
     this.sourceService.save(this.source).then(
       () => {
         this.notify.notify(new Notification('request.success', ['success']));
         this.router.navigate(['/sources']);
+        this.isSaving = false;
       },
-      (err) => this.notify.notify(new Notification('request.fail', ['fail']))
+      (err) => {
+        this.notify.notify(new Notification('request.fail', ['fail']));
+        this.isSaving = false;
+      }
     );
   }
 
