@@ -1,0 +1,16 @@
+<h1>Quellenverwaltung</h1>
+<div class="panel panel-default">
+  <div class=panel-heading>
+    <a [routerLink]="['/sources', 'new']" class="btn btn-default">Neue Quelle erstellen</a>
+  </div>
+  <table class="table table-striped">
+    <tr *ngFor="let source of sources">
+      <td>{{ source.title }}</td>
+      <td class="text-right">
+        <button (click)="activate(source)" *ngIf="!source.activated" class="btn btn-default">Aktivieren</button>
+        <button (click)="deactivate(source)" *ngIf="source.activated" class="btn btn-default">Deaktivieren</button>
+        <a [routerLink]="['/sources',source.id]" class="btn btn-default">Bearbeiten</a>
+      </td>
+    </tr>
+  </table>
+</div>

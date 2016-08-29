@@ -1,5 +1,26 @@
 {
   "title": {
-    "welcomeTo": "Willkommen zu {{ object }}!"
+    "welcomeTo": "Willkommen zu {{ object }}!",
+    "editSource": "Quelle bearbeiten"
+  },
+  "general": {
+    "name": "Name"
+  },
+  "action": {
+    "deactivate": "Deaktivieren",
+    "activate": "Aktivieren",
+    "createNewSource": "Neue Quelle erstellen",
+    "save": "Speichern"
+  },
+  "sources": {
+    "apiUrl": "API-URL",
+    "apiType": "API-Typ",
+    "syncSupport": "Server unterstützt Synchronisierung"
+  },
+  "auth": {
+    "roles": {
+      "trusted": "Vertrauter",
+      "employee": "Mitarbeiter"
+    }
   }
 }

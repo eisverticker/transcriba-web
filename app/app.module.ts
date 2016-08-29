@@ -19,11 +19,20 @@ import { HttpModule }     from '@angular/http';
 import { UtilityModule } from './utilities/utility.module';
 import { AuthModule } from './loopback-auth/auth.module';
 import { I18nModule } from './i18n/i18n.module';
+import { SourceModule } from './source/source.module';
 
 
 
 @NgModule({
-  imports: [ BrowserModule, routing, HttpModule, UtilityModule, AuthModule, I18nModule],
+  imports: [
+    BrowserModule,
+    routing,
+    HttpModule,
+    UtilityModule,
+    AuthModule,
+    I18nModule,
+    SourceModule
+  ],
   declarations: [
     AppComponent,
     DashboardComponent,

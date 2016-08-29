@@ -1,0 +1,55 @@
+<form class="panel panel-primary" (ngSubmit)="save()" #form="ngForm">
+  <div class="panel-heading">
+    {{ 'title.editSource' | translate }}
+  </div>
+  <div class="panel-body">
+
+    <div *ngIf="isLastSaveFailed && !isSaving" class="alert  alert-danger">
+        <strong>{{ 'request.fail' | translate }}</strong> {{ 'command.pleaseTryAgain' | translate }}
+    </div>
+
+    <!-- Form Elements-->
+    <div class="form-group">
+      <label for="title">{{ 'general.name' | translate }}</label>
+      <div class="input-group">
+        <input [(ngModel)]="source.title" name="title" #title="ngModel" class="form-control" required>
+        <span class="input-group-addon">
+          <span *ngIf="!(title.valid)" class="glyphicon glyphicon-minus"></span>
+          <span *ngIf="title.valid" class="glyphicon glyphicon-ok"></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="url">{{ 'sources.apiUrl' | translate }}</label>
+      <div class="input-group">
+        <input [(ngModel)]="source.url" name="url" #url="ngModel" class="form-control" required>
+        <span class="input-group-addon">
+          <span *ngIf="!(url.valid)" class="glyphicon glyphicon-minus"></span>
+          <span *ngIf="url.valid" class="glyphicon glyphicon-ok"></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="type">{{ 'sources.apiType' | translate }}</label>
+      <select [(ngModel)]="source.type" name="type" #type="ngModel" class="form-control" required>
+        <option value="transcribajson">TranscribaJSON</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="sync">
+        <input type="checkbox" [(ngModel)]="source.sync" name="sync" #sync="ngModel">
+        Server unterstützt Synchronisierung
+      </label>
+    </div>
+
+
+    <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
+      <span>{{ 'action.save' | translate }}</span>
+      <inline-spinner [active]="isSaving"></inline-spinner>
+    </button>
+    <a [routerLink]="['/sources']" class="btn btn-default">{{ 'action.abort' | translate }}</a>
+  </div>
+</form>
