@@ -8,6 +8,8 @@
       {{ 'action.logout' | translate }}
       <inline-spinner [active]="isLoggingOut"></inline-spinner>
     </button>
-    <a *ngIf="user.isAdministrator()" [routerLink]="['/admin']" class="btn btn-primary">Administration</a>
+    <a *ngIf="user.isAdministrator()" [routerLink]="['/admin']" class="btn btn-default">Administration</a>
+    <a *ngIf="user.isAdministrator()" [routerLink]="['/sources']" class="btn btn-default">Quellenverwaltung</a>
+    <a *ngIf="user.isEmployee()" [routerLink]="['/pages']" class="btn btn-default">Infoseiten verwalten</a>
   </div>
 </div>

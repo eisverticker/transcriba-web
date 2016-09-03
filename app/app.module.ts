@@ -20,6 +20,7 @@ import { UtilityModule } from './utilities/utility.module';
 import { AuthModule } from './loopback-auth/auth.module';
 import { I18nModule } from './i18n/i18n.module';
 import { SourceModule } from './source/source.module';
+import { InfoPageModule } from './info-page/info-page.module';
 
 
 
@@ -31,7 +32,8 @@ import { SourceModule } from './source/source.module';
     UtilityModule,
     AuthModule,
     I18nModule,
-    SourceModule
+    SourceModule,
+    InfoPageModule
   ],
   declarations: [
     AppComponent,

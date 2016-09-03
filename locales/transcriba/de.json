@@ -1,6 +1,9 @@
 {
   "title": {
     "welcomeTo": "Willkommen zu {{ object }}!",
+    "sourceManagement": "Quellenverwaltung",
+    "pageManagement": "Seitenverwaltung",
+    "editPage": "Seite bearbeiten",
     "editSource": "Quelle bearbeiten"
   },
   "general": {
@@ -10,7 +13,10 @@
     "deactivate": "Deaktivieren",
     "activate": "Aktivieren",
     "createNewSource": "Neue Quelle erstellen",
-    "save": "Speichern"
+    "createNewPage": "Neue Seite erstellen",
+    "save": "Speichern",
+    "edit": "Bearbeiten",
+    "show": "Anzeigen"
   },
   "sources": {
     "apiUrl": "API-URL",

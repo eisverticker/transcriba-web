@@ -18,6 +18,7 @@ export class SourceDetailsComponent implements OnInit{
 
   public source: Source = new Source("test","test", "transcribajson",true, false);
   public isSaving: boolean = false;
+  public isLastSaveFailed: boolean = false;
 
   constructor(
     private sourceService: SourceService,
@@ -53,6 +54,7 @@ export class SourceDetailsComponent implements OnInit{
         this.isSaving = false;
       },
       (err) => {
+        this.isLastSaveFailed = true;
         this.notify.notify(new Notification('request.fail', ['fail']));
         this.isSaving = false;
       }

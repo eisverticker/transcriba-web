@@ -31,6 +31,14 @@ export class User{
     return this.hasRole('administrator');
   }
 
+  public isEmployee(){
+    return this.hasRole('employee');
+  }
+
+  public isTrusted(){
+    return this.hasRole('trusted');
+  }
+
   private hasOneOfTheseRoles(roleNames: Array<string>){
     return this.roles.reduce(
       (result, currentElement) => {
