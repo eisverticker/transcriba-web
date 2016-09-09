@@ -51,10 +51,8 @@ export class AppComponent implements OnInit{
       }
     );
 
-    this.auth.user.subscribe(
+    this.auth.loadUser().then(
       user => {
-        console.log("user", user);
-        console.log("isGuest", User.isGuest(user));
         if(User.isGuest(user)){
           this.isAuthenticated = false;
           console.log("not auth");

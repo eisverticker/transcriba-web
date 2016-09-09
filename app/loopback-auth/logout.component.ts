@@ -16,7 +16,7 @@ import { Notification } from '../utilities/notification';
 export class LogoutComponent implements OnInit{
   @Output() done: EventEmitter<any> = new EventEmitter();
 
-  public user: User = new User("","","");
+  public user: User;
   public isLoggingOut: boolean = false;
 
   constructor(
@@ -25,7 +25,9 @@ export class LogoutComponent implements OnInit{
   ){}
 
   ngOnInit(){
-    this.user = this.auth.getActiveUser();
+    this.auth.loadUser().then(
+      (user) => this.user = user
+    );
   }
 
   public doLogout(){

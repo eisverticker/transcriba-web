@@ -11,23 +11,9 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if(this.auth.getCurrentInitState() === true){
-      let passed: boolean = this.auth.getActiveUser().isRegistered();
-      if(passed === false){
-        this.router.navigate(['/403']);
-      }
-      return Promise.resolve(passed);
-    }else{
-      let ob = this.auth.isInitialized.filter(x => x === true);
-
-      ob.subscribe(
-        (value) => {
-          this.router.navigate([route.routeConfig.path]);
-        }
-      );
-
-      return Promise.resolve(false);
-    }
+    return this.auth.loadUser().then(
+      (user) => Promise.resolve(user.isRegistered())
+    );
 
   }
 }

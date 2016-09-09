@@ -24,21 +24,18 @@ export class AuthComponent implements OnInit{
   ngOnInit(){
     this.route.data.subscribe(
       data => {
-        this.auth.isInitialized.subscribe(
-          isInitialized => {
-            if(isInitialized){
-              let user = this.auth.getActiveUser();
-              if(User.isGuest(user)){
-                if( data['mode'] === "register" ){
-                  this.mode = "register";
-                }else if(data['mode'] === "reset"){
-                  this.mode = "reset";
-                }else{
-                  this.mode = "unauthenticated";
-                }
+        this.auth.loadUser().then(
+          (user) => {
+            if(User.isGuest(user)){
+              if( data['mode'] === "register" ){
+                this.mode = "register";
+              }else if(data['mode'] === "reset"){
+                this.mode = "reset";
               }else{
-                this.mode = "authenticated";
+                this.mode = "unauthenticated";
               }
+            }else{
+              this.mode = "authenticated";
             }
           }
         );

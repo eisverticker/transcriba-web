@@ -10,8 +10,7 @@ import { Role } from './role';
 
 @Injectable()
 export class AuthService{
-  private isInitializedSubject: BehaviorSubject<boolean>;
-  public isInitialized: Observable<boolean>;
+  public isUserInitialized: boolean = false;
 
   //redirect for login (used by guards)
   public redirectUrl: string = "/";
@@ -27,40 +26,27 @@ export class AuthService{
     this.userSubject = new BehaviorSubject(User.createGuest());
     this.user = this.userSubject.asObservable();
 
-    this.isInitializedSubject = new BehaviorSubject(false);
-    this.isInitialized = this.isInitializedSubject.asObservable();
-
-    this.loadAuthenticatedUser().then(
-      () => { this.isInitializedSubject.next(true) },
-      () => { this.isInitializedSubject.next(true) }
-    );
   }
 
-  public loadInitializedUser(): Promise<User>{
-    if(this.getCurrentInitState()  == true){
-      return Promise.resolve(this.getActiveUser());
+  public loadUser(): Promise<User>{
+    if(this.isUserInitialized){
+      return Promise.resolve(this.userSubject.getValue());
     }else{
-      this.isInitialized.filter( x => x == true).map(x => this.getActiveUser()).subscribe(
-        (value) => console.log("init", value)
-      );
-
-      return this.isInitialized.filter( x => x == true)
-      .map(x => this.getActiveUser())
-      .toPromise().then(
-        (user) => console.log("yeah")
-      );
+      return this.authenticateUser().then(
+        (user) => {
+          this.isUserInitialized = true;
+          this.userSubject.next(user);
+          return user;
+        },
+        () => {
+          this.isUserInitialized = true;
+          return this.userSubject.getValue();
+        }
+      )
     }
   }
 
-  public getActiveUser(): User{
-    return this.userSubject.getValue();
-  }
-
-  public getCurrentInitState(): boolean{
-    return this.isInitializedSubject.getValue();
-  }
-
-  public loadAuthenticatedUser(): Promise<User>{
+  private authenticateUser(): Promise<User>{
     let url = this.backend.authUrl('AppUsers/'+this.userID, this.token);
 
     if(this.token === null || this.userID === null){
@@ -76,7 +62,6 @@ export class AuthService{
           return this.getRoles(this.userID).then(
             roles => {
               user.roles = user.roles.concat(roles);
-              this.userSubject.next(user);
               return user;
             }
           );
@@ -90,6 +75,9 @@ export class AuthService{
   }
 
   public login(user: User): Promise<void>{
+    this.reset();//delete current token and userid
+    this.isUserInitialized = false;//reinitalize user later
+
     return this.http.post(this.backend.unAuthUrl('AppUsers/login'), {
       "email": user.mail,
       "password": user.password
@@ -101,10 +89,7 @@ export class AuthService{
          let data = res.json();
          this.userID = data.userId;
          this.token = data.id;//save token to localStorage
-         this.loadAuthenticatedUser().then(
-           () => { return; },
-           () => { return; }
-         );
+         this.loadUser();//reinitalize user
       },
       (err) => {
         if(err == "Timeout"){
@@ -127,7 +112,7 @@ export class AuthService{
          this.userSubject.next(User.createGuest());
        },
        (err) => {
-         return this.loadAuthenticatedUser();
+         return this.loadUser();
        }
      )
   }
