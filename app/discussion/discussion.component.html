@@ -1,0 +1,21 @@
+<pagination-bar (pageChanged)="setPage($event)" [numOfPages]="numOfPages" [currentPage]="currentPage"></pagination-bar>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <form (ngSubmit)="addComment()" #form="ngForm">
+
+        <div class="input-group">
+          <input [disabled]="!user.isRegistered()" [(ngModel)]="newComment.content" name="content" class="form-control" required />
+          <span class="input-group-btn">
+            <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
+              <span>{{ 'action.send' | translate }}</span>
+              <inline-spinner [active]="isCommenting"></inline-spinner>
+            </button>
+          </span>
+        </div><!-- /input-group -->
+
+    </form>
+  </div>
+  <div class="panel-body">
+    <simple-comment *ngFor="let comment of comments" [comment]="comment"></simple-comment>
+  </div>
+</div>
