@@ -2,7 +2,9 @@ import { Input, Component, OnChanges} from '@angular/core';
 
 import { InfoPage } from './info-page';
 import { InfoPageService } from './info-page.service';
+
 import { AuthService } from '../loopback-auth/auth.service';
+import { User } from '../loopback-auth/user';
 
 import { Discussion } from '../discussion/discussion';
 import { DiscussionService } from '../discussion/discussion.service';
@@ -29,9 +31,9 @@ export class InfoPageDiscussionComponent implements OnChanges{
   }
 
   ngOnChanges(){
-    this.auth.loadInitializedUser().then(//load if user was initalized
+    console.log("step 1");
+    this.auth.loadUser().then(
       (user) => {
-        console.log("page",this.page);
         this.user = user;
         this.discuss.loadByID(this.page.discussionID).then(
           (discussion) => this.discussion = discussion,
