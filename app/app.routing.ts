@@ -27,6 +27,10 @@ const routes: Routes = [
     component: AuthorizationRequiredComponent
   },
   {
+    path: '404',
+    component: PageNotFoundComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }

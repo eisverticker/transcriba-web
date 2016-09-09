@@ -7,7 +7,9 @@
     "editSource": "Quelle bearbeiten"
   },
   "general": {
-    "name": "Name"
+    "name": "Name",
+    "page": "Seite",
+    "discussion": "Diskussion"
   },
   "action": {
     "deactivate": "Deaktivieren",
@@ -28,5 +30,8 @@
       "trusted": "Vertrauter",
       "employee": "Mitarbeiter"
     }
+  },
+  "form": {
+    "showDiscussion": "Diskussion anzeigen"
   }
 }

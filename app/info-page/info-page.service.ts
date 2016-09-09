@@ -4,6 +4,8 @@ import { AuthService } from '../loopback-auth/auth.service';
 
 import { Injectable } from '@angular/core';
 import { InfoPage } from './info-page';
+import { DiscussionService } from '../discussion/discussion.service';
+
 
 @Injectable()
 export class InfoPageService{
@@ -11,7 +13,8 @@ export class InfoPageService{
   constructor(
     private http: Http,
     private backend: BackendHelper,
-    private auth: AuthService
+    private auth: AuthService,
+    private discuss: DiscussionService
   ){}
 
   loadAll(): Promise<InfoPage[]>{
@@ -22,7 +25,9 @@ export class InfoPageService{
     .map(data => data.json())
     .toPromise()
     .then(
-      (data) => data.map( p => new InfoPage(p.name, p.content, p.id) )
+      (data) => data.map(
+        p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, p.id)
+      )
     );
   }
 
@@ -34,7 +39,7 @@ export class InfoPageService{
     .map(data => data.json())
     .toPromise()
     .then(
-      p => new InfoPage(p.name, p.content, p.id)
+      p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId,id)
     );
   }
 
@@ -42,12 +47,15 @@ export class InfoPageService{
     let token = this.auth.token;
     let url = this.backend.authUrl('InfoPages/parsed/'+name, token);
 
+    console.log(name);
+
     return this.http.get(url)
     .map(data => data.json())
     .toPromise()
     .then(
       data => {
-        return new InfoPage(data.page.name, data.page.content, data.page.id);
+        let p = data.page;
+        return new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, p.id);
       }
     );
   }
@@ -56,19 +64,28 @@ export class InfoPageService{
     let token = this.auth.token;
     let url: string;
 
-    if(page.id == undefined){
-      url = this.backend.authUrl('InfoPages', token);
-    }else{
-      url = this.backend.authUrl('InfoPages/'+page.id, token);
-    }
-
     let data = {
       'name': page.name,
-      'content': page.content
+      'content': page.content,
+      'show_discussion': page.show_discussion
     };
 
-    return this.http.put(url, data)
-    .toPromise();
+    if(page.id == undefined){
+      url = this.backend.authUrl('InfoPages', token);
+      return this.discuss.startDiscussion().then(
+        (discussion) => {
+          console.log("d",discussion);
+          data['discussionId'] = discussion.id;
+          return this.http.put(url, data).toPromise();
+        }
+      );
+
+    }else{
+      url = this.backend.authUrl('InfoPages/'+page.id, token);
+      data['discussionId'] = page.discussionID;
+
+      return this.http.put(url, data).toPromise();
+    }
   }
 
   delete(page: InfoPage): Promise<any>{

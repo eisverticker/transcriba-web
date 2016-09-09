@@ -6,7 +6,7 @@ import { InfoPage } from './info-page';
   moduleId:     module.id,
   selector:    'info-page',
   template: `
-    <div [innerHTML]="page.content | markdown"></div>
+    <div [innerHTML]="page.content"></div>
   `,
   styleUrls: [],
   providers: []

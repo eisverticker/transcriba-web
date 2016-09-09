@@ -36,6 +36,22 @@ export class AuthService{
     );
   }
 
+  public loadInitializedUser(): Promise<User>{
+    if(this.getCurrentInitState()  == true){
+      return Promise.resolve(this.getActiveUser());
+    }else{
+      this.isInitialized.filter( x => x == true).map(x => this.getActiveUser()).subscribe(
+        (value) => console.log("init", value)
+      );
+
+      return this.isInitialized.filter( x => x == true)
+      .map(x => this.getActiveUser())
+      .toPromise().then(
+        (user) => console.log("yeah")
+      );
+    }
+  }
+
   public getActiveUser(): User{
     return this.userSubject.getValue();
   }

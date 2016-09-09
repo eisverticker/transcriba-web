@@ -33,7 +33,7 @@ export class InfoPageEditComponent implements OnInit{
           this.page = InfoPage.createEmptyPage();
         }else{
           this.pageService.loadOneByID(params['id']).then(
-            (data) => this.page = new InfoPage(data.name, data.content, data.id),
+            (page) => this.page = page,
             (err) => {
               this.notify.notify(new Notification('request.fail', ['fail']));
               this.router.navigate(['/pages']);

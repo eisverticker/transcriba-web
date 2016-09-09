@@ -26,6 +26,14 @@
       </textarea>
     </div>
 
+    <div class="form-group">
+      <label for="show_discussion">
+        <input type="checkbox" [(ngModel)]="page.show_discussion" name="show_disussion" #discussion="ngModel" />
+        {{ 'form.showDiscussion' | translate }}
+      </label>
+
+    </div>
+
     <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
       <span>{{ 'action.save' | translate }}</span>
       <inline-spinner [active]="isSaving"></inline-spinner>

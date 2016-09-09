@@ -8,13 +8,20 @@ import { Router, ActivatedRoute } from '@angular/router';
   moduleId:     module.id,
   selector:    'info-page-viewer',
   template: `
-    <info-page [page]="page"></info-page>
+    <sub-navbar [items]="navItems"></sub-navbar>
+    <div *ngIf="page" [ngSwitch]="mode">
+      <be-patient *ngSwitchCase="'loading'"></be-patient>
+      <info-page [page]="page" *ngSwitchCase="'viewer'"></info-page>
+      <info-page-discussion [page]="page" *ngSwitchCase="'discussion'"></info-page-discussion>
+    </div>
   `,
   styleUrls: [],
   providers: []
 })
 export class InfoPageViewerComponent implements OnInit{
-  public page: InfoPage = InfoPage.createEmptyPage();
+  page: InfoPage;
+  mode: string = "loading";
+  navItems: Array<any> = [];
 
   constructor(
     private pageService: InfoPageService,
@@ -23,11 +30,37 @@ export class InfoPageViewerComponent implements OnInit{
   ){}
 
   ngOnInit(){
-    this.route.params.subscribe(
-      params => this.pageService.loadOneByName(params['id']).then(
-        (page) => this.page = page
-      )
+    this.route.data.subscribe(
+      (data) => {
+        this.mode = data['mode'];
+        this.route.params.subscribe(
+          params => this.pageService.loadOneByName(params['id']).then(
+            (page) => {
+              this.page = page;
+              this.initNavigation(page);
+            },
+            (err) => this.router.navigate(['404'])
+          )
+        );
+      }
     );
+
+  }
+
+  private initNavigation(page: InfoPage){
+
+    if(page.show_discussion){
+      this.navItems = [
+        {
+          name: "general.page",
+          route: '/info/'+page.name
+        },
+        {
+          name: "general.discussion",
+          route: '/info/'+page.name+'/discussion'
+        },
+      ];
+    }
   }
 
 }

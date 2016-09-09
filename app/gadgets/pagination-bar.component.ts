@@ -18,6 +18,7 @@ export class PaginationBarComponent implements OnChanges{
   constructor(){}
 
   ngOnChanges(){
+    this.pages = [];
     for(let i = 0; i < this.numOfPages; i++){
       this.pages.push(i);
     }

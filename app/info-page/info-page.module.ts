@@ -3,11 +3,11 @@ import { NgModule }       from '@angular/core';
 //components
 import { InfoPageComponent } from './info-page.component';
 import { InfoPageViewerComponent } from './info-page-viewer.component';
+import { InfoPageDiscussionComponent } from './info-page-discussion.component';
 import { InfoPageEditComponent } from './info-page-edit.component';
 import { InfoPageManagementComponent } from './info-page-management.component';
 
 //pipes
-import { MarkdownPipe } from './markdown.pipe';
 
 //modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,6 +18,7 @@ import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
 import { GadgetModule } from '../gadgets/gadget.module';
 import { HttpModule } from '@angular/http';
+import { DiscussionModule } from '../discussion/discussion.module';
 
 //services
 import { InfoPageService } from './info-page.service';
@@ -31,7 +32,7 @@ import { infoPageRouting } from './info-page.routing';
       InfoPageViewerComponent,
       InfoPageEditComponent,
       InfoPageManagementComponent,
-      MarkdownPipe
+      InfoPageDiscussionComponent
     ],
     imports:      [
       BrowserModule,
@@ -42,9 +43,16 @@ import { infoPageRouting } from './info-page.routing';
       AuthModule,
       RouterModule,
       GadgetModule,
+      DiscussionModule,
       infoPageRouting
     ],
-    exports: [InfoPageComponent, InfoPageEditComponent, InfoPageManagementComponent, InfoPageViewerComponent],
+    exports: [
+      InfoPageComponent,
+      InfoPageEditComponent,
+      InfoPageManagementComponent,
+      InfoPageViewerComponent,
+      InfoPageDiscussionComponent
+    ],
     bootstrap:    [],
     providers: [
       InfoPageService

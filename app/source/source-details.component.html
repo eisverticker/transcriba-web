@@ -23,7 +23,7 @@
     <div class="form-group">
       <label for="url">{{ 'sources.apiUrl' | translate }}</label>
       <div class="input-group">
-        <input [(ngModel)]="source.url" name="url" #url="ngModel" class="form-control" pattern=".*{id}.*" required>
+        <input [(ngModel)]="source.url" name="url" #url="ngModel" class="form-control" pattern=".*\{id\}.*" required>
         <span class="input-group-addon">
           <span *ngIf="!(url.valid)" class="glyphicon glyphicon-minus"></span>
           <span *ngIf="url.valid" class="glyphicon glyphicon-ok"></span>
