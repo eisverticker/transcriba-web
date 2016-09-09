@@ -11,8 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   moduleId:     module.id,
   selector:    'source-details',
   templateUrl: 'source-details.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class SourceDetailsComponent implements OnInit{
 

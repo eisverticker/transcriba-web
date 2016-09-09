@@ -5,8 +5,7 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
   moduleId:     module.id,
   selector:    'delete-button',
   templateUrl: 'delete-button.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class DeleteButtonComponent{
   @Output() xclick: EventEmitter<any> = new EventEmitter();

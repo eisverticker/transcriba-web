@@ -9,7 +9,6 @@ import { AuthorizationRequiredComponent } from './authorization-required.compone
 
 import { routing,
          appRoutingProviders } from './app.routing';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { Http } from '@angular/http';
 
@@ -21,6 +20,7 @@ import { AuthModule } from './loopback-auth/auth.module';
 import { I18nModule } from './i18n/i18n.module';
 import { SourceModule } from './source/source.module';
 import { InfoPageModule } from './info-page/info-page.module';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 
 
@@ -33,7 +33,8 @@ import { InfoPageModule } from './info-page/info-page.module';
     AuthModule,
     I18nModule,
     SourceModule,
-    InfoPageModule
+    InfoPageModule,
+    ToastModule
   ],
   declarations: [
     AppComponent,
@@ -43,9 +44,6 @@ import { InfoPageModule } from './info-page/info-page.module';
     AuthorizationRequiredComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [
-    //{ provide: VocableService, useClass: VocableOnlineService },#
-    ToastsManager
-  ]
+  providers: []
 })
 export class AppModule{}

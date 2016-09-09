@@ -9,8 +9,7 @@ import { User } from './user';
   moduleId:     module.id,
   selector:    'user-auth',
   templateUrl: 'auth.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class AuthComponent implements OnInit{
   public mode: string = "loading";//(un)authorized, register and loading

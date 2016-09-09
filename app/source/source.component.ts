@@ -9,8 +9,7 @@ import { Notification } from '../utilities/notification';
   moduleId:     module.id,
   selector:    'table-of-sources',
   templateUrl: 'source.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class SourceComponent implements OnInit{
 

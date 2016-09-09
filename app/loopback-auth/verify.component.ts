@@ -4,9 +4,7 @@ import { Component, OnInit } from '@angular/core';
   moduleId:     module.id,
   selector:    'email-verification',
   templateUrl: 'verify.component.html',
-  styleUrls: [],
-  directives: [],
-  providers: []
+  styleUrls: []
 })
 export class VerifyComponent{
   constructor(){}

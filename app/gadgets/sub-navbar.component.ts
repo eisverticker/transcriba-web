@@ -11,8 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
       </li>
     </ul>
   `,
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class SubNavbarComponent implements OnInit{
   @Input() items: Array<{ name: string, route: string  }> = [];

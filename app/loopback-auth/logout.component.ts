@@ -9,9 +9,7 @@ import { Notification } from '../utilities/notification';
   moduleId:     module.id,
   selector:    'user-logout',
   templateUrl: 'logout.component.html',
-  styleUrls: [],
-  directives: [],
-  providers: []
+  styleUrls: []
 })
 export class LogoutComponent implements OnInit{
   @Output() done: EventEmitter<any> = new EventEmitter();

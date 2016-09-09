@@ -9,8 +9,7 @@ import { User } from './user';
   moduleId:     module.id,
   selector:    'auth-administration',
   templateUrl: 'admin.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class AdminComponent implements OnInit{
   public mode: string = "loading";//(un)authorized, register and loading

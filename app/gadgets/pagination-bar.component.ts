@@ -4,8 +4,7 @@ import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angu
   moduleId:     module.id,
   selector:    'pagination-bar',
   templateUrl: 'pagination-bar.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class PaginationBarComponent implements OnChanges{
 

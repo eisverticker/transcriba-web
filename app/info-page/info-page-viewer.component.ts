@@ -15,8 +15,7 @@ import { Router, ActivatedRoute } from '@angular/router';
       <info-page-discussion [page]="page" *ngSwitchCase="'discussion'"></info-page-discussion>
     </div>
   `,
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class InfoPageViewerComponent implements OnInit{
   page: InfoPage;

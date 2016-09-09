@@ -10,9 +10,7 @@ import { Notification } from '../utilities/notification';
   moduleId:     module.id,
   selector:    'user-management',
   templateUrl: 'user-management.component.html',
-  styleUrls: [],
-  directives: [],
-  providers: []
+  styleUrls: []
 })
 export class UserManagementComponent implements OnInit{
   public isReleased: boolean = true;

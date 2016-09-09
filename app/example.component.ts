@@ -3,9 +3,7 @@ import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'some-example',
-  templateUrl: 'app/example.component.html',
-  providers: [],
-  directives: []
+  templateUrl: 'app/example.component.html'
 })
 export class ExampleComponent implements OnInit{
 

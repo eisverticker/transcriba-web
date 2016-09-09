@@ -11,8 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   moduleId:     module.id,
   selector:    'info-page-edit',
   templateUrl: 'info-page-edit.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class InfoPageEditComponent implements OnInit{
 

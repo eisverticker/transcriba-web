@@ -10,8 +10,7 @@ import { User } from '../loopback-auth/user';
   moduleId:     module.id,
   selector:    'simple-discussion',
   templateUrl: 'discussion.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class DiscussionComponent implements OnChanges{
   @Input() discussion: Discussion;

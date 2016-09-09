@@ -10,8 +10,7 @@ import { Notification } from '../utilities/notification';
   moduleId:     module.id,
   selector:    'password-reset',
   templateUrl: 'reset-form.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class ResetFormComponent implements OnInit{
   @Output() done: EventEmitter<any> = new EventEmitter();

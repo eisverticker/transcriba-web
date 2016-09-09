@@ -9,8 +9,7 @@ import { Notification } from '../utilities/notification';
   moduleId:     module.id,
   selector:    'table-of-pages',
   templateUrl: 'info-page-management.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class InfoPageManagementComponent implements OnInit{
 

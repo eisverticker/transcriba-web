@@ -8,8 +8,7 @@ import { InfoPage } from './info-page';
   template: `
     <div [innerHTML]="page.content"></div>
   `,
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class InfoPageComponent implements OnChanges{
   @Input() page: InfoPage;

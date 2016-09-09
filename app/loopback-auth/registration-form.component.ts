@@ -10,8 +10,7 @@ import { Notification } from '../utilities/notification';
   moduleId:     module.id,
   selector:    'user-registration',
   templateUrl: 'registration-form.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class RegistrationFormComponent implements OnInit{
   @Output() done: EventEmitter<any> = new EventEmitter();

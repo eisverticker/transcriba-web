@@ -4,9 +4,7 @@ import { Component, OnInit } from '@angular/core';
   moduleId:     module.id,
   selector:    'be-patient',
   templateUrl: 'be-patient.component.html',
-  styleUrls: [],
-  directives: [],
-  providers: []
+  styleUrls: []
 })
 export class BePatientComponent implements OnInit{
 

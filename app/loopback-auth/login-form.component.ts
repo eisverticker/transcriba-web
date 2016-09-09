@@ -9,8 +9,7 @@ import { Notification } from '../utilities/notification';
   moduleId:     module.id,
   selector:    'user-login',
   templateUrl: 'login-form.component.html',
-  styleUrls: [],
-  providers: []
+  styleUrls: []
 })
 export class LoginFormComponent implements OnInit{
 
