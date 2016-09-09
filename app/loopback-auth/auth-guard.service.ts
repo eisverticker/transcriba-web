@@ -12,7 +12,12 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     return this.auth.loadUser().then(
-      (user) => Promise.resolve(user.isRegistered())
+      (user) => {
+        if(!user.isRegistered()){
+          this.router.navigate(['403']);
+        }
+        return Promise.resolve(user.isRegistered());
+      }
     );
 
   }

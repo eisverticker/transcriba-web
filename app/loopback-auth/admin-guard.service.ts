@@ -12,7 +12,12 @@ export class AdminGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     return this.auth.loadUser().then(
-      (user) => Promise.resolve(user.isAdministrator())
+      (user) => {
+        if(!user.isAdministrator()){
+          this.router.navigate(['403']);
+        }
+        return Promise.resolve(user.isAdministrator());
+      }
     );
 
   }
