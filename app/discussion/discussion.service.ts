@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 import { Discussion } from './discussion';
 import { Comment } from './comment';
 
+import { User } from '../loopback-auth/user';
+
 @Injectable()
 export class DiscussionService{
 
@@ -35,7 +37,9 @@ export class DiscussionService{
     let url = this.backend.authUrl(
       'Discussions/'+discussion.id+'/comments',
       token,
-      "filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
+      "filter[order]=createdAt DESC"+
+      "&filter[include]=appUser"+
+      "&filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
     );
 
     return this.http.get(url)
@@ -44,8 +48,17 @@ export class DiscussionService{
     .toPromise()
     .then(
       (comments) => {
-        return comments.map(
-          (c) => new Comment(c.content, c.id)
+        console.log(comments);
+        return comments.filter(
+          (c) => c.appUser !== undefined
+        ).map(
+          (c) => {
+            let user = User.createEmptyUser();
+            user.name = c.appUser.username;
+            user.id = c.appUser.id;
+            user.mail = c.appUser.email;
+            return new Comment(c.content, user, c.createdAt,c.id);
+          }
         );
       }
     );
@@ -68,8 +81,8 @@ export class DiscussionService{
     let url = this.backend.authUrl('Discussions/'+discussion.id+'/comments', token);
 
     return this.http.post(url, {
-      'appUserId': this.auth.userID,
-      'content': comment.content
+      'content': comment.content,
+      'appUserId': 'none'
     })
     .toPromise()
   }

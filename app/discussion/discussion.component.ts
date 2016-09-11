@@ -1,5 +1,7 @@
 import { Component, OnChanges, Input} from '@angular/core';
 
+import { FormRequestHandling } from '../utilities/form-request-handling';
+
 import { DiscussionService } from '../discussion/discussion.service';
 
 import { Discussion } from './discussion';
@@ -12,7 +14,7 @@ import { User } from '../loopback-auth/user';
   templateUrl: 'discussion.component.html',
   styleUrls: []
 })
-export class DiscussionComponent implements OnChanges{
+export class DiscussionComponent extends FormRequestHandling implements OnChanges{
   @Input() discussion: Discussion;
   @Input() itemsPerPage: number;
   @Input() user: User;
@@ -26,7 +28,9 @@ export class DiscussionComponent implements OnChanges{
 
   constructor(
     private discuss: DiscussionService
-  ){}
+  ){
+    super();
+  }
 
   ngOnChanges(){
     this.update();
@@ -35,7 +39,11 @@ export class DiscussionComponent implements OnChanges{
   private update(){
     return this.discuss.loadCommentPage(this.discussion, this.currentPage, this.itemsPerPage)
     .then(
-      (comments) => this.comments = comments
+      (comments) => this.comments = comments,
+      (err) => {
+        console.log("update fehlgeschlagen", err);
+        return Promise.reject(err);
+      }
     ).then(
       () => this.discuss.loadNumOfComments(this.discussion).then(
         (numComments) => {
@@ -52,8 +60,15 @@ export class DiscussionComponent implements OnChanges{
   }
 
   public addComment(){
-    this.discuss.saveComment(this.discussion, this.newComment).then(
-      () => this.update()
+    let commentRequest = this.discuss.saveComment(this.discussion, this.newComment);
+    this.watchRequestState(commentRequest);
+
+    commentRequest.then(
+      () => {
+        this.newComment = Comment.createEmptyComment();
+        return this.update();
+      },
+      (err) => console.log("fehler beim kommentieren", err)
     );
   }
 

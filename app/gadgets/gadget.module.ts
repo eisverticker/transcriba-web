@@ -6,6 +6,7 @@ import { ResultPieChartComponent } from './result-pie-chart.component';
 import { InlineSpinnerComponent } from './inline-spinner.component';
 import { PaginationBarComponent } from './pagination-bar.component';
 import { SubNavbarComponent } from './sub-navbar.component';
+import { FailNotifierComponent } from './fail-notifier.component';
 
 //directives
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -18,6 +19,7 @@ import { I18nModule } from '../i18n/i18n.module';
 
 @NgModule({
     declarations: [
+      FailNotifierComponent,
       DeleteButtonComponent,
       ResultPieChartComponent,
       InlineSpinnerComponent,
@@ -26,6 +28,7 @@ import { I18nModule } from '../i18n/i18n.module';
     ],
     imports:      [ChartsModule,BrowserModule, FormsModule, I18nModule, RouterModule],
     exports: [
+      FailNotifierComponent,
       DeleteButtonComponent,
       ResultPieChartComponent,
       InlineSpinnerComponent,

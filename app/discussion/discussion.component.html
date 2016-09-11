@@ -3,6 +3,8 @@
   <div class="panel-heading">
     <form (ngSubmit)="addComment()" #form="ngForm">
 
+        <fail-notifier [activated]="!isRequestPending && isLastRequestFailed"></fail-notifier>
+
         <div class="input-group">
           <input [disabled]="!user.isRegistered()" [(ngModel)]="newComment.content" name="content" class="form-control" required />
           <span class="input-group-btn">

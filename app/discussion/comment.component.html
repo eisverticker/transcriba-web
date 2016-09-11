@@ -1,11 +1,13 @@
 <div class="panel panel-default">
+
   <div class="panel-heading">
-    Derek
+    {{ comment.user.name }} <span class="label label-default">{{ comment.createdAt | date }}</span>
   </div>
   <div class="panel-body">
     {{ comment.content }}
   </div>
   <div class="panel-footer">
+    <div class="btn-group">
     <button class="btn btn-primary" type="button">
       <span class="glyphicon glyphicon-thumbs-up"></span> <span class="badge">4</span>
     </button>
