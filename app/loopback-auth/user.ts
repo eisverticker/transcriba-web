@@ -21,6 +21,10 @@ export class User{
     return user.name == "Guest";
   }
 
+  public equals(user: User): boolean{
+    return this.name == user.name;
+  }
+
   public isRegistered(){
     return this.hasOneOfTheseRoles(Role.getAvailableRoles().map(
       (role) => role.name
