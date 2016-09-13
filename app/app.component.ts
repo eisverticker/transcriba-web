@@ -30,6 +30,25 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
+
+    this.initNotificationHandler();
+
+    //watch whether user is logged in or not
+    this.auth.user.subscribe(
+      (user) => this.updateAuthenticationState(user)
+    );
+    this.auth.loadUser().then(
+      user => this.updateAuthenticationState(user)
+    );
+
+  }
+
+
+  private updateAuthenticationState(user: User){
+    this.isAuthenticated = user.isRegistered();
+  }
+
+  private initNotificationHandler(){
     this.notify.messages.subscribe(
       notification => {
         this.translate.get(notification.message).subscribe(
@@ -50,19 +69,6 @@ export class AppComponent implements OnInit{
         );
       }
     );
-
-    this.auth.loadUser().then(
-      user => {
-        if(User.isGuest(user)){
-          this.isAuthenticated = false;
-          console.log("not auth");
-        }else{
-          this.isAuthenticated = true;
-        }
-      }
-    );
-
   }
-
 
 }
