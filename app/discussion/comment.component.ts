@@ -1,6 +1,8 @@
 import { Component, OnChanges, Input} from '@angular/core';
 
+import { CommentVotingService } from './comment-voting.service';
 import { Comment } from './comment';
+import { AuthService } from '../loopback-auth/auth.service';
 
 @Component({
   moduleId:     module.id,
@@ -9,12 +11,74 @@ import { Comment } from './comment';
   styleUrls: []
 })
 export class CommentComponent implements OnChanges{
+  public currentVote: string = "loading";//loading, like, dislike, unwanted or none
+  public votings: any;
+
   @Input() comment: Comment;
 
-  constructor(){}
+  constructor(
+    private voting: CommentVotingService,
+    private auth: AuthService
+  ){}
+
+  updateVotings(){
+    return this.auth.loadUser().then(
+      (user) => this.user = user
+    ).then(
+      () => this.voting.loadVotings(this.comment.id).then(
+        (votings) => {
+          this.votings = votings;
+          return this.voting.loadVote(this.comment.id);
+        }
+      ).then(
+        (vote) => {
+          this.currentVote = vote;
+        }
+      );
+    );
+  }
 
   ngOnChanges(){
+    this.updateVotings();
+  }
 
+  like(){
+    if(this.currentVote == "like"){
+      return this.voting.unvote(this.comment.id).then(
+        () => this.updateVotings()
+      );
+    }else{
+      return this.voting.like(this.comment.id)
+      .then(
+        () => this.updateVotings()
+      );
+    }
+  }
+
+  dislike(){
+    if(this.currentVote == "dislike"){
+      return this.voting.unvote(this.comment.id).then(
+        () => this.updateVotings()
+      );
+    }else{
+      return this.voting.dislike(this.comment.id)
+      .then(
+        () => this.updateVotings()
+      );
+    }
+  }
+
+  unwanted(){
+    if(this.currentVote == "unwanted"){
+      return this.voting.unvote(this.comment.id).then(
+        () => this.updateVotings()
+      );
+    }else{
+      return this.voting.unwanted(this.comment.id)
+      .then(
+        () => this.updateVotings()
+      );
+    }
   }
 
 }

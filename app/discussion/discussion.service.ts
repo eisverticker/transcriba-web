@@ -48,7 +48,6 @@ export class DiscussionService{
     .toPromise()
     .then(
       (comments) => {
-        console.log(comments);
         return comments.filter(
           (c) => c.appUser !== undefined
         ).map(

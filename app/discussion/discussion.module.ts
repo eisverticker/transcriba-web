@@ -7,7 +7,7 @@ import { DiscussionComponent } from './discussion.component';
 //modules
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-//import { Routes, RouterModule }   from '@angular/router';
+import { VotingModule }   from '../voting/voting.module';
 import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
@@ -16,6 +16,7 @@ import { HttpModule } from '@angular/http';
 
 //services
 import { DiscussionService } from './discussion.service';
+import { CommentVotingService } from './comment-voting.service';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { DiscussionService } from './discussion.service';
       HttpModule,
       UtilityModule,
       AuthModule,
+      VotingModule,
       //RouterModule,
       GadgetModule
     ],
@@ -38,7 +40,8 @@ import { DiscussionService } from './discussion.service';
     ],
     bootstrap:    [],
     providers: [
-      DiscussionService
+      DiscussionService,
+      CommentVotingService
     ]
 })
 export class DiscussionModule {}
