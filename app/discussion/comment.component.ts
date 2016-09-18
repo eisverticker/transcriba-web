@@ -3,6 +3,7 @@ import { Component, OnChanges, Input} from '@angular/core';
 import { CommentVotingService } from './comment-voting.service';
 import { Comment } from './comment';
 import { AuthService } from '../loopback-auth/auth.service';
+import { User } from '../loopback-auth/user';
 
 @Component({
   moduleId:     module.id,
@@ -13,6 +14,7 @@ import { AuthService } from '../loopback-auth/auth.service';
 export class CommentComponent implements OnChanges{
   public currentVote: string = "loading";//loading, like, dislike, unwanted or none
   public votings: any;
+  public user: User;
 
   @Input() comment: Comment;
 
@@ -34,7 +36,7 @@ export class CommentComponent implements OnChanges{
         (vote) => {
           this.currentVote = vote;
         }
-      );
+      )
     );
   }
 
