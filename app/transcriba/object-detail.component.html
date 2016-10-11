@@ -1,0 +1,15 @@
+<sub-navbar [items]="navItems"></sub-navbar>
+
+<be-patient *ngIf="!object"></be-patient>
+<div *ngIf="object">
+  <div *ngIf="mode=='overview'" id="overview">
+    <h1>{{ object.title }}</h1>
+    <img class="img-responsive" [src]="'http://localhost:3001/api/TranscribaObjects/'+object.id+'/overview'" alt="thumbnail" />
+  </div>
+  <div *ngIf="mode=='transcription'" id="transcription">
+    To-Do
+  </div>
+  <div *ngIf="mode=='discussion'" id="transcription">
+    <simple-discussion *ngIf="discussion && user" [user]="user" [itemsPerPage]="'10'" [discussion]="discussion"></simple-discussion>
+  </div>
+</div>

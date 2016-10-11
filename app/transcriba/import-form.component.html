@@ -1,0 +1,33 @@
+<form *ngIf="sources" class="panel panel-primary" (ngSubmit)="import()" #form="ngForm">
+  <div class="panel-heading">
+    {{ 'title.import' | translate }}
+  </div>
+  <div class="panel-body">
+
+    <fail-notifier [activated]="!isRequestPending && isLastRequestFailed"></fail-notifier>
+
+    <!-- Form Elements-->
+    <div class="form-group">
+      <label for="type">{{ 'general.source' | translate }}</label>
+      <select [(ngModel)]="selectedSourceID" name="type" class="form-control" required>
+        <option *ngFor="let s of sources" [value]="s.id">{{ s.title }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="foreignID">{{ 'general.foreignID' | translate }}</label>
+      <div class="input-group">
+        <input [(ngModel)]="foreignID" name="foreignID" #foreign="ngModel" class="form-control" required>
+        <span class="input-group-addon">
+          <span *ngIf="!(foreign.valid)" class="glyphicon glyphicon-minus"></span>
+          <span *ngIf="foreign.valid" class="glyphicon glyphicon-ok"></span>
+        </span>
+      </div>
+    </div>
+
+    <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
+      <span>{{ 'action.import' | translate }}</span>
+      <inline-spinner [active]="isRequestPending"></inline-spinner>
+    </button>
+  </div>
+</form>

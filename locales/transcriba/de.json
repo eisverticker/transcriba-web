@@ -4,12 +4,19 @@
     "sourceManagement": "Quellenverwaltung",
     "pageManagement": "Seitenverwaltung",
     "editPage": "Seite bearbeiten",
-    "editSource": "Quelle bearbeiten"
+    "editSource": "Quelle bearbeiten",
+    "import": "Objekt importieren"
   },
   "general": {
     "name": "Name",
     "page": "Seite",
-    "discussion": "Diskussion"
+    "discussion": "Diskussion",
+    "source": "Quelle",
+    "foreignID": "Externe ID",
+    "collections": "Sammlungen",
+    "objects": "Objekte",
+    "overview": "Überblick",
+    "transcription": "Transkription"
   },
   "action": {
     "deactivate": "Deaktivieren",
@@ -18,7 +25,8 @@
     "createNewPage": "Neue Seite erstellen",
     "save": "Speichern",
     "edit": "Bearbeiten",
-    "show": "Anzeigen"
+    "show": "Anzeigen",
+    "import": "Importieren"
   },
   "sources": {
     "apiUrl": "API-URL",
