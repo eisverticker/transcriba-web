@@ -7,7 +7,7 @@ export class NotificationService{
   public messages = this.subject.asObservable();
 
   constructor(){
-    console.log("Notification Service created");
+    //console.log("Notification Service created");
   }
 
   public notify(data: Notification){
