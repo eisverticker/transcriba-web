@@ -40,7 +40,7 @@ const routes: Routes = [
     data: {
       mode: 'transcription'
     }
-  }
+  },
   {
     path: 'obj/:id/viewer',
     component: ObjectDetailComponent,
