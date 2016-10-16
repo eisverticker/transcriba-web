@@ -16,7 +16,10 @@
     "collections": "Sammlungen",
     "objects": "Objekte",
     "overview": "Überblick",
-    "transcription": "Transkription"
+    "transcription": "Transkription",
+    "viewer": "Betrachter",
+    "versionHistory": "Versionen",
+    "metadata": "Metadaten"
   },
   "action": {
     "deactivate": "Deaktivieren",

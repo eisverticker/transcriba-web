@@ -42,8 +42,8 @@
       }
     },
     "request":{
-      "fail": "Anfrage fehlgeschlagen!",
-      "success": "Die Anfrage war erfolgreich!",
+      "fail": "Fehlgeschlagen!",
+      "success": "Fertig!",
       "loginFailed": "Anmeldung fehlgeschlagen!",
       "registrationFailed": "Registrierung fehlgeschlagen!",
       "registrationSucceeded": "Registrierung abgeschlossen!",
