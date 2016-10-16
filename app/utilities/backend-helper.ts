@@ -23,7 +23,7 @@ export class BackendHelper{
     }else{
       filter = "?"+filter;
     }
-    return this.config.get('backendApiUrl',"http://localhost:3001/api/")+ressourceUri;
+    return this.config.get('backendApiUrl',"http://localhost:3001/api/")+ressourceUri+filter;
   }
 
 }
