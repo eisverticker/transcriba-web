@@ -28,7 +28,8 @@
           'ng2-charts':                 'npm:ng2-charts',
           'ng2-select':                 'npm:ng2-select',
           'ng2-translate':              'npm:ng2-translate',
-          'ng2-toasty':                 'npm:ng2-toasty'
+          'ng2-toasty':                 'npm:ng2-toasty',
+          'leaflet':                    'node_modules/leaflet/dist/leaflet.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -46,7 +47,8 @@
           'ng2-charts':   { defaultExtension: 'js' },
           'ng2-select':   { defaultExtension: 'js' },
           'ng2-translate':{ defaultExtension: 'js' },
-          'ng2-toasty':   { defaultExtension: 'js' }
+          'ng2-toasty':   { defaultExtension: 'js' },
+          //'leaflet':      { defaultExtension: 'js' }
         }
       });
     })(this);
