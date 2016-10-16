@@ -1,9 +1,13 @@
 import { NgModule }       from '@angular/core';
 
-//components
+//general components
 import { ImportFormComponent } from './import-form.component';
 import { ExplorerComponent } from './explorer.component';
 import { ObjectDetailComponent } from './object-detail.component';
+import { ImageViewerComponent } from './image-viewer.component';
+
+//editor components
+import { TranscriptionEditorComponent } from './editor/transcription-editor.component';
 
 //modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +20,7 @@ import { GadgetModule } from '../gadgets/gadget.module';
 import { HttpModule } from '@angular/http';
 import { SourceModule } from '../source/source.module';
 import { DiscussionModule } from '../discussion/discussion.module';
+import { LeafletModule } from '../leaflet/leaflet.module';
 
 //services
 import { TranscribaService } from './transcriba.service';
@@ -28,6 +33,8 @@ import { transcribaRouting } from './transcriba.routing';
       ImportFormComponent,
       ExplorerComponent,
       ObjectDetailComponent,
+      ImageViewerComponent,
+      TranscriptionEditorComponent
     ],
     imports:      [
       BrowserModule,
@@ -39,9 +46,10 @@ import { transcribaRouting } from './transcriba.routing';
       RouterModule,
       GadgetModule,
       DiscussionModule,
+      LeafletModule,
       transcribaRouting
     ],
-    exports: [ImportFormComponent, ExplorerComponent],
+    exports: [ImportFormComponent, ExplorerComponent, ImageViewerComponent],
     bootstrap:    [],
     providers: [
       TranscribaService

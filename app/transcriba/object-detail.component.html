@@ -3,13 +3,29 @@
 <be-patient *ngIf="!object"></be-patient>
 <div *ngIf="object">
   <div *ngIf="mode=='overview'" id="overview">
-    <h1>{{ object.title }}</h1>
-    <img class="img-responsive" [src]="'http://localhost:3001/api/TranscribaObjects/'+object.id+'/overview'" alt="thumbnail" />
+    <h2>{{ object.title }}</h2>
+    <div class="panel panel-default">
+      <div class="panel-body">status</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <img class="img-responsive" [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')" alt="thumbnail" />
+      </div>
+      <div class="col-md-6">
+        <h3>Neueste Kommentare</h3>
+      </div>
+    </div>
+    <h3>Beteiligte Nutzer</h3>
+
   </div>
   <div *ngIf="mode=='transcription'" id="transcription">
     To-Do
   </div>
-  <div *ngIf="mode=='discussion'" id="transcription">
+  <div *ngIf="mode=='discussion'">
     <simple-discussion *ngIf="discussion && user" [user]="user" [itemsPerPage]="'10'" [discussion]="discussion"></simple-discussion>
   </div>
+  <div *ngIf="mode=='viewer'">
+    <image-viewer [objectId]="object.id"></image-viewer>
+  </div>
+
 </div>

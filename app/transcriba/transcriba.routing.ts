@@ -47,7 +47,21 @@ const routes: Routes = [
     data: {
       mode: 'viewer'
     }
-  }
+  },
+  {
+    path: 'obj/:id/meta',
+    component: ObjectDetailComponent,
+    data: {
+      mode: 'meta'
+    }
+  },
+  {
+    path: 'obj/:id/chronic',
+    component: ObjectDetailComponent,
+    data: {
+      mode: 'chronic'
+    }
+  }  
 ];
 
 export const transcribaRouting = RouterModule.forChild(routes);

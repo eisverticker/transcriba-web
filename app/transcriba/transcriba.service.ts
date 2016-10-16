@@ -114,4 +114,13 @@ export class TranscribaService{
     return Promise.resolve(collectionDummies);
   }
 
+  loadNumOfZoomLevels(id: any): Promise<number>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl('TranscribaObjects/'+id+'/zoomsteps', token);
+
+    return this.http.get(url)
+    .map(data => data.json())
+    .toPromise();
+  }
+
 }

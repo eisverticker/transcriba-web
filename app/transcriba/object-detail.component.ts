@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { TranscribaObject } from './transcriba-object';
 import { TranscribaService } from './transcriba.service';
@@ -9,10 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from '../loopback-auth/auth.service';
 import { DiscussionService } from '../discussion/discussion.service';
+import { BackendHelper } from '../utilities/backend-helper';
 
 import { Discussion } from '../discussion/discussion';
 import { User } from '../loopback-auth/user';
 
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   moduleId:     module.id,
@@ -34,34 +36,45 @@ export class ObjectDetailComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private discussionService: DiscussionService,
-    private auth: AuthService
+    private auth: AuthService,
+    private backend: BackendHelper
   ){
 
   }
 
   ngOnInit(){
-    this.route.params.subscribe( params => {
-      this.route.data.subscribe( data => {
-        let id = params['id'];
-        this.mode = data['mode'];
-        this.transcriba.loadByID(id).then(
-            obj => {
-              this.initNavigation(obj);
-              this.object = obj;
+    Observable.zip(
+      this.route.params,
+      this.route.data,
+      function(params, data){
+        return {
+          "params": params,
+          "data": data
+        }
+      }
+    ).subscribe( d => {
+      let id = d.params['id'];
+      this.mode = d.data['mode'];
+      this.transcriba.loadByID(id).then(
+          obj => {
+            this.initNavigation(obj);
+            this.object = obj;
 
-              if(this.mode == 'discussion'){
-                this.discussionService.loadByID(obj.discussionID).then(
-                  (discussion) => {
-                    this.discussion = discussion;
-                    this.auth.loadUser().then( user => this.user = user );
-                  }
-                )
-              }
+            if(this.mode == 'discussion'){
+              this.discussionService.loadByID(obj.discussionID).then(
+                (discussion) => {
+                  this.discussion = discussion;
+                  this.auth.loadUser().then( user => this.user = user );
+                },
+                err => console.log(err)
+              );
             }
-        );
-      });
+          }
+      );
     });
+
   }
+
 
   private initNavigation(obj: TranscribaObject){
 
@@ -81,6 +94,14 @@ export class ObjectDetailComponent implements OnInit{
       {
         name: "general.viewer",
         route: '/obj/'+obj.id+'/viewer'
+      },
+      {
+        name: "general.versionHistory",
+        route: '/obj/'+obj.id+'/chronic'
+      },
+      {
+        name: "general.metadata",
+        route: '/obj/'+obj.id+'/meta'
       }
     ];
 

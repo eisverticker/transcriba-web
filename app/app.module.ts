@@ -21,7 +21,7 @@ import { I18nModule } from './i18n/i18n.module';
 import { SourceModule } from './source/source.module';
 import { InfoPageModule } from './info-page/info-page.module';
 import { TranscribaModule } from './transcriba/transcriba.module';
-import { TranscriberModule } from './transcriber/transcriber.module';
+//import { TranscriberModule } from './transcriber/transcriber.module';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 
@@ -37,7 +37,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     SourceModule,
     InfoPageModule,
     TranscribaModule,
-    TranscriberModule,
+    //TranscriberModule,
     ToastModule
   ],
   declarations: [
