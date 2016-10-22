@@ -54,6 +54,7 @@ gulp.task('cssGeneral', function() {
     return gulp.src([
 		paths.npmDir + '/bootstrap/dist/css/bootstrap.css',
 		paths.npmDir + '/font-awesome/css/font-awesome.css',
+		paths.npmDir + '/leaflet/dist/leaflet.css',
 	])
 	.pipe(concat('static.css'))
   .pipe(gulp.dest(paths.cssDest));
