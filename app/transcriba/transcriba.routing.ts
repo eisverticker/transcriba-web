@@ -13,7 +13,17 @@ import { ObjectDetailComponent } from './object-detail.component';
 const routes: Routes = [
   {
     path: 'explore',
-    component: ExplorerComponent
+    component: ExplorerComponent,
+    data: {
+      type: "collection"
+    }
+  },
+  {
+    path: 'explore/objects',
+    component: ExplorerComponent,
+    data: {
+      type: "object"
+    }
   },
   {
     path: 'import',
@@ -61,7 +71,7 @@ const routes: Routes = [
     data: {
       mode: 'chronic'
     }
-  }  
+  }
 ];
 
 export const transcribaRouting = RouterModule.forChild(routes);

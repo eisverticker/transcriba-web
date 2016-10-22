@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 
 import { Collection } from './collection';
 import { TranscribaObject } from './transcriba-object';
@@ -14,17 +14,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: 'explorer.component.html',
   styleUrls: []
 })
-export class ExplorerComponent implements OnChanges, OnInit{
-  @Input() activeCollection: Collection = null;
+export class ExplorerComponent implements OnInit{
+  collections: Array<Collection>;
+  objects: Array<TranscribaObject[]>;
 
-  public collections: Array<Collection>;
-  public objects: Array<TranscribaObject>;
+  navItems: Array<any>;
 
-  public items: Array< { title: string, id: string } >[];
-  public isLoading: boolean = true;
-  public itemType: string = "collection";
-  public searchTerm: string = "";
-  public currentPage: number = 0;
+  isLoading: boolean = true;
+  searchTerm: string = "";
+  currentPage: number = 0;
+  itemType: string = "object";
 
 
   constructor(
@@ -34,78 +33,68 @@ export class ExplorerComponent implements OnChanges, OnInit{
     private router: Router
   ){}
 
-  ngOnChanges(){
-    this.updateData();
-  }
-
   ngOnInit(){
-    this.updateData();
+    this.initNavigation();
+    this.route.data.subscribe( data => {
+      this.itemType = data['type'];
+      this.updateData();
+    });
   }
 
-  setItemType(type: string){
-    this.currentPage = 0;
-    this.itemType = type;
-    this.updateData();
+  private columnify(last, current){
+      let group = last.length - 1;
+
+      if( last[group].length === 3 ){
+        last.push([]);
+        group++;
+      }
+
+      last[group].push(current);
+      return last;
   }
 
   private updateData(){
     this.isLoading = true;
-    if( this.activeCollection === null ){
-      if(this.itemType == "collection"){
-        return this.transcriba.loadCollectionPage(this.currentPage, 10).then(
-          collections => {
-            this.isLoading = false;
-            this.items = collections.reduce(
-              (last, current) => {
-                let item = {
-                  title: current.name,
-                  id: "57f61b035df32221a10083b0"
-                };
-
-                let group = last.length-1;
-
-                if( last[group].length === 3 ){
-                  last.push([]);
-                  group++;
-                }
-
-                last[group].push(item);
-                return last;
-              }
-            ,[[]]);
-          },
-          err => this.isLoading = false
-        );
-      }else if(this.itemType == "object"){
-        return this.transcriba.loadObjectPage(this.currentPage, 10).then(
-          collections => {
-            this.isLoading = false;
-            this.items = collections.reduce(
-              (last, current) => {
-                let item = {
-                  title: current.title,
-                  id: current.id
-                };
-
-                let group = last.length-1;
-
-                if( last[group].length === 3 ){
-                  last.push([]);
-                  group++;
-                }
-
-                last[group].push(item);
-                return last;
-              }
-            ,[[]]);
-          },
-          err => this.isLoading = false
-        );
-      }
-
-    }else{
-      throw "not implemented";
+    // Create usable columnified (multi array) data from collection and transcribaObject objects
+    if(this.itemType == "collection"){
+      return this.transcriba.loadCollectionPage(this.currentPage, 10).then(
+        collections => {
+          this.collections = collections;
+          this.isLoading = false;
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
+    }else if(this.itemType == "object"){
+      return this.transcriba.loadObjectPage(this.currentPage, 10).then(
+        objects => {
+          this.objects = objects.reduce(this.columnify,[[]]);
+          this.isLoading = false;
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
     }
+
+
+  }
+
+  private initNavigation(){
+
+    this.navItems = [
+      {
+        name: "general.collections",
+        route: '/explore'
+      },
+      {
+        name: "general.objects",
+        route: '/explore/objects'
+      }
+    ];
 
   }
 

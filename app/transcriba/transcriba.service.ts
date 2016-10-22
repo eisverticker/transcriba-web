@@ -5,8 +5,11 @@ import { User } from '../loopback-auth/user';
 
 import { Injectable } from '@angular/core';
 import { TranscribaObject } from './transcriba-object';
+import { Revision } from './revision';
 import { Collection } from './collection';
 import { Source } from '../source/source';
+
+import { TeiElement } from './editor/tei-element';
 
 let objectDummies: Array<TranscribaObject> = [
   new TranscribaObject("Test1", "32223","a","b", "sddsf24332"),
@@ -121,6 +124,63 @@ export class TranscribaService{
     return this.http.get(url)
     .map(data => data.json())
     .toPromise();
+  }
+
+  loadRevision(objId: any): Promise<Revision>{
+    return Promise.resolve(new Revision(
+      "dsaasdf233232423",
+      0,
+      new Date(),
+      {},
+      TeiElement.fromObject(
+        {
+        type: "root",
+        properties: {},
+        children: [
+          {
+            type: "page",
+            properties: {},
+            children: [
+              {
+                type: "paragraph",
+                properties: {},
+                children: [
+                  {
+                    type: "line",
+                    properties: {},
+                    children: [
+                      {
+                        type: "textPartOrdinary",
+                        properties: {
+                          value: "Gewöhnlicher "
+                        },
+                        children: []
+                      },
+                      {
+                        type: "textPartDeleted",
+                        properties: {
+                          value: "Test"
+                        },
+                        children: []
+                      },
+                      {
+                        type: "textPartOrdinary",
+                        properties: {
+                          value: "Text"
+                        },
+                        children: []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ),
+      false
+    ));
   }
 
 }

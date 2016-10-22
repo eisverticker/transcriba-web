@@ -1,3 +1,20 @@
+/* editor */
+.editor-line{
+  border: 1px solid grey;
+  padding: 2px;
+}
+
+.editor-panel-heading{
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.editor-link{
+  padding: 0px;
+}
+
+/* end of editor */
+
 .clickable{
   cursor: pointer;
 }

@@ -1,20 +1,13 @@
 <div class="row">
 
-  <ul style="margin-bottom: 20px;" class="nav nav-pills">
-    <li role="presentation" [class.active]="itemType == 'collection'">
-      <a (click)="setItemType('collection')">{{ 'general.collections' | translate }}</a>
-    </li>
-    <li role="presentation" [class.active]="itemType == 'object'">
-      <a (click)="setItemType('object')">{{ 'general.objects' | translate }}</a>
-    </li>
-  </ul>
+  <sub-navbar [items]="navItems"></sub-navbar>
 
   <div class="panel panel-default">
     <div class="panel-heading">
       <input type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
     </div>
-    <div *ngIf="!isLoading && items" class="panel-body">
-      <div *ngFor="let itemRow of items" class="row">
+    <div *ngIf="!isLoading && objects" class="panel-body">
+      <div *ngFor="let itemRow of objects" class="row">
         <div *ngFor="let item of itemRow" class="col-sm-6 col-md-4">
           <div class="">
             <img [src]="'http://localhost:3001/api/TranscribaObjects/'+item.id+'/thumbnail'" class="img-thumbnail" alt="thumbnail">
@@ -29,6 +22,12 @@
       </div>
 
     </div>
+
+    <table *ngIf="!isLoading && collections" class="table">
+      <tr *ngFor="let col of collections">
+        <td>{{ col.name }}</td>
+      </tr>
+    </table>
 
     <div *ngIf="isLoading" class="panel-footer">
       <be-patient></be-patient>

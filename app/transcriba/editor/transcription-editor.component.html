@@ -1,11 +1,19 @@
 <div *ngIf="object" class="row">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <image-viewer [objectId]="object.id"></image-viewer>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-7">
     <div class="panel panel-primary">
-      <div class="panel-heading">Hallo</div>
-      <div class="panel-body">Test</div>
+      <div class="panel-heading">
+        <element-details></element-details>
+      </div>
+      <div class="panel-body">
+        <tei-root *ngIf="revision" [(ngModel)]="revision.content"></tei-root>
+      </div>
+      <div class="panel-footer">
+        <button (click)="save()" class="btn btn-primary">Speichern</button>
+        <button (click)="publish()" class="btn btn-primary">Veröffentlichen</button>
+      </div>
     </div>
   </div>
 </div>

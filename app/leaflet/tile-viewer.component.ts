@@ -34,7 +34,7 @@ export class TileViewerComponent{
     var C = viewer.unproject([256, 256], 0);
 
     viewer.fitBounds(latLngBounds(A,C), {});
-    console.log(this.maxZoomLevel);
+
     let options = {
       minZoom: 0,
       maxZoom: this.maxZoomLevel+1,

@@ -7,7 +7,12 @@ import { ObjectDetailComponent } from './object-detail.component';
 import { ImageViewerComponent } from './image-viewer.component';
 
 //editor components
+import { DetailComponent } from './editor/detail.component';
 import { TranscriptionEditorComponent } from './editor/transcription-editor.component';
+import { RootComponent } from './editor/root.component';
+import { TeiElementComponent } from './editor/tei-element.component';
+import { GrowingTextareaComponent } from './editor/growing-textarea.component';
+
 
 //modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,9 +29,13 @@ import { LeafletModule } from '../leaflet/leaflet.module';
 
 //services
 import { TranscribaService } from './transcriba.service';
+import { DocumentService } from './editor/document.service';
 
 //routing
 import { transcribaRouting } from './transcriba.routing';
+
+//pipes
+import { ReplaceIfEmptyPipe } from './editor/replace-if-empty.pipe';
 
 @NgModule({
     declarations: [
@@ -34,7 +43,13 @@ import { transcribaRouting } from './transcriba.routing';
       ExplorerComponent,
       ObjectDetailComponent,
       ImageViewerComponent,
-      TranscriptionEditorComponent
+      //
+      DetailComponent,
+      TranscriptionEditorComponent,
+      RootComponent,
+      TeiElementComponent,
+      ReplaceIfEmptyPipe,
+      GrowingTextareaComponent
     ],
     imports:      [
       BrowserModule,
@@ -50,9 +65,10 @@ import { transcribaRouting } from './transcriba.routing';
       transcribaRouting
     ],
     exports: [ImportFormComponent, ExplorerComponent, ImageViewerComponent],
-    bootstrap:    [],
+    bootstrap:  [TeiElementComponent, RootComponent],
     providers: [
-      TranscribaService
+      TranscribaService,
+      DocumentService
     ]
 })
 export class TranscribaModule {}

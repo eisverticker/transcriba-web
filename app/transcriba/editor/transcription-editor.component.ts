@@ -4,6 +4,7 @@ import { TranscribaObject } from '../transcriba-object';
 import { Revision } from '../revision';
 
 import { TranscribaService } from '../transcriba.service';
+import { DocumentService } from './document.service';
 
 @Component({
   moduleId:     module.id,
@@ -18,14 +19,31 @@ export class TranscriptionEditorComponent implements OnInit{
   revision: Revision;
 
   constructor(
-    private transcriba: TranscribaService
+    private transcriba: TranscribaService,
+    private docs: DocumentService
   ){}
 
   ngOnInit(){
     this.transcriba.loadByID(this.objectId).then(
       object => this.object = object,
       err => console.log(err)
-    )
+    );
+    this.transcriba.loadRevision(this.objectId).then(
+      revision => {
+        console.log("revision", revision);
+        this.revision = revision
+      },
+      err => console.log(err)
+    );
+  }
+
+  save(){
+    this.docs.saveUnsavedChanges();
+    console.log("saving", this.revision.content);
+  }
+
+  publish(){
+
   }
 
 
