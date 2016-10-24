@@ -10,8 +10,8 @@ import { TeiElement } from './tei-element';
   template:
   `
     <div *ngIf="tei">
-      <tei-element *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
-      <button class="btn btn-link">Seite hinzufügen</button>
+      <tei-element (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+      <button (click)="addPage()" class="btn btn-link">Seite hinzufügen</button>
     </div>
   `,
   providers: [
@@ -26,6 +26,16 @@ export class RootComponent extends TeiBase{
 
   constructor(){
     super();
+  }
+
+  addPage(){
+    this.tei.children.push(new TeiElement('page', {}, []));
+  }
+
+  deleteChild(index){
+    this.tei.children = this.tei.children.filter(
+      (_, i) => index !== i
+    );
   }
 
 }

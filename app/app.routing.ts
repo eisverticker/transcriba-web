@@ -2,15 +2,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 //general components
 import { DashboardComponent } from './dashboard.component';
-import { ExampleComponent } from './example.component';
 
 //error handling components
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthorizationRequiredComponent } from './authorization-required.component';
-
-//to be deleted
-import { TranscriptionEditorComponent } from './transcriba/editor/transcription-editor.component';
-
 
 import { AdminGuardService } from './loopback-auth/admin-guard.service';
 
@@ -23,14 +18,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: DashboardComponent
-  },
-  {
-    path: 'example',
-    component: ExampleComponent
-  },
-  {
-    path: 'transcribe',
-    component: TranscriptionEditorComponent
   },
   {
     path: '403',

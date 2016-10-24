@@ -9,7 +9,7 @@ import { Revision } from './revision';
 import { Collection } from './collection';
 import { Source } from '../source/source';
 
-import { TeiElement } from './editor/tei-element';
+import { TeiElement } from '../editor/tei-element';
 
 let objectDummies: Array<TranscribaObject> = [
   new TranscribaObject("Test1", "32223","a","b", "sddsf24332"),

@@ -7,9 +7,9 @@ import { InlineSpinnerComponent } from './inline-spinner.component';
 import { PaginationBarComponent } from './pagination-bar.component';
 import { SubNavbarComponent } from './sub-navbar.component';
 import { FailNotifierComponent } from './fail-notifier.component';
+import { GrowingTextareaComponent } from './growing-textarea.component';
 
 //directives
-//import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 //modules
 import { BrowserModule  } from '@angular/platform-browser';
@@ -24,16 +24,18 @@ import { I18nModule } from '../i18n/i18n.module';
       ResultPieChartComponent,
       InlineSpinnerComponent,
       PaginationBarComponent,
-      SubNavbarComponent
+      SubNavbarComponent,
+      GrowingTextareaComponent
     ],
-    imports:      [/*ChartsModule,*/ BrowserModule, FormsModule, I18nModule, RouterModule],
+    imports:      [BrowserModule, FormsModule, I18nModule, RouterModule],
     exports: [
       FailNotifierComponent,
       DeleteButtonComponent,
       ResultPieChartComponent,
       InlineSpinnerComponent,
       PaginationBarComponent,
-      SubNavbarComponent
+      SubNavbarComponent,
+      GrowingTextareaComponent
     ],
     bootstrap:    [],
     providers: []

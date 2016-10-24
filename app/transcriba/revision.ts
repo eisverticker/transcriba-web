@@ -1,4 +1,4 @@
-import { TeiElement } from './editor/tei-element';
+import { TeiElement } from '../editor/tei-element';
 
 export class Revision{
   constructor(

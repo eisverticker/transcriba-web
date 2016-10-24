@@ -24,20 +24,24 @@
           <a [routerLink]="['/explore']">Entdecken</a>
         </li>
         <li [routerLinkActive]="['active']" role="presentation">
+          <a [routerLink]="['/contribute']">Mitmachen</a>
+        </li>
+        <li [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/import']">Importieren</a>
         </li>
         <li [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/info/impressum']">Impressum</a>
-        </li>
-        <li [routerLinkActive]="['active']" role="presentation">
-          <a [routerLink]="['/transcribe']">Transkribieren</a>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li [routerLinkActive]="['active']">
           <a *ngIf="!isAuthenticated" [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Anmelden</a>
-          <a *ngIf="isAuthenticated" [routerLink]="['/login']"><span class="glyphicon glyphicon glyphicon-user"></span> Mein Konto</a>
+          <a *ngIf="isAuthenticated" [routerLink]="['/login']">
+            <span class="glyphicon glyphicon glyphicon-user"></span>
+            <span> Mein Konto </span>
+            <span *ngIf="!'false'" class="badge"> <i class="fa fa-trophy fa-lg" aria-hidden="true"></i> 4</span>
+          </a>
         </li>
       </ul>
 

@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { TeiElementComponent } from './tei-element.component';
 
 @Injectable()
-export class DocumentService{
+export class EditorService{
 
-  private unsaved: Array<TeiElementComponent> = [];
+  //private unsaved: Array<TeiElementComponent> = [];
   private focusedElement: TeiElementComponent = null;
 
   constructor(){
@@ -19,9 +19,7 @@ export class DocumentService{
     this.focusedElement = element;
   }
 
-  /**
-   *
-   */
+  /*
   registerUnsavedElement(element){
     this.unsaved.push(element);
   }
@@ -31,6 +29,6 @@ export class DocumentService{
       element => element.saveChanges()
     );
     this.unsaved = [];
-  }
+  }*/
 
 }

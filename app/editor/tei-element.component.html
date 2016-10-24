@@ -1,0 +1,67 @@
+<ng-container [ngSwitch]="tei.type">
+
+  <div *ngSwitchCase="'page'" class="well" style="background-color: white;">
+    <div style="margin-bottom: 10px;">
+      Seite
+      <button class="btn btn-link editor-link" (click)="delete()">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div>
+      <tei-element (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+    </div>
+    <button class="btn btn-link" (click)="addParagraph()">Absatz hinzufügen</button>
+    <button class="btn btn-link" (click)="addCaption()">Überschrift hinzufügen</button>
+  </div>
+
+  <div *ngSwitchCase="'line'" class="editor-line">
+    <tei-element (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+  </div>
+
+  <div *ngSwitchCase="'paragraph'" class="panel editor-panel">
+    <div class="panel-heading editor-panel-heading">
+      Absatz
+      <button class="btn btn-link editor-link" (click)="delete()">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
+      <button *ngIf="mode=='default'" class="btn btn-link editor-link" (click)="editText()">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </button>
+      <button *ngIf="mode=='edit'" class="btn btn-link editor-link" (click)="showText()">Fertig</button>
+    </div>
+    <div class="panel-body">
+      <growing-textarea *ngIf="mode == 'edit' && value" [(ngModel)]="value"></growing-textarea>
+      <div *ngIf="mode == 'default'">
+        <tei-element (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+      </div>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'heading'" class="panel editor-panel">
+    <div class="panel-heading editor-panel-heading">
+      Überschrift
+      <button class="btn btn-link editor-link" (click)="delete()">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
+      <button *ngIf="mode=='default'" class="btn btn-link editor-link" (click)="editHeading()">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </button>
+      <button *ngIf="mode=='edit'" class="btn btn-link editor-link" (click)="showHeading()">Fertig</button>
+    </div>
+    <div class="panel-body">
+      <growing-textarea *ngIf="mode == 'edit' && value" [(ngModel)]="value"></growing-textarea>
+      <div class="editor-heading" *ngIf="mode == 'default'">
+        <tei-element (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+      </div>
+    </div>
+  </div>
+
+  <span *ngSwitchCase="'textPartOrdinary'">
+    <span (click)="focus()" (input)="textChange($event)">{{ tei.properties.value || replaceIfEmpty }}</span>
+    <i *ngIf="tei.isFocused" (click)="delete()" class="fa fa-times" aria-hidden="true"></i>
+  </span>
+  <span *ngSwitchCase="'textPartDeleted'">
+    <del (click)="focus()" (input)="textChange($event)">{{ tei.properties.value }}</del>
+    <i *ngIf="tei.isFocused" (click)="delete()" class="fa fa-times" aria-hidden="true"></i>
+  </span>
+</ng-container>

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 //components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
-import { ExampleComponent } from './example.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthorizationRequiredComponent } from './authorization-required.component';
 
@@ -21,7 +20,7 @@ import { I18nModule } from './i18n/i18n.module';
 import { SourceModule } from './source/source.module';
 import { InfoPageModule } from './info-page/info-page.module';
 import { TranscribaModule } from './transcriba/transcriba.module';
-//import { TranscriberModule } from './transcriber/transcriber.module';
+import { EditorModule } from './editor/editor.module';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 
@@ -37,13 +36,12 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     SourceModule,
     InfoPageModule,
     TranscribaModule,
-    //TranscriberModule,
+    EditorModule,
     ToastModule
   ],
   declarations: [
     AppComponent,
     DashboardComponent,
-    ExampleComponent,
     PageNotFoundComponent,
     AuthorizationRequiredComponent
   ],
