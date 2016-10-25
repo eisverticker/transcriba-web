@@ -183,4 +183,17 @@ export class TranscribaService{
     ));
   }
 
+  /**
+   * Loads the revision chronic of a TranscribaObject with the given id
+   */
+  loadChronic(objId: any): Promise<Array<{id: string, userName: string, date: string}>>{
+    return Promise.resolve([
+      {
+        id: "32342rfwead",
+        userName: "nobody",
+        date: "Mon Oct 24 2016 23:34:05 GMT+0200 (CEST)"
+      }
+    ]);
+  }
+
 }

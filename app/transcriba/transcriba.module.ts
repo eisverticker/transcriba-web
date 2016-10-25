@@ -19,7 +19,9 @@ import { GadgetModule } from '../gadgets/gadget.module';
 import { HttpModule } from '@angular/http';
 import { SourceModule } from '../source/source.module';
 import { DiscussionModule } from '../discussion/discussion.module';
-import { LeafletModule } from '../leaflet/leaflet.module';
+import { ScoreModule } from '../score/score.module';
+import { EditorModule } from '../editor/editor.module';
+import { ImageViewerModule } from '../image-viewer/image-viewer.module';
 
 //services
 import { TranscribaService } from './transcriba.service';
@@ -32,8 +34,7 @@ import { transcribaRouting } from './transcriba.routing';
     declarations: [
       ImportFormComponent,
       ExplorerComponent,
-      ObjectDetailComponent,
-      ImageViewerComponent
+      ObjectDetailComponent
     ],
     imports:      [
       BrowserModule,
@@ -42,13 +43,16 @@ import { transcribaRouting } from './transcriba.routing';
       HttpModule,
       UtilityModule,
       AuthModule,
+      SourceModule,
       RouterModule,
       GadgetModule,
       DiscussionModule,
-      LeafletModule,
-      transcribaRouting
+      transcribaRouting,
+      ScoreModule,
+      EditorModule,
+      ImageViewerModule
     ],
-    exports: [ImportFormComponent, ExplorerComponent, ImageViewerComponent],
+    exports: [ImportFormComponent, ExplorerComponent],
     bootstrap:  [],
     providers: [
       TranscribaService

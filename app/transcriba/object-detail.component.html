@@ -4,22 +4,34 @@
 <div *ngIf="object">
   <div *ngIf="mode=='overview'" id="overview">
     <h2>{{ object.title }}</h2>
-    <div class="panel panel-default">
-      <div class="panel-body">status</div>
-    </div>
     <div class="row">
-      <div class="col-md-6">
-        <img class="img-responsive" [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')" alt="thumbnail" />
-      </div>
-      <div class="col-md-6">
-        <h3>Neueste Kommentare</h3>
+      <div>
+        <img style="height: 512px; " class="img-responsive" [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')" alt="thumbnail" />
       </div>
     </div>
-    <h3>Beteiligte Nutzer</h3>
+    <h3>Infos</h3>
+    <dl *ngIf="source">
+      <dt>Quelle</dt>
+      <dd>{{ source.title }}</dd>
+    </dl>
 
+    <h3>Zuletzt geschriebene Kommentare</h3>
+    <latest-comments *ngIf="discussion" [numOfItems]="3" [discussion]="discussion"></latest-comments>
   </div>
   <div *ngIf="mode=='transcription'" id="transcription">
-    To-Do
+    <tei-editor [contents]="contents" [objectId]="object.id"></tei-editor>
+  </div>
+  <div *ngIf="mode=='chronic'" id="transcription">
+    <table class="table" *ngIf="chronic">
+      <tr>
+        <th>Nutzer</th>
+        <th>Datum</th>
+      </tr>
+      <tr *ngFor="let item of chronic">
+        <td>{{ item.userName }}</td>
+        <td>{{ item.date }}</td>
+      </tr>
+    </table>
   </div>
   <div *ngIf="mode=='discussion'">
     <simple-discussion *ngIf="discussion && user" [user]="user" [itemsPerPage]="'10'" [discussion]="discussion"></simple-discussion>

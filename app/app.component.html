@@ -30,6 +30,12 @@
           <a [routerLink]="['/import']">Importieren</a>
         </li>
         <li [routerLinkActive]="['active']" role="presentation">
+          <a [routerLink]="['/highscore']">Bestenliste</a>
+        </li>
+        <li [routerLinkActive]="['active']" role="presentation">
+          <a [routerLink]="['/info/feedback']">Feedback</a>
+        </li>
+        <li [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/info/impressum']">Impressum</a>
         </li>
       </ul>
@@ -40,7 +46,7 @@
           <a *ngIf="isAuthenticated" [routerLink]="['/login']">
             <span class="glyphicon glyphicon glyphicon-user"></span>
             <span> Mein Konto </span>
-            <span *ngIf="!'false'" class="badge"> <i class="fa fa-trophy fa-lg" aria-hidden="true"></i> 4</span>
+            <span class="badge"> <i class="fa fa-trophy fa-lg" aria-hidden="true"></i> <score-value></score-value></span>
           </a>
         </li>
       </ul>

@@ -84,7 +84,7 @@ export class TeiElementComponent extends TeiBase implements OnInit {
 
   editText(){
     this.mode = 'edit';
-    this.value = this.getParagraphText();
+    this.value = this.toText();
   }
 
   showText(){
@@ -114,27 +114,27 @@ export class TeiElementComponent extends TeiBase implements OnInit {
 
   editHeading(){
     this.mode = 'edit';
-    this.value = this.getLineText();
+    this.value = this.toText();
   }
 
-  getLineText(tei?: TeiElement){
-    if(tei === undefined){
+  toText(tei?: any){
+    let text: string = "";
+
+    if(tei == undefined){
       tei = this.tei;
     }
 
-    let text: string = "";
-    tei.children.forEach(
-      (tei) => text += tei.properties.value
-    );
-    return text;
-  }
+    if(['line', 'heading'].indexOf(tei.type) !== -1){
+      tei.children.forEach(
+        (tei) => text += tei.properties.value
+      );
+    }else if(tei.type == "paragraph"){
+      tei.children.forEach(
+        el => text += this.toText(el)+"\n"
+      );
+    }
+    console.log(text);
 
-  getParagraphText(){
-    let text: string = "";
-
-    this.tei.children.forEach(
-      el => text += this.getLineText(el)+"\n"
-    );
     return text;
   }
 

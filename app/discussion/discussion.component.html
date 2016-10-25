@@ -19,5 +19,8 @@
   </div>
   <div class="panel-body">
     <simple-comment *ngFor="let comment of comments" [comment]="comment"></simple-comment>
+    <div *ngIf="comments.length == 0">
+      {{ 'message.noCommentsAvailable' | translate }}
+    </div>
   </div>
 </div>

@@ -18,7 +18,7 @@
     "overview": "Überblick",
     "transcription": "Transkription",
     "viewer": "Betrachter",
-    "versionHistory": "Versionen",
+    "versionHistory": "Versionshistorie",
     "metadata": "Metadaten"
   },
   "action": {
@@ -46,6 +46,7 @@
     "showDiscussion": "Diskussion anzeigen"
   },
   "message": {
-    "searchTitle": "Suchen..."
+    "searchTitle": "Suchen...",
+    "noCommentsAvailable": "Hier gibt es leider noch keine Kommentare."
   }
 }

@@ -3,6 +3,7 @@ import { NgModule }       from '@angular/core';
 //components
 import { CommentComponent } from './comment.component';
 import { DiscussionComponent } from './discussion.component';
+import { DiscussionWidgetComponent } from './discussion-widget.component';
 
 //modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +22,8 @@ import { CommentVotingService } from './comment-voting.service';
 @NgModule({
     declarations: [
       CommentComponent,
-      DiscussionComponent
+      DiscussionComponent,
+      DiscussionWidgetComponent
     ],
     imports:      [
       BrowserModule,
@@ -36,7 +38,8 @@ import { CommentVotingService } from './comment-voting.service';
     ],
     exports: [
       CommentComponent,
-      DiscussionComponent
+      DiscussionComponent,
+      DiscussionWidgetComponent
     ],
     bootstrap:    [],
     providers: [

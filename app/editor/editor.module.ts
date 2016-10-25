@@ -13,7 +13,7 @@ import { FormsModule }   from '@angular/forms';
 import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { GadgetModule } from '../gadgets/gadget.module';
-import { TranscribaModule } from '../transcriba/transcriba.module';
+import { ImageViewerModule } from '../image-viewer/image-viewer.module';
 
 //services
 import { EditorService } from './editor.service';
@@ -28,13 +28,13 @@ import { EditorService } from './editor.service';
       RootComponent,
       TeiElementComponent
     ],
-    imports:      [
+    imports: [
       BrowserModule,
       FormsModule,
       I18nModule,
       UtilityModule,
       GadgetModule,
-      TranscribaModule
+      ImageViewerModule
     ],
     exports: [EditorComponent],
     bootstrap:  [],

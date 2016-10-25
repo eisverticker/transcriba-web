@@ -22,6 +22,7 @@ import { InfoPageModule } from './info-page/info-page.module';
 import { TranscribaModule } from './transcriba/transcriba.module';
 import { EditorModule } from './editor/editor.module';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ScoreModule } from './score/score.module';
 
 
 
@@ -37,7 +38,8 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
     InfoPageModule,
     TranscribaModule,
     EditorModule,
-    ToastModule
+    ToastModule,
+    ScoreModule
   ],
   declarations: [
     AppComponent,

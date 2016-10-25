@@ -26,7 +26,12 @@ export class SourceService{
     );
   }
 
+  //deprecated (alias for loadByID)
   loadSourceByID(id: any): Promise<Source>{
+    return this.loadByID(id);
+  }
+
+  loadByID(id: any): Promise<Source>{
     let token = this.auth.token;
     let url = this.backend.authUrl('Sources/'+id, token);
 
