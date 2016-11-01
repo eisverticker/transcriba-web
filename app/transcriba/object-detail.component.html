@@ -3,38 +3,16 @@
 <be-patient *ngIf="!object"></be-patient>
 <div *ngIf="object">
   <div *ngIf="mode=='overview'" id="overview">
-    <h2>{{ object.title }}</h2>
-    <div class="row">
-      <div>
-        <img style="height: 512px; " class="img-responsive" [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')" alt="thumbnail" />
-      </div>
-    </div>
-    <h3>Infos</h3>
-    <dl *ngIf="source">
-      <dt>Quelle</dt>
-      <dd>{{ source.title }}</dd>
-    </dl>
-
-    <h3>Zuletzt geschriebene Kommentare</h3>
-    <latest-comments *ngIf="discussion" [numOfItems]="3" [discussion]="discussion"></latest-comments>
+    <object-overview [object]="object"></object-overview>
   </div>
   <div *ngIf="mode=='transcription'" id="transcription">
-    <tei-editor [contents]="contents" [objectId]="object.id"></tei-editor>
+    <transcription-viewer [objectId]="object.id"></transcription-viewer>
   </div>
   <div *ngIf="mode=='chronic'" id="transcription">
-    <table class="table" *ngIf="chronic">
-      <tr>
-        <th>Nutzer</th>
-        <th>Datum</th>
-      </tr>
-      <tr *ngFor="let item of chronic">
-        <td>{{ item.userName }}</td>
-        <td>{{ item.date }}</td>
-      </tr>
-    </table>
+    <revision-history [objectId]="object.id"></revision-history>
   </div>
   <div *ngIf="mode=='discussion'">
-    <simple-discussion *ngIf="discussion && user" [user]="user" [itemsPerPage]="'10'" [discussion]="discussion"></simple-discussion>
+    <simple-discussion [itemsPerPage]="'10'" [discussionId]="object.discussionID"></simple-discussion>
   </div>
   <div *ngIf="mode=='viewer'">
     <image-viewer [objectId]="object.id"></image-viewer>

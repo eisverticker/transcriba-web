@@ -12,7 +12,7 @@ export class TeiElement{
 
   }
 
-  static fromObject(obj){
+  static fromObject(obj): TeiElement{
     let children: Array<TeiElement> = obj.children.map(
       child => TeiElement.fromObject(child)
     );
@@ -24,7 +24,4 @@ export class TeiElement{
     )
   }
 
-  static toObject(){
-
-  }
 }

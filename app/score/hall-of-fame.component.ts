@@ -17,7 +17,7 @@ import { ScoreService } from './score.service';
           <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
           {{ scorer.score }}
           </span>
-          {{ scorer.name }}
+          {{ scorer.username }}
         </li>
       </ul>
     </div>
@@ -26,7 +26,7 @@ import { ScoreService } from './score.service';
 })
 export class HallOfFameComponent implements OnInit{
 
-  scorers: Array<{name: string, score: number }>;
+  scorers: Array<{username: string, score: number }>;
 
   constructor(
     private scoreService: ScoreService

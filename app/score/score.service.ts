@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
+import { AuthService } from '../loopback-auth/auth.service';
 
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
 
@@ -13,7 +14,8 @@ export class ScoreService{
 
   constructor(
     private http: Http,
-    private backend: BackendHelper
+    private backend: BackendHelper,
+    private auth: AuthService
   ){
     //Initalize Reactive Components (Observables)
     this.scoreSubject = new BehaviorSubject(-1);
@@ -24,21 +26,30 @@ export class ScoreService{
    * Loads score value of currently logged in user
    */
   loadScore(): Promise<number>{
-    return Promise.resolve(50);
+    return this.auth.loadUser().then(
+      (user) => {
+        let token = this.auth.token;
+        let url = this.backend.authUrl('AppUsers/score', token);
+
+        return this.http.get(url)
+        .timeout(5000, "Timeout")
+        .map(data => data.json())
+        .toPromise();
+      }
+    );
   }
 
   /**
    *
    */
-  loadBestScorers(maxNumOfUsers: number = 10): Promise<{name: string, score: number}[]>{
-      return Promise.resolve(
-        [
-          {
-            name: "tester",
-            score: 20
-          }
-        ]
-      );
+  loadBestScorers(maxNumOfUsers: number = 10): Promise<{username: string, score: number}[]>{
+        let token = this.auth.token;
+        let url = this.backend.authUrl('AppUsers/leaderboard', token);
+
+        return this.http.get(url)
+        .timeout(5000, "Timeout")
+        .map(data => data.json())
+        .toPromise();
   }
 
 }

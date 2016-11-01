@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 
-  <div class="container">
+  <div [class.container]="!isWideLayout" [class.container-fluid]="isWideLayout">
 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -23,9 +23,9 @@
         <li [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/explore']">Entdecken</a>
         </li>
-        <li [routerLinkActive]="['active']" role="presentation">
+        <!--<li [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/contribute']">Mitmachen</a>
-        </li>
+        </li>-->
         <li [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/import']">Importieren</a>
         </li>
@@ -46,7 +46,7 @@
           <a *ngIf="isAuthenticated" [routerLink]="['/login']">
             <span class="glyphicon glyphicon glyphicon-user"></span>
             <span> Mein Konto </span>
-            <span class="badge"> <i class="fa fa-trophy fa-lg" aria-hidden="true"></i> <score-value></score-value></span>
+            <span style="color: gold;" class="badge"> <i class="fa fa-trophy fa-lg" aria-hidden="true"></i> <score-value></score-value></span>
           </a>
         </li>
       </ul>
@@ -56,7 +56,7 @@
   </div>
 </nav>
 
-<div style="margin-top: 80px;" class="container">
+<div style="margin-top: 80px;" [class.container]="!isWideLayout" [class.container-fluid]="isWideLayout">
 
   <router-outlet></router-outlet>
 

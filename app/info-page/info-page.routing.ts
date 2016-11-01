@@ -24,17 +24,17 @@ const routes: Routes = [
     canActivate: [AdminGuardService]
   },
   {
-    path: 'info/:id',
-    component: InfoPageViewerComponent,
-    data: {
-      'mode': 'viewer'
-    }
-  },
-  {
     path: 'info/:id/discussion',
     component: InfoPageViewerComponent,
     data: {
       'mode': 'discussion'
+    }
+  },  
+  {
+    path: 'info/:id',
+    component: InfoPageViewerComponent,
+    data: {
+      'mode': 'viewer'
     }
   }
 ];

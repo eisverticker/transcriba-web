@@ -5,7 +5,8 @@
     "pageManagement": "Seitenverwaltung",
     "editPage": "Seite bearbeiten",
     "editSource": "Quelle bearbeiten",
-    "import": "Objekt importieren"
+    "import": "Objekt importieren",
+    "userManagement": "Nutzerverwaltung"
   },
   "general": {
     "name": "Name",

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, HostListener} from '@angular/core';
 
 import { latLngBounds, CRS, map, MapOptions, Map, tileLayer, TileLayer, TileLayerOptions } from 'leaflet';
 
@@ -7,27 +7,40 @@ import { latLngBounds, CRS, map, MapOptions, Map, tileLayer, TileLayer, TileLaye
   selector:    'tile-viewer',
   template:
   `
-    <div id="tileViewer" style="height: 800px; width: 100%;"></div>
+    <div #container id="tileViewer" style="width: 100%;"></div>
   `,
   styleUrls: []
 })
 export class TileViewerComponent{
-
   @Input() url: string;
   @Input() maxZoomLevel: number;
-  @ViewChild('div') div: ElementRef
+  @ViewChild('container') container: ElementRef;
+  @HostListener('window:resize', ['$event'])
+  onResize($event){
+    this.fitViewPort();
+  }
 
+  constructor(
+      private window: Window
+  ){}
 
-  constructor(){}
 
   ngAfterViewInit() {
+    this.fitViewPort();
     this.showViewer();
+  }
+
+  private fitViewPort(){
+    let rect = this.container.nativeElement.getBoundingClientRect();
+    let viewPortHeight = this.window.innerHeight;
+    this.container.nativeElement.style.height = (viewPortHeight-rect.top-35) + "px";
   }
 
   private showViewer(){
 
     let viewer = map("tileViewer",  {
-      crs: CRS.Simple
+      crs: CRS.Simple,
+      attributionControl: false
     });
 
     var A = viewer.unproject([0, 0], 0);
@@ -35,7 +48,7 @@ export class TileViewerComponent{
 
     viewer.fitBounds(latLngBounds(A,C), {});
 
-    let options = {
+    let tileLayerOptions = {
       minZoom: 0,
       maxZoom: this.maxZoomLevel+1,
       maxNativeZoom: this.maxZoomLevel,
@@ -44,7 +57,7 @@ export class TileViewerComponent{
 
     tileLayer(
       this.url,
-      options
+      tileLayerOptions
     )
     .addTo(viewer);
   }

@@ -1,12 +1,13 @@
 import { NgModule }       from '@angular/core';
 
-//general components
+//components
 import { ImportFormComponent } from './import-form.component';
 import { ExplorerComponent } from './explorer.component';
 import { ObjectDetailComponent } from './object-detail.component';
 import { ImageViewerComponent } from './image-viewer.component';
-
-//pipes
+import { RevisionHistoryComponent } from './revision-history.component';
+import { TranscriptionViewerComponent } from './transcription-viewer.component';
+import { OverviewComponent } from './overview.component';
 
 //modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,9 +23,12 @@ import { DiscussionModule } from '../discussion/discussion.module';
 import { ScoreModule } from '../score/score.module';
 import { EditorModule } from '../editor/editor.module';
 import { ImageViewerModule } from '../image-viewer/image-viewer.module';
+import { VotingModule } from '../voting/voting.module';
 
 //services
 import { TranscribaService } from './transcriba.service';
+import { TranscriptionService } from './transcription.service';
+import { RevisionVotingService } from './revision-voting.service';
 
 //routing
 import { transcribaRouting } from './transcriba.routing';
@@ -34,7 +38,10 @@ import { transcribaRouting } from './transcriba.routing';
     declarations: [
       ImportFormComponent,
       ExplorerComponent,
-      ObjectDetailComponent
+      ObjectDetailComponent,
+      RevisionHistoryComponent,
+      OverviewComponent,
+      TranscriptionViewerComponent
     ],
     imports:      [
       BrowserModule,
@@ -50,12 +57,16 @@ import { transcribaRouting } from './transcriba.routing';
       transcribaRouting,
       ScoreModule,
       EditorModule,
-      ImageViewerModule
+      ImageViewerModule,
+      VotingModule
     ],
-    exports: [ImportFormComponent, ExplorerComponent],
+    exports: [ImportFormComponent, ExplorerComponent, RevisionHistoryComponent],
     bootstrap:  [],
     providers: [
-      TranscribaService
+      TranscribaService,
+      TranscriptionService,
+      RevisionVotingService,
+      {provide: Window, useValue: window}
     ]
 })
 export class TranscribaModule {}

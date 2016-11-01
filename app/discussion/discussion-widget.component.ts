@@ -20,7 +20,7 @@ import { Comment } from './comment';
   styleUrls: []
 })
 export class DiscussionWidgetComponent implements OnChanges{
-  @Input() discussion: Discussion;
+  @Input() discussionId: any;
   @Input() numOfItems: number;
 
   comments: Array<Comment>;
@@ -30,8 +30,11 @@ export class DiscussionWidgetComponent implements OnChanges{
   ){}
 
   ngOnChanges(){
-    this.discussionService.loadCommentPage(this.discussion, 0, this.numOfItems).then(
-      comments => this.comments = comments
+    this.discussionService.loadByID(this.discussionId).then(
+      discussion => this.discussionService.loadCommentPage(discussion, 0, this.numOfItems).then(
+          comments => this.comments = comments
+      ),
+      err => console.log(err)
     );
   }
 

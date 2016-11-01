@@ -11,19 +11,6 @@ import { Source } from '../source/source';
 
 import { TeiElement } from '../editor/tei-element';
 
-let objectDummies: Array<TranscribaObject> = [
-  new TranscribaObject("Test1", "32223","a","b", "sddsf24332"),
-  new TranscribaObject("Test2", "32d223","a","b", "sddsfdf24332"),
-  new TranscribaObject("Test3", "322d23a","a","b", "sdsafddsf24332"),
-  new TranscribaObject("Test4", "32223s","a","b", "sddsf24dsf332")
-];
-
-let collectionDummies: Array<Collection> = [
-  new Collection("Test1", "Hello Hello Hello", true, false, "32332adv"),
-  new Collection("Test2", "Hello Hello Hello2", true, false, "32332adv3"),
-  new Collection("Test3", "Hello Hello Hello3", true, false, "32332adv4"),
-  new Collection("Test4", "Hello Hello Hello4", true, false, "32332adv5")
-];
 
 @Injectable()
 export class TranscribaService{
@@ -42,18 +29,25 @@ export class TranscribaService{
     .map(data => data.json())
     .toPromise()
     .then(
-      o => new TranscribaObject(o.title, o.externalID, o.sourceId, o.discussionId, o.id)
+      o => {
+        return new TranscribaObject(
+          o.title,
+          o.externalID,
+          o.sourceId,
+          o.discussionId,
+          o.id,
+          o.status
+        )
+      }
     );
   }
 
   delete(obj: TranscribaObject): Promise<any>{
-    return Promise.resolve(null);
+    throw "not implemented yet";
   }
 
   loadParticipatingUsers(user: User): Promise<User[]>{
-    return Promise.resolve([
-      new User("schweinchenkopf", "s@skholding.com", "", [], "32r33r")
-    ]);
+    throw "not implemented yet";
   }
 
   saveObject(obj: TranscribaObject): Promise<any>{
@@ -113,8 +107,55 @@ export class TranscribaService{
     );
   }
 
+  loadObjectPageFromCollection(page: number, itemsPerPage: number, collectionId: any, searchTerm?: string): Promise<TranscribaObject[]>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl(
+      'Collections/'+collectionId+'/transcribaObjects',
+      token,
+      "filter[order]=createdAt DESC"+
+      //"&filter[include]=appUser"
+      "&filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
+    );
+
+    return this.http.get(url)
+    .timeout(5000, "Timeout")
+    .map(data => data.json())
+    .toPromise()
+    .then(
+      (objects) => {
+        return objects.map(
+          (data) => {
+            return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id);
+          }
+        );
+      }
+    );
+  }
+
   loadCollectionPage(page: number, itemsPerPage: number, rootCollection?: Collection): Promise<Collection[]>{
-    return Promise.resolve(collectionDummies);
+    let token = this.auth.token;
+    let url = this.backend.authUrl(
+      'Collections',
+      token,
+      "filter[order]=createdAt DESC"+
+      //"&filter[include]=appUser"
+      "&filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
+    );
+
+    return this.http.get(url)
+    .timeout(5000, "Timeout")
+    .map(data => data.json())
+    .toPromise()
+    .then(
+      (collections) => {
+        console.log(collections);
+        return collections.map(
+          (data) => {
+            return new Collection(data.name, data.description, data.public, data.locked, data.id);
+          }
+        );
+      }
+    );
   }
 
   loadNumOfZoomLevels(id: any): Promise<number>{
@@ -126,74 +167,64 @@ export class TranscribaService{
     .toPromise();
   }
 
-  loadRevision(objId: any): Promise<Revision>{
-    return Promise.resolve(new Revision(
-      "dsaasdf233232423",
-      0,
-      new Date(),
-      {},
-      TeiElement.fromObject(
-        {
-        type: "root",
-        properties: {},
-        children: [
-          {
-            type: "page",
-            properties: {},
-            children: [
-              {
-                type: "paragraph",
-                properties: {},
-                children: [
-                  {
-                    type: "line",
-                    properties: {},
-                    children: [
-                      {
-                        type: "textPartOrdinary",
-                        properties: {
-                          value: "Gewöhnlicher "
-                        },
-                        children: []
-                      },
-                      {
-                        type: "textPartDeleted",
-                        properties: {
-                          value: "Test"
-                        },
-                        children: []
-                      },
-                      {
-                        type: "textPartOrdinary",
-                        properties: {
-                          value: "Text"
-                        },
-                        children: []
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ),
-      false
-    ));
-  }
-
   /**
    * Loads the revision chronic of a TranscribaObject with the given id
    */
-  loadChronic(objId: any): Promise<Array<{id: string, userName: string, date: string}>>{
-    return Promise.resolve([
-      {
-        id: "32342rfwead",
-        userName: "nobody",
-        date: "Mon Oct 24 2016 23:34:05 GMT+0200 (CEST)"
-      }
-    ]);
+  loadChronic(objId: any): Promise<Array<{id: string, username: string, createdAt: string, published: boolean, approved: boolean}>>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/chronic',token);
+
+    return this.http.get(url)
+    .timeout(5000, "Timeout")
+    .map(data => data.json())
+    .toPromise();
   }
+
+  /*loadNumOfRevisions(objId: any): Promise<number>{
+    return Promise.resolve(0);
+  }*/
+
+  loadLatestRevision(objId: any): Promise<Revision>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/latest',token);
+
+    return this.http.get(url)
+    .timeout(5000, "Timeout")
+    .map(data => data.json())
+    .toPromise()
+    .then(
+        data => new Revision(
+          data.id,
+          data.approved,
+          data.createdAt,
+          data.metadata,
+          data.content,
+          data.published,
+          data.ownerId
+        )
+    );
+  }
+
+  loadStableRevision(objId: any): Promise<Revision>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/stable',token);
+
+    return this.http.get(url)
+    .timeout(5000, "Timeout")
+    .map(data => data.json())
+    .toPromise()
+    .then(
+        data => new Revision(
+          data.id,
+          data.approved,
+          data.createdAt,
+          data.metadata,
+          data.content,
+          data.published,
+          data.ownerId
+        )
+    );
+  }
+
 
 }

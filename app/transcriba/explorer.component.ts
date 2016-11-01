@@ -23,7 +23,8 @@ export class ExplorerComponent implements OnInit{
   isLoading: boolean = true;
   searchTerm: string = "";
   currentPage: number = 0;
-  itemType: string = "object";
+  mode: string = "object";
+  collectionId: any;
 
 
   constructor(
@@ -36,8 +37,15 @@ export class ExplorerComponent implements OnInit{
   ngOnInit(){
     this.initNavigation();
     this.route.data.subscribe( data => {
-      this.itemType = data['type'];
-      this.updateData();
+      this.route.params.subscribe(
+        params => {
+          this.mode = data['mode'];
+          if(this.mode == 'insideCollection'){
+            this.collectionId = params['id'];
+          }
+          this.updateData();
+        }
+      );
     });
   }
 
@@ -56,7 +64,7 @@ export class ExplorerComponent implements OnInit{
   private updateData(){
     this.isLoading = true;
     // Create usable columnified (multi array) data from collection and transcribaObject objects
-    if(this.itemType == "collection"){
+    if(this.mode == "collection"){
       return this.transcriba.loadCollectionPage(this.currentPage, 10).then(
         collections => {
           this.collections = collections;
@@ -67,8 +75,19 @@ export class ExplorerComponent implements OnInit{
           this.isLoading = false;
         }
       );
-    }else if(this.itemType == "object"){
+    }else if(this.mode == "object"){
       return this.transcriba.loadObjectPage(this.currentPage, 10).then(
+        objects => {
+          this.objects = objects.reduce(this.columnify,[[]]);
+          this.isLoading = false;
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
+    }else if(this.mode == "insideCollection"){
+      return this.transcriba.loadObjectPageFromCollection(this.currentPage, 10, this.collectionId).then(
         objects => {
           this.objects = objects.reduce(this.columnify,[[]]);
           this.isLoading = false;

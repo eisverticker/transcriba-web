@@ -1,11 +1,20 @@
-import { Component, Input, OnInit, forwardRef, ElementRef, AfterViewInit, ViewChild, Renderer } from '@angular/core';
+import { Component,
+  Input,
+  OnInit,
+  forwardRef,
+  ElementRef,
+  AfterViewInit,
+  AfterViewChecked,
+  ViewChild,
+  Renderer
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'growing-textarea',
   template:
   `
-    <textarea #textfield (keyup)="grow()" class="growing-textarea" [(ngModel)]="value"></textarea>
+    <textarea #textfield class="growing-textarea" [(ngModel)]="value"></textarea>
   `,
   providers: [
     {
@@ -15,7 +24,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
     }
   ]
 })
-export class GrowingTextareaComponent implements AfterViewInit{
+export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked{
    @ViewChild('textfield') textarea: ElementRef;
 
   //default callbacks which do nothing (they are being replaced when
@@ -34,6 +43,10 @@ export class GrowingTextareaComponent implements AfterViewInit{
     this.isViewInitialized = true;
   }
 
+  ngAfterViewChecked(){
+    this.grow();
+  }
+
   get value(){
     return this._value;
   }
@@ -47,6 +60,7 @@ export class GrowingTextareaComponent implements AfterViewInit{
 
   grow(){
     let ta = this.textarea.nativeElement;
+
     if(ta.scrollHeight > ta.clientHeight){
       ta.style.height = ta.scrollHeight + "px";
     }

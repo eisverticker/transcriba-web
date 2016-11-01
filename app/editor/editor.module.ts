@@ -4,6 +4,7 @@ import { NgModule }       from '@angular/core';
 import { EditorComponent } from './editor.component';
 import { RootComponent } from './root.component';
 import { TeiElementComponent } from './tei-element.component';
+import { TeiContainerComponent } from './tei-container.component';
 
 //pipes
 
@@ -26,7 +27,8 @@ import { EditorService } from './editor.service';
     declarations: [
       EditorComponent,
       RootComponent,
-      TeiElementComponent
+      TeiElementComponent,
+      TeiContainerComponent
     ],
     imports: [
       BrowserModule,

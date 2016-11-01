@@ -34,7 +34,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AdminGuardService]
+    canActivate: [AdminGuardService],
+    data: {
+      mode: 'user'
+    }
   }
 ];
 

@@ -22,12 +22,13 @@ export class SourceService{
     .map(data => data.json())
     .toPromise()
     .then(
-      (data) => data.map( s => new Source(s.title, s.url, s.api_type, s.sync, s.activated, s.id) )
+      (data) => data.map( s => new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id) )
     );
   }
 
   //deprecated (alias for loadByID)
   loadSourceByID(id: any): Promise<Source>{
+    console.log("loadSourceByID ist deprecated, use loadByID instead");
     return this.loadByID(id);
   }
 
@@ -39,7 +40,7 @@ export class SourceService{
     .map(data => data.json())
     .toPromise()
     .then(
-      s => new Source(s.title, s.url, s.api_type, s.sync, s.activated, s.id)
+      s => new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id)
     );
   }
 
@@ -56,6 +57,8 @@ export class SourceService{
     let data = {
       'title': source.title,
       'url': source.url,
+      'info_url': source.info_url,
+      'logo_url': source.logo_url,
       'api_type': source.type,
       'sync': source.sync,
       'activated': source.activated

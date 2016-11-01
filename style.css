@@ -1,10 +1,66 @@
 .growing-textarea{
   resize: none;
   width: 100%;
-  overflow: hidden;
+  /*height: 100px;*/
+  overflow-y: hidden;
 }
 
+/* discussion */
+.comment{
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.comment-default{
+    background-color: white;
+}
+
+.comment-highlighted{
+  background-color: snow;
+}
+
+.comment-hidden{
+
+}
+
+.comment-body{
+  padding: 2px 2px 7px 2px;
+}
+
+.comment-head{
+  padding: 2px;
+}
+
+.comment-hidden > .comment-body{
+  color: grey;
+}
+
+.comment-hidden > .comment-head{
+  display: none;
+}
+
+.comment-hidden > .comment-footer{
+  display: none;
+}
+
+.comment-footer{
+  padding: 2px;
+}
+
+.comment-date{
+  color: grey;
+}
+
+
+
 /* editor */
+.editor-navigation{
+  margin-bottom: 10px;
+}
+
 .editor-heading{
   font-size: 150%;
 }
@@ -14,10 +70,27 @@
   padding: 2px;
 }
 
+.editor-type-label{
+  color: grey;
+  transform: rotate(30deg);
+}
+
 .editor-panel{
   border: none;
   border-left: 1px solid #ccc;
   box-shadow: none;
+  margin-bottom: 15px;
+  border-radius: 0;
+}
+
+.big-panel-heading{
+  font-size: 120%;
+}
+
+.editor-page{
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+  border-radius: 0px;
 }
 
 .editor-panel-heading{

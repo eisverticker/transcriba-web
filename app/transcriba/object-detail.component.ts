@@ -3,6 +3,8 @@ import { Component, OnInit} from '@angular/core';
 import { TranscribaObject } from './transcriba-object';
 import { Revision } from './revision';
 import { TranscribaService } from './transcriba.service';
+import { TranscriptionService } from './transcription.service';
+import { RevisionVotingService } from './revision-voting.service';
 import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
@@ -16,6 +18,7 @@ import { BackendHelper } from '../utilities/backend-helper';
 import { Discussion } from '../discussion/discussion';
 import { User } from '../loopback-auth/user';
 import { Source } from '../source/source';
+import { TeiElement } from '../editor/tei-element';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -30,21 +33,18 @@ export class ObjectDetailComponent implements OnInit{
   object: TranscribaObject;
   navItems: Array<any> = [];
   mode: string;
-  discussion: Discussion;
-  user: User;
-  source: Source;
-  contents: Array<any>;
-  chronic: Array<{id: string, userName: string, date: string}>;
 
   constructor(
     private transcriba: TranscribaService,
+    private transcription: TranscriptionService,
     private notify: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
     private discussionService: DiscussionService,
     private auth: AuthService,
     private backend: BackendHelper,
-    private sourceService: SourceService
+    private sourceService: SourceService,
+    private voting: RevisionVotingService
   ){
 
   }
@@ -61,49 +61,19 @@ export class ObjectDetailComponent implements OnInit{
       }
     ).subscribe( d => {
       let id = d.params['id'];
-      this.mode = d.data['mode'];
+
+      //load object
       this.transcriba.loadByID(id).then(
           obj => {
+            this.mode = d.data['mode'];
             this.initNavigation(obj);
             this.object = obj;
-
-            if(this.mode == 'overview'){
-              this.sourceService.loadByID(obj.sourceID).then(
-                source => this.source = source,
-                err => console.log("error", err)
-              );
-            }
-
-            if(this.mode == 'transcription'){
-              console.log("transcription");
-              this.transcriba.loadRevision(obj.id).then(
-                rev => this.contents = [rev.content],
-                err => console.log("can't load revision data", err)
-              );
-            }
-
-            if(this.mode == 'chronic'){
-              this.transcriba.loadChronic(obj.id).then(
-                chronic => this.chronic = chronic,
-                err => console.log("failed to load chronic", err)
-              );
-            }
-
-            if(this.mode == 'discussion' || this.mode == 'overview'){
-              this.discussionService.loadByID(obj.discussionID).then(
-                (discussion) => {
-                  this.discussion = discussion;
-                  this.auth.loadUser().then( user => this.user = user );
-                },
-                err => console.log(err)
-              );
-            }
-          }
+          },
+          err => console.log("cannot load object", err)
       );
     });
 
   }
-
 
   private initNavigation(obj: TranscribaObject){
 
@@ -127,11 +97,11 @@ export class ObjectDetailComponent implements OnInit{
       {
         name: "general.versionHistory",
         route: '/obj/'+obj.id+'/chronic'
-      },
+      }/*,
       {
         name: "general.metadata",
         route: '/obj/'+obj.id+'/meta'
-      }
+      }*/
     ];
 
   }

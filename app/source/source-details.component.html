@@ -32,6 +32,28 @@
     </div>
 
     <div class="form-group">
+      <label for="info_url">{{ 'sources.infoUrl' | translate }}</label>
+      <div class="input-group">
+        <input [(ngModel)]="source.info_url" name="info_url" #infoUrl="ngModel" class="form-control">
+        <span class="input-group-addon">
+          <span *ngIf="!(infoUrl.valid)" class="glyphicon glyphicon-minus"></span>
+          <span *ngIf="infoUrl.valid" class="glyphicon glyphicon-ok"></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="logo_url">{{ 'sources.logoUrl' | translate }}</label>
+      <div class="input-group">
+        <input [(ngModel)]="source.logo_url" name="logo_url" #logoUrl="ngModel" class="form-control">
+        <span class="input-group-addon">
+          <span *ngIf="!(logoUrl.valid)" class="glyphicon glyphicon-minus"></span>
+          <span *ngIf="logoUrl.valid" class="glyphicon glyphicon-ok"></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label for="type">{{ 'sources.apiType' | translate }}</label>
       <select [(ngModel)]="source.type" name="type" #type="ngModel" class="form-control" required>
         <option value="transcribajson">TranscribaJSON</option>

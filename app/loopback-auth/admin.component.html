@@ -1,10 +1,8 @@
 <h1>Administratorbereich</h1>
-<ul style="margin-bottom: 20px;" class="nav nav-pills">
-  <li role="presentation" [class.active]="mode == 'userManagement'">
-    <a [routerLink]="['/admin']">Nutzerverwaltung</a>
-  </li>
-</ul>
+
+<sub-navbar [items]="navItems"></sub-navbar>
+
 <div [ngSwitch]="mode">
   <be-patient *ngSwitchCase="'loading'"></be-patient>
-  <user-management *ngSwitchCase="'userManagement'"></user-management>
+  <user-management *ngSwitchCase="'user'"></user-management>
 </div>

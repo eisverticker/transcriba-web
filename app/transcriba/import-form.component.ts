@@ -31,7 +31,16 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit{
 
   ngOnInit(){
     this.sourceService.loadAllSources().then(
-      (sources) => this.sources = sources
+      (sources) => {
+        this.sources = sources.filter(
+          source => source.activated
+        );
+
+        //default selection (first element)
+        if(this.sources.length > 0){
+          this.selectedSourceID = this.sources[0].id;
+        }
+      }
     );
   }
 

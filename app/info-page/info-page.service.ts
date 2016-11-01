@@ -47,8 +47,6 @@ export class InfoPageService{
     let token = this.auth.token;
     let url = this.backend.authUrl('InfoPages/parsed/'+name, token);
 
-    console.log(name);
-
     return this.http.get(url)
     .map(data => data.json())
     .toPromise()
@@ -74,7 +72,6 @@ export class InfoPageService{
       url = this.backend.authUrl('InfoPages', token);
       return this.discuss.startDiscussion().then(
         (discussion) => {
-          console.log("d",discussion);
           data['discussionId'] = discussion.id;
           return this.http.put(url, data).toPromise();
         }

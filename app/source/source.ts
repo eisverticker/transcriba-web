@@ -2,6 +2,8 @@ export class Source{
   constructor(
     public title: string,
     public url: string,
+    public info_url: string,
+    public logo_url: string,
     public type: string,
     public sync: boolean,
     public activated: boolean,
@@ -9,6 +11,6 @@ export class Source{
   ){}
 
   static createEmptySource(){
-    return new Source("","","transcribajson",false, true)
+    return new Source("","","","","transcribajson",false, true)
   }
 }

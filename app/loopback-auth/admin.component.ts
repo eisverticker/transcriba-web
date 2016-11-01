@@ -12,7 +12,8 @@ import { User } from './user';
   styleUrls: []
 })
 export class AdminComponent implements OnInit{
-  public mode: string = "loading";//(un)authorized, register and loading
+  mode: string = "loading";//(un)authorized, register and loading
+  navItems: Array<any> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -24,9 +25,21 @@ export class AdminComponent implements OnInit{
     this.route.data.subscribe(
       data => {
         //useless at the moment
-        this.mode = "userManagement"
+        this.mode = data['mode'];
       }
     );
+    this.initNavigation();
+  }
+
+  private initNavigation(){
+
+    this.navItems = [
+      {
+        name: "title.userManagement",
+        route: '/admin'
+      }
+    ];
+
   }
 
 }

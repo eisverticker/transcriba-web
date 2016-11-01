@@ -47,12 +47,14 @@ export class CommentComponent implements OnChanges{
   like(){
     if(this.currentVote == "like"){
       return this.voting.unvote(this.comment.id).then(
-        () => this.updateVotings()
+        () => this.updateVotings(),
+        err => console.log(err)
       );
     }else{
       return this.voting.like(this.comment.id)
       .then(
-        () => this.updateVotings()
+        () => this.updateVotings(),
+        err => console.log(err)
       );
     }
   }
@@ -60,12 +62,14 @@ export class CommentComponent implements OnChanges{
   dislike(){
     if(this.currentVote == "dislike"){
       return this.voting.unvote(this.comment.id).then(
-        () => this.updateVotings()
+        () => this.updateVotings(),
+        err => console.log(err)
       );
     }else{
       return this.voting.dislike(this.comment.id)
       .then(
-        () => this.updateVotings()
+        () => this.updateVotings(),
+        err => console.log(err)
       );
     }
   }
@@ -73,12 +77,14 @@ export class CommentComponent implements OnChanges{
   unwanted(){
     if(this.currentVote == "unwanted"){
       return this.voting.unvote(this.comment.id).then(
-        () => this.updateVotings()
+        () => this.updateVotings(),
+        err => console.log(err)
       );
     }else{
       return this.voting.unwanted(this.comment.id)
       .then(
-        () => this.updateVotings()
+        () => this.updateVotings(),
+        err => console.log(err)
       );
     }
   }

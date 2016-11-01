@@ -3,6 +3,7 @@ import { Component, OnChanges, Input} from '@angular/core';
 import { BackendHelper } from '../utilities/backend-helper';
 import { ImageViewerService } from './image-viewer.service';
 
+
 @Component({
   moduleId:     module.id,
   selector:    'image-viewer',

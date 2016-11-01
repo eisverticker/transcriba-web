@@ -32,7 +32,7 @@ export class InfoPageViewerComponent implements OnInit{
     this.route.data.subscribe(
       (data) => {
         this.mode = data['mode'];
-        this.route.params.subscribe(
+        this.route.params.first().subscribe(
           params => this.pageService.loadOneByName(params['id']).then(
             (page) => {
               this.page = page;
@@ -59,6 +59,8 @@ export class InfoPageViewerComponent implements OnInit{
           route: '/info/'+page.name+'/discussion'
         },
       ];
+    }else{
+      this.navItems = [];
     }
   }
 

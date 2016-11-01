@@ -15,14 +15,21 @@ const routes: Routes = [
     path: 'explore',
     component: ExplorerComponent,
     data: {
-      type: "collection"
+      mode: "collection"
     }
   },
   {
     path: 'explore/objects',
     component: ExplorerComponent,
     data: {
-      type: "object"
+      mode: "object"
+    }
+  },
+  {
+    path: 'explore/collection/:id',
+    component: ExplorerComponent,
+    data: {
+      mode: "insideCollection"
     }
   },
   {

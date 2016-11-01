@@ -111,7 +111,7 @@ export class VotingService{
 
   /**
    * Returns in a promise the voting state of the current user
-   * if the user didn't vote for anything then the returned state ist 'none'
+   * if the user didn't vote for anything then the returned state is 'none'
    */
   loadVote(context: VotingContext): Promise<string>{
     let token = this.auth.token;

@@ -4,7 +4,8 @@ export class TranscribaObject{
     public externalID: string,
     public sourceID: any,
     public discussionID: any,
-    public id?: any
+    public id?: any,
+    public status?: string
   ){
 
   }

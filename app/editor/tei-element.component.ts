@@ -21,6 +21,7 @@ import { EditorService } from './editor.service';
 })
 export class TeiElementComponent extends TeiBase implements OnInit {
   @Input() index: number;
+  @Input() editable: boolean;
   @Output() killMe: EventEmitter<any> = new EventEmitter();
 
 

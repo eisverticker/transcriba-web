@@ -10,12 +10,11 @@
       <div *ngFor="let itemRow of objects" class="row">
         <div *ngFor="let item of itemRow" class="col-sm-6 col-md-4">
           <div class="">
-            <img [src]="'http://localhost:3001/api/TranscribaObjects/'+item.id+'/thumbnail'" class="img-thumbnail" alt="thumbnail">
+            <a class="thumbnail" [routerLink]="'/obj/'+item.id" class="btn btn-default">
+              <img [src]="'http://localhost:3001/api/TranscribaObjects/'+item.id+'/thumbnail'" alt="thumbnail">
+            </a>
             <div class="caption">
               <p>{{ item.title }}</p>
-              <p>
-                <a [routerLink]="'/obj/'+item.id" class="btn btn-default">{{ 'action.show' | translate }}</a>
-              </p>
             </div>
           </div>
         </div>
@@ -25,7 +24,7 @@
 
     <table *ngIf="!isLoading && collections" class="table">
       <tr *ngFor="let col of collections">
-        <td>{{ col.name }}</td>
+        <td><a [routerLink]="'/explore/collection/'+col.id">{{ col.name }}</a></td>
       </tr>
     </table>
 
