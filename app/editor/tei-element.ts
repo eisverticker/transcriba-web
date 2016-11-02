@@ -1,8 +1,8 @@
 export class TeiElement{
 
   public isValid: boolean = true;
-  public isDirty: boolean = false;
   public isFocused: boolean = false;
+  public isDirty: boolean = false;
 
   constructor(
     public type: string,

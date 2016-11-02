@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { TranslateService } from 'ng2-translate';
 import { I18nHelperService } from './i18n/i18n-helper.service';
 import { NotificationService } from './utilities/notification.service';
 import { Notification } from './utilities/notification';
@@ -17,8 +17,8 @@ import './rxjs-operators';
   templateUrl: 'app/app.component.html'
 })
 export class AppComponent implements OnInit{
-  public isAuthenticated: boolean = false;
-  public isWideLayout: boolean = false;
+  isWideLayout: boolean = false;
+  user: User;
 
   constructor(
     private translate: TranslateService,
@@ -37,10 +37,10 @@ export class AppComponent implements OnInit{
 
     //watch whether user is logged in or not
     this.auth.user.subscribe(
-      (user) => this.updateAuthenticationState(user)
+      (user) => this.user = user
     );
     this.auth.loadUser().then(
-      user => this.updateAuthenticationState(user)
+      (user) => this.user = user
     );
 
     //watch if a module needs a wide page
@@ -56,10 +56,6 @@ export class AppComponent implements OnInit{
 
   }
 
-
-  private updateAuthenticationState(user: User){
-    this.isAuthenticated = user.isRegistered();
-  }
 
   private processNotificationMessage(message: string, tags: Array<string>){
     if(tags.indexOf("success") !== -1){

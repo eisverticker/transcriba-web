@@ -21,6 +21,7 @@ export class ExplorerComponent implements OnInit{
   navItems: Array<any>;
 
   isLoading: boolean = true;
+  activeSearchTerm: string = "";
   searchTerm: string = "";
   currentPage: number = 0;
   mode: string = "object";
@@ -49,6 +50,13 @@ export class ExplorerComponent implements OnInit{
     });
   }
 
+  find(){
+    if(this.searchTerm != this.activeSearchTerm){
+      this.activeSearchTerm = this.searchTerm;
+      this.updateData();
+    }
+  }
+
   private columnify(last, current){
       let group = last.length - 1;
 
@@ -63,6 +71,14 @@ export class ExplorerComponent implements OnInit{
 
   private updateData(){
     this.isLoading = true;
+
+    let searchValue: string;
+
+    if(this.searchTerm.length < 2){
+      searchValue = undefined;
+    }else{
+      searchValue = this.searchTerm;
+    }
     // Create usable columnified (multi array) data from collection and transcribaObject objects
     if(this.mode == "collection"){
       return this.transcriba.loadCollectionPage(this.currentPage, 10).then(
@@ -76,7 +92,7 @@ export class ExplorerComponent implements OnInit{
         }
       );
     }else if(this.mode == "object"){
-      return this.transcriba.loadObjectPage(this.currentPage, 10).then(
+      return this.transcriba.loadObjectPage(this.currentPage, 10, searchValue).then(
         objects => {
           this.objects = objects.reduce(this.columnify,[[]]);
           this.isLoading = false;
@@ -105,13 +121,13 @@ export class ExplorerComponent implements OnInit{
   private initNavigation(){
 
     this.navItems = [
-      {
+      /*{
         name: "general.collections",
         route: '/explore'
-      },
+      },*/
       {
         name: "general.objects",
-        route: '/explore/objects'
+        route: '/explore'
       }
     ];
 

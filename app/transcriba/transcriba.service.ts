@@ -83,11 +83,19 @@ export class TranscribaService{
   }
 
   loadObjectPage(page: number, itemsPerPage: number, searchTerm?: string, rootCollection?: Collection): Promise<TranscribaObject[]>{
+    let searchFilter;
+    if(searchTerm && searchTerm.length > 1){
+      searchFilter = "&filter[where][title][like]="+searchTerm;
+    }else{
+      searchFilter = "";
+    }
+
     let token = this.auth.token;
     let url = this.backend.authUrl(
       'TranscribaObjects',
       token,
       "filter[order]=createdAt DESC"+
+      searchFilter+
       //"&filter[include]=appUser"
       "&filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
     );
@@ -224,6 +232,16 @@ export class TranscribaService{
           data.ownerId
         )
     );
+  }
+
+  loadLatestRevisionPermissions(objId: any): Promise<{allowVote: boolean, details: any}>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/latest/permissions',token);
+
+    return this.http.get(url)
+    .timeout(5000, "Timeout")
+    .map(data => data.json())
+    .toPromise();
   }
 
 

@@ -15,10 +15,10 @@ const routes: Routes = [
     path: 'explore',
     component: ExplorerComponent,
     data: {
-      mode: "collection"
+      mode: "object"
     }
   },
-  {
+  /*{
     path: 'explore/objects',
     component: ExplorerComponent,
     data: {
@@ -31,7 +31,7 @@ const routes: Routes = [
     data: {
       mode: "insideCollection"
     }
-  },
+  },*/
   {
     path: 'import',
     component: ImportFormComponent,

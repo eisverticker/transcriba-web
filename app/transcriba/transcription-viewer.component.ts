@@ -26,12 +26,18 @@ import { User } from '../loopback-auth/user';
         <div *ngIf="user.id != latestRevision.ownerId" class="alert alert-info">
           <strong>Achtung!</strong> Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese und stimme ab!
         </div>
-        <div *ngIf="user.id == latestRevision.ownerId" class="alert alert-info">
+        <div *ngIf="!permissions.details.eligibleVoter && !permissions.details.isOwner" class="alert alert-warning">
+          <strong>Entschuldigung!</strong> Als Anfänger darfst du hier noch nicht abstimmen. Sammle erst Erfahrung indem du Schriften transkribierst.
+        </div>
+        <div *ngIf="permissions.details.maximumVotesReached" class="alert alert-warning">
+          <strong>Achtung!</strong> Du hast die maximale Anzahl an Abstimmungen für heute erreicht. Du kannst aber zu einem späteren Zeitpunkt gerne weitermachen.
+        </div>
+        <div *ngIf="permissions.details.isOwner" class="alert alert-info">
           <strong>Danke für deine Mühe!</strong> Deine Arbeit wird nun von der Community überprüft.
         </div>
         <span>Neue Version: </span>
-        <button [disabled]="user.id == latestRevision.ownerId" (click)="voteInFavor()" class="btn btn-success">Akzeptieren <span *ngIf="votings" class="badge">{{ votings.accept.length }}</span></button>
-        <button [disabled]="user.id == latestRevision.ownerId" (click)="voteAgainst()" class="btn btn-danger">Ablehnen <span *ngIf="votings" class="badge">{{ votings.refuse.length }}</span></button>
+        <button [disabled]="!permissions.allowVote" (click)="voteInFavor()" class="btn btn-success">Akzeptieren <span *ngIf="votings" class="badge">{{ votings.accept.length }}</span></button>
+        <button [disabled]="!permissions.allowVote" (click)="voteAgainst()" class="btn btn-danger">Ablehnen <span *ngIf="votings" class="badge">{{ votings.refuse.length }}</span></button>
       </div>
     </div>
     <tei-editor
@@ -54,7 +60,9 @@ export class TranscriptionViewerComponent implements OnChanges{
   labels: Array<string> = [];
   user: User;
   hasVoted: boolean;
+  permissions: {allowVote: boolean, details: any};
   votings: { accept: Array<User>, refuse: Array<User>};
+
 
   constructor(
     private transcriba: TranscribaService,
@@ -162,11 +170,18 @@ export class TranscriptionViewerComponent implements OnChanges{
               latestRevision => {
                 this.voting.loadVote(latestRevision).then(
                   vote => {
-                    this.hasVoted = vote != "none"
-                    this.contents = [stableRevision.content, latestRevision.content];
-                    this.labels = ['Alt', 'Neu'];
-                    this.editable = false;
-                    this.latestRevision = latestRevision;
+                    this.transcriba.loadLatestRevisionPermissions(this.object.id).then(
+                      permissions => {
+                        console.log(permissions);
+                        this.permissions = permissions;
+                        this.hasVoted = vote != "none"
+                        this.contents = [stableRevision.content, latestRevision.content];
+                        this.labels = ['Alt', 'Neu'];
+                        this.editable = false;
+                        this.latestRevision = latestRevision;
+                      },
+                      err => console.log(err)
+                    )
                   },
                   err => console.log("couldn't load vote", err)
                 );

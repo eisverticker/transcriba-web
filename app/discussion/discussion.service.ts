@@ -90,7 +90,7 @@ export class DiscussionService{
    * Creates a new empty discussion at the server
    * and returns the id of that discussion entity
    */
-  startDiscussion(): Promise<Discussion>{
+  /*startDiscussion(): Promise<Discussion>{
     let token = this.auth.token;
     let url = this.backend.authUrl('Discussions', token);
 
@@ -100,5 +100,5 @@ export class DiscussionService{
     .then(
       (data) => new Discussion(data.title, data.id)
     );
-  }
+  }*/
 }

@@ -70,12 +70,13 @@ export class InfoPageService{
 
     if(page.id == undefined){
       url = this.backend.authUrl('InfoPages', token);
-      return this.discuss.startDiscussion().then(
+      /*return this.discuss.startDiscussion().then(
         (discussion) => {
           data['discussionId'] = discussion.id;
-          return this.http.put(url, data).toPromise();
+
         }
-      );
+      );*/
+      return this.http.put(url, data).toPromise();
 
     }else{
       url = this.backend.authUrl('InfoPages/'+page.id, token);

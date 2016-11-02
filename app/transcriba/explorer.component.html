@@ -4,7 +4,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <input type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
+      <input (change)="find($event)" type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
     </div>
     <div *ngIf="!isLoading && objects" class="panel-body">
       <div *ngFor="let itemRow of objects" class="row">

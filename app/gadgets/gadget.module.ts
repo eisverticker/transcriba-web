@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 //components
 import { DeleteButtonComponent } from './delete-button.component';
-import { ResultPieChartComponent } from './result-pie-chart.component';
 import { InlineSpinnerComponent } from './inline-spinner.component';
 import { PaginationBarComponent } from './pagination-bar.component';
 import { SubNavbarComponent } from './sub-navbar.component';
@@ -21,17 +20,15 @@ import { I18nModule } from '../i18n/i18n.module';
     declarations: [
       FailNotifierComponent,
       DeleteButtonComponent,
-      ResultPieChartComponent,
       InlineSpinnerComponent,
       PaginationBarComponent,
       SubNavbarComponent,
       GrowingTextareaComponent
     ],
-    imports:      [BrowserModule, FormsModule, I18nModule, RouterModule],
+    imports: [BrowserModule, FormsModule, I18nModule, RouterModule],
     exports: [
       FailNotifierComponent,
       DeleteButtonComponent,
-      ResultPieChartComponent,
       InlineSpinnerComponent,
       PaginationBarComponent,
       SubNavbarComponent,

@@ -26,7 +26,7 @@
         <!--<li [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/contribute']">Mitmachen</a>
         </li>-->
-        <li [routerLinkActive]="['active']" role="presentation">
+        <li *ngIf="user.isEmployee()" [routerLinkActive]="['active']" role="presentation">
           <a [routerLink]="['/import']">Importieren</a>
         </li>
         <li [routerLinkActive]="['active']" role="presentation">
@@ -40,12 +40,12 @@
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul *ngIf="user" class="nav navbar-nav navbar-right">
         <li [routerLinkActive]="['active']">
-          <a *ngIf="!isAuthenticated" [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Anmelden</a>
-          <a *ngIf="isAuthenticated" [routerLink]="['/login']">
+          <a *ngIf="!user.isRegistered()" [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Anmelden</a>
+          <a *ngIf="user.isRegistered()" [routerLink]="['/login']">
             <span class="glyphicon glyphicon glyphicon-user"></span>
-            <span> Mein Konto </span>
+            <span> {{ user.name }} </span>
             <span style="color: gold;" class="badge"> <i class="fa fa-trophy fa-lg" aria-hidden="true"></i> <score-value></score-value></span>
           </a>
         </li>

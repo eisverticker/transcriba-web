@@ -4,7 +4,7 @@ import {
   TranslateService,
   TranslateLoader,
   TranslateStaticLoader
-} from 'ng2-translate/ng2-translate';
+} from 'ng2-translate';
 import { I18nHelperService } from './i18n-helper.service';
 
 import { Http } from '@angular/http';

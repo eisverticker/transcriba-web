@@ -21,10 +21,8 @@ var paths = {
  */
 gulp.task('scriptsGeneral', function() {
     return gulp.src([
-      paths.npmDir + '/shuffle-array/dist/shuffle-array.min.js',
 			paths.npmDir + '/jquery/dist/jquery.js',
-			paths.npmDir + '/bootstrap/dist/js/bootstrap.js',
-			paths.npmDir + '/chart.js/dist/Chart.bundle.min.js',
+			paths.npmDir + '/bootstrap/dist/js/bootstrap.js'
 		])
 		//.pipe(uglify())
 		.pipe(concat('static.js'))

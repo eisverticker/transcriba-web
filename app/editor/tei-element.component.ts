@@ -37,7 +37,6 @@ export class TeiElementComponent extends TeiBase implements OnInit {
   ngOnInit(){}
 
   delete(){
-    console.log("element of type "+this.tei.type+" with index "+ this.index +" wants to be deleted");
     this.killMe.emit(this.index);
   }
 
@@ -45,7 +44,6 @@ export class TeiElementComponent extends TeiBase implements OnInit {
     this.tei.children = this.tei.children.filter(
       (_, i) => index !== i
     );
-    console.log("type "+this.tei.type+" should delete index "+ index);
   }
 
   focus(){
@@ -58,7 +56,10 @@ export class TeiElementComponent extends TeiBase implements OnInit {
   }
 
   saveChanges(){
-    this.tei.properties.value = this.value;
+    if(this.tei.properties.value != this.value){
+      this.tei.isDirty = true;
+      this.tei.properties.value = this.value;
+    }
   }
 
   textChange(event){

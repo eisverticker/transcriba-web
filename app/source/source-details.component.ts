@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SourceDetailsComponent implements OnInit{
 
-  public source: Source = new Source("test","test", "transcribajson",true, false);
+  public source: Source = Source.createEmptySource();
   public isSaving: boolean = false;
   public isLastSaveFailed: boolean = false;
 
@@ -32,8 +32,8 @@ export class SourceDetailsComponent implements OnInit{
         if(params['id'] === "new"){
           this.source = Source.createEmptySource();
         }else{
-          this.sourceService.loadSourceByID(params['id']).then(
-            (data) => this.source = new Source(data.title, data.url, data.type, data.sync, data.activated, data.id),
+          this.sourceService.loadByID(params['id']).then(
+            (source) => this.source = source,
             (err) => {
               this.notify.notify(new Notification('request.fail', ['fail']));
               this.router.navigate(['/sources']);

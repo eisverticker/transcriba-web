@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { TranslateService } from 'ng2-translate';
 
 @Component({
   moduleId:     module.id,

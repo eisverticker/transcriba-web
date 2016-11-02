@@ -25,9 +25,7 @@
           'rxjs':                       'npm:rxjs',
           'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
           // transcriba related libraries
-          'ng2-charts':                 'npm:ng2-charts',
-          'ng2-select':                 'npm:ng2-select',
-          'ng2-translate':              'npm:ng2-translate',
+          'ng2-translate':              'npm:ng2-translate/bundles/index.js',
           'ng2-toasty':                 'npm:ng2-toasty',
           'leaflet':                    'node_modules/leaflet/dist/leaflet.js'
         },
@@ -40,14 +38,8 @@
           rxjs: {
             defaultExtension: 'js'
           },
-          'angular2-in-memory-web-api': {
-            main: './index.js',
-            defaultExtension: 'js'
-          },
-          'ng2-charts':   { defaultExtension: 'js' },
-          'ng2-select':   { defaultExtension: 'js' },
           'ng2-translate':{ defaultExtension: 'js' },
-          'ng2-toasty':   { defaultExtension: 'js' },
+          'ng2-toasty':   { defaultExtension: 'js' }
           //'leaflet':      { defaultExtension: 'js' }
         }
       });

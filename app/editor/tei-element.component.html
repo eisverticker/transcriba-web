@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="panel-body">
-      <growing-textarea *ngIf="mode == 'edit' && value" [(ngModel)]="value"></growing-textarea>
+      <growing-textarea *ngIf="mode == 'edit'" [(ngModel)]="value"></growing-textarea>
       <div class="editor-heading" *ngIf="mode == 'default'">
         <tei-element [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
       </div>
