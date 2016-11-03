@@ -15,8 +15,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class InfoPageEditComponent implements OnInit{
 
-  public page: InfoPage = InfoPage.createEmptyPage();
-  public isSaving: boolean = false;
+  page: InfoPage = InfoPage.createEmptyPage();
+  isSaving: boolean = false;
+  isLastAttemptFailed: boolean = false;
 
   constructor(
     private pageService: InfoPageService,
@@ -49,10 +50,12 @@ export class InfoPageEditComponent implements OnInit{
       () => {
         this.notify.notify(new Notification('request.success', ['success']));
         this.router.navigate(['/pages']);
+        this.isLastAttemptFailed = false;
         this.isSaving = false;
       },
       (err) => {
         this.notify.notify(new Notification('request.fail', ['fail']));
+        this.isLastAttemptFailed = true;
         this.isSaving = false;
       }
     );
