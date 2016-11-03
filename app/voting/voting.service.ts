@@ -20,7 +20,7 @@ export class VotingService{
    */
   vote(context: VotingContext, voteType: string): Promise<any>{
     let token = this.auth.token;
-    let url = this.backend.authUrl('Votings/vote', token);
+    let url: string = this.backend.authUrl('Votings/vote', token);
 
     return this.http.post(url, {
       'objectType': context.objectType,
@@ -36,7 +36,7 @@ export class VotingService{
    */
    private loadVotingIdentifier(context: VotingContext): Promise<any>{
      let token = this.auth.token;
-     let url;
+     let url: string;
 
      //we need the userId of the currently logged in user for the query first
      return this.auth.loadUser().then(
@@ -59,7 +59,7 @@ export class VotingService{
    */
   unvote(context: VotingContext): Promise<any>{
     let token = this.auth.token;
-    let url;
+    let url: string;
 
     return this.loadVotingIdentifier(context).then(
       (id) => {
@@ -74,7 +74,7 @@ export class VotingService{
    */
   count(context: VotingContext, voteType: string): Promise<number>{
     let token = this.auth.token;
-    let url = this.backend.authUrl('Votings/count', token,
+    let url: string = this.backend.authUrl('Votings/count', token,
     "filter[where][objectType]="+context.objectType+
     "&filter[where][objectId]="+context.objectId+
     "&filter[where][vote]="+voteType
@@ -90,7 +90,7 @@ export class VotingService{
    */
   loadUsers(context: VotingContext, voteType: string): Promise<User[]>{
     let token = this.auth.token;
-    let url = this.backend.authUrl('Votings', token,
+    let url: string = this.backend.authUrl('Votings', token,
     "filter[where][objectType]="+context.objectType+
     "&filter[where][objectId]="+context.objectId+
     "&filter[where][vote]="+voteType+
@@ -115,7 +115,7 @@ export class VotingService{
    */
   loadVote(context: VotingContext): Promise<string>{
     let token = this.auth.token;
-    let url;
+    let url: string;
 
     //we need the userId of the currently logged in user for the query first
     return this.auth.loadUser().then(

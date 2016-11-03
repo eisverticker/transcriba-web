@@ -6,7 +6,7 @@ export class ConfigurationPipe {
 
   constructor(private config: ConfigurationService) {}
 
-  transform(value) {
+  transform(value: string) {
     return this.config.get(value, undefined);
   }
 

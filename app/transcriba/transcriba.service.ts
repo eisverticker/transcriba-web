@@ -83,7 +83,7 @@ export class TranscribaService{
   }
 
   loadObjectPage(page: number, itemsPerPage: number, searchTerm?: string, rootCollection?: Collection): Promise<TranscribaObject[]>{
-    let searchFilter;
+    let searchFilter: string;
     if(searchTerm && searchTerm.length > 1){
       searchFilter = "&filter[where][title][like]="+searchTerm;
     }else{
