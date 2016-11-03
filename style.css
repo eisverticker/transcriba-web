@@ -5,6 +5,10 @@
   overflow-y: hidden;
 }
 
+.progress{
+  margin-bottom: 12px;
+}
+
 /* discussion */
 .comment{
   padding: 15px;

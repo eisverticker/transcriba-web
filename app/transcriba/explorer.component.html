@@ -4,7 +4,11 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <input (change)="find($event)" type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
+      <div>
+        <input (change)="find($event)" type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
+      </div>
+      <hr *ngIf="numOfPages > 1" style="margin: 5px;" />
+      <pagination-bar (pageChanged)="setPage($event)" [numOfPages]="numOfPages" [currentPage]="currentPage"></pagination-bar>
     </div>
     <div *ngIf="!isLoading && objects" class="panel-body">
       <div *ngFor="let itemRow of objects" class="row">

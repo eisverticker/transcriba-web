@@ -42,6 +42,23 @@ export class TranscribaService{
     );
   }
 
+  loadObjectCount(searchTerm?: string): Promise<number>{
+      let token = this.auth.token;
+
+      let searchFilter: string;
+      if(searchTerm && searchTerm.length > 1){
+        searchFilter = "where[title][like]="+searchTerm;
+      }else{
+        searchFilter = "";
+      }
+
+      let url = this.backend.authUrl('TranscribaObjects/count', token, searchFilter);
+
+      return this.http.get(url)
+      .map(data => data.json().count)
+      .toPromise();
+  }
+
   delete(obj: TranscribaObject): Promise<any>{
     throw "not implemented yet";
   }

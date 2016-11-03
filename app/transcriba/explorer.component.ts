@@ -25,6 +25,9 @@ export class ExplorerComponent implements OnInit{
   activeSearchTerm: string = "";
   searchTerm: string = "";
   currentPage: number = 0;
+  numOfItems: number = 0;
+  numOfPages: number = 1;
+  itemsPerPage: number = 12;
   mode: string = "object";
   collectionId: any;
 
@@ -52,8 +55,18 @@ export class ExplorerComponent implements OnInit{
     });
   }
 
+  setPage(page: number){
+    this.currentPage = page;
+    this.updateData();
+  }
+
+  private setNumberOfPages(){
+    this.numOfPages = Math.ceil(this.numOfItems/this.itemsPerPage);
+  }
+
   find(){
     if(this.searchTerm != this.activeSearchTerm){
+      this.currentPage = 0;
       this.activeSearchTerm = this.searchTerm;
       this.updateData();
     }
@@ -83,7 +96,7 @@ export class ExplorerComponent implements OnInit{
     }
     // Create usable columnified (multi array) data from collection and transcribaObject objects
     if(this.mode == "collection"){
-      return this.transcriba.loadCollectionPage(this.currentPage, 10).then(
+      return this.transcriba.loadCollectionPage(this.currentPage, this.itemsPerPage*2).then(
         collections => {
           this.collections = collections;
           this.isLoading = false;
@@ -94,18 +107,27 @@ export class ExplorerComponent implements OnInit{
         }
       );
     }else if(this.mode == "object"){
-      return this.transcriba.loadObjectPage(this.currentPage, 10, searchValue).then(
-        objects => {
-          this.objects = objects.reduce(this.columnify,[[]]);
-          this.isLoading = false;
+      return this.transcriba.loadObjectCount(searchValue).then(
+        count => {
+          this.numOfItems = count;
+          this.setNumberOfPages();
+          return this.transcriba.loadObjectPage(this.currentPage, this.itemsPerPage, searchValue).then(
+            objects => {
+              this.objects = objects.reduce(this.columnify,[[]]);
+              this.isLoading = false;
+            },
+            err => {
+              console.log(err);
+              this.isLoading = false;
+            }
+          );
+
         },
-        err => {
-          console.log(err);
-          this.isLoading = false;
-        }
-      );
+        err => console.log(err)
+      )
+
     }else if(this.mode == "insideCollection"){
-      return this.transcriba.loadObjectPageFromCollection(this.currentPage, 10, this.collectionId).then(
+      return this.transcriba.loadObjectPageFromCollection(this.currentPage, this.itemsPerPage, this.collectionId).then(
         objects => {
           this.objects = objects.reduce(this.columnify,[[]]);
           this.isLoading = false;

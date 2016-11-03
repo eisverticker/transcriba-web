@@ -16,7 +16,9 @@ import { BackendHelper } from '../utilities/backend-helper';
   <h2>{{ object.title }}</h2>
   <div class="row">
     <div>
-      <img style="height: 512px; " class="img-responsive" [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')" alt="thumbnail" />
+      <a [routerLink]="'/obj/'+object.id+'/viewer'">
+        <img style="height: 512px; " class="img-responsive" [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')" alt="thumbnail" />
+      </a>
     </div>
   </div>
   <h3>Infos</h3>
