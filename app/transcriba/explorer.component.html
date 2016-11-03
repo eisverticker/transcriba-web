@@ -11,7 +11,7 @@
         <div *ngFor="let item of itemRow" class="col-sm-6 col-md-4">
           <div class="">
             <a class="thumbnail" [routerLink]="'/obj/'+item.id" class="btn btn-default">
-              <img [src]="'http://localhost:3001/api/TranscribaObjects/'+item.id+'/thumbnail'" alt="thumbnail">
+              <img [src]="backend.unAuthUrl('TranscribaObjects/'+item.id+'/thumbnail')" alt="thumbnail">
             </a>
             <div class="caption">
               <p>{{ item.title }}</p>

@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
 
-    <div *ngIf="isLastSaveFailed && !isSaving" class="alert  alert-danger">
+    <div *ngIf="!isSaving" class="alert  alert-danger">
         <strong>{{ 'request.fail' | translate }}</strong> {{ 'command.pleaseTryAgain' | translate }}
     </div>
 

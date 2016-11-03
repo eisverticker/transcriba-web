@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 @Component({
+  moduleId:     module.id,
   selector: 'general-dashboard',
-  templateUrl: 'app/dashboard.component.html'
+  templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit{
 

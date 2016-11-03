@@ -4,7 +4,6 @@ import { NgModule }       from '@angular/core';
 import { ImportFormComponent } from './import-form.component';
 import { ExplorerComponent } from './explorer.component';
 import { ObjectDetailComponent } from './object-detail.component';
-import { ImageViewerComponent } from './image-viewer.component';
 import { RevisionHistoryComponent } from './revision-history.component';
 import { TranscriptionViewerComponent } from './transcription-viewer.component';
 import { OverviewComponent } from './overview.component';
@@ -65,8 +64,8 @@ import { transcribaRouting } from './transcriba.routing';
     providers: [
       TranscribaService,
       TranscriptionService,
-      RevisionVotingService,
-      {provide: Window, useValue: window}
+      RevisionVotingService
+      //{provide: Window, useValue: window}
     ]
 })
 export class TranscribaModule {}

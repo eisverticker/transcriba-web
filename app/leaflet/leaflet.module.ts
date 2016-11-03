@@ -25,7 +25,7 @@ import { GadgetModule } from '../gadgets/gadget.module';
     exports: [TileViewerComponent],
     bootstrap:    [],
     providers: [
-      {provide: Window, useValue: window}
+      //{provide: Window, useValue: window}
     ]
 })
 export class LeafletModule {}

@@ -5,6 +5,7 @@ import { TranscribaObject } from './transcriba-object';
 import { TranscribaService } from './transcriba.service';
 import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
+import { BackendHelper } from '../utilities/backend-helper';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -32,7 +33,8 @@ export class ExplorerComponent implements OnInit{
     private transcriba: TranscribaService,
     private notify: NotificationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public backend: BackendHelper
   ){}
 
   ngOnInit(){
@@ -57,7 +59,7 @@ export class ExplorerComponent implements OnInit{
     }
   }
 
-  private columnify(last, current){
+  private columnify(last: any, current: any){
       let group = last.length - 1;
 
       if( last[group].length === 3 ){

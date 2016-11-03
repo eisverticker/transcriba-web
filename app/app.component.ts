@@ -13,8 +13,9 @@ import { User } from './loopback-auth/user';
 import './rxjs-operators';
 
 @Component({
+  moduleId:     module.id,
   selector: 'my-app',
-  templateUrl: 'app/app.component.html'
+  templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit{
   isWideLayout: boolean = false;

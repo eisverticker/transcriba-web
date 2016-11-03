@@ -53,16 +53,14 @@ export class TeiContainerComponent implements AfterViewInit{
     this.fitViewPort();
   }
 
-  constructor(
-    private window: Window
-  ){}
+  constructor(){}
 
   private fitViewPort(){
     let rectOuter = this.container.nativeElement.getBoundingClientRect();
     let rectInner = this.contentContainer.nativeElement.getBoundingClientRect();
 
     //console.log(rectOuter, rectInner, difference);
-    let viewPortHeight = this.window.innerHeight;
+    let viewPortHeight = window.innerHeight;
     let newHeight: string = (viewPortHeight-rectInner.top-145) + "px";
 
     this.contentContainer.nativeElement.style.maxHeight = newHeight;

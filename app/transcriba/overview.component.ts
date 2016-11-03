@@ -36,7 +36,7 @@ export class OverviewComponent implements OnChanges{
 
   constructor(
     private transcriba: TranscribaService,
-    private backend: BackendHelper,
+    public backend: BackendHelper,
     private sourceService: SourceService,
     private discussionService: DiscussionService
   ){}

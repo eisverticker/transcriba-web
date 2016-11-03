@@ -20,9 +20,7 @@ export class TileViewerComponent{
     this.fitViewPort();
   }
 
-  constructor(
-      private window: Window
-  ){}
+  constructor(){}
 
 
   ngAfterViewInit() {
@@ -32,7 +30,7 @@ export class TileViewerComponent{
 
   private fitViewPort(){
     let rect = this.container.nativeElement.getBoundingClientRect();
-    let viewPortHeight = this.window.innerHeight;
+    let viewPortHeight = window.innerHeight;
     this.container.nativeElement.style.height = (viewPortHeight-rect.top-35) + "px";
   }
 

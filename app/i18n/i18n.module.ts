@@ -9,12 +9,15 @@ import { I18nHelperService } from './i18n-helper.service';
 
 import { Http } from '@angular/http';
 
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, '/web/locales', '.json');
+}
 
 @NgModule({
   imports:      [
     TranslateModule.forRoot({
       provide: TranslateLoader,
-      useFactory: (http: Http) => new TranslateStaticLoader(http, '/web/locales', '.json'),
+      useFactory: (createTranslateLoader),
       deps: [Http]
     })
   ],

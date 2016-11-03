@@ -7,15 +7,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "types": []
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true
   },
 
   "files": [
     "app/app.module.ts",
-    "app/main.ts",
-    "./typings/index.d.ts"
+    "app/main.ts"
   ],
 
   "angularCompilerOptions": {
