@@ -1,8 +1,0 @@
-<h1>Administratorbereich</h1>
-
-<sub-navbar [items]="navItems"></sub-navbar>
-
-<div [ngSwitch]="mode">
-  <be-patient *ngSwitchCase="'loading'"></be-patient>
-  <user-management *ngSwitchCase="'user'"></user-management>
-</div>

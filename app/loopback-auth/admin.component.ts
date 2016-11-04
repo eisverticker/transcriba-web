@@ -6,9 +6,16 @@ import { AuthService } from './auth.service';
 import { User } from './user';
 
 @Component({
-  moduleId:     module.id,
   selector:    'auth-administration',
-  templateUrl: 'admin.component.html',
+  template: `
+  <h1>Administratorbereich</h1>
+  <sub-navbar [items]="navItems"></sub-navbar>
+  
+  <div [ngSwitch]="mode">
+    <be-patient *ngSwitchCase="'loading'"></be-patient>
+    <user-management *ngSwitchCase="'user'"></user-management>
+  </div>
+  `,
   styleUrls: []
 })
 export class AdminComponent implements OnInit{

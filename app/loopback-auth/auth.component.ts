@@ -6,9 +6,19 @@ import { AuthService } from './auth.service';
 import { User } from './user';
 
 @Component({
-  moduleId:     module.id,
   selector:    'user-auth',
-  templateUrl: 'auth.component.html',
+  template:
+  `
+  <div [ngSwitch]="mode">
+    <be-patient *ngSwitchCase="'loading'"></be-patient>
+    <user-login (done)="finishLogin()" *ngSwitchCase="'unauthenticated'"></user-login>
+    <user-logout (done)="finishLogout()" *ngSwitchCase="'authenticated'"></user-logout>
+    <user-registration (done)="finishRegistration()" *ngSwitchCase="'register'"></user-registration>
+    <email-verification *ngSwitchCase="'verify'"></email-verification>
+    <password-reset (done)="finishReset()" *ngSwitchCase="'reset'"></password-reset>
+  </div>
+
+  `,
   styleUrls: []
 })
 export class AuthComponent implements OnInit{
