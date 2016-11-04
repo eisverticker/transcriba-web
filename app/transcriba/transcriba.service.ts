@@ -21,6 +21,9 @@ export class TranscribaService{
     private auth: AuthService
   ){}
 
+  /**
+   * Returns the TranscribaObject with the given id as Promise
+   */
   loadByID(id: any): Promise<TranscribaObject>{
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/'+id, token);
@@ -42,6 +45,12 @@ export class TranscribaService{
     );
   }
 
+  /**
+   * Get number of objects in the database
+   * you can also specify a search term if you only want to
+   * count objects with a title containing the search term
+   * (usefull for explorer)
+   */
   loadObjectCount(searchTerm?: string): Promise<number>{
       let token = this.auth.token;
 
@@ -59,26 +68,31 @@ export class TranscribaService{
       .toPromise();
   }
 
+  /**
+   * Removes an object from the database
+   */
   delete(obj: TranscribaObject): Promise<any>{
     throw "not implemented yet";
   }
 
+  /**
+   * Returns all users who are considered participants of the object
+   */
   loadParticipatingUsers(user: User): Promise<User[]>{
     throw "not implemented yet";
   }
 
-  saveObject(obj: TranscribaObject): Promise<any>{
-    return Promise.resolve(null);
-  }
-
+  /**
+   * Loads a collection of objects
+   */
   loadCollectionByID(id: any): Promise<Collection>{
     return Promise.resolve(Collection.createEmptyCollection());
   }
 
-  saveCollection(collection: Collection): Promise<any>{
-    return Promise.resolve(null);
-  }
-
+  /**
+   * Imports an object by his source and his id at
+   * the specified source (external id)
+   */
   import(source: Source, foreignID: string): Promise<string>{
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/import', token);
@@ -99,6 +113,9 @@ export class TranscribaService{
     return Promise.resolve(null);
   }
 
+  /**
+   * Loads an array of objects which belong to the given page
+   */
   loadObjectPage(page: number, itemsPerPage: number, searchTerm?: string, rootCollection?: Collection): Promise<TranscribaObject[]>{
     let searchFilter: string;
     if(searchTerm && searchTerm.length > 1){
@@ -183,15 +200,6 @@ export class TranscribaService{
     );
   }
 
-  loadNumOfZoomLevels(id: any): Promise<number>{
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+id+'/zoomsteps', token);
-
-    return this.http.get(url)
-    .map(data => data.json())
-    .toPromise();
-  }
-
   /**
    * Loads the revision chronic of a TranscribaObject with the given id
    */
@@ -230,6 +238,9 @@ export class TranscribaService{
     );
   }
 
+  /**
+   * Returns the latest stable revision of an object
+   */
   loadStableRevision(objId: any): Promise<Revision>{
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/'+objId+'/stable',token);
@@ -251,6 +262,9 @@ export class TranscribaService{
     );
   }
 
+  /**
+   * Returns the latest revision (including unpublished and not yet accepted ones)
+   */
   loadLatestRevisionPermissions(objId: any): Promise<{allowVote: boolean, details: any}>{
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/'+objId+'/latest/permissions',token);
