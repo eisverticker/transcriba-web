@@ -116,22 +116,33 @@ export class TranscribaService{
   /**
    * Loads an array of objects which belong to the given page
    */
-  loadObjectPage(page: number, itemsPerPage: number, searchTerm?: string, rootCollection?: Collection): Promise<TranscribaObject[]>{
-    let searchFilter: string;
-    if(searchTerm && searchTerm.length > 1){
-      searchFilter = "&filter[where][title][like]="+searchTerm;
-    }else{
-      searchFilter = "";
-    }
+  loadObjectPage(
+    page: number,
+    itemsPerPage: number,
+    searchTerm?: string,
+    rootCollection?: Collection,
+    status?: string
+  ): Promise<TranscribaObject[]>{
 
     let token = this.auth.token;
+
+    let filters =
+      "filter[order]=createdAt DESC"+
+      "&filter[limit]="+itemsPerPage+
+      "&filter[skip]="+itemsPerPage*page;
+
+    if(searchTerm){
+      filters += "&filter[where][title][like]="+searchTerm;
+    }
+
+    if(status){
+      filters += "&filter[where][status]="+status;
+    }
+
     let url = this.backend.authUrl(
       'TranscribaObjects',
       token,
-      "filter[order]=createdAt DESC"+
-      searchFilter+
-      //"&filter[include]=appUser"
-      "&filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
+      filters
     );
 
     return this.http.get(url)

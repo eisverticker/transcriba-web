@@ -7,6 +7,7 @@ import { ObjectDetailComponent } from './object-detail.component';
 import { RevisionHistoryComponent } from './revision-history.component';
 import { TranscriptionViewerComponent } from './transcription-viewer.component';
 import { OverviewComponent } from './overview.component';
+import { VotingSuggestionComponent } from './voting-suggestion.component';
 
 //modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -40,7 +41,8 @@ import { transcribaRouting } from './transcriba.routing';
       ObjectDetailComponent,
       RevisionHistoryComponent,
       OverviewComponent,
-      TranscriptionViewerComponent
+      TranscriptionViewerComponent,
+      VotingSuggestionComponent
     ],
     imports:      [
       BrowserModule,
@@ -59,7 +61,12 @@ import { transcribaRouting } from './transcriba.routing';
       ImageViewerModule,
       VotingModule
     ],
-    exports: [ImportFormComponent, ExplorerComponent, RevisionHistoryComponent],
+    exports: [
+      ImportFormComponent,
+      ExplorerComponent,
+      RevisionHistoryComponent,
+      VotingSuggestionComponent
+    ],
     bootstrap:  [],
     providers: [
       TranscribaService,
