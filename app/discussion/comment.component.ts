@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input} from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges} from '@angular/core';
 
 import { CommentVotingService } from './comment-voting.service';
 import { Comment } from './comment';
@@ -40,7 +40,7 @@ export class CommentComponent implements OnChanges{
     );
   }
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.updateVotings();
   }
 

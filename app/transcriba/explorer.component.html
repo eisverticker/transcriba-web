@@ -5,12 +5,12 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div>
-        <input (change)="find($event)" type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
+        <input (change)="find()" type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
       </div>
       <hr *ngIf="numOfPages > 1" style="margin: 5px;" />
       <pagination-bar (pageChanged)="setPage($event)" [numOfPages]="numOfPages" [currentPage]="currentPage"></pagination-bar>
     </div>
-    <div *ngIf="!isLoading && objects" class="panel-body">
+    <div *ngIf="!isLoading" class="panel-body">
       <div *ngFor="let itemRow of objects" class="row">
         <div *ngFor="let item of itemRow" class="col-sm-6 col-md-4">
           <div class="">
@@ -26,7 +26,7 @@
 
     </div>
 
-    <table *ngIf="!isLoading && collections" class="table">
+    <table *ngIf="!isLoading" class="table">
       <tr *ngFor="let col of collections">
         <td><a [routerLink]="'/explore/collection/'+col.id">{{ col.name }}</a></td>
       </tr>

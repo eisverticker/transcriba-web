@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input} from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 import { InfoPage } from './info-page';
 
@@ -10,13 +10,9 @@ import { InfoPage } from './info-page';
   `,
   styleUrls: []
 })
-export class InfoPageComponent implements OnChanges{
+export class InfoPageComponent{
   @Input() page: InfoPage;
 
   constructor(){}
-
-  ngOnChanges(){
-
-  }
 
 }

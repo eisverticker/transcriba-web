@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input} from '@angular/core';
+import { Component, OnChanges, SimpleChanges,Input} from '@angular/core';
 
 import { DiscussionService } from '../discussion/discussion.service';
 
@@ -29,7 +29,7 @@ export class DiscussionWidgetComponent implements OnChanges{
     private discussionService: DiscussionService
   ){}
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.discussionService.loadByID(this.discussionId).then(
       discussion => this.discussionService.loadCommentPage(discussion, 0, this.numOfItems).then(
           comments => this.comments = comments

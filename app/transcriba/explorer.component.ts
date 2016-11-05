@@ -16,8 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: []
 })
 export class ExplorerComponent implements OnInit{
-  collections: Array<Collection>;
-  objects: Array<TranscribaObject[]>;
+  collections: Array<Collection> = [];
+  objects: Array<TranscribaObject[]> = [[]];
 
   navItems: Array<any>;
 

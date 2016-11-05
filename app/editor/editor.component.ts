@@ -4,7 +4,8 @@ import {
   EventEmitter,
   Output,
   OnChanges,
-  OnDestroy
+  OnDestroy,
+  SimpleChanges
 } from '@angular/core';
 
 import { AppService, LayoutType } from '../utilities/app.service';
@@ -43,7 +44,7 @@ export class EditorComponent implements OnChanges, OnDestroy{
     private app: AppService
   ){}
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     if(this.contents && this.contents.length > 2) throw "too many contents given";
     this.app.setLayoutType(LayoutType.wide);
   }

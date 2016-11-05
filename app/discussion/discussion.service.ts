@@ -86,19 +86,4 @@ export class DiscussionService{
     .toPromise()
   }
 
-  /**
-   * Creates a new empty discussion at the server
-   * and returns the id of that discussion entity
-   */
-  /*startDiscussion(): Promise<Discussion>{
-    let token = this.auth.token;
-    let url = this.backend.authUrl('Discussions', token);
-
-    return this.http.post(url, {})
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      (data) => new Discussion(data.title, data.id)
-    );
-  }*/
 }

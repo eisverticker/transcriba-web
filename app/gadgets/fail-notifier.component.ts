@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input} from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 @Component({
   moduleId:     module.id,
@@ -10,13 +10,9 @@ import { Component, OnChanges, Input} from '@angular/core';
   `,
   styleUrls: []
 })
-export class FailNotifierComponent implements OnChanges{
+export class FailNotifierComponent{
   @Input() activated: boolean;
 
   constructor(){}
-
-  ngOnChanges(){
-
-  }
 
 }

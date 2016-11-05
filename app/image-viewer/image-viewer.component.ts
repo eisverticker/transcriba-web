@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input} from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 
 import { BackendHelper } from '../utilities/backend-helper';
 import { ImageViewerService } from './image-viewer.service';
@@ -24,7 +24,7 @@ export class ImageViewerComponent implements OnChanges{
     private viewerService: ImageViewerService
   ){}
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.viewerService.loadNumOfZoomLevels(this.objectId).then(
       numOfZooms => {
         this.zoomSteps = numOfZooms-1;

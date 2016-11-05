@@ -1,4 +1,12 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges
+} from '@angular/core';
 
 @Component({
   moduleId:     module.id,
@@ -16,7 +24,7 @@ export class PaginationBarComponent implements OnChanges{
 
   constructor(){}
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.pages = [];
     for(let i = 0; i < this.numOfPages; i++){
       this.pages.push(i);

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { TranscribaService } from './transcriba.service';
 
@@ -30,7 +30,7 @@ export class RevisionHistoryComponent implements OnChanges{
     private transcriba: TranscribaService
   ){}
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.transcriba.loadChronic(this.objectId).then(
       chronic => {
         this.items = chronic

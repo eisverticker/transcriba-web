@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { TranscribaObject } from './transcriba-object';
 import { Discussion } from '../discussion/discussion';
@@ -43,7 +43,7 @@ export class OverviewComponent implements OnChanges{
     private discussionService: DiscussionService
   ){}
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.discussionService.loadByID(this.object.discussionID).then(
       (discussion) => this.discussion = discussion,
       err => console.log(err)

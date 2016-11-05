@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input} from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input} from '@angular/core';
 
 import { FormRequestHandling } from '../utilities/form-request-handling';
 
@@ -36,7 +36,7 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
     super();
   }
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.update();
   }
 

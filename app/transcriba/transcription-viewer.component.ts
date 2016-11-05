@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TranscribaService } from './transcriba.service';
@@ -74,7 +74,7 @@ export class TranscriptionViewerComponent implements OnChanges{
 
   ){}
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
     this.auth.loadUser().then(
       user => {
         this.user = user;
