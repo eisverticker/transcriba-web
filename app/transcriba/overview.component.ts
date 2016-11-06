@@ -48,7 +48,7 @@ export class OverviewComponent implements OnChanges{
       (discussion) => this.discussion = discussion,
       err => console.log(err)
     );
-    this.sourceService.loadByID(this.object.sourceID).then(
+    this.sourceService.loadSummaryByID(this.object.sourceID).then(
       source => this.source = source,
       err => console.log("error", err)
     );

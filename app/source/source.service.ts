@@ -44,6 +44,18 @@ export class SourceService{
     );
   }
 
+  loadSummaryByID(id: any): Promise<Source>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl('Sources/'+id+'/summary', token);
+
+    return this.http.get(url)
+    .map(data => data.json())
+    .toPromise()
+    .then(
+      s => new Source(s.title, "", s.info_url, s.logo_url, "", false, false, s.id)
+    );
+  }
+
   save(source: Source): Promise<any>{
     let token = this.auth.token;
     let url: string;
