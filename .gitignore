@@ -12,4 +12,6 @@ web/fonts/*
 web/locales/*
 literatur/
 deprecated/
-aot/
+aot/app/
+aot/node_modules/
+aot/web/

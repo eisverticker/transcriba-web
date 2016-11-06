@@ -22,26 +22,29 @@ var paths = {
 gulp.task('scriptsGeneral', function() {
     return gulp.src([
 			paths.npmDir + '/jquery/dist/jquery.js',
-			paths.npmDir + '/bootstrap/dist/js/bootstrap.js'
+			paths.npmDir + '/bootstrap/dist/js/bootstrap.js',
+			paths.npmDir + '/core-js/client/shim.min.js',
+			paths.npmDir + '/zone.js/dist/zone.js'
 		])
 		//.pipe(uglify())
 		.pipe(concat('static.js'))
     .pipe(gulp.dest(paths.scriptDest));
 });
 
-gulp.task('scriptsFrontEnd', function() {
+gulp.task('scriptsJustInTime', function() {
     return gulp.src([
-
+			paths.npmDir + '/reflect-metadata/Reflect.js',
+			paths.npmDir + '/systemjs/dist/system.src.js'
 		])
-		.pipe(concat('staticFrontEnd.js'))
-        .pipe(gulp.dest(paths.scriptDest));
+		.pipe(concat('static-jit.js'))
+    .pipe(gulp.dest(paths.scriptDest));
 });
 
-gulp.task('scriptsBackEnd', function() {
+gulp.task('scriptsAdditional', function() {
     return gulp.src([
-
+			paths.npmDir + '/ng2-toastr/bundles/ng2-toastr.min.js'
 		])
-		.pipe(concat('staticBackEnd.js'))
+		.pipe(concat('static-additional.js'))
     .pipe(gulp.dest(paths.scriptDest));
 });
 
@@ -53,26 +56,14 @@ gulp.task('cssGeneral', function() {
 		paths.npmDir + '/bootstrap/dist/css/bootstrap.css',
 		paths.npmDir + '/font-awesome/css/font-awesome.css',
 		paths.npmDir + '/leaflet/dist/leaflet.css',
+		paths.npmDir + '/ng2-toastr/bundles/ng2-toastr.min.css',
+		'forms.css',
+		'style.css'
 	])
 	.pipe(concat('static.css'))
   .pipe(gulp.dest(paths.cssDest));
 });
 
-gulp.task('cssBackEnd', function() {
-    return gulp.src([
-
-	])
-	  .pipe(concat('staticBackEnd.css'))
-      .pipe(gulp.dest(paths.cssDest));
-});
-
-gulp.task('cssFrontEnd', function() {
-    return gulp.src([
-
-    ])
-	  .pipe(concat('staticFrontEnd.css'))
-    .pipe(gulp.dest(paths.cssDest));
-});
 
 gulp.task('fonts', function() {
     return gulp.src([
@@ -101,4 +92,4 @@ gulp.task('localesRu', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['scriptsGeneral', 'scriptsFrontEnd','scriptsBackEnd','cssFrontEnd', 'cssGeneral','cssBackEnd','fonts', 'localesDe', 'localesEn','localesRu']);
+gulp.task('default', ['scriptsGeneral', 'scriptsJustInTime', 'scriptsAdditional', 'cssGeneral','fonts', 'localesDe', 'localesEn','localesRu']);

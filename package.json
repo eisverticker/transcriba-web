@@ -37,6 +37,11 @@
     "zone.js": "^0.6.26"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.34",
+    "@types/jasmine": "^2.5.36",
+    "@types/leaflet": "^1.0.36",
+    "@types/node": "^6.0.46",
+    "@types/selenium-webdriver": "^2.53.33",
     "concurrently": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
@@ -45,11 +50,10 @@
     "gulp-notify": "^2.2.0",
     "gulp-uglify": "^1.4.2",
     "lite-server": "^2.2.2",
-    "typescript": "^2.0.6",
-    "@types/core-js": "^0.9.34",
-    "@types/node": "^6.0.46",
-    "@types/jasmine": "^2.5.36",
-    "@types/selenium-webdriver": "^2.53.33",
-    "@types/leaflet": "^1.0.36"
+    "rollup": "^0.36.3",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1",
+    "typescript": "^2.0.6"
   }
 }
