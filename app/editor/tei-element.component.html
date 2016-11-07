@@ -1,6 +1,6 @@
 <ng-container [ngSwitch]="tei.type">
 
-  <div *ngSwitchCase="'page'" class="well editor-page">
+  <div *ngSwitchCase="'page'" class="well editor-page" [class.dirty]="markDirty && tei.isDirty">
     <div style="margin-bottom: 10px;">
       <span class="editor-type-label">Seite</span>
       <div *ngIf="editable" class="editor-tools pull-right">
@@ -10,17 +10,17 @@
       </div>
     </div>
     <div>
-      <tei-element [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+      <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
     </div>
     <button class="btn btn-link" *ngIf="editable" (click)="addParagraph()">Absatz hinzufügen</button>
-    <button class="btn btn-link" *ngIf="editable" (click)="addCaption()">Überschrift hinzufügen</button>
+    <button class="btn btn-link" *ngIf="editable" (click)="addHeading()">Überschrift hinzufügen</button>
   </div>
 
   <div *ngSwitchCase="'line'" class="editor-line">
-    <tei-element [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+    <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
   </div>
 
-  <div *ngSwitchCase="'paragraph'" class="panel editor-panel">
+  <div *ngSwitchCase="'paragraph'" class="panel editor-panel" [class.dirty]="markDirty && tei.isDirty">
     <div class="panel-heading editor-panel-heading">
       Absatz
       <div *ngIf="editable" class="editor-tools pull-right">
@@ -36,12 +36,12 @@
     <div class="panel-body">
       <growing-textarea *ngIf="mode == 'edit'" [(ngModel)]="value"></growing-textarea>
       <div *ngIf="mode == 'default'">
-        <tei-element [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+        <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
       </div>
     </div>
   </div>
 
-  <div *ngSwitchCase="'heading'" class="panel editor-panel">
+  <div *ngSwitchCase="'heading'" class="panel editor-panel" [class.dirty]="markDirty && tei.isDirty">
     <div class="panel-heading editor-panel-heading">
       Überschrift
       <div *ngIf="editable" class="editor-tools pull-right">
@@ -57,7 +57,7 @@
     <div class="panel-body">
       <growing-textarea *ngIf="mode == 'edit'" [(ngModel)]="value"></growing-textarea>
       <div class="editor-heading" *ngIf="mode == 'default'">
-        <tei-element [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+        <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
       </div>
     </div>
   </div>

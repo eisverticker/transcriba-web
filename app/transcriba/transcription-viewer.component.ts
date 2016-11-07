@@ -43,9 +43,11 @@ import { User } from '../loopback-auth/user';
     <tei-editor
       (save)="save($event)"
       (publish)="publish($event)"
+      (abort)="abort()"
       [editable]="editable"
       [contents]="contents"
       [objectId]="object.id"
+      [markDirty]="markDirty"
       [labels]="labels">
     </tei-editor>
   </div>
@@ -62,7 +64,7 @@ export class TranscriptionViewerComponent implements OnChanges{
   hasVoted: boolean;
   permissions: {allowVote: boolean, details: any};
   votings: { accept: Array<User>, refuse: Array<User>};
-
+  markDirty: Array<boolean> = [false, true];
 
   constructor(
     private transcriba: TranscribaService,
@@ -114,6 +116,7 @@ export class TranscriptionViewerComponent implements OnChanges{
   }
 
   save(content){
+    console.log("save", content);
     this.transcription.save(this.object.id, content).then(
       () => this.notify.notify(new Notification('request.success', ['success'])),
       () => this.notify.notify(new Notification('request.fail', ['fail']))
@@ -127,6 +130,14 @@ export class TranscriptionViewerComponent implements OnChanges{
         this.update();
       },
       () => this.notify.notify(new Notification('request.fail', ['fail']))
+    );
+  }
+
+  abort(){
+    console.log("abort")
+    this.transcription.abort().then(
+      () => this.update(),
+      (err) => console.log(err)
     );
   }
 
@@ -172,7 +183,7 @@ export class TranscriptionViewerComponent implements OnChanges{
                   vote => {
                     this.transcriba.loadLatestRevisionPermissions(this.object.id).then(
                       permissions => {
-                        console.log(permissions);
+                        console.log(latestRevision.content);
                         this.permissions = permissions;
                         this.hasVoted = vote != "none"
                         this.contents = [stableRevision.content, latestRevision.content];

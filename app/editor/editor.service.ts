@@ -5,7 +5,6 @@ import { TeiElementComponent } from './tei-element.component';
 @Injectable()
 export class EditorService{
 
-  //private unsaved: Array<TeiElementComponent> = [];
   private focusedElement: TeiElementComponent = null;
 
   constructor(){
@@ -19,16 +18,5 @@ export class EditorService{
     this.focusedElement = element;
   }
 
-  /*
-  registerUnsavedElement(element){
-    this.unsaved.push(element);
-  }
-
-  saveUnsavedChanges(){
-    this.unsaved.forEach(
-      element => element.saveChanges()
-    );
-    this.unsaved = [];
-  }*/
 
 }

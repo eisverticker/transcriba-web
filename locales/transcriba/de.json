@@ -30,7 +30,8 @@
     "save": "Speichern",
     "edit": "Bearbeiten",
     "show": "Anzeigen",
-    "import": "Importieren"
+    "import": "Importieren",
+    "publish": "Veröffentlichen"
   },
   "sources": {
     "apiUrl": "API-URL",
@@ -48,6 +49,7 @@
   },
   "message": {
     "searchTitle": "Suchen...",
-    "noCommentsAvailable": "Hier gibt es leider noch keine Kommentare."
+    "noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
+    "readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet."
   }
 }

@@ -2,8 +2,24 @@
   <h1>{{'title.welcomeTo' | translate: { object: "Transcriba" } }}</h1>
   <p>
     {{'text.intro' | translate }}
+    <a class="btn btn-default" [routerLink]="['/explore']">
+      Zu den Manuskripten
+    </a>
   </p>
 </div>
+
+<div *ngIf="user && !user.isRegistered()" class="jumbotron">
+  <h2>Du bist im Moment nicht angemeldet</h2>
+  <p>
+    Falls du bereits ein Nutzerkonto besitzt, kannst du dich dort anmelden.
+    Ansonsten kannst du in wenigen Schritten ein Neues erstellen.
+  </p>
+  <p>
+    <button class="btn btn-default" [routerLink]="['/login']">Anmelden</button>
+    <button class="btn btn-default" [routerLink]="['/register']">Neues Konto</button>
+  </p>
+</div>
+
 <div *ngIf="!'t'" class="row">
   <div class="col-md-6">
     <div class="jumbotron">Jumbo 1</div>
@@ -13,4 +29,6 @@
   </div>
 </div>
 
-<voting-suggestions></voting-suggestions>
+<busy-widget></busy-widget>
+
+<voting-suggestions *ngIf="user && user.isRegistered()" ></voting-suggestions>

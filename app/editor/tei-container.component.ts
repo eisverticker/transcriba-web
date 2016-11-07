@@ -21,16 +21,17 @@ import { TeiElement } from './tei-element';
       Transkription <span *ngIf="label">- {{ label }}</span>
     </div>
     <div #contentContainer class="panel-body bg-info" style="overflow-y: auto;">
-      <tei-root [editable]="editable" *ngIf="content" [(ngModel)]="content"></tei-root>
+      <tei-root [markDirty]="markDirty" [editable]="editable" *ngIf="content" [(ngModel)]="content"></tei-root>
     </div>
     <div class="panel-footer">
       <div *ngIf="editable">
-        <button (click)="saveContent()" class="btn btn-default">Speichern</button>
-        <button (click)="publishContent()" class="btn btn-primary">Abschließen</button>
+        <button (click)="saveContent()" class="btn btn-default">{{ 'action.save' | translate }}</button>
+        <button (click)="publishContent()" class="btn btn-primary">{{ 'action.publish' | translate }}</button>
+        <button (click)="abortTranscription()" class="btn btn-danger">{{ 'action.abort' | translate }}</button>
       </div>
       <div *ngIf="!editable">
         <div class="alert alert-warning" role="alert">
-          Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet.
+          {{ 'message.readOnlyMode' | translate }}
         </div>
       </div>
     </div>
@@ -41,9 +42,11 @@ export class TeiContainerComponent implements AfterViewInit{
   @Input() label: string;
   @Input() content: TeiElement;
   @Input() editable: boolean;
+  @Input() markDirty: boolean;
 
   @Output() save: EventEmitter<any> = new EventEmitter();
   @Output() publish: EventEmitter<any> = new EventEmitter();
+  @Output() abort: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('container') container: ElementRef;
   @ViewChild('contentContainer') contentContainer: ElementRef;
@@ -77,6 +80,10 @@ export class TeiContainerComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     this.fitViewPort();
+  }
+
+  abortTranscription(){
+    this.abort.emit();
   }
 
 }

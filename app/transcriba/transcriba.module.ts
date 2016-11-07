@@ -8,6 +8,7 @@ import { RevisionHistoryComponent } from './revision-history.component';
 import { TranscriptionViewerComponent } from './transcription-viewer.component';
 import { OverviewComponent } from './overview.component';
 import { VotingSuggestionComponent } from './voting-suggestion.component';
+import { BusyWidgetComponent } from './busy-widget.component';
 
 //modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -42,7 +43,8 @@ import { transcribaRouting } from './transcriba.routing';
       RevisionHistoryComponent,
       OverviewComponent,
       TranscriptionViewerComponent,
-      VotingSuggestionComponent
+      VotingSuggestionComponent,
+      BusyWidgetComponent
     ],
     imports:      [
       BrowserModule,
@@ -65,7 +67,8 @@ import { transcribaRouting } from './transcriba.routing';
       ImportFormComponent,
       ExplorerComponent,
       RevisionHistoryComponent,
-      VotingSuggestionComponent
+      VotingSuggestionComponent,
+      BusyWidgetComponent
     ],
     bootstrap:  [],
     providers: [

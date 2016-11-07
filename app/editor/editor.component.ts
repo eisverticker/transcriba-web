@@ -21,7 +21,15 @@ import { TeiElement } from './tei-element';
       <image-viewer [objectId]="objectId"></image-viewer>
     </div>
     <div *ngFor="let content of contents; let i = index" [class.col-md-6]="contents.length==1" [class.col-md-4]="contents.length==2">
-      <tei-container (save)="saveContent($event)" (publish)="publishContent($event)" [label]="labels[i]" [content]="contents[i]" [editable]="editable"></tei-container>
+      <tei-container
+        (save)="saveContent($event)"
+        (publish)="publishContent($event)"
+        (abort)="abortTranscription()"
+        [label]="labels[i]"
+        [content]="contents[i]"
+        [markDirty]="markDirty[i]"
+        [editable]="editable">
+      </tei-container>
     </div>
   </div>
 
@@ -33,9 +41,12 @@ export class EditorComponent implements OnChanges, OnDestroy{
   @Input() labels: Array<string> = [];
   @Input() objectId: any;
   @Input() editable: boolean = false;
+  //in which editor windows should be visible where changes have been made
+  @Input() markDirty: Array<boolean>;
 
   @Output() save: EventEmitter<any> = new EventEmitter();
   @Output() publish: EventEmitter<any> = new EventEmitter();
+  @Output() abort: EventEmitter<any> = new EventEmitter();
 
 
   isInit: boolean = false;
@@ -55,6 +66,10 @@ export class EditorComponent implements OnChanges, OnDestroy{
 
   publishContent(){
     this.publish.emit(this.contents[0]);
+  }
+
+  abortTranscription(){
+    this.abort.emit();
   }
 
   ngOnDestroy(){

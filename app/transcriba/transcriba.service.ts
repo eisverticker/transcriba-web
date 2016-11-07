@@ -286,5 +286,28 @@ export class TranscribaService{
     .toPromise();
   }
 
+  /**
+   * If the user is in busy state then he is currently working on some object
+   * revision. This method returns that object
+   */
+   loadCurrentlyOccupiedObject(): Promise<TranscribaObject>{
+     let token = this.auth.token;
+     let url = this.backend.authUrl('TranscribaObjects/occupied',token);
+
+     return this.http.get(url)
+     .timeout(5000, "Timeout")
+     .map(data => data.json())
+     .toPromise();
+   }
+
+   isUserBusy(): Promise<boolean>{
+     let token = this.auth.token;
+     let url = this.backend.authUrl('AppUsers/busy',token);
+
+     return this.http.get(url)
+     .timeout(5000, "Timeout")
+     .map(data => data.json())
+     .toPromise();
+   }
 
 }

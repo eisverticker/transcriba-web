@@ -10,7 +10,7 @@ import { TeiElement } from './tei-element';
   template:
   `
     <div *ngIf="tei">
-      <tei-element [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+      <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
       <div class="well" *ngIf="tei.children.length == 0">Diese Transkription ist leer <i class="fa fa-frown-o" aria-hidden="true"></i></div>
       <button *ngIf="editable" (click)="addPage()" class="btn btn-link">Seite hinzufügen</button>
     </div>
@@ -25,6 +25,7 @@ import { TeiElement } from './tei-element';
 })
 export class RootComponent extends TeiBase{
   @Input() editable: boolean;
+  @Input() markDirty: boolean;
 
   constructor(){
     super();

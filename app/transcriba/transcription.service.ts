@@ -67,4 +67,17 @@ export class TranscriptionService{
     .toPromise();
   }
 
+  /**
+   * Aborts the transcription of the current user
+   * (deletes revision and frees object/user)
+   */
+  abort(): Promise<any>{
+    let token = this.auth.token;
+    let url = this.backend.authUrl('TranscribaObjects/free', token);
+
+    return this.http.post(url, {})
+    .map(data => data.json())
+    .toPromise();
+  }
+
 }

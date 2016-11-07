@@ -2,12 +2,12 @@ export class TeiElement{
 
   public isValid: boolean = true;
   public isFocused: boolean = false;
-  public isDirty: boolean = false;
 
   constructor(
     public type: string,
     public properties: any,
-    public children: Array<TeiElement> = []
+    public children: Array<TeiElement> = [],
+    public isDirty: boolean = false
   ){
 
   }
@@ -20,7 +20,8 @@ export class TeiElement{
     return new TeiElement(
       obj.type,
       obj.properties,
-      children
+      children,
+      obj.isDirty
     )
   }
 

@@ -21,6 +21,7 @@ import { EditorService } from './editor.service';
 })
 export class TeiElementComponent extends TeiBase implements OnInit {
   @Input() index: number;
+  @Input() markDirty: boolean;
   @Input() editable: boolean;
   @Output() killMe: EventEmitter<any> = new EventEmitter();
 
@@ -34,7 +35,11 @@ export class TeiElementComponent extends TeiBase implements OnInit {
     super();
   }
 
-  ngOnInit(){}
+  ngOnInit(){
+    if(this.tei.isDirty){
+      console.log("mark element of type:"+this.tei.type+" as dirty");
+    }
+  }
 
   delete(){
     this.killMe.emit(this.index);
@@ -75,11 +80,11 @@ export class TeiElementComponent extends TeiBase implements OnInit {
     let defaultTextPart = new TeiElement('textPartOrdinary', { value: "Text" }, []);
     let defaultLinePart = new TeiElement('line', {}, [defaultTextPart]);
 
-    this.tei.children.push(new TeiElement('paragraph', {}, [defaultLinePart]));
+    this.tei.children.push(new TeiElement('paragraph', {}, [defaultLinePart], true));
   }
 
-  addCaption(){
-    let defaultTextPart = new TeiElement('textPartOrdinary', { value: "Text" }, []);
+  addHeading(){
+    let defaultTextPart = new TeiElement('textPartOrdinary', { value: "Text" }, [], true);
 
     this.tei.children.push(new TeiElement('heading', {}, [defaultTextPart]));
   }
