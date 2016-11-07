@@ -17,10 +17,15 @@ import { TeiElement } from './tei-element';
   template:
   `
   <div *ngIf="objectId && contents" class="row">
-    <div [class.col-md-6]="contents.length==1" [class.col-md-4]="contents.length==2">
+    <div [class.col-xs-6]="contents.length==1" [class.col-xs-4]="contents.length==2">
       <image-viewer [objectId]="objectId"></image-viewer>
     </div>
-    <div *ngFor="let content of contents; let i = index" [class.col-md-6]="contents.length==1" [class.col-md-4]="contents.length==2">
+    <div *ngFor="let content of contents; let i = index" [class.col-xs-6]="contents.length==1" [class.col-xs-4]="contents.length==2">
+      <div *ngIf="enableStarter" style="margin-bottom: 10px;">
+        <button (click)="starter()"  class="btn btn-default">
+          An Transkription weiterarbeiten
+        </button>
+      </div>
       <tei-container
         (save)="saveContent($event)"
         (publish)="publishContent($event)"
@@ -41,12 +46,14 @@ export class EditorComponent implements OnChanges, OnDestroy{
   @Input() labels: Array<string> = [];
   @Input() objectId: any;
   @Input() editable: boolean = false;
+  @Input() enableStarter: boolean = false;
   //in which editor windows should be visible where changes have been made
   @Input() markDirty: Array<boolean>;
 
   @Output() save: EventEmitter<any> = new EventEmitter();
   @Output() publish: EventEmitter<any> = new EventEmitter();
   @Output() abort: EventEmitter<any> = new EventEmitter();
+  @Output() start: EventEmitter<any> = new EventEmitter();
 
 
   isInit: boolean = false;
@@ -70,6 +77,10 @@ export class EditorComponent implements OnChanges, OnDestroy{
 
   abortTranscription(){
     this.abort.emit();
+  }
+
+  starter(){
+    this.start.emit();
   }
 
   ngOnDestroy(){

@@ -153,7 +153,7 @@ export class TranscribaService{
       (objects) => {
         return objects.map(
           (data) => {
-            return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id);
+            return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id, data.status);
           }
         );
       }
@@ -178,7 +178,7 @@ export class TranscribaService{
       (objects) => {
         return objects.map(
           (data) => {
-            return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id);
+            return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id, data.status);
           }
         );
       }

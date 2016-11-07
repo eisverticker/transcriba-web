@@ -114,6 +114,7 @@ export class ExplorerComponent implements OnInit{
           return this.transcriba.loadObjectPage(this.currentPage, this.itemsPerPage, searchValue).then(
             objects => {
               this.objects = objects.reduce(this.columnify,[[]]);
+              console.log(this.objects)
               this.isLoading = false;
             },
             err => {

@@ -16,9 +16,16 @@
           <div class="">
             <a class="thumbnail" [routerLink]="'/obj/'+item.id" class="btn btn-default">
               <img [src]="backend.unAuthUrl('TranscribaObjects/'+item.id+'/thumbnail')" alt="thumbnail">
+              <span style="opacity: 0.6;position: absolute;margin-left: -20px;margin-top: 5px;">
+                <i *ngIf="item.status == 'occupied'" class="fa fa-pencil" aria-hidden="true"></i>
+                <i *ngIf="item.status == 'voting'" class="fa fa-question" aria-hidden="true"></i>
+              </span>
             </a>
             <div class="caption">
-              <p>{{ item.title }}</p>
+              <p>
+                <span>{{ item.title }}</span>
+              </p>
+
             </div>
           </div>
         </div>

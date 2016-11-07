@@ -12,7 +12,7 @@ import { TranscribaService } from './transcriba.service';
       <div class="panel-heading">
         <span>An Abstimmungen teilnehmen</span>
         <button class="btn btn-default" (click)="nextPage()">Umblättern</button>
-        <button class="btn btn-default" (click)="previousPage()">Zurück</button>
+        <button *ngIf="page !== 0" class="btn btn-default" (click)="previousPage()">Zurück</button>
       </div>
       <div class="panel-body">
         <div *ngIf="!objects || objects.length == 0">

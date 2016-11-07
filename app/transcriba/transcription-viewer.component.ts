@@ -19,9 +19,6 @@ import { User } from '../loopback-auth/user';
   `
   <div *ngIf="object">
     <div class="editor-navigation">
-      <button (click)="transcribe()" *ngIf="object.status == 'free' && user.isRegistered()" class="btn btn-default">
-        An Transkription weiterarbeiten
-      </button>
       <div *ngIf="latestRevision && object.status == 'voting' && user.isRegistered() && (hasVoted != undefined && !hasVoted)">
         <div *ngIf="user.id != latestRevision.ownerId" class="alert alert-info">
           <strong>Achtung!</strong> Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese und stimme ab!
@@ -44,6 +41,8 @@ import { User } from '../loopback-auth/user';
       (save)="save($event)"
       (publish)="publish($event)"
       (abort)="abort()"
+      (start)="transcribe()"
+      [enableStarter]="object.status == 'free' && user.isRegistered()"
       [editable]="editable"
       [contents]="contents"
       [objectId]="object.id"
@@ -73,7 +72,6 @@ export class TranscriptionViewerComponent implements OnChanges{
     private router: Router,
     private notify: NotificationService,
     private auth: AuthService
-
   ){}
 
   ngOnChanges(changes: SimpleChanges){

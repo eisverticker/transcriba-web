@@ -7,9 +7,7 @@ export class EditorService{
 
   private focusedElement: TeiElementComponent = null;
 
-  constructor(){
-
-  }
+  constructor(){}
 
   setFocusedElement(element){
     if(this.focusedElement){
