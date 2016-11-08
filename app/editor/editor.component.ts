@@ -17,10 +17,10 @@ import { TeiElement } from './tei-element';
   template:
   `
   <div *ngIf="objectId && contents" class="row">
-    <div [class.col-xs-6]="contents.length==1" [class.col-xs-4]="contents.length==2">
+    <div class="hidden-xs" [class.col-sm-6]="contents.length==1" [class.col-sm-4]="contents.length==2">
       <image-viewer [objectId]="objectId"></image-viewer>
     </div>
-    <div *ngFor="let content of contents; let i = index" [class.col-xs-6]="contents.length==1" [class.col-xs-4]="contents.length==2">
+    <div *ngFor="let content of contents; let i = index" [class.col-sm-6]="contents.length==1" [class.col-sm-4]="contents.length==2">
       <div *ngIf="enableStarter" style="margin-bottom: 10px;">
         <button (click)="starter()"  class="btn btn-default">
           An Transkription weiterarbeiten

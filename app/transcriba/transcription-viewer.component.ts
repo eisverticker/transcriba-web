@@ -18,7 +18,7 @@ import { User } from '../loopback-auth/user';
   template:
   `
   <div *ngIf="object">
-    <div class="editor-navigation">
+    <div class="editor-navigation hidden-xs">
       <div *ngIf="latestRevision && object.status == 'voting' && user.isRegistered() && (hasVoted != undefined && !hasVoted)">
         <div *ngIf="user.id != latestRevision.ownerId" class="alert alert-info">
           <strong>Achtung!</strong> Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese und stimme ab!
