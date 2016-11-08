@@ -125,7 +125,10 @@ export class TranscriptionViewerComponent implements OnChanges{
     this.transcription.publish(this.object.id, content).then(
       () => {
         this.notify.notify(new Notification('request.success', ['success']));
-        this.update();
+        //navigate to overview, because of bug #3
+        // https://github.com/eisverticker/transcriba/issues/3
+        this.router.navigate(['/obj',this.object.id]);
+        //this.update();
       },
       () => this.notify.notify(new Notification('request.fail', ['fail']))
     );
@@ -181,8 +184,8 @@ export class TranscriptionViewerComponent implements OnChanges{
                   vote => {
                     this.transcriba.loadLatestRevisionPermissions(this.object.id).then(
                       permissions => {
-                        console.log(latestRevision.content);
                         this.permissions = permissions;
+                        console.log(permissions);
                         this.hasVoted = vote != "none"
                         this.contents = [stableRevision.content, latestRevision.content];
                         this.labels = ['Alt', 'Neu'];
