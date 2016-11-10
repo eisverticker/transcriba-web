@@ -27,7 +27,7 @@ export class I18nHelperService{
     this.translate.use(lang);
 
     //this language will be used as a fallback if a translation wasn't found in the current language
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('de');
   }
 
 }
