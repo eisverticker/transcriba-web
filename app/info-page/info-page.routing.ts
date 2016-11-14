@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../loopback-auth/auth-guard.service';
-import { AdminGuardService } from '../loopback-auth/admin-guard.service';
+import { EmployeeGuardService } from '../loopback-auth/employee-guard.service';
 
 //components
 //import { InfoPageDiscussionComponent } from './info-page-discussion.component';
@@ -16,12 +16,12 @@ const routes: Routes = [
   {
     path: 'pages/:id',
     component: InfoPageEditComponent,
-    canActivate: [AdminGuardService]
+    canActivate: [EmployeeGuardService]
   },
   {
     path: 'pages',
     component: InfoPageManagementComponent,
-    canActivate: [AdminGuardService]
+    canActivate: [EmployeeGuardService]
   },
   {
     path: 'info/:id/discussion',
@@ -29,7 +29,7 @@ const routes: Routes = [
     data: {
       'mode': 'discussion'
     }
-  },  
+  },
   {
     path: 'info/:id',
     component: InfoPageViewerComponent,

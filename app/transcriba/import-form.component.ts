@@ -40,7 +40,8 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit{
         if(this.sources.length > 0){
           this.selectedSourceID = this.sources[0].id;
         }
-      }
+      },
+      err => console.log(err)
     );
   }
 
