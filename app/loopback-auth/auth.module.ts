@@ -26,6 +26,8 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { AuthGuardService } from './auth-guard.service';
 import { AdminGuardService } from './admin-guard.service';
+import { EmployeeGuardService } from './employee-guard.service';
+import { TrustedGuardService } from './trusted-guard.service';
 
 
 
