@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../loopback-auth/auth-guard.service';
-import { AdminGuardService } from '../loopback-auth/admin-guard.service';
+import { EmployeeGuardService } from '../loopback-auth/employee-guard.service';
 
 import { ExplorerComponent } from './explorer.component';
 import { ImportFormComponent } from './import-form.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: 'import',
     component: ImportFormComponent,
-    canActivate: [AdminGuardService]
+    canActivate: [EmployeeGuardService]
   },
   {
     path: 'obj/:id',
