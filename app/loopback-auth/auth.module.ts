@@ -60,6 +60,8 @@ import { authRouting } from './auth.routing';
       AuthService,
       UserService,
       AuthGuardService,
+      TrustedGuardService,
+      EmployeeGuardService,
       AdminGuardService
     ]
 })
