@@ -39,7 +39,7 @@
             defaultExtension: 'js'
           },
           'ng2-translate':{ defaultExtension: 'js' },
-          'ng2-toasty':   { defaultExtension: 'js' }
+          'ng2-toasty':   { defaultExtension: 'js', main: 'index.js' }
           //'leaflet':      { defaultExtension: 'js' }
         }
       });

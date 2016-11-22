@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { TranslateService } from 'ng2-translate';
 import { I18nHelperService } from './i18n/i18n-helper.service';
 import { NotificationService } from './utilities/notification.service';
@@ -24,12 +24,14 @@ export class AppComponent implements OnInit{
   constructor(
     private translate: TranslateService,
     private notify: NotificationService,
-    private toastr: ToastsManager,
     private auth: AuthService,
     private i18n: I18nHelperService,
-    private app: AppService
+    private app: AppService,
+    private toastyService:ToastyService,
+    private toastyConfig: ToastyConfig
   ){
     this.i18n.detectUserLanguage();
+    this.toastyConfig.theme = 'bootstrap';
   }
 
   ngOnInit(){
@@ -60,14 +62,17 @@ export class AppComponent implements OnInit{
 
   private processNotificationMessage(message: string, tags: Array<string>){
     if(tags.indexOf("success") !== -1){
-      this.toastr.success(message);
+      //this.toastr.success(message);
+      this.toastyService.default(message);
     }else if(
       tags.indexOf("fail") !== -1 ||
       tags.indexOf("error") !== -1)
     {
-      this.toastr.error(message);
+      //this.toastr.error(message);
+      this.toastyService.default(message);
     }else{
-      this.toastr.info(message);
+      //this.toastr.info(message);
+      this.toastyService.default(message);
     }
   }
 

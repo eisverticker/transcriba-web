@@ -3,7 +3,8 @@ var gulp 			= require('gulp')
 		minify 		= require('gulp-minify')
 		concat 		= require('gulp-concat')
     notify 		= require('gulp-notify')
-		mergeJson = require('gulp-merge-json');
+		mergeJson = require('gulp-merge-json')
+		cleanDest = require('gulp-clean-dest');
 
 
 var paths = {
@@ -57,6 +58,7 @@ gulp.task('cssGeneral', function() {
 		paths.npmDir + '/font-awesome/css/font-awesome.css',
 		paths.npmDir + '/leaflet/dist/leaflet.css',
 		paths.npmDir + '/ng2-toastr/bundles/ng2-toastr.min.css',
+		paths.npmDir + '/ng2-toasty/style-bootstrap.css',
 		'forms.css',
 		'style.css'
 	])
@@ -90,6 +92,12 @@ gulp.task('localesRu', function() {
 	.pipe(mergeJson('ru.json'))
 	.pipe(gulp.dest(paths.localeDest));
 });
+
+gulp.task('copy', [], function () {
+		 return gulp.src(['web/**/*', 'web/**/*'], {})
+		 .pipe(cleanDest('aot/web'))
+		 .pipe(gulp.dest('aot/web'));
+ });
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['scriptsGeneral', 'scriptsJustInTime', 'scriptsAdditional', 'cssGeneral','fonts', 'localesDe', 'localesEn','localesRu']);

@@ -9,13 +9,12 @@
     "removeComments": false,
     "noImplicitAny": false,
     "typeRoots": [
-      "./node_modules/@types/"
+      "node_modules/@types/"
     ]
   },
   "compileOnSave": true,
   "exclude": [
     "node_modules/*",
-    "**/*-aot.ts",
-    "aot/*"
+    "**/*-aot.ts"
   ]
 }
