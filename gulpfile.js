@@ -34,7 +34,7 @@ gulp.task('scriptsGeneral', function() {
 
 gulp.task('scriptsJustInTime', function() {
     return gulp.src([
-			paths.npmDir + '/reflect-metadata/Reflect.js',
+			//paths.npmDir + '/reflect-metadata/Reflect.js',
 			paths.npmDir + '/systemjs/dist/system.src.js'
 		])
 		.pipe(concat('static-jit.js'))

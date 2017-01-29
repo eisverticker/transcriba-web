@@ -26,7 +26,7 @@
           'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
           // transcriba related libraries
           'ng2-translate':              'npm:ng2-translate/bundles/index.js',
-          'ng2-toasty':                 'npm:ng2-toasty',
+          'ng2-toasty':                 'npm:ng2-toasty/bundles/index.umd.js',
           'leaflet':                    'node_modules/leaflet/dist/leaflet.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
@@ -38,8 +38,8 @@
           rxjs: {
             defaultExtension: 'js'
           },
-          'ng2-translate':{ defaultExtension: 'js' },
-          'ng2-toasty':   { defaultExtension: 'js', main: 'index.js' }
+          'ng2-translate':{ defaultExtension: 'js' }//,
+          //'ng2-toasty':   { defaultExtension: 'js', main: 'index.js' }
           //'leaflet':      { defaultExtension: 'js' }
         }
       });

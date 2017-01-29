@@ -82,7 +82,7 @@ export class AuthService{
       "email": user.mail,
       "password": user.password
     })
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .toPromise()
     .then(
       (res) => {
@@ -104,7 +104,7 @@ export class AuthService{
   }
   public logout(): Promise<any>{
     return this.http.post(this.backend.authUrl('AppUsers/logout', this.token),{})
-     .timeout(5000, "Timeout")
+     .timeout(5000)
      .toPromise()
      .then(
        ()=> {
@@ -129,7 +129,7 @@ export class AuthService{
     return this.http.post(url, {
       "email": user.mail
     })
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .toPromise();
   }
 
@@ -141,7 +141,7 @@ export class AuthService{
       "email": user.mail,
       "password": user.password
     })
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .toPromise()
     .then(
       () => {

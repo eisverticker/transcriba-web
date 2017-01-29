@@ -35,7 +35,7 @@ export class UserService{
     );
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise()
     .then(
@@ -105,7 +105,7 @@ export class UserService{
     let token = this.auth.token;
     let url = this.backend.authUrl('AppUsers/'+user.id, token);
 
-    return this.http.delete(url).timeout(5000, "Timeout").toPromise();
+    return this.http.delete(url).timeout(5000).toPromise();
   }
 
 }

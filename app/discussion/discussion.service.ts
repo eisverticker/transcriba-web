@@ -43,7 +43,7 @@ export class DiscussionService{
     );
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise()
     .then(

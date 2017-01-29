@@ -146,7 +146,7 @@ export class TranscribaService{
     );
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise()
     .then(
@@ -171,7 +171,7 @@ export class TranscribaService{
     );
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise()
     .then(
@@ -196,7 +196,7 @@ export class TranscribaService{
     );
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise()
     .then(
@@ -219,7 +219,7 @@ export class TranscribaService{
     let url = this.backend.authUrl('TranscribaObjects/'+objId+'/chronic',token);
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise();
   }
@@ -233,7 +233,7 @@ export class TranscribaService{
     let url = this.backend.authUrl('TranscribaObjects/'+objId+'/latest',token);
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise()
     .then(
@@ -257,7 +257,7 @@ export class TranscribaService{
     let url = this.backend.authUrl('TranscribaObjects/'+objId+'/stable',token);
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise()
     .then(
@@ -281,7 +281,7 @@ export class TranscribaService{
     let url = this.backend.authUrl('TranscribaObjects/'+objId+'/latest/permissions',token);
 
     return this.http.get(url)
-    .timeout(5000, "Timeout")
+    .timeout(5000)
     .map(data => data.json())
     .toPromise();
   }
@@ -295,7 +295,7 @@ export class TranscribaService{
      let url = this.backend.authUrl('TranscribaObjects/occupied',token);
 
      return this.http.get(url)
-     .timeout(5000, "Timeout")
+     .timeout(5000)
      .map(data => data.json())
      .toPromise();
    }
@@ -305,7 +305,7 @@ export class TranscribaService{
      let url = this.backend.authUrl('AppUsers/busy',token);
 
      return this.http.get(url)
-     .timeout(5000, "Timeout")
+     .timeout(5000)
      .map(data => data.json())
      .toPromise();
    }
