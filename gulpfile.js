@@ -41,13 +41,13 @@ gulp.task('scriptsJustInTime', function() {
     .pipe(gulp.dest(paths.scriptDest));
 });
 
-gulp.task('scriptsAdditional', function() {
+/*gulp.task('scriptsAdditional', function() {
     return gulp.src([
 			paths.npmDir + '/ng2-toastr/bundles/ng2-toastr.min.js'
 		])
 		.pipe(concat('static-additional.js'))
     .pipe(gulp.dest(paths.scriptDest));
-});
+});*/
 
 /**
  * Stylesheet files
@@ -57,7 +57,7 @@ gulp.task('cssGeneral', function() {
 		paths.npmDir + '/bootstrap/dist/css/bootstrap.css',
 		paths.npmDir + '/font-awesome/css/font-awesome.css',
 		paths.npmDir + '/leaflet/dist/leaflet.css',
-		paths.npmDir + '/ng2-toastr/bundles/ng2-toastr.min.css',
+		//paths.npmDir + '/ng2-toastr/bundles/ng2-toastr.min.css',
 		paths.npmDir + '/ng2-toasty/style-bootstrap.css',
 		'forms.css',
 		'style.css'
@@ -100,4 +100,4 @@ gulp.task('copy', [], function () {
  });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['scriptsGeneral', 'scriptsJustInTime', 'scriptsAdditional', 'cssGeneral','fonts', 'localesDe', 'localesEn','localesRu']);
+gulp.task('default', ['scriptsGeneral', 'scriptsJustInTime', /*'scriptsAdditional'*/, 'cssGeneral','fonts', 'localesDe', 'localesEn','localesRu']);
