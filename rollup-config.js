@@ -13,7 +13,8 @@ export default {
       commonjs({
         include: [
           'node_modules/rxjs/**',
-          'node_modules/angular-in-memory-web-api/**'
+          'node_modules/angular-in-memory-web-api/**',
+          'node_modules/leaflet/dist/**'
         ],
       }),
       uglify()

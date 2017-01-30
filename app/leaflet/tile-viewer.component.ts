@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, HostListener} from '@angular/core';
 
-import { latLngBounds, CRS, map, MapOptions, Map, tileLayer, TileLayer, TileLayerOptions } from 'leaflet';
+import * as L from 'leaflet';
 
 @Component({
   moduleId:     module.id,
@@ -36,24 +36,24 @@ export class TileViewerComponent{
 
   private showViewer(){
 
-    let viewer = map("tileViewer",  {
-      crs: CRS.Simple,
+    let viewer = L.map("tileViewer",  {
+      crs: L.CRS.Simple,
       attributionControl: false
     });
 
     var A = viewer.unproject([0, 0], 0);
     var C = viewer.unproject([256, 256], 0);
 
-    viewer.fitBounds(latLngBounds(A,C), {});
+    viewer.fitBounds(L.latLngBounds(A,C), {});
 
     let tileLayerOptions = {
       minZoom: 0,
       maxZoom: this.maxZoomLevel+1,
       maxNativeZoom: this.maxZoomLevel,
-      bounds: latLngBounds(A,C)
+      bounds: L.latLngBounds(A,C)
     };
 
-    tileLayer(
+    L.tileLayer(
       this.url,
       tileLayerOptions
     )

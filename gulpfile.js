@@ -95,9 +95,9 @@ gulp.task('localesRu', function() {
 
 gulp.task('copy', [], function () {
 		 return gulp.src(['web/**/*', 'web/**/*'], {})
-		 .pipe(cleanDest('aot/web'))
-		 .pipe(gulp.dest('aot/web'));
+		 .pipe(cleanDest('dist/web'))
+		 .pipe(gulp.dest('dist/web'));
  });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['scriptsGeneral', 'scriptsJustInTime', /*'scriptsAdditional'*/, 'cssGeneral','fonts', 'localesDe', 'localesEn','localesRu']);
+gulp.task('default', ['scriptsGeneral', 'scriptsJustInTime'/*, 'scriptsAdditional'*/, 'cssGeneral','fonts', 'localesDe', 'localesEn','localesRu', 'copy']);

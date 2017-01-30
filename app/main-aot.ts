@@ -1,3 +1,5 @@
 import { platformBrowser }    from '@angular/platform-browser';
-import { AppModuleNgFactory } from '../aot/app/app.module.ngfactory';//leave the dots like they are
+import { AppModuleNgFactory } from '../aot/app/app.module.ngfactory';
+
+console.log('Running AOT compiled');
 platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
