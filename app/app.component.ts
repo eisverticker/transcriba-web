@@ -63,16 +63,16 @@ export class AppComponent implements OnInit {
   private processNotificationMessage(message: string, tags: Array<string>) {
     if (tags.indexOf('success') !== -1) {
       // this.toastr.success(message);
-      this.toastyService.default(message);
+      this.toastyService.success(message);
     }else if (
       tags.indexOf('fail') !== -1 ||
       tags.indexOf('error') !== -1
     ) {
       // this.toastr.error(message);
-      this.toastyService.default(message);
+      this.toastyService.error(message);
     }else {
       // this.toastr.info(message);
-      this.toastyService.default(message);
+      this.toastyService.info(message);
     }
   }
 
