@@ -1,16 +1,16 @@
 import { NgModule }       from '@angular/core';
 
-//components
+// components
 import { TileViewerComponent } from './tile-viewer.component';
 
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { GadgetModule } from '../gadgets/gadget.module';
 
-//services
+// services
 
-//routing
+// routing
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { GadgetModule } from '../gadgets/gadget.module';
     exports: [TileViewerComponent],
     bootstrap:    [],
     providers: [
-      //{provide: Window, useValue: window}
+      // {provide: Window, useValue: window}
     ]
 })
 export class LeafletModule {}

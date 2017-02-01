@@ -1,18 +1,18 @@
 import { NgModule }       from '@angular/core';
 
-//components
+// components
 import { InfoPageComponent } from './info-page.component';
 import { InfoPageViewerComponent } from './info-page-viewer.component';
 import { InfoPageDiscussionComponent } from './info-page-discussion.component';
 import { InfoPageEditComponent } from './info-page-edit.component';
 import { InfoPageManagementComponent } from './info-page-management.component';
 
-//pipes
+// pipes
 
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { Routes, RouterModule }   from '@angular/router';
+import { RouterModule }   from '@angular/router';
 import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
@@ -20,10 +20,10 @@ import { GadgetModule } from '../gadgets/gadget.module';
 import { HttpModule } from '@angular/http';
 import { DiscussionModule } from '../discussion/discussion.module';
 
-//services
+// services
 import { InfoPageService } from './info-page.service';
 
-//routing
+// routing
 import { infoPageRouting } from './info-page.routing';
 
 @NgModule({

@@ -1,18 +1,9 @@
-export class TeiElement{
+export class TeiElement {
 
-  public isValid: boolean = true;
-  public isFocused: boolean = false;
+  public isValid = true;
+  public isFocused = false;
 
-  constructor(
-    public type: string,
-    public properties: any,
-    public children: Array<TeiElement> = [],
-    public isDirty: boolean = false
-  ){
-
-  }
-
-  static fromObject(obj): TeiElement{
+  static fromObject(obj): TeiElement {
     let children: Array<TeiElement> = obj.children.map(
       child => TeiElement.fromObject(child)
     );
@@ -22,7 +13,14 @@ export class TeiElement{
       obj.properties,
       children,
       obj.isDirty
-    )
+    );
   }
+
+  constructor(
+    public type: string,
+    public properties: any,
+    public children: Array<TeiElement> = [],
+    public isDirty = false
+  ) {}
 
 }

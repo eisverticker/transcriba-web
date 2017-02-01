@@ -4,15 +4,12 @@ import { InfoPage } from './info-page';
 
 @Component({
   moduleId:     module.id,
-  selector:    'info-page-discussion',
+  selector:    'tr-info-page-discussion',
   template: `
-    <simple-discussion *ngIf="page" [itemsPerPage]="'10'" [discussionId]="page.discussionID"></simple-discussion>
+    <tr-simple-discussion *ngIf="page" [itemsPerPage]="'10'" [discussionId]="page.discussionID"></tr-simple-discussion>
   `,
   styleUrls: []
 })
-export class InfoPageDiscussionComponent{
+export class InfoPageDiscussionComponent {
   @Input() page: InfoPage;
-
-  constructor(){}
-
 }

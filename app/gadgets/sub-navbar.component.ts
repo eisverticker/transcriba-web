@@ -1,9 +1,8 @@
-import { Component, OnInit, Input} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 
 @Component({
   moduleId:     module.id,
-  selector:    'sub-navbar',
+  selector:    'ut-sub-navbar',
   template: `
     <ul style="margin-bottom: 20px;" class="nav nav-pills">
       <li *ngFor="let item of items" role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -13,11 +12,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   `,
   styleUrls: []
 })
-export class SubNavbarComponent implements OnInit{
+export class SubNavbarComponent {
   @Input() items: Array<{ name: string, route: string  }> = [];
-
-  constructor(){}
-
-  ngOnInit(){}
-
 }

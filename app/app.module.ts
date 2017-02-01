@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 
-//components
+// components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthorizationRequiredComponent } from './authorization-required.component';
 
-import { routing,
-         appRoutingProviders } from './app.routing';
+import { routing } from './app.routing';
 
-import { Http } from '@angular/http';
-
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule }     from '@angular/http';
 import { UtilityModule } from './utilities/utility.module';
@@ -50,4 +47,4 @@ import { ScoreModule } from './score/score.module';
   bootstrap: [ AppComponent ],
   providers: []
 })
-export class AppModule{}
+export class AppModule {}

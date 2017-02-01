@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, Input} from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
 import { FormRequestHandling } from '../utilities/form-request-handling';
 
@@ -13,16 +13,16 @@ import { Observable } from 'rxjs/Rx';
 
 @Component({
   moduleId:     module.id,
-  selector:    'simple-discussion',
+  selector:    'tr-simple-discussion',
   templateUrl: 'discussion.component.html',
   styleUrls: []
 })
-export class DiscussionComponent extends FormRequestHandling implements OnChanges{
+export class DiscussionComponent extends FormRequestHandling implements OnChanges {
   @Input() discussionId: any;
   @Input() itemsPerPage: number;
   user: User;
 
-  currentPage: number = 0;
+  currentPage = 0;
   numOfPages: number;
   numOfComments: number;
   newComment: Comment = Comment.createEmptyComment();
@@ -32,20 +32,20 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
   constructor(
     private discuss: DiscussionService,
     private auth: AuthService
-  ){
+  ) {
     super();
   }
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.update();
   }
 
-  setPage(page: number){
+  setPage(page: number) {
     this.currentPage = page;
     this.update();
   }
 
-  addComment(){
+  addComment() {
     let commentRequest = this.discuss.saveComment(this.discussion, this.newComment);
     this.watchRequestState(commentRequest);
 
@@ -54,30 +54,30 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
         this.newComment = Comment.createEmptyComment();
         return this.update();
       },
-      (err) => console.log("fehler beim kommentieren", err)
+      (err) => console.log('fehler beim kommentieren', err)
     );
   }
 
-  private loadDiscussionAndUserData(): Observable<any>{
+  private loadDiscussionAndUserData(): Observable<any> {
     return Observable.zip(
       this.auth.loadUser(),
       this.discuss.loadNumOfComments(this.discussion),
       this.discuss.loadCommentPage(this.discussion, this.currentPage, this.itemsPerPage),
       function(user, numOfComments, comments){
         return {
-          "user": user,
-          "numOfComments": numOfComments,
-          "comments": comments
-        }
+          'user': user,
+          'numOfComments': numOfComments,
+          'comments': comments
+        };
       }
     );
   }
 
-  private setNumberOfPages(){
-    this.numOfPages = Math.ceil(this.numOfComments/this.itemsPerPage);
+  private setNumberOfPages() {
+    this.numOfPages = Math.ceil(this.numOfComments / this.itemsPerPage);
   }
 
-  private update(){
+  private update() {
     return this.discuss.loadByID(this.discussionId).then(
       (discussion) => {
         this.discussion = discussion;
@@ -92,7 +92,7 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
         );
       },
       (err) => {
-        console.log("update fehlgeschlagen", err);
+        console.log('update fehlgeschlagen', err);
         return Promise.reject(err);
       }
     );

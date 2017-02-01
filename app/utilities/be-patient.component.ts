@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector:    'be-patient',
+  selector:    'ut-be-patient',
   template:
   `
   {{ 'message.pleaseWait' | translate }}
@@ -9,14 +9,4 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: []
 })
-export class BePatientComponent implements OnInit{
-
-  constructor(){
-
-  }
-
-  ngOnInit(){
-
-  }
-
-}
+export class BePatientComponent {}

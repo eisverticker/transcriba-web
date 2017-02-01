@@ -9,7 +9,7 @@
       <td class="text-right">
         <a [routerLink]="['/info',page.name]" class="btn btn-default">{{ 'action.show' | translate }}</a>
         <a [routerLink]="['/pages',page.id]" class="btn btn-default">{{ 'action.edit' | translate }}</a>
-        <delete-button (xclick)="deletePage(page)"></delete-button>
+        <ut-delete-button (xclick)="deletePage(page)"></ut-delete-button>
       </td>
     </tr>
   </table>

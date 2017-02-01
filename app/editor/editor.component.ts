@@ -13,12 +13,12 @@ import { AppService, LayoutType } from '../utilities/app.service';
 import { TeiElement } from './tei-element';
 
 @Component({
-  selector:    'tei-editor',
+  selector:    'tr-tei-editor',
   template:
   `
   <div *ngIf="objectId && contents" class="row">
     <div class="hidden-xs" [class.col-sm-6]="contents.length==1" [class.col-sm-4]="contents.length==2">
-      <image-viewer [objectId]="objectId"></image-viewer>
+      <tr-image-viewer [objectId]="objectId"></tr-image-viewer>
     </div>
     <div *ngFor="let content of contents; let i = index" [class.col-sm-6]="contents.length==1" [class.col-sm-4]="contents.length==2">
       <div *ngIf="enableStarter" style="margin-bottom: 10px;">
@@ -26,7 +26,7 @@ import { TeiElement } from './tei-element';
           An Transkription weiterarbeiten
         </button>
       </div>
-      <tei-container
+      <tr-tei-container
         (save)="saveContent($event)"
         (publish)="publishContent($event)"
         (abort)="abortTranscription()"
@@ -34,20 +34,21 @@ import { TeiElement } from './tei-element';
         [content]="contents[i]"
         [markDirty]="markDirty[i]"
         [editable]="editable">
-      </tei-container>
+      </tr-tei-container>
     </div>
   </div>
 
   `,
   styleUrls: []
 })
-export class EditorComponent implements OnChanges, OnDestroy{
+export class EditorComponent implements OnChanges, OnDestroy {
   @Input() contents: Array<TeiElement>;
   @Input() labels: Array<string> = [];
   @Input() objectId: any;
-  @Input() editable: boolean = false;
-  @Input() enableStarter: boolean = false;
-  //in which editor windows should be visible where changes have been made
+  @Input() editable = false;
+  @Input() enableStarter = false;
+
+  // should we highlight changes? (in comparison to previous revision)
   @Input() markDirty: Array<boolean>;
 
   @Output() save: EventEmitter<any> = new EventEmitter();
@@ -56,34 +57,36 @@ export class EditorComponent implements OnChanges, OnDestroy{
   @Output() start: EventEmitter<any> = new EventEmitter();
 
 
-  isInit: boolean = false;
+  isInit = false;
 
   constructor(
     private app: AppService
-  ){}
+  ) {}
 
-  ngOnChanges(changes: SimpleChanges){
-    if(this.contents && this.contents.length > 2) throw "too many contents given";
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.contents && this.contents.length > 2) {
+      throw 'too many contents given';
+    }
     this.app.setLayoutType(LayoutType.wide);
   }
 
-  saveContent(){
+  saveContent() {
     this.save.emit(this.contents[0]);
   }
 
-  publishContent(){
+  publishContent() {
     this.publish.emit(this.contents[0]);
   }
 
-  abortTranscription(){
+  abortTranscription() {
     this.abort.emit();
   }
 
-  starter(){
+  starter() {
     this.start.emit();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.app.resetLayout();
   }
 

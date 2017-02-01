@@ -1,6 +1,4 @@
 import { Component,
-  Input,
-  OnInit,
   forwardRef,
   ElementRef,
   AfterViewInit,
@@ -8,10 +6,10 @@ import { Component,
   ViewChild,
   Renderer
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'growing-textarea',
+  selector: 'ut-growing-textarea',
   template:
   `
     <textarea #textfield class="growing-textarea" [(ngModel)]="value"></textarea>
@@ -24,26 +22,21 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
     }
   ]
 })
-export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked{
+export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked {
    @ViewChild('textfield') textarea: ElementRef;
 
-  //default callbacks which do nothing (they are being replaced when
-  //  someone binds a value to ngModel)
-  private propagateChange: (value: any) => void = (value) => {};
-  private propagateTouch: (value: any) => void = (value) => {};
-
-  private _value: string = "";
-  private isViewInitialized: boolean = false;
+  private _value = '';
+  private isViewInitialized = false;
 
   constructor(
     private renderer: Renderer
-  ){}
+  ) {}
 
   ngAfterViewInit() {
     this.isViewInitialized = true;
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.grow();
   }
 
@@ -58,32 +51,37 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
     }
   }
 
-  grow(){
+  grow() {
     let ta = this.textarea.nativeElement;
 
-    if(ta.scrollHeight > ta.clientHeight){
-      ta.style.height = ta.scrollHeight + "px";
+    if (ta.scrollHeight > ta.clientHeight) {
+      ta.style.height = ta.scrollHeight + 'px';
     }
   }
 
   /* ngModel (ControlValueAccessor) */
-  writeValue(value: any) : void {
+  writeValue(value: any): void {
     this._value = value;
-    if(this.isViewInitialized == true){
+    if (this.isViewInitialized === true) {
       this.grow();
     }
   }
 
-  registerOnChange(fn: any) : void {
+  registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
 
-  setDisabledState(isDisabled: boolean) : void {
-
+  setDisabledState(isDisabled: boolean): void {
+    // empty
   }
 
   registerOnTouched(fn: any) {
       this.propagateTouch = fn;
   }
+
+  // default callbacks which do nothing (they are being replaced when
+  //  someone binds a value to ngModel)
+  private propagateChange: (value: any) => void = (value) => { /*nop*/ };
+  private propagateTouch: (value: any) => void = (value) => {  /*nop*/  };
 
 }

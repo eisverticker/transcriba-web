@@ -7,28 +7,28 @@ import { Notification } from '../utilities/notification';
 
 @Component({
   moduleId:     module.id,
-  selector:    'user-logout',
+  selector:    'usr-logout',
   templateUrl: 'logout.component.html',
   styleUrls: []
 })
-export class LogoutComponent implements OnInit{
+export class LogoutComponent implements OnInit {
   @Output() done: EventEmitter<any> = new EventEmitter();
 
   public user: User;
-  public isLoggingOut: boolean = false;
+  public isLoggingOut = false;
 
   constructor(
     private auth: AuthService,
     private notify: NotificationService
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.auth.loadUser().then(
       (user) => this.user = user
     );
   }
 
-  public doLogout(){
+  doLogout() {
     this.isLoggingOut = true;
 
     this.auth.logout().then(
@@ -39,9 +39,9 @@ export class LogoutComponent implements OnInit{
       },
       (err) => {
         this.isLoggingOut = true;
-        if(err == "Timeout"){
+        if (err === 'Timeout') {
           this.notify.notify(Notification.timeout());
-        }else{
+        }else {
           this.notify.notify(
             Notification.message('request.logoutFailed')
           );

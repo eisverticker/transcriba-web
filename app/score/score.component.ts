@@ -8,10 +8,10 @@ import { Notification } from '../utilities/notification';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
-  selector: 'score-value',
+  selector: 'tr-score-value',
   template: '<span *ngIf="score != undefined">{{ score }}</span>'
 })
-export class ScoreComponent implements OnInit{
+export class ScoreComponent implements OnInit {
 
   score: number;
 
@@ -19,12 +19,11 @@ export class ScoreComponent implements OnInit{
     private scoreService: ScoreService,
     private notifier: NotificationService,
     private auth: AuthService
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.loadScore();
-    var scoreWatcher = Observable
-      .interval(10000 /* ms */)
+    let scoreWatcher = Observable.interval(10000) // ms
       .timeInterval()
       .subscribe(
         () => this.loadScore(),
@@ -37,23 +36,25 @@ export class ScoreComponent implements OnInit{
     );
   }
 
-  loadScore(){
-    if(!this.auth.token) return;
+  loadScore() {
+    if (!this.auth.token) {
+      return;
+    };
 
     this.scoreService.loadScore().then(
       score => {
-        if(this.score == undefined){
+        if (this.score === undefined) {
           this.score = score;
-        }else if(this.score < score){
-          this.notifier.notify(new Notification('+ '+(score-this.score), ['success', 'untranslated']));
+        }else if (this.score < score) {
+          this.notifier.notify(new Notification('+ ' + (score - this.score), ['success', 'untranslated']));
           this.score = score;
-        }else if(this.score > score){
-          this.notifier.notify(new Notification('- '+(score-this.score), ['fail', 'untranslated']));
+        }else if (this.score > score) {
+          this.notifier.notify(new Notification('- ' + (score - this.score), ['fail', 'untranslated']));
           this.score = score;
         }
       },
       err => {
-        console.log("we were not able to load score", err)
+        console.log('we were not able to load score', err);
       }
     );
   }

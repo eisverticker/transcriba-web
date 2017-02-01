@@ -1,8 +1,12 @@
-export abstract class FormRequestHandling{
-  isRequestPending: boolean = false;
-  isLastRequestFailed: boolean = false;
+/**
+ * An abstract class which provides an unified and simple interface for handling
+ * forms which have a "loading" state
+ */
+export abstract class FormRequestHandling {
+  isRequestPending = false;
+  isLastRequestFailed = false;
 
-  watchRequestState(request: Promise<any>){
+  watchRequestState(request: Promise<any>) {
     this.isRequestPending = true;
 
     request.then(

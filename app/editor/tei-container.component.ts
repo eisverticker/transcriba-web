@@ -13,7 +13,7 @@ import { TeiElement } from './tei-element';
 
 
 @Component({
-  selector: 'tei-container',
+  selector: 'tr-tei-container',
   template:
   `
   <div #container class="panel panel-primary" [class.panel-primary]="editable" [class.panel-default]="!editable">
@@ -21,7 +21,7 @@ import { TeiElement } from './tei-element';
       Transkription <span *ngIf="label">- {{ label }}</span>
     </div>
     <div #contentContainer class="panel-body bg-info" style="overflow-y: auto;">
-      <tei-root [markDirty]="markDirty" [editable]="editable" *ngIf="content" [(ngModel)]="content"></tei-root>
+      <tr-tei-root [markDirty]="markDirty" [editable]="editable" *ngIf="content" [(ngModel)]="content"></tr-tei-root>
     </div>
     <div class="panel-footer">
       <div *ngIf="editable">
@@ -38,7 +38,7 @@ import { TeiElement } from './tei-element';
   </div>
   `
 })
-export class TeiContainerComponent implements AfterViewInit{
+export class TeiContainerComponent implements AfterViewInit {
   @Input() label: string;
   @Input() content: TeiElement;
   @Input() editable: boolean;
@@ -52,29 +52,15 @@ export class TeiContainerComponent implements AfterViewInit{
   @ViewChild('contentContainer') contentContainer: ElementRef;
 
   @HostListener('window:resize', ['$event'])
-  onResize($event){
+  onResize($event) {
     this.fitViewPort();
   }
 
-  constructor(){}
-
-  private fitViewPort(){
-    let rectOuter = this.container.nativeElement.getBoundingClientRect();
-    let rectInner = this.contentContainer.nativeElement.getBoundingClientRect();
-
-    //console.log(rectOuter, rectInner, difference);
-    let viewPortHeight = window.innerHeight;
-    let newHeight: string = (viewPortHeight-rectInner.top-145) + "px";
-
-    this.contentContainer.nativeElement.style.maxHeight = newHeight;
-    //this.contentContainer.nativeElement.style.height = newHeight;
-  }
-
-  saveContent(){
+  saveContent() {
     this.save.emit(this.content);
   }
 
-  publishContent(){
+  publishContent() {
     this.publish.emit(this.content);
   }
 
@@ -82,8 +68,21 @@ export class TeiContainerComponent implements AfterViewInit{
     this.fitViewPort();
   }
 
-  abortTranscription(){
+  abortTranscription() {
     this.abort.emit();
+  }
+
+  private fitViewPort() {
+    // values are not being used yet but could be useful later
+    // let rectOuter = this.container.nativeElement.getBoundingClientRect();
+    let rectInner = this.contentContainer.nativeElement.getBoundingClientRect();
+    // console.log(rectOuter, rectInner, difference);
+
+    let viewPortHeight = window.innerHeight;
+    let newHeight: string = (viewPortHeight - rectInner.top - 145) + 'px';
+
+    this.contentContainer.nativeElement.style.maxHeight = newHeight;
+    // this.contentContainer.nativeElement.style.height = newHeight;
   }
 
 }

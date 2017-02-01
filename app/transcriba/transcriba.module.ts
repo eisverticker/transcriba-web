@@ -1,6 +1,6 @@
 import { NgModule }       from '@angular/core';
 
-//components
+// components
 import { ImportFormComponent } from './import-form.component';
 import { ExplorerComponent } from './explorer.component';
 import { ObjectDetailComponent } from './object-detail.component';
@@ -10,10 +10,10 @@ import { OverviewComponent } from './overview.component';
 import { VotingSuggestionComponent } from './voting-suggestion.component';
 import { BusyWidgetComponent } from './busy-widget.component';
 
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { Routes, RouterModule }   from '@angular/router';
+import { RouterModule }   from '@angular/router';
 import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
@@ -26,12 +26,12 @@ import { EditorModule } from '../editor/editor.module';
 import { ImageViewerModule } from '../image-viewer/image-viewer.module';
 import { VotingModule } from '../voting/voting.module';
 
-//services
+// services
 import { TranscribaService } from './transcriba.service';
 import { TranscriptionService } from './transcription.service';
 import { RevisionVotingService } from './revision-voting.service';
 
-//routing
+// routing
 import { transcribaRouting } from './transcriba.routing';
 
 
@@ -75,7 +75,7 @@ import { transcribaRouting } from './transcriba.routing';
       TranscribaService,
       TranscriptionService,
       RevisionVotingService
-      //{provide: Window, useValue: window}
+      // {provide: Window, useValue: window}
     ]
 })
 export class TranscribaModule {}

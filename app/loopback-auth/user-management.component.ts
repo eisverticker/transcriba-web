@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { User } from './user';
 import { Role } from './role';
@@ -8,25 +8,25 @@ import { Notification } from '../utilities/notification';
 
 @Component({
   moduleId:     module.id,
-  selector:    'user-management',
+  selector:    'usr-management',
   templateUrl: 'user-management.component.html',
   styleUrls: []
 })
-export class UserManagementComponent implements OnInit{
-  public isReleased: boolean = true;
+export class UserManagementComponent implements OnInit {
+  public isReleased = true;
   public users: Array<User> = [];
   public roles: Array<Role> = [];
-  public page: number = 0;
+  public page = 0;
   public numOfPages: number;
-  public isLocked: boolean = false;
-  public itemsPerPage: number = 12;
+  public isLocked = false;
+  public itemsPerPage = 12;
 
   constructor(
     private userService: UserService,
     private notify: NotificationService
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.userService.loadRoles().then(
       roles => {
@@ -39,20 +39,20 @@ export class UserManagementComponent implements OnInit{
     );
   }
 
-  setPage(page: number){
+  setPage(page: number) {
     this.page = page;
     this.updateUserList();
   }
 
-  updateUserCount(): Promise<any>{
+  updateUserCount(): Promise<any> {
     return this.userService.loadUserCount().then(
       (count) => {
-        this.numOfPages = Math.ceil(count/this.itemsPerPage);
+        this.numOfPages = Math.ceil(count / this.itemsPerPage);
       }
     );
   }
 
-  updateUserList(): Promise<any>{
+  updateUserList(): Promise<any> {
     return this.userService.loadUserPage(this.page, this.itemsPerPage).then(
       users => {
         this.users = users;
@@ -61,26 +61,26 @@ export class UserManagementComponent implements OnInit{
     );
   }
 
-  changeRole($event, user: User){
+  changeRole($event, user: User) {
     return this.userService.giveUserRole(user, $event.target.value).then(
-      () => this.notify.notify(new Notification("request.success", ['success'])),
-      ()  => this.notify.notify(new Notification("request.fail", ['fail']))
+      () => this.notify.notify(new Notification('request.success', ['success'])),
+      ()  => this.notify.notify(new Notification('request.fail', ['fail']))
     ).then(
       () => this.updateUserList()
     );
   }
 
-  deleteUser(user: User){
+  deleteUser(user: User) {
     this.userService.delete(user).then(
       () => {
         this.notify.notify(
-          new Notification("request.successfulRemoved", ['success'])
+          new Notification('request.successfulRemoved', ['success'])
         );
         return this.updateUserList();
       }
         ,
       (err) => {
-        this.notify.notify(new Notification("request.fail", ['fail']));
+        this.notify.notify(new Notification('request.fail', ['fail']));
         return Promise.reject(err);
       }
     );

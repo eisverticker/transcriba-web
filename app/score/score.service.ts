@@ -3,21 +3,21 @@ import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
-//import { AuthAction } from './auth-action';
+// import { AuthAction } from './auth-action';
 
 @Injectable()
-export class ScoreService{
-  private scoreSubject: BehaviorSubject<number>;
+export class ScoreService {
   public score: Observable<number>;
+  private scoreSubject: BehaviorSubject<number>;
 
   constructor(
     private http: Http,
     private backend: BackendHelper,
     private auth: AuthService
-  ){
-    //Initalize Reactive Components (Observables)
+  ) {
+    // Initalize Reactive Components (Observables)
     this.scoreSubject = new BehaviorSubject(-1);
     this.score = this.scoreSubject.asObservable();
   }
@@ -25,7 +25,7 @@ export class ScoreService{
   /**
    * Loads score value of currently logged in user
    */
-  loadScore(): Promise<number>{
+  loadScore(): Promise<number> {
     return this.auth.loadUser().then(
       (user) => {
         let token = this.auth.token;
@@ -42,7 +42,7 @@ export class ScoreService{
   /**
    *
    */
-  loadBestScorers(maxNumOfUsers: number = 10): Promise<{username: string, score: number}[]>{
+  loadBestScorers(maxNumOfUsers = 10): Promise<{username: string, score: number}[]> {
         let token = this.auth.token;
         let url = this.backend.authUrl('AppUsers/leaderboard', token);
 

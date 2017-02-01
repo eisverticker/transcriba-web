@@ -1,18 +1,18 @@
 import { configData } from '../config';
 
-export class Role{
+export class Role {
   constructor(
     public name: string,
     public id?: any
-  ){};
+  ) {};
 
-  static getAvailableRoles(): Array<Role>{
-    if(configData.roles === undefined){
+  static getAvailableRoles(): Array<Role> {
+    if (configData.roles === undefined) {
       return [
         new Role('registered'),
         new Role('administrator')
       ];
-    }else{
+    }else {
       return configData.roles.map( role => new Role(role) );
     }
   }

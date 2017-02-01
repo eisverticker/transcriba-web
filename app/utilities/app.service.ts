@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 export enum LayoutType {
   wide,
@@ -7,21 +7,21 @@ export enum LayoutType {
 }
 
 @Injectable()
-export class AppService{
-  private layoutSubject: BehaviorSubject<LayoutType>;
+export class AppService {
   public layout: Observable<LayoutType>;
+  private layoutSubject: BehaviorSubject<LayoutType>;
 
-  constructor(){
-    //Initalizing Reactive Components (Observables)
+  constructor() {
+    // Initalizing Reactive Components (Observables)
     this.layoutSubject = new BehaviorSubject(LayoutType.fixed);
     this.layout = this.layoutSubject.asObservable();
   }
 
-  setLayoutType(type: LayoutType){
+  setLayoutType(type: LayoutType) {
     this.layoutSubject.next(type);
   }
 
-  resetLayout(){
+  resetLayout() {
     this.layoutSubject.next(LayoutType.fixed);
   }
 

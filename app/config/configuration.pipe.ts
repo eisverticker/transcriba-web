@@ -1,8 +1,8 @@
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { ConfigurationService } from './configuration.service';
 
 @Pipe({ name: 'config' })
-export class ConfigurationPipe {
+export class ConfigurationPipe implements PipeTransform {
 
   constructor(private config: ConfigurationService) {}
 

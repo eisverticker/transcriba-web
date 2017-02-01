@@ -1,14 +1,14 @@
 import { NgModule }       from '@angular/core';
 
-//components
+// components
 import { EditorComponent } from './editor.component';
 import { RootComponent } from './root.component';
 import { TeiElementComponent } from './tei-element.component';
 import { TeiContainerComponent } from './tei-container.component';
 
-//pipes
+// pipes
 
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { I18nModule } from '../i18n/i18n.module';
@@ -16,10 +16,10 @@ import { UtilityModule } from '../utilities/utility.module';
 import { GadgetModule } from '../gadgets/gadget.module';
 import { ImageViewerModule } from '../image-viewer/image-viewer.module';
 
-//services
+// services
 import { EditorService } from './editor.service';
 
-//routing
+// routing
 
 
 

@@ -1,6 +1,4 @@
 import { Routes, RouterModule } from '@angular/router';
-
-import { AuthGuardService } from '../loopback-auth/auth-guard.service';
 import { EmployeeGuardService } from '../loopback-auth/employee-guard.service';
 
 import { ExplorerComponent } from './explorer.component';
@@ -8,14 +6,12 @@ import { ImportFormComponent } from './import-form.component';
 
 import { ObjectDetailComponent } from './object-detail.component';
 
-//import { AuthGuardService } from './auth-guard.service';
-
 const routes: Routes = [
   {
     path: 'explore',
     component: ExplorerComponent,
     data: {
-      mode: "object"
+      mode: 'object'
     }
   },
   /*{

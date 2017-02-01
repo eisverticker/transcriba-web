@@ -1,25 +1,25 @@
 <div *ngIf="user && comments">
 
-  <pagination-bar (pageChanged)="setPage($event)" [numOfPages]="numOfPages" [currentPage]="currentPage"></pagination-bar>
+  <ut-pagination-bar (pageChanged)="setPage($event)" [numOfPages]="numOfPages" [currentPage]="currentPage"></ut-pagination-bar>
 
 
   <form (ngSubmit)="addComment()" #form="ngForm">
 
-      <fail-notifier [activated]="!isRequestPending && isLastRequestFailed"></fail-notifier>
+      <ut-fail-notifier [activated]="!isRequestPending && isLastRequestFailed"></ut-fail-notifier>
 
       <div class="input-group">
         <input [disabled]="!user.isRegistered()" [(ngModel)]="newComment.content" name="content" class="form-control" required />
         <span class="input-group-btn">
           <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
             <span>{{ 'action.send' | translate }}</span>
-            <inline-spinner [active]="isRequestPending"></inline-spinner>
+            <ut-inline-spinner [active]="isRequestPending"></ut-inline-spinner>
           </button>
         </span>
       </div><!-- /input-group -->
 
   </form>
 
-  <simple-comment *ngFor="let comment of comments" [comment]="comment"></simple-comment>
+  <tr-simple-comment *ngFor="let comment of comments" [comment]="comment"></tr-simple-comment>
   <div class="well" style="margin-top: 15px;" *ngIf="comments.length == 0">
     {{ 'message.noCommentsAvailable' | translate }}
   </div>

@@ -10,14 +10,19 @@ import { SourceService } from '../source/source.service';
 import { BackendHelper } from '../utilities/backend-helper';
 
 @Component({
-  selector: 'object-overview',
+  selector: 'tr-object-overview',
   template:
   `
   <h2>{{ object.title }}</h2>
   <div class="row">
     <div>
       <a [routerLink]="'/obj/'+object.id+'/viewer'">
-        <img style="height: 512px; " class="img-responsive" [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')" alt="thumbnail" />
+        <img
+        style="height: 512px;"
+        class="img-responsive"
+        [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')"
+        alt="thumbnail"
+        />
       </a>
     </div>
   </div>
@@ -28,10 +33,10 @@ import { BackendHelper } from '../utilities/backend-helper';
   </dl>
 
   <h3>Zuletzt geschriebene Kommentare</h3>
-  <latest-comments *ngIf="discussion" [numOfItems]="3" [discussionId]="discussion.id"></latest-comments>
+  <tr-latest-comments *ngIf="discussion" [numOfItems]="3" [discussionId]="discussion.id"></tr-latest-comments>
   `
 })
-export class OverviewComponent implements OnChanges{
+export class OverviewComponent implements OnChanges {
   @Input() object: TranscribaObject;
   discussion: Discussion;
   source: Source;
@@ -41,16 +46,16 @@ export class OverviewComponent implements OnChanges{
     public backend: BackendHelper,
     private sourceService: SourceService,
     private discussionService: DiscussionService
-  ){}
+  ) {}
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.discussionService.loadByID(this.object.discussionID).then(
       (discussion) => this.discussion = discussion,
       err => console.log(err)
     );
     this.sourceService.loadSummaryByID(this.object.sourceID).then(
       source => this.source = source,
-      err => console.log("error", err)
+      err => console.log('error', err)
     );
   }
 }

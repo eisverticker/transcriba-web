@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { InfoPage } from './info-page';
 import { InfoPageService } from './info-page.service';
@@ -9,29 +9,29 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   moduleId:     module.id,
-  selector:    'info-page-edit',
+  selector:    'tr-info-page-edit',
   templateUrl: 'info-page-edit.component.html',
   styleUrls: []
 })
-export class InfoPageEditComponent implements OnInit{
+export class InfoPageEditComponent implements OnInit {
 
   page: InfoPage = InfoPage.createEmptyPage();
-  isSaving: boolean = false;
-  isLastAttemptFailed: boolean = false;
+  isSaving = false;
+  isLastAttemptFailed = false;
 
   constructor(
     private pageService: InfoPageService,
     private notify: NotificationService,
     private route: ActivatedRoute,
     private router: Router
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.params.subscribe(
       (params) => {
-        if(params['id'] === "new"){
+        if (params['id'] === 'new') {
           this.page = InfoPage.createEmptyPage();
-        }else{
+        }else {
           this.pageService.loadOneByID(params['id']).then(
             (page) => this.page = page,
             (err) => {
@@ -44,7 +44,7 @@ export class InfoPageEditComponent implements OnInit{
     );
   }
 
-  save(){
+  save() {
     this.isSaving = true;
     this.pageService.save(this.page).then(
       () => {

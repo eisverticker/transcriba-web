@@ -1,16 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
-
-import { AuthGuardService } from '../loopback-auth/auth-guard.service';
 import { EmployeeGuardService } from '../loopback-auth/employee-guard.service';
 
-//components
-//import { InfoPageDiscussionComponent } from './info-page-discussion.component';
+// components
+// import { InfoPageDiscussionComponent } from './info-page-discussion.component';
 import { InfoPageViewerComponent } from './info-page-viewer.component';
 import { InfoPageEditComponent } from './info-page-edit.component';
 import { InfoPageManagementComponent } from './info-page-management.component';
 
 
-//import { AuthGuardService } from './auth-guard.service';
+// import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
   {

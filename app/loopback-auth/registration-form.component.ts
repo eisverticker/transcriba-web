@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { AuthService } from './auth.service';
 import { User } from './user';
@@ -8,33 +8,27 @@ import { Notification } from '../utilities/notification';
 
 @Component({
   moduleId:     module.id,
-  selector:    'user-registration',
+  selector:    'usr-registration',
   templateUrl: 'registration-form.component.html',
   styleUrls: []
 })
-export class RegistrationFormComponent implements OnInit{
+export class RegistrationFormComponent {
   @Output() done: EventEmitter<any> = new EventEmitter();
 
-  public user: User = User.createEmptyUser();//()
-  public isRegistering: boolean = false;//()
-  public isLastRegistrationFailed: boolean = false;//()
-  public passwordCheck: string = "";
-  //is true if both password field values match
-  // except they are empty
-  public isPasswordMatching: boolean = false;
+  public user: User = User.createEmptyUser(); // ()
+  public isRegistering = false; // ()
+  public isLastRegistrationFailed = false; // ()
+  public passwordCheck = '';
+  // is true if both password field values match
+  //   except they are empty
+  public isPasswordMatching = false;
   constructor(
     private auth: AuthService,
     private notify: NotificationService
-  ){
+  ) {}
 
-  }
-
-  ngOnInit(){
-
-  }
-
-  register(){
-    if(this.isPasswordMatching){
+  register() {
+    if (this.isPasswordMatching) {
       this.isRegistering = true;
       this.auth.register(this.user).then(
         () => {
@@ -44,10 +38,10 @@ export class RegistrationFormComponent implements OnInit{
         },
         (err) => {
           this.isRegistering = false;
-          if(err == "Timeout"){
+          if (err === 'Timeout') {
             this.notify.notify(Notification.timeout());
-          }else{
-            this.notify.notify(new Notification('request.registrationFailed',['fail']));
+          }else {
+            this.notify.notify(new Notification('request.registrationFailed', ['fail']));
           }
         }
       );
@@ -55,8 +49,8 @@ export class RegistrationFormComponent implements OnInit{
     }
   }
 
-  matchPasswords(){
-    this.isPasswordMatching = this.user.password == this.passwordCheck;
+  matchPasswords() {
+    this.isPasswordMatching = this.user.password === this.passwordCheck;
   }
 
 }

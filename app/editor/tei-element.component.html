@@ -10,14 +10,28 @@
       </div>
     </div>
     <div>
-      <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+      <tr-tei-element
+        [markDirty]="markDirty"
+        [editable]="editable"
+        (killMe)="deleteChild($event)"
+        *ngFor="let child of tei.children; let i = index"
+        [index]="i"
+        [(ngModel)]="tei.children[i]">
+      </tr-tei-element>
     </div>
     <button class="btn btn-link" *ngIf="editable" (click)="addParagraph()">Absatz hinzufügen</button>
     <button class="btn btn-link" *ngIf="editable" (click)="addHeading()">Überschrift hinzufügen</button>
   </div>
 
   <div *ngSwitchCase="'line'" class="editor-line">
-    <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+    <tr-tei-element
+      [markDirty]="markDirty"
+      [editable]="editable"
+      (killMe)="deleteChild($event)"
+      *ngFor="let child of tei.children; let i = index"
+      [index]="i"
+      [(ngModel)]="tei.children[i]">
+    </tr-tei-element>
   </div>
 
   <div *ngSwitchCase="'paragraph'" class="panel editor-panel" [class.dirty]="markDirty && tei.isDirty">
@@ -34,9 +48,16 @@
       </div>
     </div>
     <div class="panel-body">
-      <growing-textarea *ngIf="mode == 'edit'" [(ngModel)]="value"></growing-textarea>
+      <ut-growing-textarea *ngIf="mode == 'edit'" [(ngModel)]="value"></ut-growing-textarea>
       <div *ngIf="mode == 'default'">
-        <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+        <tr-tei-element
+          [markDirty]="markDirty"
+          [editable]="editable"
+          (killMe)="deleteChild($event)"
+          *ngFor="let child of tei.children; let i = index"
+          [index]="i"
+          [(ngModel)]="tei.children[i]">
+        </tr-tei-element>
       </div>
     </div>
   </div>
@@ -55,9 +76,16 @@
       </div>
     </div>
     <div class="panel-body">
-      <growing-textarea *ngIf="mode == 'edit'" [(ngModel)]="value"></growing-textarea>
+      <ut-growing-textarea *ngIf="mode == 'edit'" [(ngModel)]="value"></ut-growing-textarea>
       <div class="editor-heading" *ngIf="mode == 'default'">
-        <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+        <tr-tei-element
+          [markDirty]="markDirty"
+          [editable]="editable" 
+          (killMe)="deleteChild($event)"
+          *ngFor="let child of tei.children; let i = index"
+          [index]="i"
+          [(ngModel)]="tei.children[i]">
+        </tr-tei-element>
       </div>
     </div>
   </div>

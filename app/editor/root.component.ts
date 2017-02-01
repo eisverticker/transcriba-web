@@ -6,11 +6,18 @@ import { TeiElement } from './tei-element';
 
 
 @Component({
-  selector: 'tei-root',
+  selector: 'tr-tei-root',
   template:
   `
     <div *ngIf="tei">
-      <tei-element [markDirty]="markDirty" [editable]="editable" (killMe)="deleteChild($event)" *ngFor="let child of tei.children; let i = index" [index]="i" [(ngModel)]="tei.children[i]"></tei-element>
+      <tr-tei-element
+      [markDirty]="markDirty"
+      [editable]="editable"
+      (killMe)="deleteChild($event)"
+      *ngFor="let child of tei.children; let i = index"
+      [index]="i"
+      [(ngModel)]="tei.children[i]">
+      </tr-tei-element>
       <div class="well" *ngIf="tei.children.length == 0">Diese Transkription ist leer <i class="fa fa-frown-o" aria-hidden="true"></i></div>
       <button *ngIf="editable" (click)="addPage()" class="btn btn-link">Seite hinzufügen</button>
     </div>
@@ -23,19 +30,19 @@ import { TeiElement } from './tei-element';
     }
   ]
 })
-export class RootComponent extends TeiBase{
+export class RootComponent extends TeiBase {
   @Input() editable: boolean;
   @Input() markDirty: boolean;
 
-  constructor(){
+  constructor() {
     super();
   }
 
-  addPage(){
+  addPage() {
     this.tei.children.push(new TeiElement('page', {}, []));
   }
 
-  deleteChild(index){
+  deleteChild(index) {
     this.tei.children = this.tei.children.filter(
       (_, i) => index !== i
     );

@@ -1,17 +1,17 @@
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
-export abstract class PaginationComponent{
-
-  private _numOfItems: number;
-  private _itemsPerPage: number;
+export abstract class PaginationComponent {
 
   protected paginator: BehaviorSubject<number>;
   protected pageChanged: Observable<number>;
 
+  private _numOfItems: number;
+  private _itemsPerPage: number;
+
   constructor(
-    itemsPerPage: number = 12,
-    numOfItems: number = 0
-  ){
+    itemsPerPage = 12,
+    numOfItems = 0
+  ) {
     this.itemsPerPage = itemsPerPage;
     this.numOfItems = numOfItems;
 
@@ -19,7 +19,7 @@ export abstract class PaginationComponent{
     this.pageChanged = this.paginator.asObservable();
   }
 
-  //Custom Getter and Setter
+  // Custom Getter and Setter
   set numOfItems(value: number){
     this._numOfItems = value;
   }
@@ -36,10 +36,7 @@ export abstract class PaginationComponent{
     return this._itemsPerPage;
   }
 
-  //
-  getNumOfPages(): number{
-    return Math.ceil(this.numOfItems/this.itemsPerPage);
+  getNumOfPages(): number {
+    return Math.ceil(this.numOfItems / this.itemsPerPage);
   }
-
-
 }

@@ -6,21 +6,21 @@ import { AuthService } from './loopback-auth/auth.service';
 
 @Component({
   moduleId:     module.id,
-  selector: 'general-dashboard',
+  selector: 'tr-general-dashboard',
   templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   user: User;
 
   constructor(
     private auth: AuthService
-  ){ }
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.auth.loadUser().then(
       user => this.user = user,
       err => console.log(err)
-    )
+    );
   }
 
 }

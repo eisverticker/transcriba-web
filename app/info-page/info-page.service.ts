@@ -8,16 +8,16 @@ import { DiscussionService } from '../discussion/discussion.service';
 
 
 @Injectable()
-export class InfoPageService{
+export class InfoPageService {
 
   constructor(
     private http: Http,
     private backend: BackendHelper,
     private auth: AuthService,
     private discuss: DiscussionService
-  ){}
+  ) {}
 
-  loadAll(): Promise<InfoPage[]>{
+  loadAll(): Promise<InfoPage[]> {
     let token = this.auth.token;
     let url = this.backend.authUrl('InfoPages', token);
 
@@ -31,21 +31,21 @@ export class InfoPageService{
     );
   }
 
-  loadOneByID(id: any): Promise<InfoPage>{
+  loadOneByID(id: any): Promise<InfoPage> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('InfoPages/'+id, token);
+    let url = this.backend.authUrl('InfoPages/' + id, token);
 
     return this.http.get(url)
     .map(data => data.json())
     .toPromise()
     .then(
-      p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId,id)
+      p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, id)
     );
   }
 
-  loadOneByName(name: string): Promise<InfoPage>{
+  loadOneByName(name: string): Promise<InfoPage> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('InfoPages/parsed/'+name, token);
+    let url = this.backend.authUrl('InfoPages/parsed/' + name, token);
 
     return this.http.get(url)
     .map(data => data.json())
@@ -58,7 +58,7 @@ export class InfoPageService{
     );
   }
 
-  save(page: InfoPage): Promise<any>{
+  save(page: InfoPage): Promise<any> {
     let token = this.auth.token;
     let url: string;
 
@@ -68,7 +68,7 @@ export class InfoPageService{
       'show_discussion': page.show_discussion
     };
 
-    if(page.id == undefined){
+    if (page.id === undefined) {
       url = this.backend.authUrl('InfoPages', token);
       /*return this.discuss.startDiscussion().then(
         (discussion) => {
@@ -78,17 +78,17 @@ export class InfoPageService{
       );*/
       return this.http.put(url, data).toPromise();
 
-    }else{
-      url = this.backend.authUrl('InfoPages/'+page.id, token);
+    }else {
+      url = this.backend.authUrl('InfoPages/' + page.id, token);
       data['discussionId'] = page.discussionID;
 
       return this.http.put(url, data).toPromise();
     }
   }
 
-  delete(page: InfoPage): Promise<any>{
+  delete(page: InfoPage): Promise<any> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('InfoPages/'+page.id, token);
+    let url = this.backend.authUrl('InfoPages/' + page.id, token);
 
     return this.http.delete(url).toPromise();
   }

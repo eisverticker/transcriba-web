@@ -18,7 +18,7 @@
 
     <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
       <span>{{ 'action.login' | translate }}</span>
-      <inline-spinner [active]="isLoggingIn"></inline-spinner>
+      <ut-inline-spinner [active]="isLoggingIn"></ut-inline-spinner>
     </button>
     <a [routerLink]="['/reset']" class="btn btn-default">{{ 'action.forgottenPassword' | translate }}</a>
     <a [routerLink]="['/register']" class="btn btn-default">{{ 'action.newAccount' | translate }} <span class="glyphicon glyphicon-chevron-right"></span></a>

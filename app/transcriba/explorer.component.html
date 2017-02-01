@@ -1,6 +1,6 @@
 <div class="row">
 
-  <sub-navbar [items]="navItems"></sub-navbar>
+  <ut-sub-navbar [items]="navItems"></ut-sub-navbar>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -8,7 +8,11 @@
         <input (change)="find()" type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
       </div>
       <hr *ngIf="numOfPages > 1" style="margin: 5px;" />
-      <pagination-bar (pageChanged)="setPage($event)" [numOfPages]="numOfPages" [currentPage]="currentPage"></pagination-bar>
+      <ut-pagination-bar
+        (pageChanged)="setPage($event)"
+        [numOfPages]="numOfPages"
+        [currentPage]="currentPage">
+      </ut-pagination-bar>
     </div>
     <div *ngIf="!isLoading" class="panel-body">
       <div *ngFor="let itemRow of objects" class="row">
@@ -40,7 +44,7 @@
     </table>
 
     <div *ngIf="isLoading" class="panel-footer">
-      <be-patient></be-patient>
+      <ut-be-patient></ut-be-patient>
     </div>
   </div>
 

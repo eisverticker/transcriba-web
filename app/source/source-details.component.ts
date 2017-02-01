@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Source } from './source';
 import { SourceService } from './source.service';
@@ -9,29 +9,29 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   moduleId:     module.id,
-  selector:    'source-details',
+  selector:    'tr-source-details',
   templateUrl: 'source-details.component.html',
   styleUrls: []
 })
-export class SourceDetailsComponent implements OnInit{
+export class SourceDetailsComponent implements OnInit {
 
   public source: Source = Source.createEmptySource();
-  public isSaving: boolean = false;
-  public isLastSaveFailed: boolean = false;
+  public isSaving = false;
+  public isLastSaveFailed = false;
 
   constructor(
     private sourceService: SourceService,
     private notify: NotificationService,
     private route: ActivatedRoute,
     private router: Router
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.params.subscribe(
       (params) => {
-        if(params['id'] === "new"){
+        if (params['id'] === 'new') {
           this.source = Source.createEmptySource();
-        }else{
+        }else {
           this.sourceService.loadByID(params['id']).then(
             (source) => this.source = source,
             (err) => {
@@ -44,7 +44,7 @@ export class SourceDetailsComponent implements OnInit{
     );
   }
 
-  save(){
+  save() {
     this.isSaving = true;
     this.sourceService.save(this.source).then(
       () => {

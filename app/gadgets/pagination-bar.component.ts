@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   OnChanges,
   Input,
   Output,
@@ -10,11 +9,11 @@ import {
 
 @Component({
   moduleId:     module.id,
-  selector:    'pagination-bar',
+  selector:    'ut-pagination-bar',
   templateUrl: 'pagination-bar.component.html',
   styleUrls: []
 })
-export class PaginationBarComponent implements OnChanges{
+export class PaginationBarComponent implements OnChanges {
 
   public pages: Array<number> = [];
 
@@ -22,20 +21,18 @@ export class PaginationBarComponent implements OnChanges{
   @Input() numOfPages: number;
   @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(){}
-
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.pages = [];
-    for(let i = 0; i < this.numOfPages; i++){
+    for (let i = 0; i < this.numOfPages; i++) {
       this.pages.push(i);
     }
   }
 
-  getPageWidth(){
-    return (100/this.numOfPages).toString() + "%";
+  getPageWidth() {
+    return (100 / this.numOfPages).toString() + '%';
   }
 
-  openPage(page: number){
+  openPage(page: number) {
     this.pageChanged.emit(page);
   }
 

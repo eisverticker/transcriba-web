@@ -36,7 +36,7 @@
 
     <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
       <span>{{ 'action.save' | translate }}</span>
-      <inline-spinner [active]="isSaving"></inline-spinner>
+      <ut-inline-spinner [active]="isSaving"></ut-inline-spinner>
     </button>
     <a [routerLink]="['/pages']" class="btn btn-default">{{ 'action.abort' | translate }}</a>
   </div>

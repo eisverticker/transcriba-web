@@ -6,14 +6,14 @@ import { ImageViewerService } from './image-viewer.service';
 
 @Component({
   moduleId:     module.id,
-  selector:    'image-viewer',
+  selector:    'tr-image-viewer',
   template:
   `
-    <tile-viewer *ngIf="url && zoomSteps" [maxZoomLevel]="zoomSteps" [url]="url"></tile-viewer>
+    <tr-tile-viewer *ngIf="url && zoomSteps" [maxZoomLevel]="zoomSteps" [url]="url"></tr-tile-viewer>
   `,
   styleUrls: []
 })
-export class ImageViewerComponent implements OnChanges{
+export class ImageViewerComponent implements OnChanges {
 
   @Input() objectId: any;
   zoomSteps: number;
@@ -22,13 +22,13 @@ export class ImageViewerComponent implements OnChanges{
   constructor(
     private backend: BackendHelper,
     private viewerService: ImageViewerService
-  ){}
+  ) {}
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.viewerService.loadNumOfZoomLevels(this.objectId).then(
       numOfZooms => {
-        this.zoomSteps = numOfZooms-1;
-        this.url = this.backend.unAuthUrl('TranscribaObjects/'+this.objectId+'/tiles/{z}/{x}/{y}');
+        this.zoomSteps = numOfZooms - 1;
+        this.url = this.backend.unAuthUrl('TranscribaObjects/' + this.objectId + '/tiles/{z}/{x}/{y}');
       },
       err => console.log(err)
     );

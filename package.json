@@ -11,7 +11,8 @@
     "lite:aot": "lite-server -c dist/bs-config.json",
     "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\"",
     "test-once": "tsc && karma start karma.conf.js --single-run",
-    "lint": "tslint ./app/**/*.ts -t verbose"
+    "lint": "tslint ./app/**/*.ts -t verbose",
+    "lintfix": "tslint ./app/**/*.ts -t verbose --fix"
   },
   "license": "MIT",
   "dependencies": {
@@ -31,7 +32,7 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^2.2.4",
-    "leaflet": "^1.0.1",
+    "leaflet": "~1.0.3",
     "ng2-toasty": "^2.1.0",
     "ng2-translate": "^3.2.1",
     "reflect-metadata": "^0.1.8",

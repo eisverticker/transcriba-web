@@ -9,24 +9,22 @@ import { Revision } from './revision';
 import { Collection } from './collection';
 import { Source } from '../source/source';
 
-import { TeiElement } from '../editor/tei-element';
-
 
 @Injectable()
-export class TranscribaService{
+export class TranscribaService {
 
   constructor(
     private http: Http,
     private backend: BackendHelper,
     private auth: AuthService
-  ){}
+  ) {}
 
   /**
    * Returns the TranscribaObject with the given id as Promise
    */
-  loadByID(id: any): Promise<TranscribaObject>{
+  loadByID(id: any): Promise<TranscribaObject> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+id, token);
+    let url = this.backend.authUrl('TranscribaObjects/' + id, token);
 
     return this.http.get(url)
     .map(data => data.json())
@@ -40,7 +38,7 @@ export class TranscribaService{
           o.discussionId,
           o.id,
           o.status
-        )
+        );
       }
     );
   }
@@ -51,14 +49,14 @@ export class TranscribaService{
    * count objects with a title containing the search term
    * (usefull for explorer)
    */
-  loadObjectCount(searchTerm?: string): Promise<number>{
+  loadObjectCount(searchTerm?: string): Promise<number> {
       let token = this.auth.token;
 
       let searchFilter: string;
-      if(searchTerm && searchTerm.length > 1){
-        searchFilter = "where[title][like]="+searchTerm;
-      }else{
-        searchFilter = "";
+      if (searchTerm && searchTerm.length > 1) {
+        searchFilter = 'where[title][like]=' + searchTerm;
+      }else {
+        searchFilter = '';
       }
 
       let url = this.backend.authUrl('TranscribaObjects/count', token, searchFilter);
@@ -71,21 +69,21 @@ export class TranscribaService{
   /**
    * Removes an object from the database
    */
-  delete(obj: TranscribaObject): Promise<any>{
-    throw "not implemented yet";
+  delete(obj: TranscribaObject): Promise<any> {
+    throw 'not implemented yet';
   }
 
   /**
    * Returns all users who are considered participants of the object
    */
-  loadParticipatingUsers(user: User): Promise<User[]>{
-    throw "not implemented yet";
+  loadParticipatingUsers(user: User): Promise<User[]> {
+    throw 'not implemented yet';
   }
 
   /**
    * Loads a collection of objects
    */
-  loadCollectionByID(id: any): Promise<Collection>{
+  loadCollectionByID(id: any): Promise<Collection> {
     return Promise.resolve(Collection.createEmptyCollection());
   }
 
@@ -93,7 +91,7 @@ export class TranscribaService{
    * Imports an object by his source and his id at
    * the specified source (external id)
    */
-  import(source: Source, foreignID: string): Promise<string>{
+  import(source: Source, foreignID: string): Promise<string> {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/import', token);
 
@@ -105,11 +103,11 @@ export class TranscribaService{
     .toPromise();
   }
 
-  addObjectToCollection(target: Collection, obj: TranscribaObject): Promise<any>{
+  addObjectToCollection(target: Collection, obj: TranscribaObject): Promise<any> {
     return Promise.resolve(null);
   }
 
-  addCollectionToCollection(target: Collection, item: Collection): Promise<any>{
+  addCollectionToCollection(target: Collection, item: Collection): Promise<any> {
     return Promise.resolve(null);
   }
 
@@ -122,21 +120,21 @@ export class TranscribaService{
     searchTerm?: string,
     rootCollection?: Collection,
     status?: string
-  ): Promise<TranscribaObject[]>{
+  ): Promise<TranscribaObject[]> {
 
     let token = this.auth.token;
 
     let filters =
-      "filter[order]=createdAt DESC"+
-      "&filter[limit]="+itemsPerPage+
-      "&filter[skip]="+itemsPerPage*page;
+      'filter[order]=createdAt DESC' +
+      '&filter[limit]=' + itemsPerPage +
+      '&filter[skip]=' + itemsPerPage * page;
 
-    if(searchTerm){
-      filters += "&filter[where][title][like]="+searchTerm;
+    if (searchTerm) {
+      filters += '&filter[where][title][like]=' + searchTerm;
     }
 
-    if(status){
-      filters += "&filter[where][status]="+status;
+    if (status) {
+      filters += '&filter[where][status]=' + status;
     }
 
     let url = this.backend.authUrl(
@@ -160,14 +158,14 @@ export class TranscribaService{
     );
   }
 
-  loadObjectPageFromCollection(page: number, itemsPerPage: number, collectionId: any, searchTerm?: string): Promise<TranscribaObject[]>{
+  loadObjectPageFromCollection(page: number, itemsPerPage: number, collectionId: any, searchTerm?: string): Promise<TranscribaObject[]> {
     let token = this.auth.token;
     let url = this.backend.authUrl(
-      'Collections/'+collectionId+'/transcribaObjects',
+      'Collections/' + collectionId + '/transcribaObjects',
       token,
-      "filter[order]=createdAt DESC"+
-      //"&filter[include]=appUser"
-      "&filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
+      'filter[order]=createdAt DESC' +
+      // "&filter[include]=appUser"
+      '&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
     return this.http.get(url)
@@ -185,14 +183,14 @@ export class TranscribaService{
     );
   }
 
-  loadCollectionPage(page: number, itemsPerPage: number, rootCollection?: Collection): Promise<Collection[]>{
+  loadCollectionPage(page: number, itemsPerPage: number, rootCollection?: Collection): Promise<Collection[]> {
     let token = this.auth.token;
     let url = this.backend.authUrl(
       'Collections',
       token,
-      "filter[order]=createdAt DESC"+
-      //"&filter[include]=appUser"
-      "&filter[limit]="+itemsPerPage+"&filter[skip]="+itemsPerPage*page
+      'filter[order]=createdAt DESC' +
+      // "&filter[include]=appUser"
+      '&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
     return this.http.get(url)
@@ -214,9 +212,9 @@ export class TranscribaService{
   /**
    * Loads the revision chronic of a TranscribaObject with the given id
    */
-  loadChronic(objId: any): Promise<Array<{id: string, username: string, createdAt: string, published: boolean, approved: boolean}>>{
+  loadChronic(objId: any): Promise<Array<{id: string, username: string, createdAt: string, published: boolean, approved: boolean}>> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/chronic',token);
+    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/chronic', token);
 
     return this.http.get(url)
     .timeout(5000)
@@ -228,9 +226,9 @@ export class TranscribaService{
     return Promise.resolve(0);
   }*/
 
-  loadLatestRevision(objId: any): Promise<Revision>{
+  loadLatestRevision(objId: any): Promise<Revision> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/latest',token);
+    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest', token);
 
     return this.http.get(url)
     .timeout(5000)
@@ -252,9 +250,9 @@ export class TranscribaService{
   /**
    * Returns the latest stable revision of an object
    */
-  loadStableRevision(objId: any): Promise<Revision>{
+  loadStableRevision(objId: any): Promise<Revision> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/stable',token);
+    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/stable', token);
 
     return this.http.get(url)
     .timeout(5000)
@@ -276,9 +274,9 @@ export class TranscribaService{
   /**
    * Returns the latest revision (including unpublished and not yet accepted ones)
    */
-  loadLatestRevisionPermissions(objId: any): Promise<{allowVote: boolean, details: any}>{
+  loadLatestRevisionPermissions(objId: any): Promise<{allowVote: boolean, details: any}> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/latest/permissions',token);
+    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest/permissions', token);
 
     return this.http.get(url)
     .timeout(5000)
@@ -290,9 +288,9 @@ export class TranscribaService{
    * If the user is in busy state then he is currently working on some object
    * revision. This method returns that object
    */
-   loadCurrentlyOccupiedObject(): Promise<TranscribaObject>{
+   loadCurrentlyOccupiedObject(): Promise<TranscribaObject> {
      let token = this.auth.token;
-     let url = this.backend.authUrl('TranscribaObjects/occupied',token);
+     let url = this.backend.authUrl('TranscribaObjects/occupied', token);
 
      return this.http.get(url)
      .timeout(5000)
@@ -300,9 +298,9 @@ export class TranscribaService{
      .toPromise();
    }
 
-   isUserBusy(): Promise<boolean>{
+   isUserBusy(): Promise<boolean> {
      let token = this.auth.token;
-     let url = this.backend.authUrl('AppUsers/busy',token);
+     let url = this.backend.authUrl('AppUsers/busy', token);
 
      return this.http.get(url)
      .timeout(5000)

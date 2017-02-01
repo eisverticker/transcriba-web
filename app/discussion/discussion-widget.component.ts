@@ -1,17 +1,15 @@
-import { Component, OnChanges, SimpleChanges,Input} from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
 import { DiscussionService } from '../discussion/discussion.service';
-
-import { Discussion } from './discussion';
 import { Comment } from './comment';
 
 @Component({
   moduleId:     module.id,
-  selector:    'latest-comments',
+  selector:    'tr-latest-comments',
   template:
   `
   <div *ngIf="comments">
-    <simple-comment *ngFor="let comment of comments" [comment]="comment"></simple-comment>
+    <tr-simple-comment *ngFor="let comment of comments" [comment]="comment"></tr-simple-comment>
     <div *ngIf="comments.length == 0">
       {{ 'message.noCommentsAvailable' | translate }}
     </div>
@@ -19,7 +17,7 @@ import { Comment } from './comment';
   `,
   styleUrls: []
 })
-export class DiscussionWidgetComponent implements OnChanges{
+export class DiscussionWidgetComponent implements OnChanges {
   @Input() discussionId: any;
   @Input() numOfItems: number;
 
@@ -27,9 +25,9 @@ export class DiscussionWidgetComponent implements OnChanges{
 
   constructor(
     private discussionService: DiscussionService
-  ){}
+  ) {}
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.discussionService.loadByID(this.discussionId).then(
       discussion => this.discussionService.loadCommentPage(discussion, 0, this.numOfItems).then(
           comments => this.comments = comments

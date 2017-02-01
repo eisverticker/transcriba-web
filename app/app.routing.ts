@@ -1,13 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 
-//general components
+// general components
 import { DashboardComponent } from './dashboard.component';
 
-//error handling components
+// error handling components
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthorizationRequiredComponent } from './authorization-required.component';
-
-import { AdminGuardService } from './loopback-auth/admin-guard.service';
 
 const routes: Routes = [
   {

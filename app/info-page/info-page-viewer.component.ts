@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { InfoPage } from './info-page';
 import { InfoPageService } from './info-page.service';
@@ -6,29 +6,29 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   moduleId:     module.id,
-  selector:    'info-page-viewer',
+  selector:    'tr-info-page-viewer',
   template: `
-    <sub-navbar [items]="navItems"></sub-navbar>
+    <ut-sub-navbar [items]="navItems"></ut-sub-navbar>
     <div *ngIf="page" [ngSwitch]="mode">
-      <be-patient *ngSwitchCase="'loading'"></be-patient>
-      <info-page [page]="page" *ngSwitchCase="'viewer'"></info-page>
-      <info-page-discussion [page]="page" *ngSwitchCase="'discussion'"></info-page-discussion>
+      <ut-be-patient *ngSwitchCase="'loading'"></ut-be-patient>
+      <tr-info-page [page]="page" *ngSwitchCase="'viewer'"></tr-info-page>
+      <tr-info-page-discussion [page]="page" *ngSwitchCase="'discussion'"></tr-info-page-discussion>
     </div>
   `,
   styleUrls: []
 })
-export class InfoPageViewerComponent implements OnInit{
+export class InfoPageViewerComponent implements OnInit {
   page: InfoPage;
-  mode: string = "loading";
+  mode = 'loading';
   navItems: Array<any> = [];
 
   constructor(
     private pageService: InfoPageService,
     private router: Router,
     private route: ActivatedRoute
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.data.subscribe(
       (data) => {
         this.mode = data['mode'];
@@ -46,20 +46,20 @@ export class InfoPageViewerComponent implements OnInit{
 
   }
 
-  private initNavigation(page: InfoPage){
+  private initNavigation(page: InfoPage) {
 
-    if(page.show_discussion){
+    if (page.show_discussion) {
       this.navItems = [
         {
-          name: "general.page",
-          route: '/info/'+page.name
+          name: 'general.page',
+          route: '/info/' + page.name
         },
         {
-          name: "general.discussion",
-          route: '/info/'+page.name+'/discussion'
+          name: 'general.discussion',
+          route: '/info/' + page.name + '/discussion'
         },
       ];
-    }else{
+    }else {
       this.navItems = [];
     }
   }

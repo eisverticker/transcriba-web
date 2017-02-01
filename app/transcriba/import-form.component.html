@@ -4,7 +4,8 @@
   </div>
   <div class="panel-body">
 
-    <fail-notifier [activated]="!isRequestPending && isLastRequestFailed"></fail-notifier>
+    <ut-fail-notifier [activated]="!isRequestPending && isLastRequestFailed">
+    </ut-fail-notifier>
 
     <!-- Form Elements-->
     <div class="form-group">
@@ -27,7 +28,7 @@
 
     <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
       <span>{{ 'action.import' | translate }}</span>
-      <inline-spinner [active]="isRequestPending"></inline-spinner>
+      <ut-inline-spinner [active]="isRequestPending"></ut-inline-spinner>
     </button>
   </div>
 </form>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
   TranslateModule,
-  TranslateService,
   TranslateLoader,
   TranslateStaticLoader
 } from 'ng2-translate';

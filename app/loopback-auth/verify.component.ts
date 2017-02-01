@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   moduleId:     module.id,
-  selector:    'email-verification',
+  selector:    'usr-email-verification',
   template:
   `
   <div class="jumbotron">
@@ -14,10 +14,4 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: []
 })
-export class VerifyComponent{
-  constructor(){}
-
-  ngOnInit(){
-
-  }
-}
+export class VerifyComponent {}

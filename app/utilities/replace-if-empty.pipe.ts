@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({name: 'replaceIfEmpty'})
 export class ReplaceIfEmptyPipe implements PipeTransform {
   transform(value: string): string {
-    if(value.trim() == "" || value == undefined || value == null){
-      return "Leer"
-    }else{
+    if (value.trim() === '' || value === undefined || value === null) {
+      return 'Leer';
+    }else {
       return value;
     }
   }

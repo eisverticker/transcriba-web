@@ -3,10 +3,10 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TranscribaService } from './transcriba.service';
 
 @Component({
-  selector: 'revision-history',
+  selector: 'tr-revision-history',
   template:
   `
-  <inline-spinner [active]="items == undefined"></inline-spinner>
+  <ut-inline-spinner [active]="items == undefined"></ut-inline-spinner>
   <table class="table" *ngIf="items">
     <tr>
       <th>Nutzer</th>
@@ -22,20 +22,20 @@ import { TranscribaService } from './transcriba.service';
     </tr>
   `
 })
-export class RevisionHistoryComponent implements OnChanges{
+export class RevisionHistoryComponent implements OnChanges {
   @Input() objectId: any;
   items: Array<{id: string, username: string, createdAt: string, published: boolean, approved: boolean}>;
 
   constructor(
     private transcriba: TranscribaService
-  ){}
+  ) {}
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.transcriba.loadChronic(this.objectId).then(
       chronic => {
-        this.items = chronic
+        this.items = chronic;
       },
-      err => console.log("failed to load chronic", err)
+      err => console.log('failed to load chronic', err)
     );
   }
 }

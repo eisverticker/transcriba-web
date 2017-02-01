@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-//components
+// components
 import { DeleteButtonComponent } from './delete-button.component';
 import { InlineSpinnerComponent } from './inline-spinner.component';
 import { PaginationBarComponent } from './pagination-bar.component';
@@ -8,9 +8,9 @@ import { SubNavbarComponent } from './sub-navbar.component';
 import { FailNotifierComponent } from './fail-notifier.component';
 import { GrowingTextareaComponent } from './growing-textarea.component';
 
-//directives
+// directives
 
-//modules
+// modules
 import { BrowserModule  } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';

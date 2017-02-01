@@ -1,20 +1,19 @@
 import { NgModule }       from '@angular/core';
 
-//components
-//..
+// components
+// ..
 
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule }   from '@angular/router';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
 import { HttpModule } from '@angular/http';
 
-//services
+// services
 import { VotingService } from './voting.service';
 
-//routing
-//..
+// routing
+// ..
 
 @NgModule({
     declarations: [],

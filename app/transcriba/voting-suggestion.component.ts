@@ -5,7 +5,7 @@ import { BackendHelper } from '../utilities/backend-helper';
 import { TranscribaService } from './transcriba.service';
 
 @Component({
-  selector: 'voting-suggestions',
+  selector: 'tr-voting-suggestions',
   template:
   `
     <div *ngIf="objects && !(page == 0 && objects.length == 0)" class="panel panel-default">
@@ -30,32 +30,32 @@ import { TranscribaService } from './transcriba.service';
     </div>
   `
 })
-export class VotingSuggestionComponent implements OnInit{
+export class VotingSuggestionComponent implements OnInit {
 
   objects: Array<TranscribaObject>;
-  page: number = 0;
+  page = 0;
 
   constructor(
     private transcriba: TranscribaService,
     public backend: BackendHelper
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.updateObjects();
   }
 
-  nextPage(){
+  nextPage() {
     this.page++;
     this.updateObjects();
   }
 
-  previousPage(){
+  previousPage() {
     this.page--;
     this.updateObjects();
   }
 
-  updateObjects(){
-    this.transcriba.loadObjectPage(this.page,3, undefined, undefined,"voting").then(
+  updateObjects() {
+    this.transcriba.loadObjectPage(this.page, 3, undefined, undefined, 'voting').then(
       objects => this.objects = objects,
       err => console.log(err)
     );

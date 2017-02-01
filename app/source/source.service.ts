@@ -6,15 +6,15 @@ import { Injectable } from '@angular/core';
 import { Source } from './source';
 
 @Injectable()
-export class SourceService{
+export class SourceService {
 
   constructor(
     private http: Http,
     private backend: BackendHelper,
     private auth: AuthService
-  ){}
+  ) {}
 
-  loadAllSources(): Promise<Source[]>{
+  loadAllSources(): Promise<Source[]> {
     let token = this.auth.token;
     let url = this.backend.authUrl('Sources', token);
 
@@ -26,15 +26,15 @@ export class SourceService{
     );
   }
 
-  //deprecated (alias for loadByID)
-  loadSourceByID(id: any): Promise<Source>{
-    console.log("loadSourceByID ist deprecated, use loadByID instead");
+  // deprecated (alias for loadByID)
+  loadSourceByID(id: any): Promise<Source> {
+    console.log('loadSourceByID ist deprecated, use loadByID instead');
     return this.loadByID(id);
   }
 
-  loadByID(id: any): Promise<Source>{
+  loadByID(id: any): Promise<Source> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('Sources/'+id, token);
+    let url = this.backend.authUrl('Sources/' + id, token);
 
     return this.http.get(url)
     .map(data => data.json())
@@ -44,26 +44,26 @@ export class SourceService{
     );
   }
 
-  loadSummaryByID(id: any): Promise<Source>{
+  loadSummaryByID(id: any): Promise<Source> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('Sources/'+id+'/summary', token);
+    let url = this.backend.authUrl('Sources/' + id + '/summary', token);
 
     return this.http.get(url)
     .map(data => data.json())
     .toPromise()
     .then(
-      s => new Source(s.title, "", s.info_url, s.logo_url, "", false, false, s.id)
+      s => new Source(s.title, '', s.info_url, s.logo_url, '', false, false, s.id)
     );
   }
 
-  save(source: Source): Promise<any>{
+  save(source: Source): Promise<any> {
     let token = this.auth.token;
     let url: string;
 
-    if(source.id == undefined){
+    if (source.id === undefined) {
       url = this.backend.authUrl('Sources', token);
-    }else{
-      url = this.backend.authUrl('Sources/'+source.id, token);
+    }else {
+      url = this.backend.authUrl('Sources/' + source.id, token);
     }
 
     let data = {

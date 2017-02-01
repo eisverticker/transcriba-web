@@ -1,4 +1,8 @@
-export class TranscribaObject{
+export class TranscribaObject {
+  static createEmptyObject() {
+    return new TranscribaObject('', '', '', '');
+  }
+
   constructor(
     public title: string,
     public externalID: string,
@@ -6,12 +10,6 @@ export class TranscribaObject{
     public discussionID: any,
     public id?: any,
     public status?: string
-  ){
-
-  }
-
-  static createEmptyObject(){
-    return new TranscribaObject("", "","","")
-  }
+  ) {}
 
 }

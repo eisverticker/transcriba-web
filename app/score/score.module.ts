@@ -1,20 +1,20 @@
 import { NgModule }       from '@angular/core';
 
-//components
+// components
 import { ScoreComponent } from './score.component';
 import { HallOfFameComponent } from './hall-of-fame.component';
 
-//pipes
+// pipes
 
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { AuthModule } from '../loopback-auth/auth.module';
 
-//services
+// services
 import { ScoreService } from './score.service';
 
-//routing
+// routing
 import { scoreRouting } from './score.routing';
 
 

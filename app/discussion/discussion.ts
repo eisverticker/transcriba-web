@@ -1,14 +1,11 @@
-import { Comment } from './comment';
+export class Discussion {
 
-export class Discussion{
-  private
+  static createEmptyDiscussion() {
+    return new Discussion('', []);
+  }
 
   constructor(
     public title: string,
     public id?: any
-  ){}
-
-  static createEmptyDiscussion(){
-    return new Discussion("", []);
-  }
+  ) {}
 }

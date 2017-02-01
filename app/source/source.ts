@@ -1,4 +1,8 @@
-export class Source{
+export class Source {
+  static createEmptySource() {
+    return new Source('', '', '', '', 'transcribajson', false, true);
+  }
+
   constructor(
     public title: string,
     public url: string,
@@ -8,9 +12,5 @@ export class Source{
     public sync: boolean,
     public activated: boolean,
     public id?: any
-  ){}
-
-  static createEmptySource(){
-    return new Source("","","","","transcribajson",false, true)
-  }
+  ) {}
 }

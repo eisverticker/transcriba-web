@@ -1,31 +1,29 @@
 import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
-import { User } from '../loopback-auth/user';
 
 import { Injectable } from '@angular/core';
-import { TranscribaObject } from './transcriba-object';
 import { Revision } from './revision';
 
 import { TeiElement } from '../editor/tei-element';
 
 @Injectable()
-export class TranscriptionService{
+export class TranscriptionService {
 
   constructor(
     private http: Http,
     private backend: BackendHelper,
     private auth: AuthService
-  ){}
+  ) {}
 
   /**
    * Tries to start the Transcription which means
    * that it occupies the object and fetchen the data of the
    * new cloned revision (which the user has write permissions to)
    */
-  start(objId: any): Promise<Revision>{
+  start(objId: any): Promise<Revision> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/occupy', token);
+    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/occupy', token);
 
     return this.http.post(url, {})
     .map(data => data.json())
@@ -46,9 +44,9 @@ export class TranscriptionService{
   /**
    * Saves editor data to the latest revision
    */
-  save(objId: any, content: TeiElement): Promise<any>{
+  save(objId: any, content: TeiElement): Promise<any> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/save', token);
+    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/save', token);
 
     return this.http.post(url, content)
     .map(data => data.json())
@@ -58,9 +56,9 @@ export class TranscriptionService{
   /**
    * Finish the work on the current revision
    */
-  publish(objId: any, content: TeiElement): Promise<any>{
+  publish(objId: any, content: TeiElement): Promise<any> {
     let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/'+objId+'/publish', token);
+    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/publish', token);
 
     return this.http.post(url, content)
     .map(data => data.json())
@@ -71,7 +69,7 @@ export class TranscriptionService{
    * Aborts the transcription of the current user
    * (deletes revision and frees object/user)
    */
-  abort(): Promise<any>{
+  abort(): Promise<any> {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/free', token);
 

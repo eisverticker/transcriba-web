@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, SimpleChanges} from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 
 import { CommentVotingService } from './comment-voting.service';
 import { Comment } from './comment';
@@ -7,12 +7,12 @@ import { User } from '../loopback-auth/user';
 
 @Component({
   moduleId:     module.id,
-  selector:    'simple-comment',
+  selector:    'tr-simple-comment',
   templateUrl: 'comment.component.html',
   styleUrls: []
 })
-export class CommentComponent implements OnChanges{
-  public currentVote: string = "loading";//loading, like, dislike, unwanted or none
+export class CommentComponent implements OnChanges {
+  public currentVote = 'loading'; // loading, like, dislike, unwanted or none
   public votings: any;
   public user: User;
 
@@ -21,9 +21,9 @@ export class CommentComponent implements OnChanges{
   constructor(
     private voting: CommentVotingService,
     private auth: AuthService
-  ){}
+  ) {}
 
-  updateVotings(){
+  updateVotings() {
     return this.auth.loadUser().then(
       (user) => this.user = user
     ).then(
@@ -40,17 +40,17 @@ export class CommentComponent implements OnChanges{
     );
   }
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     this.updateVotings();
   }
 
-  like(){
-    if(this.currentVote == "like"){
+  like() {
+    if (this.currentVote === 'like') {
       return this.voting.unvote(this.comment.id).then(
         () => this.updateVotings(),
         err => console.log(err)
       );
-    }else{
+    } else {
       return this.voting.like(this.comment.id)
       .then(
         () => this.updateVotings(),
@@ -59,13 +59,13 @@ export class CommentComponent implements OnChanges{
     }
   }
 
-  dislike(){
-    if(this.currentVote == "dislike"){
+  dislike() {
+    if (this.currentVote === 'dislike') {
       return this.voting.unvote(this.comment.id).then(
         () => this.updateVotings(),
         err => console.log(err)
       );
-    }else{
+    }else {
       return this.voting.dislike(this.comment.id)
       .then(
         () => this.updateVotings(),
@@ -74,13 +74,13 @@ export class CommentComponent implements OnChanges{
     }
   }
 
-  unwanted(){
-    if(this.currentVote == "unwanted"){
+  unwanted() {
+    if (this.currentVote === 'unwanted') {
       return this.voting.unvote(this.comment.id).then(
         () => this.updateVotings(),
         err => console.log(err)
       );
-    }else{
+    }else {
       return this.voting.unwanted(this.comment.id)
       .then(
         () => this.updateVotings(),

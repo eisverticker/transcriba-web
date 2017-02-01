@@ -1,6 +1,6 @@
 import { NgModule }       from '@angular/core';
 
-//components
+// components
 import { AuthComponent } from './auth.component';
 import { LoginFormComponent } from './login-form.component';
 import { LogoutComponent } from './logout.component';
@@ -11,17 +11,17 @@ import { VerifyComponent } from './verify.component';
 import { AdminComponent } from './admin.component';
 import { UserManagementComponent } from './user-management.component';
 
-//modules
+// modules
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { Routes, RouterModule }   from '@angular/router';
+import { RouterModule }   from '@angular/router';
 import { UtilityModule } from '../utilities/utility.module';
 import { I18nModule } from '../i18n/i18n.module';
 import { GadgetModule } from '../gadgets/gadget.module';
 
 import { HttpModule } from '@angular/http';
 
-//services
+// services
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { AuthGuardService } from './auth-guard.service';
@@ -31,7 +31,7 @@ import { TrustedGuardService } from './trusted-guard.service';
 
 
 
-//routing
+// routing
 import { authRouting } from './auth.routing';
 
 @NgModule({

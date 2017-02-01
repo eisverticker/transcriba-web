@@ -2,60 +2,58 @@ import { VotingService } from '../voting/voting.service';
 import { VotingContext } from '../voting/voting-context';
 
 import { Injectable } from '@angular/core';
-import { Discussion } from './discussion';
-import { Comment } from './comment';
 
 import { User } from '../loopback-auth/user';
 
 @Injectable()
-export class CommentVotingService{
+export class CommentVotingService {
 
   constructor(
     private voting: VotingService
-  ){}
+  ) {}
 
-  like(id: any): Promise<any>{
-    let votingContext = new VotingContext("Comment", id);
+  like(id: any): Promise<any> {
+    let votingContext = new VotingContext('Comment', id);
 
-    return this.voting.vote(votingContext, "like");
+    return this.voting.vote(votingContext, 'like');
   }
 
-  dislike(id: any): Promise<any>{
-    let votingContext = new VotingContext("Comment", id);
+  dislike(id: any): Promise<any> {
+    let votingContext = new VotingContext('Comment', id);
 
-    return this.voting.vote(votingContext, "dislike");
+    return this.voting.vote(votingContext, 'dislike');
   }
 
-  unwanted(id: any): Promise<any>{
-    let votingContext = new VotingContext("Comment", id);
+  unwanted(id: any): Promise<any> {
+    let votingContext = new VotingContext('Comment', id);
 
-    return this.voting.vote(votingContext, "unwanted");
+    return this.voting.vote(votingContext, 'unwanted');
   }
 
-  unvote(id: any): Promise<any>{
-    let votingContext = new VotingContext("Comment", id);
+  unvote(id: any): Promise<any> {
+    let votingContext = new VotingContext('Comment', id);
 
     return this.voting.unvote(votingContext);
   }
 
-  loadVotings(id: any): Promise<{ likes: Array<User>, dislikes: Array<User>, unwanted: Array<User> }>{
-    let votingContext = new VotingContext("Comment", id);
+  loadVotings(id: any): Promise<{ likes: Array<User>, dislikes: Array<User>, unwanted: Array<User> }> {
+    let votingContext = new VotingContext('Comment', id);
     let res = {
       likes: [],
       dislikes: [],
       unwanted: []
     };
 
-    return this.voting.loadUsers(votingContext, "like")
+    return this.voting.loadUsers(votingContext, 'like')
     .then(
       (users) => {
         res.likes = users;
-        return this.voting.loadUsers(votingContext, "dislike");
+        return this.voting.loadUsers(votingContext, 'dislike');
       }
     ).then(
       (users) => {
         res.dislikes = users;
-        return this.voting.loadUsers(votingContext, "unwanted");
+        return this.voting.loadUsers(votingContext, 'unwanted');
       }
     ).then(
       (users) => {
@@ -65,8 +63,8 @@ export class CommentVotingService{
     );
   }
 
-  loadVote(id: any): Promise<string>{
-    let votingContext = new VotingContext("Comment", id);
+  loadVote(id: any): Promise<string> {
+    let votingContext = new VotingContext('Comment', id);
 
     return this.voting.loadVote(votingContext);
   }

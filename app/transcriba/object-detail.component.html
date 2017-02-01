@@ -1,21 +1,22 @@
-<sub-navbar [items]="navItems"></sub-navbar>
+<ut-sub-navbar [items]="navItems"></ut-sub-navbar>
 
-<be-patient *ngIf="!object"></be-patient>
+<ut-be-patient *ngIf="!object"></ut-be-patient>
 <div *ngIf="object">
   <div *ngIf="mode=='overview'" id="overview">
-    <object-overview [object]="object"></object-overview>
+    <tr-object-overview [object]="object"></tr-object-overview>
   </div>
   <div *ngIf="mode=='transcription'" id="transcription">
-    <transcription-viewer [objectId]="object.id"></transcription-viewer>
+    <tr-transcription-viewer [objectId]="object.id"></tr-transcription-viewer>
   </div>
   <div *ngIf="mode=='chronic'" id="transcription">
-    <revision-history [objectId]="object.id"></revision-history>
+    <tr-revision-history [objectId]="object.id"></tr-revision-history>
   </div>
   <div *ngIf="mode=='discussion'">
-    <simple-discussion [itemsPerPage]="'10'" [discussionId]="object.discussionID"></simple-discussion>
+    <tr-simple-discussion [itemsPerPage]="'10'" [discussionId]="object.discussionID">
+    </tr-simple-discussion>
   </div>
   <div *ngIf="mode=='viewer'">
-    <image-viewer [objectId]="object.id"></image-viewer>
+    <tr-image-viewer [objectId]="object.id"></tr-image-viewer>
   </div>
 
 </div>

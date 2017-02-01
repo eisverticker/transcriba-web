@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ScoreService } from './score.service';
 
 @Component({
-  selector: 'hall-of-fame',
+  selector: 'tr-hall-of-fame',
   template:
   `
   <div class="panel panel-default">
@@ -24,18 +24,18 @@ import { ScoreService } from './score.service';
   </div>
   `
 })
-export class HallOfFameComponent implements OnInit{
+export class HallOfFameComponent implements OnInit {
 
   scorers: Array<{username: string, score: number }>;
 
   constructor(
     private scoreService: ScoreService
-  ){}
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.scoreService.loadBestScorers().then(
       scorers => this.scorers = scorers,
-      err => console.log("we were not able to load hall of fame", err)
+      err => console.log('we were not able to load hall of fame', err)
     );
   }
 

@@ -6,7 +6,7 @@ import { BackendHelper } from '../utilities/backend-helper';
 import { TranscribaService } from './transcriba.service';
 
 @Component({
-  selector: 'busy-widget',
+  selector: 'tr-busy-widget',
   template:
   `
     <div *ngIf="object" class="panel panel-primary">
@@ -24,7 +24,7 @@ import { TranscribaService } from './transcriba.service';
     </div>
   `
 })
-export class BusyWidgetComponent implements OnInit{
+export class BusyWidgetComponent implements OnInit {
 
   object: TranscribaObject;
 
@@ -32,23 +32,23 @@ export class BusyWidgetComponent implements OnInit{
     private auth: AuthService,
     private transcriba: TranscribaService,
     public backend: BackendHelper
-  ){}
+  ) {}
 
-  ngOnInit(){
-    this.auth.loadUser().then(//load user to check if the user is registered
+  ngOnInit() {
+    this.auth.loadUser().then(// load user to check if the user is registered
       user => {
-        if(user.isRegistered()){
-          this.transcriba.isUserBusy().then(//check busy state
+        if (user.isRegistered()) {
+          this.transcriba.isUserBusy().then(// check busy state
             isBusy => {
-              if(isBusy){
-                this.transcriba.loadCurrentlyOccupiedObject().then(//load object if busy
+              if (isBusy) {
+                this.transcriba.loadCurrentlyOccupiedObject().then(// load object if busy
                   object => this.object = object,
                   err => console.log(err)
                 );
               }
             },
             err => console.log(err)
-          )
+          );
         }
       },
       err => console.log(err)
