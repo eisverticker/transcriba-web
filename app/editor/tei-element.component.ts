@@ -95,7 +95,7 @@ export class TeiElementComponent extends TeiBase implements OnInit {
   }
 
   showText() {
-    let lineStrings: Array<string> = this.value.trim().split('');
+    let lineStrings: Array<string> = this.value.trim().split('\n');
     lineStrings = lineStrings.filter(
       line =>  line.trim() !== ''
     );

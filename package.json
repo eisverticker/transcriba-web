@@ -14,7 +14,6 @@
     "lint": "tslint ./app/**/*.ts -t verbose",
     "lintfix": "tslint ./app/**/*.ts -t verbose --fix"
   },
-  "license": "MIT",
   "dependencies": {
     "@angular/common": "~2.4.0",
     "@angular/compiler": "~2.4.0",
@@ -69,5 +68,12 @@
     "rollup-plugin-uglify": "^1.0.1",
     "tslint": "^4.4.2",
     "typescript": "~2.0.10"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/transcriba/transcriba-web.git"
+  },
+  "license": "MIT",
+  "description": "Client application for the transcriba manuscript transcription platform",
+  "homepage": "http://transcriba.de"
 }
