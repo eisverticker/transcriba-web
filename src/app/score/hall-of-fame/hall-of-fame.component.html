@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <span>Hall of Fame</span>
+</mat-toolbar>
+
+<div class="tr-container">
+
+  <table class="table table-striped">
+    <tr>
+      <th>{{ 'general.username' | translate }}</th>
+      <th>{{ 'general.score' | translate }}</th>
+    </tr>
+    <tr *ngFor="let scorer of scorers">
+      <td>{{ scorer.username }}</td>
+      <td>{{ scorer.score }}</td>
+    </tr>
+  </table>
+
+</div>

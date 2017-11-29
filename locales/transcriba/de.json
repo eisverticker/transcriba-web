@@ -1,4 +1,9 @@
 {
+  "navigation": {
+    "landingPage": "Start",
+    "discover": "Entdecken",
+    "import": "Importieren"
+  },
   "title": {
     "welcomeTo": "Willkommen zu {{ object }}!",
     "sourceManagement": "Quellenverwaltung",
@@ -6,7 +11,8 @@
     "editPage": "Seite bearbeiten",
     "editSource": "Quelle bearbeiten",
     "import": "Objekt importieren",
-    "userManagement": "Nutzerverwaltung"
+    "userManagement": "Nutzerverwaltung",
+    "account": "Konto"
   },
   "general": {
     "name": "Name",
@@ -20,7 +26,9 @@
     "transcription": "Transkription",
     "viewer": "Betrachter",
     "versionHistory": "Versionshistorie",
-    "metadata": "Metadaten"
+    "metadata": "Metadaten",
+    "username": "Benuzter",
+    "score": "Punktzahl"
   },
   "action": {
     "deactivate": "Deaktivieren",
@@ -35,6 +43,8 @@
   },
   "sources": {
     "apiUrl": "API-URL",
+    "infoUrl": "Info-URL",
+    "logoUrl": "Logo-URL",
     "apiType": "API-Typ",
     "syncSupport": "Server unterstützt Synchronisierung"
   },

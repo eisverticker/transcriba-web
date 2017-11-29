@@ -1,0 +1,85 @@
+<mat-toolbar>
+  {{ 'title.editSource' | translate }}
+</mat-toolbar>
+
+<div class="tr-container">
+  <mat-card>
+    <mat-card-header>
+        {{ source.title }}
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="save()" #form="ngForm">
+
+        <div *ngIf="isLastSaveFailed && !isSaving" class="alert  alert-danger">
+            <strong>{{ 'request.fail' | translate }}</strong> {{ 'command.pleaseTryAgain' | translate }}
+        </div>
+
+        <!-- Form Elements-->
+        <mat-form-field>
+          <input matInput
+            [placeholder]="'general.name' | translate"
+            [(ngModel)]="source.title"
+            name="title"
+            #title="ngModel"
+            type="text"
+            required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+            [placeholder]="'sources.apiUrl' | translate"
+            [(ngModel)]="source.url"
+            name="url"
+            pattern=".*\{id\}.*"
+            #url="ngModel"
+            type="text"
+            required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+            [placeholder]="'sources.infoUrl' | translate"
+            [(ngModel)]="source.info_url"
+            name="info_url"
+            #infoUrl="ngModel"
+            type="text"
+            required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+            [placeholder]="'sources.logoUrl' | translate"
+            [(ngModel)]="source.logo_url"
+            name="logo_url"
+            #logoUrl="ngModel"
+            type="text"
+            required>
+        </mat-form-field>
+
+        <section>
+          <label>{{ 'sources.apiType' | translate }}:</label>
+          <mat-radio-group
+            [(ngModel)]="source.type"
+            name="type"
+            #type="ngModel"
+            required>
+            <mat-radio-button value="transcribajson">TranscribaJSON</mat-radio-button>
+          </mat-radio-group>
+        </section>
+
+        <section>
+          <mat-slide-toggle name="sync" [(ngModel)]="source.sync">
+            Server unterstützt Synchronisierung
+          </mat-slide-toggle>
+        </section>
+
+        <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
+          <span>{{ 'action.save' | translate }}</span>
+          <tui-inline-spinner [active]="isSaving"></tui-inline-spinner>
+        </button>
+        <button mat-raised-button [routerLink]="['/sources']">{{ 'action.abort' | translate }}</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+</div>

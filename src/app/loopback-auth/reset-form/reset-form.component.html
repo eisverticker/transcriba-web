@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+    <span>{{ 'title.passwordReset' | translate }}</span>
+</mat-toolbar>
+
+<div class="tr-container">
+  <form (ngSubmit)="reset()" #form="ngForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <div class="card-title-big">Nutzerdaten</div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+        <div *ngIf="isLastResetFailed && !isResetting" class="alert  alert-danger">
+            <strong>{{ 'request.fail' | translate }}</strong> {{ 'command.pleaseTryAgain' | translate }}
+        </div>
+
+        <!-- Form Elements-->
+        <mat-form-field>
+          <input matInput [placeholder]="'general.email' | translate" [(ngModel)]="user.mail" name="mail" #mail="ngModel" pattern=".{2,20}@.{2,20}\..{2,5}" type="email" placeholder="E-Mail" required>
+        </mat-form-field>
+
+        <button mat-button [disabled]="!form.valid" type="submit" >
+          <span>Absenden</span>
+          <tui-inline-spinner [active]="isResetting"></tui-inline-spinner>
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

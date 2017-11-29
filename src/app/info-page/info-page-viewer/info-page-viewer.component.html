@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <span>Info</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button [routerLink]="discussionLink">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-comment"></mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="tr-container">
+  <div *ngIf="page" [ngSwitch]="mode">
+    <tui-loading-indicator *ngSwitchCase="'loading'"></tui-loading-indicator>
+    <inf-info-page [page]="page" *ngSwitchCase="'viewer'"></inf-info-page>
+    <inf-info-page-discussion [page]="page" *ngSwitchCase="'discussion'"></inf-info-page-discussion>
+  </div>
+</div>

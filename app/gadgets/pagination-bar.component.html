@@ -1,4 +1,0 @@
-<div *ngIf="numOfPages > 1" class="progress">
-  <div (click)="openPage(page)" *ngFor="let page of pages" class="progress-bar clickable" [class.progress-bar-info]="page == currentPage" [style.width]="getPageWidth()">
-  </div>
-</div>

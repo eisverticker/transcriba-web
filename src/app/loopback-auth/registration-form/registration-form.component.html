@@ -1,0 +1,32 @@
+<mat-toolbar color="primary">
+    <span>{{ 'title.register' | translate }}</span>
+</mat-toolbar>
+
+<div class="tr-container">
+  <form class="card" (ngSubmit)="register()" #form="ngForm">
+    <mat-card>
+      <mat-card-title>
+        <div class="card-title-big">Nutzerdaten</div>
+      </mat-card-title>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput [placeholder]="'auth.email' | translate" [(ngModel)]="user.mail" name="mail" #mail="ngModel" type="email"  validateEmail required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'auth.username' | translate" [(ngModel)]="user.name" name="name" #name="ngModel" pattern="^[\wäöüÄÖÜ]{3,15}$" type="text" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'auth.password' | translate" [(ngModel)]="user.password" name="password" #password="ngModel" pattern=".{3,}" type="password" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'auth.passwordRepeat' | translate" (keyup)="matchPasswords()" [(ngModel)]="passwordCheck" name="passwordCheck" #passwordCheckVar="ngModel" type="password" required>
+        </mat-form-field>
+
+        <button mat-button [disabled]="!form.valid" type="submit">
+          <span>{{ 'action.send' | translate }}</span>
+          <tui-inline-spinner [active]="isRegistering"></tui-inline-spinner>
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

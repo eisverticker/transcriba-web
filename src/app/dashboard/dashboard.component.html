@@ -1,0 +1,22 @@
+<div class="jumbotron bg-light">
+  <div class="container">
+    <div class="media">
+      <div class="media-body">
+        <h1 class="tr-handwritten">Transcriba <span class="badge badge-secondary">Beta</span></h1>
+        <p>Hilf uns alte Manuskripte digital zu erschließen und unser kulturelles Erbe zu erhalten!</p>
+        <button mat-raised-button [routerLink]="['/info/projekt']">Mehr erfahren</button>
+        <button mat-raised-button [routerLink]="['/tutorial']">Tutorial</button>
+        <button *ngIf="!isRegistered()" mat-raised-button color="accent" [routerLink]="['/login']">Anmelden</button>
+        <button *ngIf="!isRegistered()" mat-raised-button color="accent" [routerLink]="['/register']">Registrieren</button>
+      </div>
+      <img class="d-flex ml-3" src="assets/images/manuscript-sketch.png" alt="manuscript icon">
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="tr-container">
+    <tr-busy-widget></tr-busy-widget>
+    <tr-voting-suggestion *ngIf="isRegistered()"></tr-voting-suggestion>
+  </div>
+</div>

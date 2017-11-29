@@ -1,0 +1,12 @@
+<div *ngIf="tei">
+  <tr-tei-element
+  [markDirty]="markDirty"
+  [editable]="editable"
+  (killMe)="deleteChild($event)"
+  *ngFor="let child of tei.children; let i = index"
+  [index]="i"
+  [(ngModel)]="tei.children[i]">
+  </tr-tei-element>
+  <div class="well" *ngIf="tei.children.length == 0">Diese Transkription ist leer <i class="fa fa-frown-o" aria-hidden="true"></i></div>
+  <button mat-button *ngIf="editable" (click)="addPage()">Seite hinzufügen</button>
+</div>

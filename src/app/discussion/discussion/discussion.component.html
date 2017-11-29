@@ -1,0 +1,31 @@
+<div *ngIf="user && comments">
+
+  <tui-pagination-bar
+    (pageChanged)="setPage($event)"
+    [numOfItems]="numOfComments"
+    [itemsPerPage]="itemsPerPage"
+    [currentPage]="currentPage">
+  </tui-pagination-bar>
+
+      <form class="comment-add-form" (ngSubmit)="addComment()" #form="ngForm">
+
+        <tui-fail-indicator [activated]="!isRequestPending && isLastRequestFailed"></tui-fail-indicator>
+
+        <mat-form-field>
+          <input [placeholder]="'Kommentar'" matInput [disabled]="!user.isRegistered()" [(ngModel)]="newComment.content" name="content" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button [disabled]="!form.valid" type="submit">
+            <span>{{ 'action.send' | translate }}</span>
+            <tui-inline-spinner [active]="isRequestPending"></tui-inline-spinner>
+          </button>
+        </div>
+      </form>
+
+  <disc-comment class="card-spaced" *ngFor="let comment of comments" [comment]="comment"></disc-comment>
+
+  <div class="well" style="margin-top: 15px;" *ngIf="comments.length == 0">
+    {{ 'message.noCommentsAvailable' | translate }}
+  </div>
+
+</div>

@@ -1,0 +1,10 @@
+<mat-toolbar>
+  Administratorbereich
+</mat-toolbar>
+
+<tui-sub-nav-bar [items]="navItems"></tui-sub-nav-bar>
+
+<div class="tr-container" [ngSwitch]="mode">
+  <tui-loading-indicator *ngSwitchCase="'loading'"></tui-loading-indicator>
+  <lauth-user-management *ngSwitchCase="'user'"></lauth-user-management>
+</div>
