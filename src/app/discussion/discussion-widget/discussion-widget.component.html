@@ -1,0 +1,6 @@
+<div *ngIf="comments">
+  <disc-comment *ngFor="let comment of comments" [comment]="comment"></disc-comment>
+  <div *ngIf="comments.length == 0">
+    {{ 'message.noCommentsAvailable' | translate }}
+  </div>
+</div>

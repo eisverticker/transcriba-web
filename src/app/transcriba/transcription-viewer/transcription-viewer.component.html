@@ -1,0 +1,50 @@
+<div *ngIf="object">
+  <div class="editor-navigation hidden-xs">
+    <div *ngIf="latestRevision && object.status == 'voting' && user.isRegistered() && (hasVoted != undefined && !hasVoted)">
+      <div *ngIf="user.id != latestRevision.ownerId" class="alert alert-info">
+        <strong>Achtung!</strong> Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese und stimme ab!
+      </div>
+      <div *ngIf="!permissions.details.eligibleVoter && !permissions.details.isOwner" class="alert alert-warning">
+        <strong>Entschuldigung!</strong>
+        Als Anfänger darfst du hier noch nicht abstimmen.
+        Sammle erst Erfahrung indem du Schriften transkribierst.
+      </div>
+      <div *ngIf="permissions.details.maximumVotesReached" class="alert alert-warning">
+        <strong>Achtung!</strong>
+        Du hast die maximale Anzahl an Abstimmungen für heute erreicht.
+        Du kannst aber zu einem späteren Zeitpunkt gerne weitermachen.
+      </div>
+      <div *ngIf="permissions.details.isOwner" class="alert alert-info">
+        <strong>Danke für deine Mühe!</strong> Deine Arbeit wird nun von der Community überprüft.
+      </div>
+      <span>Neue Version: </span>
+      <button mat-raised-button
+        [disabled]="!permissions.allowVote"
+        (click)="voteInFavor()">
+        Akzeptieren
+        <span *ngIf="votings" class="badge">
+        {{ votings.accept.length }}
+        </span>
+      </button>
+      <button mat-raised-button
+        [disabled]="!permissions.allowVote"
+        (click)="voteAgainst()">
+        Ablehnen
+        <span *ngIf="votings" class="badge">{{ votings.refuse.length }}
+        </span>
+      </button>
+    </div>
+  </div>
+  <tr-editor
+    (save)="save($event)"
+    (publish)="publish($event)"
+    (abort)="abort()"
+    (start)="transcribe()"
+    [enableStarter]="object.status == 'free' && user.isRegistered()"
+    [editable]="editable"
+    [contents]="contents"
+    [objectId]="object.id"
+    [markDirty]="markDirty"
+    [labels]="labels">
+  </tr-editor>
+</div>

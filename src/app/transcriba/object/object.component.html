@@ -1,0 +1,10 @@
+<mat-card class="card-spaced tr-explorer-card">
+  <mat-card-header>
+    <mat-card-title>{{ object.title }} <span class="badge badge-warning">Bearbeitungsphase</span></mat-card-title>
+  </mat-card-header>
+  <img class="tr-explorer-thumbnail" mat-card-image [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/thumbnail')" alt="thumbnail">
+  <mat-card-actions>
+    <button mat-button [routerLink]="'/obj/'+object.id">Ansehen</button>
+    <button mat-button [routerLink]="'/obj/'+object.id">Bearbeiten</button>
+  </mat-card-actions>
+</mat-card>

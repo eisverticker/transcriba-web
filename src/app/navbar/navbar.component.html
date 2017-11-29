@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <a [routerLink]="['/home']" class="navbar-brand">
+      <img src="assets/images/logo.png" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" [routerLinkActive]="['active']" role="presentation">
+          <a class="nav-link" [routerLink]="['/home']">Start</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" role="presentation">
+          <a class="nav-link" [routerLink]="['/explore']">Entdecken</a>
+        </li>
+        <!--<li [routerLinkActive]="['active']" role="presentation">
+          <a [routerLink]="['/contribute']">Mitmachen</a>
+        </li>-->
+        <li class="nav-item" *ngIf="user.isEmployee()" [routerLinkActive]="['active']" role="presentation">
+          <a class="nav-link" [routerLink]="['/import']">Importieren</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" role="presentation">
+          <a class="nav-link" [routerLink]="['/highscore']">Bestenliste</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" role="presentation">
+          <a class="nav-link" [routerLink]="['/info/feedback']">Feedback</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" role="presentation">
+          <a class="nav-link" [routerLink]="['/info/impressum']">Impressum</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" *ngIf="!user.isRegistered()" [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Anmelden</a>
+            <a class="nav-link" *ngIf="user.isRegistered()" [routerLink]="['/login']">
+              <span class="glyphicon glyphicon glyphicon-user"></span>
+              <span> {{ user.name }} </span>
+              <span style="color: gold;" class="badge"> <i class="fa fa-trophy fa-lg" aria-hidden="true"></i> <scr-score></scr-score></span>
+            </a>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</nav>

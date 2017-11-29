@@ -1,0 +1,79 @@
+<div class="conainer-fluid">
+  <mat-toolbar>
+      <span>Startseite</span>
+      <span class="example-spacer"></span>
+      <mat-icon fontSet="fontawesome" fontIcon="fa-trash"></mat-icon>
+      <mat-icon fontSet="fontawesome" fontIcon="fa-heart"></mat-icon>
+  </mat-toolbar>
+
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <div class="media">
+      <div class="media-body">
+        <h1 class="tr-handwritten">Transcriba <span class="badge badge-primary">Beta</span></h1>
+        <p>Hilf uns alte Manuskripte digital zu erschließen und unser kulturelles Erbe zu erhalten (<a href="#">Mehr erfahren</a>)!</p>
+        <button mat-button color="primary" type="submit">Tutorial</button>
+        <button mat-button color="primary" type="submit">Anmelden</button>
+        <button mat-button color="primary" type="submit">Registrieren</button>
+      </div>
+      <img class="d-flex ml-3" src="http://www.dorrancepublishing.com/wp-content/uploads/2016/07/icon_manuscript.png" alt="Generic placeholder image">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <mat-card style="margin-bottom: 30px;">
+    <mat-card-header>
+      <div md-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button md-button>LIKE</button>
+      <button md-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+  <mat-slide-toggle>Slide me!</mat-slide-toggle>
+  <button md-button (click)="openSnackBar()" aria-label="Show an example snack-bar">
+  Pizza party
+  </button>
+  <button md-button color="primary" type="submit">Search</button>
+
+  <div class="alert alert-primary" role="alert">
+    This is a primary alert—check it out!
+  </div>
+  <div class="alert alert-secondary" role="alert">
+    This is a secondary alert—check it out!
+  </div>
+  <div class="alert alert-success" role="alert">
+    This is a success alert—check it out!
+  </div>
+  <div class="alert alert-danger" role="alert">
+    This is a danger alert—check it out!
+  </div>
+  <div class="alert alert-warning" role="alert">
+    This is a warning alert—check it out!
+  </div>
+  <div class="alert alert-info" role="alert">
+    This is a info alert—check it out!
+  </div>
+  <div class="alert alert-light" role="alert">
+    This is a light alert—check it out!
+  </div>
+  <div class="alert alert-dark" role="alert">
+    This is a dark alert—check it out!
+  </div>
+
+  <tui-inline-spinner [active]="true"></tui-inline-spinner>
+  <tui-loading-indicator></tui-loading-indicator>
+  <tui-fail-indicator [activated]="true"></tui-fail-indicator>
+</div><!-- /.container -->

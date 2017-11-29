@@ -1,0 +1,38 @@
+<div class="tr-container">
+
+  <form class="card" (ngSubmit)="login()" #form="ngForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <div class="card-title-big">{{ 'title.login' | translate }}</div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="isLastLoginFailed && !isLoggingIn" class="alert  alert-danger">
+            <strong>{{ 'request.loginFailed' | translate }}</strong> {{ 'command.pleaseTryAgain' | translate }}
+        </div>
+
+        <mat-form-field>
+          <input matInput [placeholder]="'auth.email' | translate" [(ngModel)]="user.mail" name="mail" #mail="ngModel" type="email" validateEmail required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [placeholder]="'auth.password' | translate" [(ngModel)]="user.password" name="password" #password="ngModel" pattern=".{3,}" type="password" required>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button [disabled]="!form.valid" type="submit">
+          <span>{{ 'action.login' | translate }}</span>
+          <tui-inline-spinner [active]="isLoggingIn"></tui-inline-spinner>
+        </button>
+        <a mat-button [routerLink]="['/reset']">
+          {{ 'action.forgottenPassword' | translate }}
+        </a>
+        <a mat-button [routerLink]="['/register']">
+          {{ 'action.newAccount' | translate }}
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+</div>

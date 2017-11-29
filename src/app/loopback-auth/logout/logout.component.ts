@@ -1,0 +1,57 @@
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output
+} from '@angular/core';
+
+import { User } from '../user';
+import { AuthService } from '../auth.service';
+import { NotificationService } from '../../utility/notification.service';
+import { Notification } from '../../utility/notification';
+
+@Component({
+  selector: 'lauth-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.scss']
+})
+export class LogoutComponent implements OnInit {
+  @Output() done: EventEmitter<any> = new EventEmitter();
+
+  public user: User;
+  public isLoggingOut = false;
+
+  constructor(
+    private auth: AuthService,
+    private notify: NotificationService
+  ) {}
+
+  ngOnInit() {
+    this.auth.loadUser().then(
+      (user) => this.user = user
+    );
+  }
+
+  doLogout() {
+    this.isLoggingOut = true;
+
+    this.auth.logout().then(
+      () => {
+        this.notify.notify(new Notification('message.goodbye', ['info']));
+        this.isLoggingOut = false;
+        this.done.emit(null);
+      },
+      (err) => {
+        this.isLoggingOut = true;
+        if (err === 'Timeout') {
+          this.notify.notify(Notification.timeout());
+        }else {
+          this.notify.notify(
+            Notification.message('request.logoutFailed')
+          );
+        }
+      }
+    );
+  }
+
+}

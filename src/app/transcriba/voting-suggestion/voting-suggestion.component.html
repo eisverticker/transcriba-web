@@ -1,0 +1,15 @@
+<div *ngIf="objects && !(page == 0 && objects.length == 0)" class="card">
+  <div class="card-header">
+    <span>An Abstimmungen teilnehmen</span>
+    <button *ngIf="objects.length == 3" class="btn btn-default" (click)="nextPage()">Umblättern</button>
+    <button *ngIf="page !== 0" class="btn btn-default" (click)="previousPage()">Zurück</button>
+  </div>
+  <div class="card-body">
+    <div *ngIf="!objects || objects.length == 0">
+      Keine Objekte vorhanden
+    </div>
+    <div class="col-md-4" *ngFor="let object of objects">
+      <tr-object [object]="object"></tr-object>
+    </div>
+  </div>
+</div>

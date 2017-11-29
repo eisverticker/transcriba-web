@@ -8,7 +8,8 @@
       "login": "Anmeldung",
       "register": "Registrierung",
       "userinfo": "Nutzerinformationen",
-      "authorizationRequired": "Fehlende Rechte!"
+      "authorizationRequired": "Fehlende Rechte!",
+      "passwordReset": "Passwort zurücksetzen"
     },
     "command":{
       "pleaseVerifyYourEMailAccount": "Nach der Registrierung wurde Ihnen ein Bestätigungslink per E-Mail zugesandt, bitte klicken Sie auf diesen Link, um zu bestätigen, dass diese E-Mail-Adresse Ihnen gehört.",
@@ -25,7 +26,7 @@
     },
     "general": {
       "error": "Fehler",
-      "pigNose": "Schweinenase"
+      "email": "E-Mail-Adresse"
     },
     "state": {
       "done": "fertig"
@@ -35,6 +36,7 @@
       "password": "Passwort",
       "email": "E-Mail-Adresse",
       "passwordRepeat": "Passwort wiederholen",
+
       "roles": {
         "registered": "Registrierter",
         "administrator": "Administrator",

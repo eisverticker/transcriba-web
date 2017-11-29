@@ -1,0 +1,20 @@
+<div #container class="card" [class.panel-primary]="editable" [class.panel-default]="!editable">
+  <div class="card-header">
+    Transkription <span *ngIf="label">- {{ label }}</span>
+  </div>
+  <div #contentContainer class="card-body bg-info" style="overflow-y: auto;">
+    <tr-root [markDirty]="markDirty" [editable]="editable" *ngIf="content" [(ngModel)]="content"></tr-root>
+  </div>
+  <div class="card-footer">
+    <div *ngIf="editable">
+      <button (click)="saveContent()" mat-raised-button>{{ 'action.save' | translate }}</button>
+      <button (click)="publishContent()" mat-raised-button color="accent">{{ 'action.publish' | translate }}</button>
+      <button (click)="abortTranscription()" mat-raised-button color="warn">{{ 'action.abort' | translate }}</button>
+    </div>
+    <div *ngIf="!editable">
+      <div class="alert alert-warning" role="alert">
+        {{ 'message.readOnlyMode' | translate }}
+      </div>
+    </div>
+  </div>
+</div>

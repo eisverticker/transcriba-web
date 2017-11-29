@@ -1,0 +1,24 @@
+<div class="container container-spaced">
+  <form *ngIf="user" (ngSubmit)="doLogout()" #form="ngForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <div class="card-title-big">{{ 'title.account' | translate }}</div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ 'message.helloSomeone' | translate: { name: user.name } }}</p>
+        <button mat-raised-button (click)="doLogout()" class="btn btn-primary">
+          {{ 'action.logout' | translate }}
+          <tui-inline-spinner [active]="isLoggingOut"></tui-inline-spinner>
+        </button>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button *ngIf="user.isAdministrator()" [routerLink]="['/admin']">Administration</a>
+        <a mat-button *ngIf="user.isAdministrator()" [routerLink]="['/sources']">Quellenverwaltung</a>
+        <a mat-button *ngIf="user.isEmployee()" [routerLink]="['/pages']">Infoseiten verwalten</a>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+</div>

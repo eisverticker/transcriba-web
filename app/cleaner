@@ -1,4 +1,0 @@
-rm *.js && rm *.js.map
-rm vocable/*.js && rm vocable/*.js.map
-rm game/*.js && rm game/*.js.map
-rm gadget/*.js && rm gadget/*.js.map
