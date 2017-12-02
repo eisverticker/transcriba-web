@@ -85,6 +85,10 @@ footer.jumbotron {
   margin-bottom: 0;
 }
 
+.alert {
+  margin-top: 0.5rem;
+}
+
 .tr-handwritten {
   font-family: Reenie Beanie;
 }
@@ -165,4 +169,23 @@ footer.jumbotron {
 
 .tr-explorer-thumbnail {
   width: 200px;
+  cursor: pointer;
+}
+
+.tr-img-highlighted {
+  border: 4px solid yellowgreen;
+  -webkit-filter: grayscale(85%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(85%);
+}
+
+// using bootstrap grid in material cards
+.row-mat-card {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.progress-pill {
+  border-radius: 3px;
+  margin: 0 0.2rem;
+  height: 10px;
 }

@@ -12,7 +12,8 @@
     "editSource": "Quelle bearbeiten",
     "import": "Objekt importieren",
     "userManagement": "Nutzerverwaltung",
-    "account": "Konto"
+    "account": "Konto",
+    "tutorial": "Einführung"
   },
   "general": {
     "name": "Name",

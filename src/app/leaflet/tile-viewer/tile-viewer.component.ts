@@ -59,7 +59,8 @@ export class TileViewerComponent implements AfterViewInit {
       minZoom: 0,
       maxZoom: this.maxZoomLevel + 1,
       maxNativeZoom: this.maxZoomLevel,
-      bounds: latLngBounds(A, C)
+      bounds: latLngBounds(A, C),
+      updateWhenZooming: false
     };
 
     tileLayer(

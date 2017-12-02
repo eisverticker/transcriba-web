@@ -10,6 +10,7 @@ import { RevisionHistoryComponent } from './revision-history/revision-history.co
 import { TranscriptionViewerComponent } from './transcription-viewer/transcription-viewer.component';
 import { VotingSuggestionComponent } from './voting-suggestion/voting-suggestion.component';
 import { ExplorerComponent } from './explorer/explorer.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 // guards
 import { EmployeeGuard } from '../loopback-auth/employee.guard';
@@ -41,6 +42,10 @@ const routes: Routes = [
     path: 'import',
     component: ImportFormComponent,
     canActivate: [EmployeeGuard]
+  },
+  {
+    path: 'tutorial',
+    component: TutorialComponent
   },
   {
     path: 'obj/:id',

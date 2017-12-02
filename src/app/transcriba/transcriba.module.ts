@@ -22,7 +22,8 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatGridListModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 // components
@@ -40,6 +41,7 @@ import { TranscribaService } from './transcriba.service';
 import { TranscriptionService } from './transcription.service';
 import { RevisionVotingService } from './revision-voting.service';
 import { ObjectComponent } from './object/object.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 @NgModule({
   imports: [
@@ -65,7 +67,8 @@ import { ObjectComponent } from './object/object.component';
     MatToolbarModule,
     MatIconModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ],
   declarations: [
     BusyWidgetComponent,
@@ -76,7 +79,8 @@ import { ObjectComponent } from './object/object.component';
     TranscriptionViewerComponent,
     VotingSuggestionComponent,
     ExplorerComponent,
-    ObjectComponent
+    ObjectComponent,
+    TutorialComponent
   ],
   providers: [
     TranscribaService,

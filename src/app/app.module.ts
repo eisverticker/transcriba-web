@@ -39,7 +39,7 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     AuthorizationRequiredComponent,
     PageNotFoundComponent,
     ExperimentalComponent,
-    FooterBarComponent
+    FooterBarComponent,
   ],
   imports: [
     BrowserModule,
