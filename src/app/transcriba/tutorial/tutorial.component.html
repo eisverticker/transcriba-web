@@ -1,0 +1,21 @@
+<mat-toolbar>
+  {{ 'title.tutorial' | translate }}
+</mat-toolbar>
+
+<div class="tr-container">
+<mat-card>
+  <mat-card-title>{{ currentItem.title }}</mat-card-title>
+  <img *ngIf="currentItem.imageFileName" class="tr-img-highlighted" mat-card-image src="assets/tutorial/{{ currentItem.imageFileName }}">
+  <mat-card-content *ngIf="currentItem.description">{{ currentItem.description }}</mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="currentItemIdx > 0" (click)="goToPreviousItem()" mat-raised-button>
+      Zurück
+    </button>
+    <button *ngIf="currentItemIdx !== tutorialItems.length - 1" (click)="goToNextItem()" mat-raised-button color="accent">Weiter</button>
+    <button *ngIf="currentItemIdx === tutorialItems.length - 1" (click)="finishTutorial()" mat-raised-button color="accent">
+      Abschließen
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+</div>

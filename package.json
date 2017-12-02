@@ -1,6 +1,8 @@
 {
-  "name": "transcriba-webapp",
-  "version": "1.0.0",
+  "name": "transcriba-web",
+  "description": "Client application for the transcriba manuscript transcription platform",
+  "homepage": "http://transcriba.de",
+  "version": "2.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -61,5 +63,9 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/transcriba/transcriba-web.git"
   }
 }

@@ -14,7 +14,6 @@ export class NotificationService {
   }
 
   public notify(data: Notification) {
-    console.log("notify activated");
     this.subject.next( data );
   }
 

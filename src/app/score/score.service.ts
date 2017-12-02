@@ -5,6 +5,9 @@ import { AuthService } from '../loopback-auth/auth.service';
 import { User } from '../loopback-auth/user';
 import { Score } from './score';
 
+import { Notification } from '../utility/notification';
+import { NotificationService } from '../utility/notification.service';
+
 import {
   Observable,
   BehaviorSubject,
@@ -24,7 +27,8 @@ export class ScoreService {
   constructor(
     private http: HttpClient,
     private backend: BackendService,
-    private auth: AuthService
+    private auth: AuthService,
+    private notificationService: NotificationService
   ) {
     // init by reset
     this.reset();
@@ -34,6 +38,7 @@ export class ScoreService {
     this.score = this.scoreSubject.asObservable();
     this.user = this.auth.user;
 
+    // react when the user changes
     this.user.subscribe(
       (user) => {
         if(user.isRegistered()){
@@ -90,7 +95,8 @@ export class ScoreService {
         this.lastScore = scoreResult;
       },
       (err) => {
-        this.scoreSubject.next(false);
+        // notify the user about an error
+        this.notificationService.notify(Notification.timeout());
       }
     );
   }

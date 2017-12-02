@@ -18,7 +18,8 @@ export class User {
     public mail: string,
     public password: string,
     public roles: Array<Role> = [],
-    public id?: any
+    public id?: any,
+    public completedTutorial?: boolean
   ) {};
 
   public equals(user: User): boolean {

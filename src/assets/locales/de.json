@@ -17,7 +17,8 @@
 		"editSource": "Quelle bearbeiten",
 		"import": "Objekt importieren",
 		"userManagement": "Nutzerverwaltung",
-		"account": "Konto"
+		"account": "Konto",
+		"tutorial": "Einführung"
 	},
 	"command": {
 		"pleaseVerifyYourEMailAccount": "Nach der Registrierung wurde Ihnen ein Bestätigungslink per E-Mail zugesandt, bitte klicken Sie auf diesen Link, um zu bestätigen, dass diese E-Mail-Adresse Ihnen gehört.",

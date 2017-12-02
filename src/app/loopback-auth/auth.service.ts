@@ -178,7 +178,14 @@ export class AuthService {
       .toPromise()
       .then(
         (data) => {
-          const user = new User(data['username'], data['email'], '', [], data['id']);
+          const user = new User(
+            data['username'],
+            data['email'],
+            '',
+            [],
+            data['id'],
+            data['completedTutorial']
+          );
 
           return this.getRoles(this.userID).then(
             roles => {

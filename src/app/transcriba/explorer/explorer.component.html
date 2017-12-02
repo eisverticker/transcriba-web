@@ -3,15 +3,31 @@
 </mat-toolbar>
 
 <div class="tr-container">
+  <section>
+    <mat-checkbox>Unbearbeitet</mat-checkbox>
+    <mat-checkbox>Bearbeitungsphase</mat-checkbox>
+    <mat-checkbox>Überprüfungsphase</mat-checkbox>
+    <mat-checkbox>Geprüft</mat-checkbox>
+  </section>
+
   <tui-pagination-bar
     (pageChanged)="setPage($event)"
     [numOfItems]="numOfItems"
     [itemsPerPage]="itemsPerPage"
     [currentPage]="currentPage">
   </tui-pagination-bar>
+  
   <div *ngFor="let itemRow of objects" class="row">
     <div *ngFor="let item of itemRow" class="col-sm-6 col-md-4">
       <tr-object [object]="item"></tr-object>
     </div>
   </div>
+
+  <tui-pagination-bar
+    (pageChanged)="setPage($event)"
+    [numOfItems]="numOfItems"
+    [itemsPerPage]="itemsPerPage"
+    [currentPage]="currentPage">
+  </tui-pagination-bar>
+
 </div>
