@@ -21,6 +21,7 @@ import { SubNavBarComponent } from './sub-nav-bar/sub-nav-bar.component';
 import { PaginationBarComponent } from './pagination-bar/pagination-bar.component';
 import { TimeoutComponent } from './timeout/timeout.component';
 import { GrowingTextareaComponent } from './growing-textarea/growing-textarea.component';
+import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { GrowingTextareaComponent } from './growing-textarea/growing-textarea.co
     SubNavBarComponent,
     PaginationBarComponent,
     TimeoutComponent,
-    GrowingTextareaComponent
+    GrowingTextareaComponent,
+    SimpleDialogComponent
   ],
   exports: [
     LoadingIndicatorComponent,
@@ -52,7 +54,11 @@ import { GrowingTextareaComponent } from './growing-textarea/growing-textarea.co
     CriticalButtonComponent,
     SubNavBarComponent,
     PaginationBarComponent,
-    GrowingTextareaComponent
+    GrowingTextareaComponent,
+    SimpleDialogComponent
+  ],
+  entryComponents: [
+    SimpleDialogComponent
   ]
 })
 export class TranscribaUiModule { }
