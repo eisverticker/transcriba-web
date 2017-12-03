@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { I18nHelperService } from './i18n/i18n-helper.service';
 import { Observable } from 'rxjs/Observable';
-import { MatSnackBar } from '@angular/material';
+import {
+  MatSnackBar,
+  MatDialog
+} from '@angular/material';
+import { SimpleDialogComponent } from './transcriba-ui/simple-dialog/simple-dialog.component';
 import { NotificationService } from './utility/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,6 +19,7 @@ export class AppComponent implements OnInit {
   constructor(
     private i18n: I18nHelperService,
     private snacks: MatSnackBar,
+    private dialog: MatDialog,
     private notify: NotificationService,
     private translate: TranslateService
   ) {
@@ -26,10 +31,18 @@ export class AppComponent implements OnInit {
   }
 
   private processNotificationMessage(message: string, tags: Array<string>) {
-    this.snacks.open(message, '', {
-      duration: 2000,
-      verticalPosition: 'bottom'
-    });
+    if(tags.indexOf('attention') !== -1){
+      this.dialog.open(SimpleDialogComponent, {
+        data: {
+          'message': message
+        }
+      });
+    }else{
+      this.snacks.open(message, '', {
+        duration: 2000,
+        verticalPosition: 'bottom'
+      });      
+    }
 
     /*if (tags.indexOf('success') !== -1) {
       // this.toastr.success(message);

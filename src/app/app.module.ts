@@ -20,7 +20,8 @@ import {
   MatSnackBarModule,
   MatToolbarModule,
   MatIconRegistry,
-  MatIconModule
+  MatIconModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -61,7 +62,8 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     MatSlideToggleModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
