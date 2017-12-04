@@ -1,33 +1,39 @@
 <mat-toolbar color="primary">
-  <input matInput (change)="find()" type="text" [(ngModel)]="searchTerm" class="form-control" [placeholder]="'message.searchTitle' | translate" />
+    <input matInput
+    (change)="find()"
+    type="text"
+    [(ngModel)]="filter.latestSearchTerm"
+    class="form-control"
+    [placeholder]="'message.searchTitle' | translate" />
 </mat-toolbar>
 
-<div class="tr-container">
+<div class="tr-container-big">
+
   <section>
-    <mat-checkbox>Unbearbeitet</mat-checkbox>
-    <mat-checkbox>Bearbeitungsphase</mat-checkbox>
-    <mat-checkbox>Überprüfungsphase</mat-checkbox>
-    <mat-checkbox>Geprüft</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.stage.unprocessed">{{ 'stage.unprocessed' | translate }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.stage.transcription">{{ 'stage.transcription' | translate }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.stage.review">{{ 'stage.review' | translate }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.stage.reviewed">{{ 'stage.reviewed' | translate }}</mat-checkbox>
   </section>
 
   <tui-pagination-bar
     (pageChanged)="setPage($event)"
-    [numOfItems]="numOfItems"
-    [itemsPerPage]="itemsPerPage"
-    [currentPage]="currentPage">
+    [numOfItems]="pagination.numOfItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [currentPage]="pagination.currentPage">
   </tui-pagination-bar>
-  
-  <div *ngFor="let itemRow of objects" class="row">
-    <div *ngFor="let item of itemRow" class="col-sm-6 col-md-4">
-      <tr-object [object]="item"></tr-object>
+
+  <div class="row">
+    <div *ngFor="let object of objects" class="col">
+      <tr-object [object]="object"></tr-object>
     </div>
   </div>
 
   <tui-pagination-bar
     (pageChanged)="setPage($event)"
-    [numOfItems]="numOfItems"
-    [itemsPerPage]="itemsPerPage"
-    [currentPage]="currentPage">
+    [numOfItems]="pagination.numOfItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [currentPage]="pagination.currentPage">
   </tui-pagination-bar>
 
 </div>
