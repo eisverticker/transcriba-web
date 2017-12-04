@@ -1,15 +1,20 @@
 <div *ngIf="objects && !(page == 0 && objects.length == 0)" class="card">
   <div class="card-header">
-    <span>An Abstimmungen teilnehmen</span>
-    <button *ngIf="objects.length == 3" class="btn btn-default" (click)="nextPage()">Umblättern</button>
-    <button *ngIf="page !== 0" class="btn btn-default" (click)="previousPage()">Zurück</button>
+    Offene Abstimmungen
+    <span class="toolbar-spacer"></span>
+    <span>
+      <button mat-raised-button *ngIf="objects.length == 3" (click)="nextPage()">Umblättern</button>
+      <button mat-raised-button *ngIf="page !== 0" (click)="previousPage()">Zurück</button>
+    </span>
   </div>
-  <div class="card-body">
+  <div class="card-body bg-primary">
     <div *ngIf="!objects || objects.length == 0">
       Keine Objekte vorhanden
     </div>
-    <div class="col-md-4" *ngFor="let object of objects">
-      <tr-object [object]="object"></tr-object>
+    <div class="row">
+      <div class="col" *ngFor="let object of objects">
+        <tr-object [object]="object"></tr-object>
+      </div>
     </div>
   </div>
 </div>

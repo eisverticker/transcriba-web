@@ -2,14 +2,22 @@
   <div class="container">
     <div class="media">
       <div class="media-body">
-        <h1 class="tr-handwritten">Transcriba <span class="badge badge-secondary">Beta</span></h1>
-        <p>Hilf uns alte Manuskripte digital zu erschließen und unser kulturelles Erbe zu erhalten!</p>
-        <button mat-raised-button [routerLink]="['/info/project']">Mehr erfahren</button>
-        <button mat-raised-button [routerLink]="['/tutorial']">Tutorial</button>
-        <button *ngIf="!isRegistered()" mat-raised-button color="accent" [routerLink]="['/login']">Anmelden</button>
-        <button *ngIf="!isRegistered()" mat-raised-button color="accent" [routerLink]="['/register']">Registrieren</button>
+        <h1 class="tr-handwritten">Transcriba</h1>
+        <p>
+          {{ 'message.transcribaIntro' | translate }}
+        </p>
+        <button mat-raised-button [routerLink]="['/info/project']">{{ 'action.learnMore' | translate }}</button>
+        <button mat-raised-button [routerLink]="['/tutorial']">
+          {{ 'general.tutorial' | translate }}
+        </button>
+        <button *ngIf="!isRegistered()" mat-raised-button color="accent" [routerLink]="['/login']">
+          {{ 'action.login' | translate }}
+        </button>
+        <button *ngIf="!isRegistered()" mat-raised-button color="accent" [routerLink]="['/register']">
+          {{ 'action.register' | translate }}
+        </button>
       </div>
-      <img class="d-flex ml-3" src="assets/images/manuscript-sketch.png" alt="manuscript icon">
+      <img *ngIf="false" class="d-flex ml-3" src="assets/images/manuscript-sketch.png" alt="manuscript icon">
     </div>
   </div>
 </div>
