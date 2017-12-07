@@ -203,4 +203,10 @@ export class AuthService {
     }
   }
 
+  public reload(): Promise<void>{
+    return this.authenticateUser().then(
+      (user) => { return; }
+    );
+  }
+
 }

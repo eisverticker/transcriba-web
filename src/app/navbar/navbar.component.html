@@ -3,11 +3,11 @@
     <a [routerLink]="['/home']" class="navbar-brand">
       <img src="assets/images/logo.png" />
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#transcribaNavbar" aria-controls="transcribaNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="transcribaNavbar">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" [routerLinkActive]="['active']" role="presentation">
           <a class="nav-link" [routerLink]="['/home']">Start</a>
@@ -31,7 +31,7 @@
           <a class="nav-link" [routerLink]="['/info/impressum']">Impressum</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form class="form-inline">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" [routerLinkActive]="['active']">
             <a class="nav-link" *ngIf="!user.isRegistered()" [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Anmelden</a>

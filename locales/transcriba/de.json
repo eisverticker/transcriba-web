@@ -13,11 +13,17 @@
     "import": "Objekt importieren",
     "userManagement": "Nutzerverwaltung",
     "account": "Konto",
-    "tutorial": "Einführung"
+    "tutorial": "Einführung",
+    "newVersion": "Neue Version",
+    "transcriptionEditor": "Transcriba-Editor",
+    "revisionComparision": "Ungeprüfte Version",
+    "openVotings": "Offene Abstimmungen"
   },
   "general": {
     "name": "Name",
     "page": "Seite",
+    "paragraph": "Absatz",
+    "heading": "Überschrift",
     "discussion": "Diskussion",
     "source": "Quelle",
     "foreignID": "Externe ID",
@@ -29,7 +35,8 @@
     "versionHistory": "Versionshistorie",
     "metadata": "Metadaten",
     "username": "Benuzter",
-    "score": "Punktzahl"
+    "score": "Punktzahl",
+    "tutorial": "Tutorial"
   },
   "action": {
     "deactivate": "Deaktivieren",
@@ -40,7 +47,17 @@
     "edit": "Bearbeiten",
     "show": "Anzeigen",
     "import": "Importieren",
-    "publish": "Veröffentlichen"
+    "publish": "Veröffentlichen",
+    "accept": "Akzeptieren",
+    "dismiss": "Ablehnen",
+    "ok": "Alles klar!",
+    "transcribe": "An Transkription weiterarbeiten",
+    "addPage": "Seite hinzufügen",
+    "undo": "Rückgängig",
+    "learnMore": "Mehr erfahren",
+    "removePage": "Seite entfernen",
+    "addParagraph": "Absatz hinzufügen",
+    "addHeading": "Überschrift hinzufügen"
   },
   "sources": {
     "apiUrl": "API-URL",
@@ -48,6 +65,12 @@
     "logoUrl": "Logo-URL",
     "apiType": "API-Typ",
     "syncSupport": "Server unterstützt Synchronisierung"
+  },
+  "stage": {
+    "unprocessed": "Unbearbeitet",
+    "transcription": "Bearbeitungsphase",
+    "review": "Überprüfungsphase",
+    "reviewed": "Überprüft"
   },
   "auth": {
     "roles": {
@@ -61,6 +84,17 @@
   "message": {
     "searchTitle": "Suchen...",
     "noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
-    "readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet."
+    "readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet.",
+    "caution": "Achtung!",
+    "pleaseTakeThisSurvey": "Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese.",
+    "maximumVotesReached": "Du hast die maximale Anzahl an Abstimmungen für heute erreicht. Du kannst aber zu einem späteren Zeitpunkt gerne weitermachen.",
+    "youAreNoEligibleVoter": "Als Anfänger darfst du hier noch nicht abstimmen. Sammle erst Erfahrung indem du Schriften transkribierst.",
+    "thanksForEffort": "Danke für deine Mühe!",
+    "workWillBeChecked": "Du hast dieses Objekt bearbeitet. Deine Arbeit wird von der Community überprüft.",
+    "sorry": "Entschuldigung",
+    "timeoutDetailed": "  Entschuldigung, die Verbindung zum Server ist fehlgeschlagen, bitte laden Sie die Seite neu und versuchen es erneut. Überprüfen Sie auch ihre Internetkonnektivität.",
+    "emptyTranscription": "Zu diesem Manuskript wurden noch keine Seiten hinzugefügt.",
+    "commentDisabled": "Dieser Kommentar wurde ausgeblendet.",
+    "transcribaIntro": "Hilf uns alte Manuskripte digital zu erschließen und unser kulturelles Erbe zu erhalten!"
   }
 }
