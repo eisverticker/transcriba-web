@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TutorialItem } from './tutorial-item';
+import { TranscribaService } from '../transcriba.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tr-tutorial',
@@ -12,7 +14,10 @@ export class TutorialComponent implements OnInit {
   currentItem: TutorialItem;
   currentItemIdx: number;
 
-  constructor() {
+  constructor(
+    private transcribaService: TranscribaService,
+    private router: Router
+  ) {
     this.tutorialItems = [
       {
         title: "Willkommen beim Transcriba-Tutorial!"
@@ -45,9 +50,10 @@ export class TutorialComponent implements OnInit {
     this.currentItem = this.tutorialItems[this.currentItemIdx];
   }
 
-  // TODO
   finishTutorial(){
-
+    this.transcribaService.completeTutorial().then(
+      () => this.router.navigate(['home'])
+    );
   }
 
 }

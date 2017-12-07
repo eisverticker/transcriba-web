@@ -7,7 +7,7 @@
           {{ 'message.transcribaIntro' | translate }}
         </p>
         <button mat-raised-button [routerLink]="['/info/project']">{{ 'action.learnMore' | translate }}</button>
-        <button mat-raised-button [routerLink]="['/tutorial']">
+        <button mat-raised-button [routerLink]="['/tutorial']" *ngIf="needsTutorial()">
           {{ 'general.tutorial' | translate }}
         </button>
         <button *ngIf="!isRegistered()" mat-raised-button color="accent" [routerLink]="['/login']">
