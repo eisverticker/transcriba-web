@@ -1,7 +1,7 @@
 <ng-container [ngSwitch]="tei.type">
 
   <mat-card *ngSwitchCase="'page'" class="editor-page" [class.dirty]="markDirty && tei.isDirty">
-    <mat-card-subtitle>Seite</mat-card-subtitle>
+    <mat-card-subtitle>{{ 'general.page' | translate }}</mat-card-subtitle>
     <mat-card-content>
       <div>
         <tr-tei-element
@@ -13,12 +13,16 @@
           [(ngModel)]="tei.children[i]">
         </tr-tei-element>
       </div>
-      <button mat-button *ngIf="editable" (click)="addParagraph()">Absatz hinzufügen</button>
-      <button mat-button *ngIf="editable" (click)="addHeading()">Überschrift hinzufügen</button>
+      <button mat-button *ngIf="editable" (click)="addParagraph()">
+        {{ 'action.addParagraph' | translate }}
+      </button>
+      <button mat-button *ngIf="editable" (click)="addHeading()">
+        {{ 'action.addHeading' | translate }}
+      </button>
     </mat-card-content>
     <mat-card-actions>
       <button *ngIf="editable" mat-button (click)="delete()">
-          Seite entfernen
+          {{ 'action.removePage' | translate }}
       </button>
     </mat-card-actions>
   </mat-card>
@@ -66,7 +70,7 @@
 
   <div *ngSwitchCase="'heading'" class="card editor-panel" [class.dirty]="markDirty && tei.isDirty">
     <div class="card-heading editor-panel-heading">
-      Überschrift
+      {{ 'general.heading' | translate }}
       <div *ngIf="editable" class="editor-tools pull-right">
         <button mat-icon-button (click)="delete()">
           <mat-icon aria-label="delete element" fontSet="fontawesome" fontIcon="fa-trash"></mat-icon>

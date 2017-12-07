@@ -11,7 +11,11 @@
 
   <mat-card-content>
     <span *ngIf="currentVote != 'unwanted'">{{ comment.content }}</span>
-    <span *ngIf="currentVote == 'unwanted'">Dieser Kommentar wurde ausgeblendet. <button (click)="unwanted()" class="btn btn-link" [class.btn-primary]="currentVote == 'unwanted'">Rückgängig</button></span>
+    <span *ngIf="currentVote == 'unwanted'">{{ 'message.commentDisabled' | translate }}
+      <button mat-raised-button (click)="unwanted()">
+        {{ 'action.undo' | translate }}
+      </button>
+    </span>
   </mat-card-content>
   <mat-card-actions *ngIf="currentVote != 'loading'">
     <button mat-button [disabled]="!user.isRegistered()  || comment.user.id==user.id" (click)="like()" class="btn btn-default" [class.btn-primary]="currentVote == 'like'">
