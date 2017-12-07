@@ -315,4 +315,16 @@ export class TranscribaService {
      .toPromise();
    }
 
+   completeTutorial(): Promise<void>{
+     const token = this.auth.token;
+     const url = this.backend.authUrl('AppUsers/tutorial', token);
+
+     return this.http.post<void>(url, {})
+     .timeout(5000)
+     .toPromise()
+     .then(
+       () => this.auth.reload()
+     );
+   }
+
 }

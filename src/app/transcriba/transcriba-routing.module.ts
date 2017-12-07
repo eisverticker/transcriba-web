@@ -24,20 +24,6 @@ const routes: Routes = [
       mode: 'object'
     }
   },
-  /*{
-    path: 'explore/objects',
-    component: ExplorerComponent,
-    data: {
-      mode: "object"
-    }
-  },
-  {
-    path: 'explore/collection/:id',
-    component: ExplorerComponent,
-    data: {
-      mode: "insideCollection"
-    }
-  },*/
   {
     path: 'import',
     component: ImportFormComponent,

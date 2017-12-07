@@ -96,9 +96,9 @@ export class TranscriptionViewerComponent implements OnChanges {
     this.transcription.publish(this.object.id, content).then(
       () => {
         this.notify.notify(new Notification('request.success', ['success']));
-        // navigate to overview, because of bug #3
+        // navigate to home, because of bug #3
         //  https://github.com/eisverticker/transcriba/issues/3
-        this.router.navigate(['/obj', this.object.id]);
+        this.router.navigate(['home']);
         // this.update();
       },
       () => this.notify.notify(new Notification('request.fail', ['fail']))
@@ -106,7 +106,6 @@ export class TranscriptionViewerComponent implements OnChanges {
   }
 
   abort() {
-    console.log('abort');
     this.transcription.abort().then(
       () => this.update(),
       (err) => console.log(err)
@@ -123,6 +122,7 @@ export class TranscriptionViewerComponent implements OnChanges {
 
   private setObject(obj: TranscribaObject) {
     this.object = obj;
+
     // we are preloading a revision based on the status
     //  of the transcriba object
     //  we are loading the stable revision normally
@@ -156,12 +156,21 @@ export class TranscriptionViewerComponent implements OnChanges {
                     this.transcriba.loadLatestRevisionPermissions(this.object.id).then(
                       permissions => {
                         this.permissions = permissions;
-                        console.log(permissions);
                         this.hasVoted = vote !== 'none';
                         this.contents = [stableRevision.content, latestRevision.content];
-                        this.labels = ['Alt', 'Neu'];
+                        this.labels = ['Aktuelle Version', 'Neue Version'];
                         this.editable = false;
                         this.latestRevision = latestRevision;
+
+                        // notify user that his work will be checked by other users
+                        if(this.permissions.details.isOwner){
+                          this.notify.notify(new Notification('message.workWillBeChecked', ['attention', 'info']));
+                        }
+
+                        // notify user that he is not permitted to vote
+                        if(!this.permissions.details.eligibleVoter && !this.permissions.details.isOwner){
+                          this.notify.notify(new Notification('message.youAreNoEligibleVoter', ['attention', 'info']));
+                        }
                       },
                       err => console.log(err)
                     );

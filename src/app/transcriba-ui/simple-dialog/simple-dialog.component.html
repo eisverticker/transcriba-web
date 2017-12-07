@@ -1,4 +1,4 @@
-<p>Hi {{data.message}}</p>
+<p>{{data.message}}</p>
 <div mat-dialog-actions>
-  <button color="accent" mat-raised-button (click)="onUserAcknowledgement()" tabindex="-1">Verstanden</button>
+  <button color="accent" class="mx-auto d-block" mat-raised-button (click)="onUserAcknowledgement()" tabindex="-1">{{ 'action.ok' | translate }}</button>
 </div>

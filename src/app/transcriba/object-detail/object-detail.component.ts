@@ -53,49 +53,18 @@ export class ObjectDetailComponent implements OnInit {
         };
       }
     ).subscribe( d => {
+      console.log('object-detail', 'params have changed');
       const id = d.params['id'];
 
       // load object
       this.transcriba.loadByID(id).then(
           obj => {
             this.mode = d.data['mode'];
-            this.initNavigation(obj);
             this.object = obj;
           },
           err => console.log('cannot load object', err)
       );
     });
-
-  }
-
-  private initNavigation(obj: TranscribaObject) {
-
-    this.navItems = [
-      {
-        name: 'general.overview',
-        route: '/obj/' + obj.id
-      },
-      {
-        name: 'general.transcription',
-        route: '/obj/' + obj.id + '/transcribe'
-      },
-      {
-        name: 'general.discussion',
-        route: '/obj/' + obj.id + '/discussion'
-      },
-      {
-        name: 'general.viewer',
-        route: '/obj/' + obj.id + '/viewer'
-      },
-      {
-        name: 'general.versionHistory',
-        route: '/obj/' + obj.id + '/chronic'
-      }/*,
-      {
-        name: "general.metadata",
-        route: '/obj/'+obj.id+'/meta'
-      }*/
-    ];
 
   }
 
