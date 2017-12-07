@@ -34,4 +34,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  needsTutorial() {
+    return this.isRegistered() && !this.user.completedTutorial;
+  }
+
 }
