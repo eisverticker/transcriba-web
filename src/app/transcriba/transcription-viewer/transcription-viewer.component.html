@@ -2,37 +2,42 @@
   <div class="editor-navigation hidden-xs">
     <div *ngIf="latestRevision && object.status == 'voting' && user.isRegistered() && (hasVoted != undefined && !hasVoted)">
       <div *ngIf="user.id != latestRevision.ownerId" class="alert alert-info">
-        <strong>Achtung!</strong> Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese und stimme ab!
+        <strong>{{ 'message.caution' | translate }}</strong>
+        {{ 'message.pleaseTakeThisSurvey' | translate }}
       </div>
-      <div *ngIf="!permissions.details.eligibleVoter && !permissions.details.isOwner" class="alert alert-warning">
-        <strong>Entschuldigung!</strong>
-        Als Anfänger darfst du hier noch nicht abstimmen.
-        Sammle erst Erfahrung indem du Schriften transkribierst.
+      <div *ngIf="false && !permissions.details.eligibleVoter && !permissions.details.isOwner" class="alert alert-warning">
+        <strong>{{ 'message.sorry' | translate }}</strong>
+        {{ 'message.youAreNoEligibleVoter' | translate }}
       </div>
       <div *ngIf="permissions.details.maximumVotesReached" class="alert alert-warning">
-        <strong>Achtung!</strong>
-        Du hast die maximale Anzahl an Abstimmungen für heute erreicht.
-        Du kannst aber zu einem späteren Zeitpunkt gerne weitermachen.
+        <strong></strong>
+        {{ 'message.maximumVotesReached' | translate }}
       </div>
-      <div *ngIf="permissions.details.isOwner" class="alert alert-info">
-        <strong>Danke für deine Mühe!</strong> Deine Arbeit wird nun von der Community überprüft.
+      <div *ngIf="false && permissions.details.isOwner" class="alert alert-info">
+        <strong>{{ 'message.thanksForEffort' | translate }}</strong>
+        {{ 'message.workWillBeChecked' | translate }}
+
       </div>
-      <span>Neue Version: </span>
-      <button mat-raised-button
+      <mat-toolbar>
+        {{ 'title.revisionComparision' | translate }}
+        <span *ngIf="false">{{ 'title.newVersion' | translate }}</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-raised-button
         [disabled]="!permissions.allowVote"
         (click)="voteInFavor()">
-        Akzeptieren
-        <span *ngIf="votings" class="badge">
-        {{ votings.accept.length }}
-        </span>
-      </button>
-      <button mat-raised-button
+          {{ 'action.accept' | translate }}
+          <span *ngIf="votings" class="badge">
+            {{ votings.accept.length }}
+          </span>
+        </button>
+        <button mat-raised-button
         [disabled]="!permissions.allowVote"
         (click)="voteAgainst()">
-        Ablehnen
+        {{ 'action.dismiss' | translate }}
         <span *ngIf="votings" class="badge">{{ votings.refuse.length }}
         </span>
-      </button>
+        </button>
+      </mat-toolbar>
     </div>
   </div>
   <tr-editor

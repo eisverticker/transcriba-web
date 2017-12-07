@@ -1,6 +1,6 @@
-<h2>{{ object.title }}</h2>
-<div>
-  <div>
+<h1 class="compact mb-3 mt-3">{{ object.title }}</h1>
+<div class="overview-summary d-md-flex">
+  <div class="picture">
     <a [routerLink]="'/obj/'+object.id+'/viewer'">
       <img
       style="height: 512px;"
@@ -10,14 +10,20 @@
       />
     </a>
   </div>
+  <div class="info pl-4">
+    <dl *ngIf="source">
+      <dt>Quelle</dt>
+      <dd>{{ source.title }} (ID: {{ object.externalID }})</dd>
+      <dt>Tags</dt>
+      <dd>
+        <span class="badge badge-info">Reinhold Grundemann</span>
+        <span class="badge badge-info">Perthes</span>
+      </dd>
+    </dl>
+  </div>
 </div>
-<h3>Infos</h3>
-<dl *ngIf="source">
-  <dt>Quelle</dt>
-  <dd>{{ source.title }} ({{ object.externalID }})</dd>
-</dl>
 
-<h3>Zuletzt geschriebene Kommentare</h3>
+<h2 class="compact mt-4 mb-3">Zuletzt geschriebene Kommentare</h2>
 <disc-discussion-widget
   *ngIf="discussion"
   [numOfItems]="3"
