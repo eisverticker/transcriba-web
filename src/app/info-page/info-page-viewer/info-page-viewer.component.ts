@@ -26,7 +26,7 @@ export class InfoPageViewerComponent implements OnInit {
     this.route.data.subscribe(
       (data) => {
         this.mode = data['mode'];
-        this.route.params.first().subscribe(
+        this.route.params.subscribe(
           params => this.pageService.loadOneByName(params['id']).then(
             (page) => {
               this.page = page;
