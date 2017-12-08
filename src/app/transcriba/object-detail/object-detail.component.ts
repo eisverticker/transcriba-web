@@ -61,6 +61,12 @@ export class ObjectDetailComponent implements OnInit {
           obj => {
             this.mode = d.data['mode'];
             this.object = obj;
+
+            switch(this.mode){
+              case 'viewer':
+               this.currentTab = 4;
+               break;
+            }
           },
           err => console.log('cannot load object', err)
       );

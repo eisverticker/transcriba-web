@@ -11,11 +11,6 @@
   </mat-card-header>
   <img [routerLink]="'/obj/'+object.id" class="tr-explorer-thumbnail" mat-card-image [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/thumbnail')" alt="thumbnail">
   <mat-card-actions>
-    <div class="row row-mat-card">
-      <div class="col bg-success progress-pill"></div>
-      <div class="col bg-success progress-pill"></div>
-      <div class="col bg-success progress-pill"></div>
-      <div class="col progress-pill"></div>
-    </div>
+    <tui-progress-pills [stageNames]="['Unbearbeitet', 'Transkription', 'Überprüfung','Überprüft']" [size]="3" [current]="0"></tui-progress-pills>
   </mat-card-actions>
 </mat-card>

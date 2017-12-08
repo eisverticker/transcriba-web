@@ -85,6 +85,12 @@ $fa-font-path: "../node_modules/font-awesome/fonts";
 // allows us to push some buttons/links
 // to the right of the card-header easily
 // see mat-toolbar
+blockquote {
+  margin-left: 1rem;
+  padding-left: 0.3rem;
+  border-left: 3px solid map-get($tr-accent, default);
+}
+
 .card-header {
   display: flex;
 }
@@ -171,6 +177,10 @@ footer.jumbotron {
  */
  .editor-page {
    margin-bottom: 10px;
+ }
+
+ .editor-page-container  {
+   overflow-y: auto;
  }
 
 /*

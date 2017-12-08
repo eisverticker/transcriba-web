@@ -41,6 +41,10 @@ const routes: Routes = [
     }
   },
   {
+    path: 'obj/:id/overview',
+    component: OverviewComponent,
+  },
+  {
     path: 'obj/:id/discussion',
     component: ObjectDetailComponent,
     data: {

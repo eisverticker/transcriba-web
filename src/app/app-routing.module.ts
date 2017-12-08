@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 // general components
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ExperimentalComponent } from './experimental/experimental.component';
 
 // error handling components
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -18,10 +17,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: DashboardComponent
-  },
-  {
-    path: 'experimental',
-    component: ExperimentalComponent
   },
   {
     path: '403',

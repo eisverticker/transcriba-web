@@ -9,6 +9,9 @@ import {
   EventEmitter
 } from '@angular/core';
 
+import { MatDialog } from '@angular/material';
+import { InfoDialogComponent } from '../../info-page/info-dialog/info-dialog.component';
+
 import { TeiElement } from '../tei-element';
 
 @Component({
@@ -34,6 +37,11 @@ export class TeiContainerComponent implements AfterViewInit {
     this.fitViewPort();
   }
 
+  constructor(
+    private dialog: MatDialog
+  ) {
+  }
+
   saveContent() {
     this.save.emit(this.content);
   }
@@ -48,6 +56,14 @@ export class TeiContainerComponent implements AfterViewInit {
 
   abortTranscription() {
     this.abort.emit();
+  }
+
+  openHelp(){
+    this.dialog.open(InfoDialogComponent, {
+      data: {
+        'infoPageName': 'editor-help'
+      }
+    });
   }
 
   private fitViewPort() {

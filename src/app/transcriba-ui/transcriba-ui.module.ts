@@ -22,6 +22,7 @@ import { PaginationBarComponent } from './pagination-bar/pagination-bar.componen
 import { TimeoutComponent } from './timeout/timeout.component';
 import { GrowingTextareaComponent } from './growing-textarea/growing-textarea.component';
 import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
+import { ProgressPillsComponent } from './progress-pills/progress-pills.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
     PaginationBarComponent,
     TimeoutComponent,
     GrowingTextareaComponent,
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    ProgressPillsComponent
   ],
   exports: [
     LoadingIndicatorComponent,
@@ -55,7 +57,8 @@ import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
     SubNavBarComponent,
     PaginationBarComponent,
     GrowingTextareaComponent,
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    ProgressPillsComponent
   ],
   entryComponents: [
     SimpleDialogComponent

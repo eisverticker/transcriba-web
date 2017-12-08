@@ -29,7 +29,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthorizationRequiredComponent } from './authorization-required/authorization-required.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ExperimentalComponent } from './experimental/experimental.component';
 import { FooterBarComponent } from './footer-bar/footer-bar.component';
 
 @NgModule({
@@ -39,7 +38,6 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     DashboardComponent,
     AuthorizationRequiredComponent,
     PageNotFoundComponent,
-    ExperimentalComponent,
     FooterBarComponent,
   ],
   imports: [

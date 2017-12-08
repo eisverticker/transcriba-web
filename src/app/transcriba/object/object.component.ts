@@ -13,6 +13,7 @@ import { BackendService } from '../../utility/backend.service';
 })
 export class ObjectComponent implements OnInit {
   @Input() object;
+  numOfStages = 3;
 
   constructor(
     public backend: BackendService
