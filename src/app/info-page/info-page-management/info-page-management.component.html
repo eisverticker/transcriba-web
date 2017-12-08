@@ -5,14 +5,14 @@
 <div class="tr-container">
   <div class="card">
     <div class="card-header">
-      <a [routerLink]="['/pages', 'new']" class="btn btn-default">{{ 'action.createNewPage' | translate }}</a>
+      <a mat-raised-button [routerLink]="['/pages', 'new']">{{ 'action.createNewPage' | translate }}</a>
     </div>
     <table class="table table-striped">
       <tr *ngFor="let page of pages">
         <td>{{ page.name }}</td>
         <td class="text-right">
-          <a mat-raised-button color="primary" [routerLink]="['/info',page.name]">{{ 'action.show' | translate }}</a>
-          <a mat-raised-button color="primary" [routerLink]="['/pages',page.id]">{{ 'action.edit' | translate }}</a>
+          <a mat-raised-button [routerLink]="['/info',page.name]">{{ 'action.show' | translate }}</a>
+          <a mat-raised-button [routerLink]="['/pages',page.id]">{{ 'action.edit' | translate }}</a>
           <tui-critical-button [type]="'delete'" (xclick)="deletePage(page)"></tui-critical-button>
         </td>
       </tr>

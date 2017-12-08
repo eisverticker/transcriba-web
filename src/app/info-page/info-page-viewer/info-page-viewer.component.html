@@ -1,6 +1,9 @@
 <mat-toolbar *ngIf="page && page.show_discussion" color="primary">
-  <span>Info</span>
+  <span>{{ page.name }}</span>
   <span class="toolbar-spacer"></span>
+  <button mat-icon-button [routerLink]="['/pages',page.id]">
+    <mat-icon fontSet="fontawesome" fontIcon="fa-pencil"></mat-icon>
+  </button>
   <button mat-icon-button [routerLink]="discussionLink">
     <mat-icon fontSet="fontawesome" fontIcon="fa-comment"></mat-icon>
   </button>

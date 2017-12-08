@@ -17,7 +17,8 @@ import { InfoPageRoutingModule } from './info-page-routing.module';
 import {
   MatToolbarModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDialogModule
 } from '@angular/material';
 
 // components
@@ -26,6 +27,7 @@ import { InfoPageEditComponent } from './info-page-edit/info-page-edit.component
 import { InfoPageManagementComponent } from './info-page-management/info-page-management.component';
 import { InfoPageViewerComponent } from './info-page-viewer/info-page-viewer.component';
 import { InfoPageComponent } from './info-page/info-page.component';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 // services
 import { InfoPageService } from './info-page.service';
@@ -42,6 +44,7 @@ import { InfoPageService } from './info-page.service';
     LoopbackAuthModule,
     TranscribaUiModule,
     DiscussionModule,
+    MatDialogModule,
     InfoPageRoutingModule,
     // material
     MatToolbarModule,
@@ -53,10 +56,19 @@ import { InfoPageService } from './info-page.service';
     InfoPageEditComponent,
     InfoPageManagementComponent,
     InfoPageViewerComponent,
-    InfoPageComponent
+    InfoPageComponent,
+    InfoDialogComponent
+  ],
+  exports: [
+    InfoPageViewerComponent,
+    InfoPageComponent,
+    InfoDialogComponent    
   ],
   providers: [
     InfoPageService
+  ],
+  entryComponents: [
+    InfoDialogComponent
   ]
 })
 export class InfoPageModule { }

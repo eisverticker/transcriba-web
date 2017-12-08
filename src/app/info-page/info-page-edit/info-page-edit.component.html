@@ -39,11 +39,11 @@
 
       </div>
 
-      <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
+      <button mat-raised-button [disabled]="!form.valid" type="submit">
         <span>{{ 'action.save' | translate }}</span>
         <tui-inline-spinner [active]="isSaving"></tui-inline-spinner>
       </button>
-      <a [routerLink]="['/pages']" class="btn btn-default">{{ 'action.abort' | translate }}</a>
+      <a mat-raised-button [routerLink]="['/pages']">{{ 'action.abort' | translate }}</a>
     </div>
   </form>
 </div>

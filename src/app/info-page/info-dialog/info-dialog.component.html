@@ -1,0 +1,13 @@
+<inf-info-page *ngIf="infoPage" [page]="infoPage"></inf-info-page>
+<div *ngIf="isError" class="alert alert-error">
+  {{ 'message.pageNotFound' | translate }}
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button
+  color="accent"
+  class="mx-auto d-block"
+  (click)="onUserAcknowledgement()"
+  tabindex="-1">
+    {{ 'action.ok' | translate }}
+  </button>
+</div>
