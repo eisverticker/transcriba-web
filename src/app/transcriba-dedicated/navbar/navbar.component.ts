@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../loopback-auth/user';
-import { AuthService } from '../loopback-auth/auth.service';
+import { User } from '../../loopback-auth/user';
+import { AuthService } from '../../loopback-auth/auth.service';
 
 @Component({
   selector: 'tr-navbar',
