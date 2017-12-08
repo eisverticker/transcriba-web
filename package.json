@@ -10,7 +10,8 @@
     "build": "gulp && ng build",
     "test": "gulp && ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "inspect": "sh ./code-inspector.sh"
   },
   "private": true,
   "dependencies": {
