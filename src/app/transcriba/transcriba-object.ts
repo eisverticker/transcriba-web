@@ -9,7 +9,8 @@ export class TranscribaObject {
     public sourceID: any,
     public discussionID: any,
     public id?: any,
-    public status?: string
+    public status?: string,
+    public stage?: number
   ) {}
 
 }

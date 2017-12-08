@@ -17,7 +17,8 @@
     "newVersion": "Neue Version",
     "transcriptionEditor": "Transcriba-Editor",
     "revisionComparision": "Ungeprüfte Version",
-    "openVotings": "Offene Abstimmungen"
+    "openVotings": "Offene Abstimmungen",
+    "currentManuscript": "Aktuelle Manuskripte"
   },
   "general": {
     "name": "Name",
@@ -75,13 +76,15 @@
   "auth": {
     "roles": {
       "trusted": "Vertrauter",
-      "employee": "Mitarbeiter"
+      "employee": "Mitarbeiter",
+      "administrator": "Administrator"
     }
   },
   "form": {
     "showDiscussion": "Diskussion anzeigen"
   },
   "message": {
+    "noOpenVotings": "Es sind im Moment keine Abstimmungen verfügbar.",
     "searchTitle": "Suchen...",
     "noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
     "readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet.",

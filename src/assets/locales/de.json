@@ -22,7 +22,8 @@
 		"newVersion": "Neue Version",
 		"transcriptionEditor": "Transcriba-Editor",
 		"revisionComparision": "Ungeprüfte Version",
-		"openVotings": "Offene Abstimmungen"
+		"openVotings": "Offene Abstimmungen",
+		"currentManuscript": "Aktuelle Manuskripte"
 	},
 	"command": {
 		"pleaseVerifyYourEMailAccount": "Nach der Registrierung wurde Ihnen ein Bestätigungslink per E-Mail zugesandt, bitte klicken Sie auf diesen Link, um zu bestätigen, dass diese E-Mail-Adresse Ihnen gehört.",
@@ -115,6 +116,7 @@
 		"helloSomeone": "Hallo {{ name }}!",
 		"pageNotFound": "Diese Seite existiert leider nicht",
 		"notAccessable": "Du hast keinen Zugriff auf diese Ressource",
+		"noOpenVotings": "Es sind im Moment keine Abstimmungen verfügbar.",
 		"searchTitle": "Suchen...",
 		"noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
 		"readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet.",

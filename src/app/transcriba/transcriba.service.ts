@@ -35,7 +35,8 @@ export class TranscribaService {
           o['sourceId'],
           o['discussionId'],
           o['id'],
-          o['status']
+          o['status'],
+          o['stage']
         );
       }
     );
@@ -153,7 +154,8 @@ export class TranscribaService {
               data.sourceId,
               data.discussionId,
               data.id,
-              data.status
+              data.status,
+              data.stage
             );
           }
         );
@@ -184,7 +186,8 @@ export class TranscribaService {
               data['sourceId'],
               data['discussionId'],
               data['id'],
-              data['status']
+              data['status'],
+              data['stage']
             );
           }
         );

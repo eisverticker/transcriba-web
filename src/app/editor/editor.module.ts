@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utility/utility.module';
+import { InfoPageModule } from '../info-page/info-page.module';
 import { TranscribaUiModule } from '../transcriba-ui/transcriba-ui.module';
 import { ImageViewerModule } from '../image-viewer/image-viewer.module';
 
@@ -11,7 +12,8 @@ import { ImageViewerModule } from '../image-viewer/image-viewer.module';
 import {
   MatCardModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDialogModule
 } from '@angular/material';
 
 // components
@@ -32,6 +34,8 @@ import { EditorService } from './editor.service';
     UtilityModule,
     TranscribaUiModule,
     ImageViewerModule,
+    MatDialogModule,
+    InfoPageModule,
     // material
     MatCardModule,
     MatIconModule,

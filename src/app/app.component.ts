@@ -41,9 +41,11 @@ export class AppComponent implements OnInit {
       this.snacks.open(message, '', {
         duration: 2000,
         verticalPosition: 'bottom'
-      });      
+      });
     }
 
+    // TODO: simple dialog should present different types of dialogs with
+    //  different visuals
     /*if (tags.indexOf('success') !== -1) {
       // this.toastr.success(message);
       this.toastyService.success(message);
