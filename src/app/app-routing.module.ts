@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // general components
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './transcriba-dedicated/dashboard/dashboard.component';
 
 // error handling components
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthorizationRequiredComponent } from './authorization-required/authorization-required.component';
+import { PageNotFoundComponent } from './transcriba-dedicated/page-not-found/page-not-found.component';
+import { AuthorizationRequiredComponent } from './transcriba-dedicated/authorization-required/authorization-required.component';
 
 const routes: Routes = [
   {

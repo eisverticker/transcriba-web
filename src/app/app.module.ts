@@ -12,33 +12,17 @@ import { InfoPageModule } from './info-page/info-page.module';
 import { ScoreModule } from './score/score.module';
 import { SourceModule } from './source/source.module';
 import { TranscribaModule } from './transcriba/transcriba.module';
+import { TranscribaDedicatedModule } from './transcriba-dedicated/transcriba-dedicated.module';
 
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatToolbarModule,
-  MatIconRegistry,
-  MatIconModule,
-  MatDialogModule
+  MatIconRegistry
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthorizationRequiredComponent } from './authorization-required/authorization-required.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { FooterBarComponent } from './footer-bar/footer-bar.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    DashboardComponent,
-    AuthorizationRequiredComponent,
-    PageNotFoundComponent,
-    FooterBarComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -53,15 +37,8 @@ import { FooterBarComponent } from './footer-bar/footer-bar.component';
     ScoreModule,
     SourceModule,
     TranscribaModule,
-    AppRoutingModule,
-    // material design
-    MatButtonModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatDialogModule
+    TranscribaDedicatedModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

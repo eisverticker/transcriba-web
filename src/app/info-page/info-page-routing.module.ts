@@ -9,8 +9,8 @@ import { InfoPageViewerComponent } from './info-page-viewer/info-page-viewer.com
 import { InfoPageComponent } from './info-page/info-page.component';
 
 // error handling components
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
-import { AuthorizationRequiredComponent } from '../authorization-required/authorization-required.component';
+import { PageNotFoundComponent } from '../transcriba-dedicated/page-not-found/page-not-found.component';
+import { AuthorizationRequiredComponent } from '../transcriba-dedicated/authorization-required/authorization-required.component';
 
 // guards
 import { EmployeeGuard } from '../loopback-auth/employee.guard';
