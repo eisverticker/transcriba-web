@@ -1,15 +1,9 @@
-<mat-toolbar color="primary">
-    <span>{{ 'title.passwordReset' | translate }}</span>
-</mat-toolbar>
-
 <div class="tr-container">
   <form (ngSubmit)="reset()" #form="ngForm">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <div class="card-title-big">Nutzerdaten</div>
-        </mat-card-title>
-      </mat-card-header>
+      <mat-card-title>
+        {{ 'title.passwordReset' | translate }}
+      </mat-card-title>
       <mat-card-content>
 
         <div *ngIf="isLastResetFailed && !isResetting" class="alert  alert-danger">

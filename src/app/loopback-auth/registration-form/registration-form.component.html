@@ -1,12 +1,8 @@
-<mat-toolbar color="primary">
-    <span>{{ 'title.register' | translate }}</span>
-</mat-toolbar>
-
 <div class="tr-container">
   <form class="card" (ngSubmit)="register()" #form="ngForm">
     <mat-card>
       <mat-card-title>
-        <div class="card-title-big">Nutzerdaten</div>
+        <span>{{ 'title.register' | translate }}</span>
       </mat-card-title>
       <mat-card-content>
         <mat-form-field>

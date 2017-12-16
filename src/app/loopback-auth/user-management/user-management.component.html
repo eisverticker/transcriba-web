@@ -8,9 +8,9 @@
 
   <div class="card">
     <div class="card-header">
-      Nutzer
+      {{ 'title.userManagement' | translate }}
     </div>
-    <div class=card-body>
+    <div class="card-body">
       <table class="table table-striped">
         <tr *ngFor="let user of users">
           <td>{{ user.name }}</td>

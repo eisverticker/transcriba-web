@@ -2,11 +2,9 @@
 
   <form class="card" (ngSubmit)="login()" #form="ngForm">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <div class="card-title-big">{{ 'title.login' | translate }}</div>
-        </mat-card-title>
-      </mat-card-header>
+      <mat-card-title>
+        {{ 'title.login' | translate }}
+      </mat-card-title>
       <mat-card-content>
         <div *ngIf="isLastLoginFailed && !isLoggingIn" class="alert  alert-danger">
             <strong>{{ 'request.loginFailed' | translate }}</strong> {{ 'command.pleaseTryAgain' | translate }}
