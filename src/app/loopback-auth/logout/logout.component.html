@@ -1,11 +1,9 @@
 <div class="container container-spaced">
   <form *ngIf="user" (ngSubmit)="doLogout()" #form="ngForm">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <div class="card-title-big">{{ 'title.account' | translate }}</div>
-        </mat-card-title>
-      </mat-card-header>
+      <mat-card-title>
+        {{ 'title.account' | translate }}
+      </mat-card-title>
       <mat-card-content>
         <p>{{ 'message.helloSomeone' | translate: { name: user.name } }}</p>
         <button mat-raised-button (click)="doLogout()" class="btn btn-primary">

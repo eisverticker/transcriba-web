@@ -13,9 +13,15 @@
       <tr *ngFor="let source of sources">
         <td>{{ source.title }}</td>
         <td class="text-right">
-          <button mat-button (click)="activate(source)" *ngIf="!source.activated">{{ 'action.activate' | translate }}</button>
-          <button mat-button (click)="deactivate(source)" *ngIf="source.activated">{{ 'action.deactivate' | translate }}</button>
-          <button mat-button [routerLink]="['/sources',source.id]">{{ 'action.edit' | translate }}</button>
+          <button mat-button (click)="activate(source)" *ngIf="!source.activated">
+            {{ 'action.activate' | translate }}
+          </button>
+          <button mat-button (click)="deactivate(source)" *ngIf="source.activated">
+            {{ 'action.deactivate' | translate }}
+          </button>
+          <button mat-button [routerLink]="['/sources',source.id]">
+            {{ 'action.edit' | translate }}
+          </button>
         </td>
       </tr>
     </table>
