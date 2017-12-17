@@ -29,6 +29,7 @@ export class TranscribaService {
     .toPromise()
     .then(
       o => {
+        console.log("o", o);
         return new TranscribaObject(
           o['title'],
           o['externalID'],
@@ -36,7 +37,8 @@ export class TranscribaService {
           o['discussionId'],
           o['id'],
           o['status'],
-          o['stage']
+          o['stage'],
+          o['publicTags']
         );
       }
     );
@@ -148,6 +150,7 @@ export class TranscribaService {
       (objects) => {
         return objects.map(
           (data) => {
+            console.log('obj data', data);
             return new TranscribaObject(
               data.title,
               data.externalID,
@@ -155,7 +158,8 @@ export class TranscribaService {
               data.discussionId,
               data.id,
               data.status,
-              data.stage
+              data.stage,
+              data.publicTags
             );
           }
         );

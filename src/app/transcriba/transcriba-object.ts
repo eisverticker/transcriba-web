@@ -10,7 +10,8 @@ export class TranscribaObject {
     public discussionID: any,
     public id?: any,
     public status?: string,
-    public stage?: number
+    public stage?: number,
+    public tags?: Array<string>
   ) {}
 
 }
