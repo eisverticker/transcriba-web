@@ -10,6 +10,8 @@
 		"userinfo": "Nutzerinformationen",
 		"authorizationRequired": "Fehlende Rechte!",
 		"passwordReset": "Passwort zurücksetzen",
+		"comments": "Kommentare",
+		"recentComments": "Zuletzt geschriebene Kommentare",
 		"welcomeTo": "Willkommen zu {{ object }}!",
 		"sourceManagement": "Quellenverwaltung",
 		"pageManagement": "Seitenverwaltung",
@@ -23,7 +25,8 @@
 		"transcriptionEditor": "Transcriba-Editor",
 		"revisionComparision": "Ungeprüfte Version",
 		"openVotings": "Offene Abstimmungen",
-		"currentManuscript": "Aktuelle Manuskripte"
+		"currentManuscript": "Aktuelle Manuskripte",
+		"administration": "Administration"
 	},
 	"command": {
 		"pleaseVerifyYourEMailAccount": "Nach der Registrierung wurde Ihnen ein Bestätigungslink per E-Mail zugesandt, bitte klicken Sie auf diesen Link, um zu bestätigen, dass diese E-Mail-Adresse Ihnen gehört.",
@@ -55,7 +58,8 @@
 		"learnMore": "Mehr erfahren",
 		"removePage": "Seite entfernen",
 		"addParagraph": "Absatz hinzufügen",
-		"addHeading": "Überschrift hinzufügen"
+		"addHeading": "Überschrift hinzufügen",
+		"showAllComments": "Vollständige Diskussion anzeigen"
 	},
 	"general": {
 		"error": "Fehler",
@@ -76,7 +80,8 @@
 		"metadata": "Metadaten",
 		"username": "Benuzter",
 		"score": "Punktzahl",
-		"tutorial": "Tutorial"
+		"tutorial": "Tutorial",
+		"infoPage": "Informationsseite {{ value }}"
 	},
 	"state": {
 		"done": "fertig"

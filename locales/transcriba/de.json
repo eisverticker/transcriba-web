@@ -5,6 +5,8 @@
     "import": "Importieren"
   },
   "title": {
+    "comments": "Kommentare",
+    "recentComments": "Zuletzt geschriebene Kommentare",
     "welcomeTo": "Willkommen zu {{ object }}!",
     "sourceManagement": "Quellenverwaltung",
     "pageManagement": "Seitenverwaltung",
@@ -18,7 +20,8 @@
     "transcriptionEditor": "Transcriba-Editor",
     "revisionComparision": "Ungeprüfte Version",
     "openVotings": "Offene Abstimmungen",
-    "currentManuscript": "Aktuelle Manuskripte"
+    "currentManuscript": "Aktuelle Manuskripte",
+    "administration": "Administration"
   },
   "general": {
     "name": "Name",
@@ -37,7 +40,8 @@
     "metadata": "Metadaten",
     "username": "Benuzter",
     "score": "Punktzahl",
-    "tutorial": "Tutorial"
+    "tutorial": "Tutorial",
+    "infoPage": "Informationsseite {{ value }}"
   },
   "action": {
     "deactivate": "Deaktivieren",
@@ -58,7 +62,8 @@
     "learnMore": "Mehr erfahren",
     "removePage": "Seite entfernen",
     "addParagraph": "Absatz hinzufügen",
-    "addHeading": "Überschrift hinzufügen"
+    "addHeading": "Überschrift hinzufügen",
+    "showAllComments": "Vollständige Diskussion anzeigen"
   },
   "sources": {
     "apiUrl": "API-URL",

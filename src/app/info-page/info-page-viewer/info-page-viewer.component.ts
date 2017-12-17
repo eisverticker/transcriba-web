@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 import { InfoPage } from '../info-page';
 import { InfoPageService } from '../info-page.service';
+import { AuthService } from '../../loopback-auth/auth.service';
+import { User } from '../../loopback-auth/user';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -13,14 +16,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class InfoPageViewerComponent implements OnInit {
   page: InfoPage;
   mode = 'loading';
+  user: Observable<User>;
   navItems: Array<any> = [];
   discussionLink: string;
 
   constructor(
     private pageService: InfoPageService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {
+    this.user = this.authService.user;
+  }
 
   ngOnInit() {
     this.route.data.subscribe(

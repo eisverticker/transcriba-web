@@ -1,4 +1,10 @@
-<mat-toolbar color="primary">{{ 'title.import' | translate }}</mat-toolbar>
+<mat-toolbar color="primary">
+  {{ 'title.import' | translate }}
+  <span class="toolbar-spacer"></span>
+  <a mat-button [routerLink]="['/pages']">
+    {{ 'title.sourceManagement' | translate }}
+  </a>
+</mat-toolbar>
 
 <div class="tr-container">
   <form *ngIf="sources" class="card" (ngSubmit)="import()" #form="ngForm">

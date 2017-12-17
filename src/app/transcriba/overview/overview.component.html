@@ -11,19 +11,18 @@
     </a>
   </div>
   <div class="info pl-4">
-    <dl *ngIf="source">
-      <dt>Quelle</dt>
+    <dl *ngIf="source && object.tags">
+      <dt>{{ 'general.source' | translate }}</dt>
       <dd>{{ source.title }} (ID: {{ object.externalID }})</dd>
-      <dt>Tags</dt>
-      <dd>
-        <span class="badge badge-info">Reinhold Grundemann</span>
-        <span class="badge badge-info">Perthes</span>
+      <dt *ngIf="object.tags.length > 0">Tags</dt>
+      <dd *ngIf="object.tags.length > 0">
+        <span *ngFor="let tag of object.tags" class="badge badge-info">{{ tag }}</span>
       </dd>
     </dl>
   </div>
 </div>
 
-<h2 class="compact mt-4 mb-3">Zuletzt geschriebene Kommentare</h2>
+<h2 class="compact mt-4 mb-3">{{ 'title.recentComments' | translate }}</h2>
 <disc-discussion-widget
   *ngIf="discussion"
   [numOfItems]="3"
