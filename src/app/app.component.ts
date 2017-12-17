@@ -5,9 +5,13 @@ import {
   MatSnackBar,
   MatDialog
 } from '@angular/material';
+import { Router } from '@angular/router';
 import { SimpleDialogComponent } from './transcriba-ui/simple-dialog/simple-dialog.component';
 import { NotificationService } from './utility/notification.service';
+import { Notification } from './utility/notification';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from './loopback-auth/auth.service';
+import { User } from './loopback-auth/user';
 
 @Component({
   selector: 'tr-root',
@@ -16,18 +20,32 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
 
+  user: Observable<User>;
+
   constructor(
     private i18n: I18nHelperService,
     private snacks: MatSnackBar,
     private dialog: MatDialog,
     private notify: NotificationService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.i18n.initUserLanguage();
+    this.user = this.authService.user;
   }
 
   ngOnInit() {
     this.initNotificationHandler();
+    this.user.subscribe(
+      (user) => {
+        if(user.isRegistered() && !user.completedTutorial) {
+          let alert = new Notification('message.tutorialFirst', ['info', 'attention']);
+          this.notify.notify(alert);
+          this.router.navigate(['/tutorial']);
+        }
+      }
+    );
   }
 
   private processNotificationMessage(message: string, tags: Array<string>) {

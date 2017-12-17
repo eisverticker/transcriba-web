@@ -121,6 +121,7 @@
 		"helloSomeone": "Hallo {{ name }}!",
 		"pageNotFound": "Diese Seite existiert leider nicht",
 		"notAccessable": "Du hast keinen Zugriff auf diese Ressource",
+		"tutorialFirst": "Als Einsteiger musst du zunächst das Tutorial abschließen.",
 		"noOpenVotings": "Es sind im Moment keine Abstimmungen verfügbar.",
 		"searchTitle": "Suchen...",
 		"noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
