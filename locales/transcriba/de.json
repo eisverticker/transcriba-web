@@ -80,6 +80,7 @@
   },
   "auth": {
     "roles": {
+      "registered": "Registrierter",
       "trusted": "Vertrauter",
       "employee": "Mitarbeiter",
       "administrator": "Administrator"
@@ -89,6 +90,7 @@
     "showDiscussion": "Diskussion anzeigen"
   },
   "message": {
+    "tutorialFirst": "Als Einsteiger musst du zunächst das Tutorial abschließen.",
     "noOpenVotings": "Es sind im Moment keine Abstimmungen verfügbar.",
     "searchTitle": "Suchen...",
     "noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
