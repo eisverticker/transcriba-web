@@ -73,7 +73,7 @@ export class TeiContainerComponent implements AfterViewInit {
     // console.log(rectOuter, rectInner, difference);
 
     const viewPortHeight = window.innerHeight;
-    const newHeight: string = (viewPortHeight - rectInner.top - 145) + 'px';
+    const newHeight: string = (viewPortHeight - rectInner.top - 100) + 'px';
 
     this.contentContainer.nativeElement.style.maxHeight = newHeight;
     // this.contentContainer.nativeElement.style.height = newHeight;
