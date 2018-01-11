@@ -138,9 +138,7 @@ export class AuthService {
               return roleNames.indexOf(role.name) !== -1;
             }
           );
-          //return rolesInOrder;
-          // FIXME: remove dummy data
-          return Role.getAvailableRoles();
+          return rolesInOrder;
         },
         (res) => {
           return Promise.reject<Role[]>(res);
