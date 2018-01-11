@@ -63,10 +63,10 @@ export class TranscriptionService {
   }
 
   /**
-   * Aborts the transcription of the current user
+   * Aborts the currently open transcription
    * (deletes revision and frees object/user)
    */
-  abort(): Promise<any> {
+  abort(): Promise<boolean> {
     const token = this.auth.token;
     const url = this.backend.authUrl('TranscribaObjects/free', token);
 

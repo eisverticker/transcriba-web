@@ -28,19 +28,16 @@ export class TranscribaService {
     return this.http.get(url)
     .toPromise()
     .then(
-      o => {
-        console.log("o", o);
-        return new TranscribaObject(
-          o['title'],
-          o['externalID'],
-          o['sourceId'],
-          o['discussionId'],
-          o['id'],
-          o['status'],
-          o['stage'],
-          o['publicTags']
-        );
-      }
+      o => new TranscribaObject(
+        o['title'],
+        o['externalID'],
+        o['sourceId'],
+        o['discussionId'],
+        o['id'],
+        o['status'],
+        o['stage'],
+        o['publicTags']
+      )
     );
   }
 
