@@ -38,6 +38,7 @@
     "leaflet": "^1.2.0",
     "popper.js": "^1.12.5",
     "rxjs": "^5.4.2",
+    "url-factory": "^3.0.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
