@@ -98,4 +98,29 @@ export class SourceService {
     .toPromise();
   }
 
+  /**
+   * Load API information of an external manuscript source
+   */
+   loadMetadata(url: string): Promise<Source> {
+     const token = this.auth.token;
+     const requestUrl = this.backend.authUrl('Sources/metadata', token, {
+       'url': url
+     });
+     console.log('metadata url', requestUrl);
+
+     return this.http.get(requestUrl)
+     .toPromise()
+     .then(
+       o => new Source(
+         o['name'], // title
+         o['manuscriptUrl'], // url
+         o['linkUrl'], // info_url
+         '', // logo_url
+         'TranscribaJSON', // type
+         o['capabilities']['synchronisation'], // sync
+         true // activated
+       )
+     );
+   }
+
 }
