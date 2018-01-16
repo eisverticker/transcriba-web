@@ -73,7 +73,6 @@ export class ScoreService {
   }
 
   updateScore(){
-    console.log("updateScore called")
     this.loadScore().then(
       (scoreResult) => {
         // case 1: first publish

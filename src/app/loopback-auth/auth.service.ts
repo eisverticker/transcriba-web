@@ -188,7 +188,6 @@ export class AuthService {
           return this.getRoles(this.userID).then(
             roles => {
               user.roles = user.roles.concat(roles);
-              console.log(user);
               return user;
             }
           );
