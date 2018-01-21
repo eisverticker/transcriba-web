@@ -49,21 +49,18 @@ export class InfoPageService {
 
   loadOneByName(name: string): Promise<InfoPage> {
     const token = this.auth.token;
-    const url = this.backend.authUrl('InfoPages/parsed/' + name, token);
+    const url = this.backend.authUrl('InfoPages/' + name + '/parsed', token);
 
     return this.http.get(url)
     .toPromise()
     .then(
-      data => {
-        const p = data['page'];
-        return new InfoPage(
-          p.name,
-          p.content,
-          p.show_discussion,
-          p.discussionId,
-          p.id
-        );
-      }
+      pageData => new InfoPage(
+        pageData['name'],
+        pageData['content'],
+        pageData['show_discussion'],
+        pageData['discussionId'],
+        pageData['id']
+      )
     );
   }
 
