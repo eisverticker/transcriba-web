@@ -49,12 +49,7 @@ export class ExplorerComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.route.params.subscribe(
-        params => {
-          //if (this.mode === 'insideCollection') {
-          //  this.collectionId = params['id'];
-          //}
-          this.updateData();
-        }
+        params => this.updateData()
       );
     });
   }
@@ -100,10 +95,7 @@ export class ExplorerComponent implements OnInit {
             this.objects = objects;
             this.isLoading = false;
           },
-          err => {
-            console.log(err);
-            this.isLoading = false;
-          }
+          err => this.isLoading = false
         );
 
       },

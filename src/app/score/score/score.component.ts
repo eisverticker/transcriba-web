@@ -28,13 +28,11 @@ export class ScoreComponent implements OnInit {
     this.scoreService.startIntervalTimer();
     this.score.subscribe(
       (score) => {
-        if(typeof score == "boolean") return;
-        if(score.hasChanged){
+        if (typeof score === 'boolean') { return; }
+        if (score.hasChanged) {
           this.notifier.notify(Notification.message(score.delta.toString()));
         }
       }
-    )
+    );
   }
-
-
 }

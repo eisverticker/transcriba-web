@@ -38,7 +38,7 @@ import {
     MatSnackBarModule,
     MatToolbarModule,
     MatIconModule,
-    MatDialogModule    
+    MatDialogModule
   ],
   declarations: [
     NavbarComponent,

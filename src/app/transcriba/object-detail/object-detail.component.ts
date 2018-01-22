@@ -62,7 +62,7 @@ export class ObjectDetailComponent implements OnInit {
             this.mode = d.data['mode'];
             this.object = obj;
 
-            switch(this.mode){
+            switch (this.mode) {
               case 'viewer':
                this.currentTab = 4;
                break;

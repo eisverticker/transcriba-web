@@ -3,7 +3,7 @@ export class TutorialItem {
   public imageFileName?: string;
   public description?: string;
 
-  constructor(title: string){
+  constructor(title: string) {
     this.title = title;
   }
 }
