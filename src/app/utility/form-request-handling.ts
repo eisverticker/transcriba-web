@@ -3,8 +3,8 @@
  * forms which have a "loading" state
  */
 export abstract class FormRequestHandling {
-  isRequestPending = false;
-  isLastRequestFailed = false;
+  public isRequestPending = false;
+  public isLastRequestFailed = false;
 
   watchRequestState(request: Promise<any>) {
     this.isRequestPending = true;
