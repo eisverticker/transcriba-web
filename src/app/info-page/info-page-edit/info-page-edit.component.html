@@ -18,10 +18,6 @@
         <label for="name">{{ 'general.name' | translate }}</label>
         <div class="input-group">
           <input [(ngModel)]="page.name" name="name" #name="ngModel" class="form-control" required>
-          <span class="input-group-addon">
-            <span *ngIf="!(name.valid)" class="glyphicon glyphicon-minus"></span>
-            <span *ngIf="name.valid" class="glyphicon glyphicon-ok"></span>
-          </span>
         </div>
       </div>
 
@@ -43,7 +39,7 @@
         <span>{{ 'action.save' | translate }}</span>
         <tui-inline-spinner [active]="isSaving"></tui-inline-spinner>
       </button>
-      <a mat-raised-button [routerLink]="['/pages']">{{ 'action.abort' | translate }}</a>
+      <button mat-raised-button [routerLink]="['/pages']">{{ 'action.abort' | translate }}</button>
     </div>
   </form>
 </div>

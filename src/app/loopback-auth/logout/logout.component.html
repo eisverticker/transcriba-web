@@ -12,15 +12,15 @@
         </button>
       </mat-card-content>
       <mat-card-actions>
-        <a mat-button *ngIf="user.isAdministrator()" [routerLink]="['/admin']">
+        <button mat-button *ngIf="user.isAdministrator()" [routerLink]="['/admin']">
           {{ 'title.administration' | translate }}
-        </a>
-        <a mat-button *ngIf="user.isAdministrator()" [routerLink]="['/sources']">
+        </button>
+        <button mat-button *ngIf="user.isAdministrator()" [routerLink]="['/sources']">
           {{ 'title.sourceManagement' | translate }}
-        </a>
-        <a mat-button *ngIf="user.isEmployee()" [routerLink]="['/pages']">
+        </button>
+        <button mat-button *ngIf="user.isEmployee()" [routerLink]="['/pages']">
           {{ 'title.pageManagement' | translate }}
-        </a>
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>

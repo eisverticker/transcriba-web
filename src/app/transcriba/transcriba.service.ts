@@ -146,19 +146,16 @@ export class TranscribaService {
     .then(
       (objects) => {
         return objects.map(
-          (data) => {
-            console.log('obj data', data);
-            return new TranscribaObject(
-              data.title,
-              data.externalID,
-              data.sourceId,
-              data.discussionId,
-              data.id,
-              data.status,
-              data.stage,
-              data.publicTags
-            );
-          }
+          (data) => new TranscribaObject(
+            data.title,
+            data.externalID,
+            data.sourceId,
+            data.discussionId,
+            data.id,
+            data.status,
+            data.stage,
+            data.publicTags
+          )
         );
       }
     );

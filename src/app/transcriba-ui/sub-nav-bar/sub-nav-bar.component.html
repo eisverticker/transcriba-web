@@ -1,5 +1,10 @@
 <ul class="nav nav-pills sub-nav-bar">
   <li class="nav-item" *ngFor="let item of items" role="presentation">
-    <a class="nav-link bg-dark text-light" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="item.route">{{ item.name | translate }}</a>
+    <button mat-raised-button
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"
+      [routerLink]="item.route">
+    {{ item.name | translate }}
+    </button>
   </li>
 </ul>
