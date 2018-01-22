@@ -58,7 +58,7 @@ export class TeiContainerComponent implements AfterViewInit {
     this.abort.emit();
   }
 
-  openHelp(){
+  openHelp() {
     this.dialog.open(InfoDialogComponent, {
       data: {
         'infoPageName': 'editor-help'

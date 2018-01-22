@@ -18,8 +18,8 @@ export class ProgressPillsComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges() {
-    let pills = [];
-    for(let i = 0; i < this.size; i++){
+    const pills = [];
+    for (let i = 0; i < this.size; i++) {
       pills.push(i < this.current);
     }
     this.pills = pills;

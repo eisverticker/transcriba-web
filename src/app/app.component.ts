@@ -39,8 +39,8 @@ export class AppComponent implements OnInit {
     this.initNotificationHandler();
     this.user.subscribe(
       (user) => {
-        if(user.isRegistered() && !user.completedTutorial) {
-          let alert = new Notification('message.tutorialFirst', ['info', 'attention']);
+        if (user.isRegistered() && !user.completedTutorial) {
+          const alert = new Notification('message.tutorialFirst', ['info', 'attention']);
           this.notify.notify(alert);
           this.router.navigate(['/tutorial']);
         }
@@ -49,13 +49,13 @@ export class AppComponent implements OnInit {
   }
 
   private processNotificationMessage(message: string, tags: Array<string>) {
-    if(tags.indexOf('attention') !== -1){
+    if (tags.indexOf('attention') !== -1) {
       this.dialog.open(SimpleDialogComponent, {
         data: {
           'message': message
         }
       });
-    }else{
+    } else {
       this.snacks.open(message, '', {
         duration: 2000,
         verticalPosition: 'bottom'

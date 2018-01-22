@@ -31,11 +31,8 @@ export class InfoDialogComponent implements OnInit {
   ngOnInit() {
     this.pageService.loadOneByName(this.data.infoPageName).then(
       (page) => this.infoPage = page,
-      (err) => {
-        console.log("info page not found");
-        this.isError = true;
-      }
-    )
+      (err) => this.isError = true
+    );
   }
 
 }

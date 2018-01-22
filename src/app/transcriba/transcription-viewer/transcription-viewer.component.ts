@@ -163,12 +163,12 @@ export class TranscriptionViewerComponent implements OnChanges {
                         this.latestRevision = latestRevision;
 
                         // notify user that his work will be checked by other users
-                        if(this.permissions.details.isOwner){
+                        if (this.permissions.details.isOwner) {
                           this.notify.notify(new Notification('message.workWillBeChecked', ['attention', 'info']));
                         }
 
                         // notify user that he is not permitted to vote
-                        if(!this.permissions.details.eligibleVoter && !this.permissions.details.isOwner){
+                        if (!this.permissions.details.eligibleVoter && !this.permissions.details.isOwner) {
                           this.notify.notify(new Notification('message.youAreNoEligibleVoter', ['attention', 'info']));
                         }
                       },

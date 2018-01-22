@@ -48,8 +48,7 @@ export class InfoPageEditComponent implements OnInit {
     this.pageService.save(this.page).then(
       () => {
         this.notify.notify(new Notification('request.success', ['success']));
-        console.log("navigate to ", ['info',this.page.name]);
-        this.router.navigate(['info',this.page.name]);
+        this.router.navigate(['info', this.page.name]);
         this.isLastAttemptFailed = false;
         this.isSaving = false;
       },

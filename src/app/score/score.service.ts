@@ -18,7 +18,7 @@ import {
 export class ScoreService {
 
   score: Observable<Score | boolean>;
-  user: Observable<User>
+  user: Observable<User>;
   private scoreSubject: BehaviorSubject<Score | boolean>;
   lastScore: number; // init in reset()
   isIntervalStarted = false;
@@ -41,9 +41,9 @@ export class ScoreService {
     // react when the user changes
     this.user.subscribe(
       (user) => {
-        if(user.isRegistered()){
+        if (user.isRegistered()) {
           this.updateScore();
-        }else{
+        } else {
           this.reset();
           this.scoreSubject.next(false);
         }
@@ -52,16 +52,16 @@ export class ScoreService {
 
   }
 
-  reset(){
+  reset() {
     this.lastScore = -1;
-    if(this.intervalSubscription != null){
+    if (this.intervalSubscription != null) {
       this.intervalSubscription.unsubscribe();
     }
   }
 
-  startIntervalTimer(){
+  startIntervalTimer() {
     // only start timer once
-    if(this.isIntervalStarted) return;
+    if (this.isIntervalStarted) { return; }
 
     this.isIntervalStarted = true;
     this.intervalSubscription = Observable
@@ -72,11 +72,11 @@ export class ScoreService {
     );
   }
 
-  updateScore(){
+  updateScore() {
     this.loadScore().then(
       (scoreResult) => {
         // case 1: first publish
-        if(this.lastScore == -1){
+        if (this.lastScore === -1) {
           this.scoreSubject.next({
             value: scoreResult,
             hasChanged: false,
@@ -85,7 +85,7 @@ export class ScoreService {
         }
 
         // case 2: publish on change
-        if(scoreResult != this.lastScore && this.lastScore != -1){
+        if (scoreResult !== this.lastScore && this.lastScore !== -1) {
             this.scoreSubject.next({
               value: scoreResult,
               hasChanged: true,

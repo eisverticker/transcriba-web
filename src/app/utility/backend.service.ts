@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 import { environment } from '../../environments/environment';
-import  urlFactory  from 'url-factory';
+import urlFactory from 'url-factory';
 
 @Injectable()
 export class BackendService {
@@ -16,7 +16,7 @@ export class BackendService {
     //  However, for compatibility reasons the old BackendService api was kept
     //  and thus the code became uglier
     let baseUrl = environment.backendApiUrl;
-    if (baseUrl.charAt(baseUrl.length - 1) == '/') {
+    if (baseUrl.charAt(baseUrl.length - 1) === '/') {
       baseUrl = baseUrl.substr(0, baseUrl.length - 1);
     }
     this.urlBuilder = urlFactory(baseUrl);
@@ -57,14 +57,14 @@ export class BackendService {
   /**
    * Propagate Connection Problem
    */
-  connectionFailed(){
-    this.errorSubject.next('unavailable')
+  connectionFailed() {
+    this.errorSubject.next('unavailable');
   }
 
   /**
    * Propagate Authentication Problem
    */
-  authenticationFailed(){
+  authenticationFailed() {
     this.errorSubject.next('unauthenticated');
   }
 

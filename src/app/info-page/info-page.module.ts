@@ -62,7 +62,7 @@ import { InfoPageService } from './info-page.service';
   exports: [
     InfoPageViewerComponent,
     InfoPageComponent,
-    InfoDialogComponent    
+    InfoDialogComponent
   ],
   providers: [
     InfoPageService

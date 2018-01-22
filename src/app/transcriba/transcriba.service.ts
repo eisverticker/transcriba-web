@@ -316,7 +316,7 @@ export class TranscribaService {
      .toPromise();
    }
 
-   completeTutorial(): Promise<void>{
+   completeTutorial(): Promise<void> {
      const token = this.auth.token;
      const url = this.backend.authUrl('AppUsers/tutorial', token);
 
