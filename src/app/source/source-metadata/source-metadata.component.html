@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-content>
+    <form (ngSubmit)="importMetadata()" #form="ngForm">
+      <section>
+        <mat-form-field>
+          <input matInput
+            [placeholder]="'general.metadataUrl' | translate"
+            [(ngModel)]="metadataUrl"
+            name="metadataUrl"
+            #title="ngModel"
+            type="text"
+            required>
+        </mat-form-field>
+      </section>
+
+      <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
+        <span>{{ 'action.find' | translate }}</span>
+        <tui-inline-spinner [active]="isLoading"></tui-inline-spinner>
+      </button>
+      <button mat-raised-button [routerLink]="['/sources', 'new']">{{ 'action.manual' | translate }}</button>
+      <button mat-raised-button [routerLink]="['/sources']">{{ 'action.abort' | translate }}</button>
+    </form>
+  </mat-card-content>
+</mat-card>

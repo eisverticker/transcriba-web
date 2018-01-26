@@ -28,6 +28,8 @@ import { SourceComponent } from './source/source.component';
 
 // services
 import { SourceService } from './source.service';
+import { SourceMetadataComponent } from './source-metadata/source-metadata.component';
+import { SourceEditorComponent } from './source-editor/source-editor.component';
 
 @NgModule({
   imports: [
@@ -53,7 +55,9 @@ import { SourceService } from './source.service';
   ],
   declarations: [
     SourceDetailsComponent,
-    SourceComponent
+    SourceComponent,
+    SourceMetadataComponent,
+    SourceEditorComponent
   ],
   providers: [
     SourceService

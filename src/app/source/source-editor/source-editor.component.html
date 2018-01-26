@@ -1,0 +1,15 @@
+<mat-toolbar>
+  {{ 'title.editSource' | translate }}
+</mat-toolbar>
+
+<div *ngIf="currentSource" class="tr-container">
+  <src-source-details *ngIf="mode == 'detailMode'"
+    [source]="currentSource"
+    (saved)="completeEditing($event)"
+    (abort)="abortEditing()">
+  </src-source-details>
+  <src-source-metadata *ngIf="mode == 'metadataMode'"
+    (done)="completeMetadataImport($event)"
+    (abort)="abortEditing()">
+  </src-source-metadata>
+</div>
