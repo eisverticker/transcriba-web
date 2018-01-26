@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LoggerService {
-  private logs: string[];
+  private logs: Array<any>;
 
   constructor() {
     this.logs = [];
   }
 
-  log(message: string) {
-    this.logs.push(message);
-    console.log(message);
+  log(context: string, message: any) {
+    this.logs.push(context + ':' + message);
+    console.log(context, message);
   }
 
   printLogs() {

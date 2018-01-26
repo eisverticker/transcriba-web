@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Source } from '../source';
 import { SourceService } from '../source.service';
 import { NotificationService } from '../../utility/notification.service';
 import { Notification } from '../../utility/notification';
-
+import { LoggerService } from '../../utility/logger.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -14,41 +14,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SourceDetailsComponent implements OnInit {
 
-  public source: Source = Source.createEmptySource();
+  @Input() source: Source;
+  @Output() saved = new EventEmitter<Source>();
+  @Output() abort = new EventEmitter<void>();
   public isSaving = false;
   public isLastSaveFailed = false;
 
   constructor(
+    private logger: LoggerService,
     private sourceService: SourceService,
     private notify: NotificationService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.route.params.subscribe(
-      (params) => {
-        if (params['id'] === 'new') {
-          this.source = Source.createEmptySource();
-        }else {
-          this.sourceService.loadByID(params['id']).then(
-            (source) => this.source = source,
-            (err) => {
-              this.notify.notify(new Notification('request.fail', ['fail']));
-              this.router.navigate(['/sources']);
-            }
-          );
-        }
-      }
-    );
-  }
+  ngOnInit() {}
 
   save() {
     this.isSaving = true;
     this.sourceService.save(this.source).then(
       () => {
-        this.notify.notify(new Notification('request.success', ['success']));
-        this.router.navigate(['/sources']);
+        this.saved.emit(this.source);
         this.isSaving = false;
       },
       (err) => {
@@ -57,6 +43,10 @@ export class SourceDetailsComponent implements OnInit {
         this.isSaving = false;
       }
     );
+  }
+
+  abortEditing() {
+    this.abort.emit(null);
   }
 
 }
