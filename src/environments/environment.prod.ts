@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  backendApiUrl: 'https://api.transcriba.de/api/',
+  backendApiUrl: 'https://data.transcriba.de/api/',
   roles: [
     'registered',
     'trusted',
