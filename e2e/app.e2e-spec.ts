@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('transcriba-webapp App', () => {
+describe('transcriba-web App', () => {
   let page: AppPage;
 
   beforeEach(() => {
