@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 
 import { TranscribaService } from '../transcriba.service';
+import { LoggerService } from '../../utility/logger.service';
 
 class Item {
   public id: string;
@@ -21,6 +22,8 @@ class Item {
   styleUrls: ['./revision-history.component.scss']
 })
 export class RevisionHistoryComponent implements OnChanges {
+  private logger = LoggerService.getCustomLogger('RevisionHistoryComponent');
+
   @Input() objectId: any;
   items: Array<Item>;
 
@@ -33,7 +36,7 @@ export class RevisionHistoryComponent implements OnChanges {
       chronic => {
         this.items = chronic;
       },
-      err => console.log('failed to load chronic', err)
+      err => this.logger.error('failed to load chronic', err)
     );
   }
 }

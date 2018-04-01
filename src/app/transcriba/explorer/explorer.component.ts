@@ -4,6 +4,7 @@ import { Collection } from '../collection';
 import { TranscribaObject } from '../transcriba-object';
 import { TranscribaService } from '../transcriba.service';
 import { BackendService } from '../../utility/backend.service';
+import { LoggerService } from '../../utility/logger.service';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,6 +14,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./explorer.component.scss']
 })
 export class ExplorerComponent implements OnInit {
+  private logger = LoggerService.getCustomLogger('ExplorerComponent');
+
   collections: Array<Collection> = [];
   objects: Array<TranscribaObject> = [];
 
@@ -96,7 +99,7 @@ export class ExplorerComponent implements OnInit {
         );
 
       },
-      err => console.log(err)
+      error => this.logger.error(error)
     );
 
 

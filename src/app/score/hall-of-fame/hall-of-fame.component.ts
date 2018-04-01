@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ScoreService } from '../score.service';
-import { User } from '../../loopback-auth/user';
 import { AuthService } from '../../loopback-auth/auth.service';
+import { LoggerService } from '../../utility/logger.service';
+
+import { User } from '../../loopback-auth/user';
 
 @Component({
   selector: 'scr-hall-of-fame',
@@ -10,6 +12,7 @@ import { AuthService } from '../../loopback-auth/auth.service';
   styleUrls: ['./hall-of-fame.component.scss']
 })
 export class HallOfFameComponent implements OnInit {
+  private logger = LoggerService.getCustomLogger('HallOfFameComponent');
 
   scorers: Array<{username: string, score: number }>;
   user: Observable<User>;
@@ -30,7 +33,7 @@ export class HallOfFameComponent implements OnInit {
   private updateScorerList(user: User): Promise<any> {
     return this.scoreService.loadBestScorers().then(
       scorers => this.scorers = scorers,
-      err => console.log('we were not able to load hall of fame', err)
+      error => this.logger.error('updateScorerList', error)
     );
   }
 

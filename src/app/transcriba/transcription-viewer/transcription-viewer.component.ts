@@ -10,13 +10,14 @@ import { TranscribaService } from '../transcriba.service';
 import { TranscriptionService } from '../transcription.service';
 import { RevisionVotingService } from '../revision-voting.service';
 import { NotificationService } from '../../utility/notification.service';
-import { Notification } from '../../utility/notification';
+import { LoggerService } from '../../utility/logger.service';
 import { AuthService } from '../../loopback-auth/auth.service';
 
 import { TranscribaObject } from '../transcriba-object';
 import { Revision } from '../revision';
 import { TeiElement } from '../../editor/tei-element';
 import { User } from '../../loopback-auth/user';
+import { Notification } from '../../utility/notification';
 
 @Component({
   selector: 'tr-transcription-viewer',
@@ -24,6 +25,8 @@ import { User } from '../../loopback-auth/user';
   styleUrls: ['./transcription-viewer.component.scss']
 })
 export class TranscriptionViewerComponent implements OnChanges {
+  private logger = LoggerService.getCustomLogger('TranscriptionViewerComponent');
+
   @Input() objectId: any;
   object: TranscribaObject;
   editable = true;
@@ -51,7 +54,7 @@ export class TranscriptionViewerComponent implements OnChanges {
         this.user = user;
         this.update();
       },
-      err => console.log(err)
+      error => this.logger.error('onChanges', error)
     );
   }
 
@@ -70,7 +73,7 @@ export class TranscriptionViewerComponent implements OnChanges {
         this.notify.notify(new Notification('request.success', ['success']));
         this.update();
       },
-      err => console.log(err)
+      error => this.logger.error('voteInFavor', error)
     );
   }
 
@@ -80,12 +83,11 @@ export class TranscriptionViewerComponent implements OnChanges {
         this.notify.notify(new Notification('request.success', ['success']));
         this.update();
       },
-      err => console.log(err)
+      error => this.logger.error('voteAgainst', error)
     );
   }
 
   save(content) {
-    console.log('save', content);
     this.transcription.save(this.object.id, content).then(
       () => this.notify.notify(new Notification('request.success', ['success'])),
       () => this.notify.notify(new Notification('request.fail', ['fail']))
@@ -108,7 +110,7 @@ export class TranscriptionViewerComponent implements OnChanges {
   abort() {
     this.transcription.abort().then(
       () => this.update(),
-      (err) => console.log(err)
+      error => this.logger.error('abort', error)
     );
   }
 
@@ -116,7 +118,7 @@ export class TranscriptionViewerComponent implements OnChanges {
     this.labels = [];
     this.transcriba.loadByID(this.objectId).then(
       obj => this.setObject(obj),
-      err => console.log('error loading object', err)
+      error => this.logger.error('update', error)
     );
   }
 
@@ -141,7 +143,7 @@ export class TranscriptionViewerComponent implements OnChanges {
             this.contents = [latestRevision.content];
           }
         },
-        err => console.log('can\'t load revision data', err)
+        error => this.logger.error('cannot load revision data', error)
       );
     } else { // status isn't occupied
 
@@ -172,24 +174,24 @@ export class TranscriptionViewerComponent implements OnChanges {
                           this.notify.notify(new Notification('message.youAreNoEligibleVoter', ['attention', 'info']));
                         }
                       },
-                      err => console.log(err)
+                      error => this.logger.error(error)
                     );
                   },
-                  err => console.log('couldn\'t load vote', err)
+                  error => this.logger.error('couldn\'t load vote', error)
                 );
                 this.voting.loadVotings(latestRevision.id).then(
                   votings => this.votings = votings,
-                  err => console.log(err)
+                  error => this.logger.error(error)
                 );
               },
-              err => console.log('can\'t load revision data', err)
+              error => this.logger.error('can\'t load revision data', error)
             );
           } else if (this.object.status === 'free') {
             this.contents = [stableRevision.content];
             this.editable = false;
           }
         },
-        err => console.log('can\'t load revision data', err)
+        err => this.logger.error('can\'t load revision data', err)
       );
 
     }
