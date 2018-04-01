@@ -11,9 +11,7 @@ import {
   map,
   CRS,
   tileLayer,
-  marker,
-  latLngBounds,
-  latLng
+  latLngBounds
 } from 'leaflet';
 
 @Component({

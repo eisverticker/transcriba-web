@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { AuthService } from '../auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'lauth-admin',
@@ -13,9 +11,7 @@ export class AdminComponent implements OnInit {
   navItems: Array<any> = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private auth: AuthService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {

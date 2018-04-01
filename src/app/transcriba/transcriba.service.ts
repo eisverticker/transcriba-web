@@ -58,7 +58,7 @@ export class TranscribaService {
         )
       )
     )
-    .toPromise()
+    .toPromise();
   }
 
   /**
@@ -265,7 +265,7 @@ export class TranscribaService {
    * Loads a revision with the specified tag
    * the tag must be supported by the server's rest api
    */
-  private loadRevision(trObjectId: any, tag: 'latest' | 'stable'): Promise<Revision>{
+  private loadRevision(trObjectId: any, tag: 'latest' | 'stable'): Promise<Revision> {
     const token = this.auth.token;
     const url = this.backend.authUrl(
       'TranscribaObjects/' + trObjectId + '/' + tag,
@@ -287,7 +287,7 @@ export class TranscribaService {
         )
       )
     )
-    .toPromise()
+    .toPromise();
   }
 
   loadLatestRevision(trObjectId: any): Promise<Revision> {

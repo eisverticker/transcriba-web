@@ -1,8 +1,7 @@
 import {
   Component,
   OnInit,
-  Inject,
-  Input
+  Inject
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { InfoPage } from '../info-page';

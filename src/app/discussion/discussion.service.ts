@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../utility/backend.service';
 import { AuthService } from '../loopback-auth/auth.service';
 

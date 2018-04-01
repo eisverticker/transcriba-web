@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Collection } from '../collection';
 import { TranscribaObject } from '../transcriba-object';
 import { TranscribaService } from '../transcriba.service';
-import { NotificationService } from '../../utility/notification.service';
 import { BackendService } from '../../utility/backend.service';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'tr-explorer',
@@ -40,9 +39,7 @@ export class ExplorerComponent implements OnInit {
 
   constructor(
     private transcriba: TranscribaService,
-    private notify: NotificationService,
     private route: ActivatedRoute,
-    private router: Router,
     public backend: BackendService
   ) {}
 
