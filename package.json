@@ -27,7 +27,6 @@
     "@angular/platform-browser": "~5.2.0",
     "@angular/platform-browser-dynamic": "~5.2.0",
     "@angular/router": "~5.2.0",
-    "@asymmetrik/ngx-leaflet": "^3.0.2",
     "@ng-bootstrap/ng-bootstrap": "~1.1.0",
     "@ngx-translate/core": "~9.1.0",
     "@ngx-translate/http-loader": "~2.0.1",
