@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoggerService } from '../../utility/logger.service';
 import { SourceService } from '../source.service';
 import { Source } from '../source';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'src-source-metadata',
@@ -18,15 +17,14 @@ export class SourceMetadataComponent implements OnInit {
 
   constructor(
     private logger: LoggerService,
-    private SourceService: SourceService,
-    private router: Router
+    private sourceService: SourceService
   ) { }
 
   ngOnInit() {}
 
   importMetadata() {
     this.isLoading = true;
-    return this.SourceService.loadMetadata(this.metadataUrl).then(
+    return this.sourceService.loadMetadata(this.metadataUrl).then(
       (source) => {
         this.done.emit(source);
         this.isLoading = false;

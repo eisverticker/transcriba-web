@@ -26,12 +26,12 @@ export class AuthComponent implements OnInit {
             if (User.isGuest(user)) {
               if ( data['mode'] === 'register' ) {
                 this.mode = 'register';
-              }else if (data['mode'] === 'reset') {
+              } else if (data['mode'] === 'reset') {
                 this.mode = 'reset';
-              }else {
+              } else {
                 this.mode = 'unauthenticated';
               }
-            }else {
+            } else {
               this.mode = 'authenticated';
             }
           }

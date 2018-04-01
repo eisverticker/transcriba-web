@@ -2,13 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // components
-import { BusyWidgetComponent } from './busy-widget/busy-widget.component';
 import { ImportFormComponent } from './import-form/import-form.component';
 import { ObjectDetailComponent } from './object-detail/object-detail.component';
 import { OverviewComponent } from './overview/overview.component';
-import { RevisionHistoryComponent } from './revision-history/revision-history.component';
-import { TranscriptionViewerComponent } from './transcription-viewer/transcription-viewer.component';
-import { VotingSuggestionComponent } from './voting-suggestion/voting-suggestion.component';
 import { ExplorerComponent } from './explorer/explorer.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 

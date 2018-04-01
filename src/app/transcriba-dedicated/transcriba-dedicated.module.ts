@@ -5,6 +5,7 @@ import { LoopbackAuthModule } from '../loopback-auth/loopback-auth.module';
 import { TranscribaModule } from '../transcriba/transcriba.module';
 import { ScoreModule } from '../score/score.module';
 import { I18nModule } from '../i18n/i18n.module';
+import { UtilityModule } from '../utility/utility.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,7 +19,6 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatToolbarModule,
-  MatIconRegistry,
   MatIconModule,
   MatDialogModule
 } from '@angular/material';
@@ -31,6 +31,7 @@ import {
     TranscribaModule,
     ScoreModule,
     I18nModule,
+    UtilityModule,
     // material design
     MatButtonModule,
     MatCardModule,

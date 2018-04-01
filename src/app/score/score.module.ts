@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { LoopbackAuthModule } from '../loopback-auth/loopback-auth.module';
+import { UtilityModule } from '../utility/utility.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -29,11 +30,11 @@ import { ScoreService } from './score.service';
     HttpClientModule,
     ScoreRoutingModule,
     I18nModule,
+    UtilityModule,
     // material design
     MatIconModule,
     MatToolbarModule,
     MatCardModule
-
   ],
   declarations: [
     ScoreComponent,

@@ -3,6 +3,7 @@
     "node_modules/codelyzer"
   ],
   "rules": {
+    "no-unused-variable": true,
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
@@ -15,7 +16,8 @@
     "forin": true,
     "import-blacklist": [
       true,
-      "rxjs"
+      "rxjs",
+      "rxjs/Rx"
     ],
     "import-spacing": true,
     "indent": [
@@ -40,6 +42,10 @@
         ]
       }
     ],
+    "deprecation": {
+        "severity": "warn"
+    },
+    "no-output-on-prefix": true,
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -48,7 +54,9 @@
       "info",
       "time",
       "timeEnd",
-      "trace"
+      "trace",
+      "log",
+      "error"
     ],
     "no-construct": true,
     "no-debugger": true,
@@ -103,7 +111,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [
@@ -145,7 +152,6 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true,
-    "invoke-injectable": true
+    "directive-class-suffix": true
   }
 }

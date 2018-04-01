@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Collection } from '../collection';
 import { TranscribaObject } from '../transcriba-object';
 import { TranscribaService } from '../transcriba.service';
-import { NotificationService } from '../../utility/notification.service';
 import { BackendService } from '../../utility/backend.service';
+import { LoggerService } from '../../utility/logger.service';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'tr-explorer',
@@ -14,6 +14,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./explorer.component.scss']
 })
 export class ExplorerComponent implements OnInit {
+  private logger = LoggerService.getCustomLogger('ExplorerComponent');
+
   collections: Array<Collection> = [];
   objects: Array<TranscribaObject> = [];
 
@@ -40,9 +42,7 @@ export class ExplorerComponent implements OnInit {
 
   constructor(
     private transcriba: TranscribaService,
-    private notify: NotificationService,
     private route: ActivatedRoute,
-    private router: Router,
     public backend: BackendService
   ) {}
 
@@ -80,7 +80,7 @@ export class ExplorerComponent implements OnInit {
 
     if (this.filter.latestSearchTerm.length < 2) {
       searchValue = undefined;
-    }else {
+    } else {
       searchValue = this.filter.latestSearchTerm;
     }
 
@@ -99,7 +99,7 @@ export class ExplorerComponent implements OnInit {
         );
 
       },
-      err => console.log(err)
+      error => this.logger.error(error)
     );
 
 

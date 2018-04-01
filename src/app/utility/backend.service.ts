@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
 import urlFactory from 'url-factory';
 
@@ -32,7 +33,7 @@ export class BackendService {
 
     if (filter === undefined) {
       filter = '';
-    }else {
+    } else {
       filter = '&' + filter;
     }
     return environment.backendApiUrl + ressourceUriPart + '?access_token=' + token + filter;
@@ -48,7 +49,7 @@ export class BackendService {
 
     if (filter === undefined) {
       filter = '';
-    }else {
+    } else {
       filter = '?' + filter;
     }
     return environment.backendApiUrl + ressourceUriPart + filter;

@@ -1,17 +1,16 @@
 import {
   Component,
   Input,
-  OnInit,
   forwardRef,
   EventEmitter,
   Output
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { EditorService } from '../editor.service';
+
 import { TeiBase } from '../tei-base';
 import { TeiElement } from '../tei-element';
-
-import { EditorService } from '../editor.service';
 
 @Component({
   selector: 'tr-tei-element',
@@ -25,12 +24,11 @@ import { EditorService } from '../editor.service';
     }
   ]
 })
-export class TeiElementComponent extends TeiBase implements OnInit {
+export class TeiElementComponent extends TeiBase {
   @Input() index: number;
   @Input() markDirty: boolean;
   @Input() editable: boolean;
   @Output() killMe: EventEmitter<any> = new EventEmitter();
-
 
   value: any;
   mode  = 'default';
@@ -39,12 +37,6 @@ export class TeiElementComponent extends TeiBase implements OnInit {
     private docs: EditorService
   ) {
     super();
-  }
-
-  ngOnInit() {
-    if (this.tei.isDirty) {
-      console.log('mark element of type:' + this.tei.type + ' as dirty');
-    }
   }
 
   delete() {
@@ -141,7 +133,7 @@ export class TeiElementComponent extends TeiBase implements OnInit {
       tei.children.forEach(
         (childTei) => text += childTei.properties.value
       );
-    }else if (tei.type === 'paragraph') {
+    } else if (tei.type === 'paragraph') {
       tei.children.forEach(
         el => text += this.toText(el) + '\n'
       );

@@ -2,18 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { TranscribaObject } from '../transcriba-object';
 import { TranscribaService } from '../transcriba.service';
-import { TranscriptionService } from '../transcription.service';
-import { RevisionVotingService } from '../revision-voting.service';
-import { NotificationService } from '../../utility/notification.service';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import { AuthService } from '../../loopback-auth/auth.service';
-import { DiscussionService } from '../../discussion/discussion.service';
-import { SourceService } from '../../source/source.service';
-import { BackendService } from '../../utility/backend.service';
+import { LoggerService } from '../../utility/logger.service';
 
-import { Observable } from 'rxjs/Rx';
+import { zip } from 'rxjs/observable/zip';
 
 @Component({
   selector: 'tr-object-detail',
@@ -28,36 +22,28 @@ export class ObjectDetailComponent implements OnInit {
   currentTab = 0;
 
   constructor(
-    private transcriba: TranscribaService,
-    private transcription: TranscriptionService,
-    private notify: NotificationService,
+    private transcribaService: TranscribaService,
     private route: ActivatedRoute,
-    private router: Router,
-    private discussionService: DiscussionService,
-    private auth: AuthService,
-    private backend: BackendService,
-    private sourceService: SourceService,
-    private voting: RevisionVotingService
+    private logger: LoggerService
   ) {
 
   }
 
   ngOnInit() {
-    Observable.zip(
+    zip(
       this.route.params,
       this.route.data,
-      function(params, data){
+      function(params, data) {
         return {
           'params': params,
           'data': data
         };
       }
     ).subscribe( d => {
-      console.log('object-detail', 'params have changed');
       const id = d.params['id'];
 
       // load object
-      this.transcriba.loadByID(id).then(
+      this.transcribaService.loadByID(id).then(
           obj => {
             this.mode = d.data['mode'];
             this.object = obj;
@@ -68,7 +54,7 @@ export class ObjectDetailComponent implements OnInit {
                break;
             }
           },
-          err => console.log('cannot load object', err)
+          err => this.logger.log('ObjectDetailComponent', err)
       );
     });
 

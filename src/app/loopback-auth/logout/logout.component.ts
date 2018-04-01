@@ -45,7 +45,7 @@ export class LogoutComponent implements OnInit {
         this.isLoggingOut = true;
         if (err === 'Timeout') {
           this.notify.notify(Notification.timeout());
-        }else {
+        } else {
           this.notify.notify(
             Notification.message('request.logoutFailed')
           );

@@ -6,6 +6,8 @@ import {
 } from '@angular/core';
 
 import { CommentVotingService } from '../comment-voting.service';
+import { LoggerService } from '../../utility/logger.service';
+
 import { Comment } from '../comment';
 import { AuthService } from '../../loopback-auth/auth.service';
 import { User } from '../../loopback-auth/user';
@@ -16,6 +18,8 @@ import { User } from '../../loopback-auth/user';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnChanges {
+  private logger = LoggerService.getCustomLogger('CommentComponent');
+
   public currentVote = 'loading'; // loading, like, dislike, unwanted or none
   public votings: any;
   public user: User;
@@ -24,11 +28,11 @@ export class CommentComponent implements OnChanges {
 
   constructor(
     private voting: CommentVotingService,
-    private auth: AuthService
+    private authService: AuthService
   ) {}
 
   updateVotings() {
-    return this.auth.loadUser().then(
+    return this.authService.loadUser().then(
       (user) => this.user = user
     ).then(
       () => this.voting.loadVotings(this.comment.id).then(
@@ -52,13 +56,13 @@ export class CommentComponent implements OnChanges {
     if (this.currentVote === 'like') {
       return this.voting.unvote(this.comment.id).then(
         () => this.updateVotings(),
-        err => console.log(err)
+        err => this.logger.error(err)
       );
     } else {
       return this.voting.like(this.comment.id)
       .then(
         () => this.updateVotings(),
-        err => console.log(err)
+        err => this.logger.error(err)
       );
     }
   }
@@ -67,13 +71,13 @@ export class CommentComponent implements OnChanges {
     if (this.currentVote === 'dislike') {
       return this.voting.unvote(this.comment.id).then(
         () => this.updateVotings(),
-        err => console.log(err)
+        err => this.logger.error(err)
       );
-    }else {
+    } else {
       return this.voting.dislike(this.comment.id)
       .then(
         () => this.updateVotings(),
-        err => console.log(err)
+        err => this.logger.error(err)
       );
     }
   }
@@ -82,13 +86,13 @@ export class CommentComponent implements OnChanges {
     if (this.currentVote === 'unwanted') {
       return this.voting.unvote(this.comment.id).then(
         () => this.updateVotings(),
-        err => console.log(err)
+        err => this.logger.error(err)
       );
-    }else {
+    } else {
       return this.voting.unwanted(this.comment.id)
       .then(
         () => this.updateVotings(),
-        err => console.log(err)
+        err => this.logger.error(err)
       );
     }
   }

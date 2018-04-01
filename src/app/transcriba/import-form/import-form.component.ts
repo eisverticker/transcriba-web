@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormRequestHandling } from '../../utility/form-request-handling';
 import { TranscribaService } from '../transcriba.service';
-import { Source } from '../../source/source';
 import { SourceService } from '../../source/source.service';
-
-import { Notification } from '../../utility/notification';
+import { LoggerService } from '../../utility/logger.service';
 import { NotificationService } from '../../utility/notification.service';
+
+import { FormRequestHandling } from '../../utility/form-request-handling';
+import { Source } from '../../source/source';
+import { Notification } from '../../utility/notification';
 
 @Component({
   selector: 'tr-import-form',
@@ -22,7 +23,8 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
   constructor(
     private transcriba: TranscribaService,
     private sourceService: SourceService,
-    private notifier: NotificationService
+    private notify: NotificationService,
+    private logger: LoggerService
   ) {
     super();
   }
@@ -39,7 +41,7 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
           this.selectedSourceID = this.sources[0].id;
         }
       },
-      err => console.log(err)
+      err => this.logger.error('ImportFormComponent@ngOnInit', err)
     );
   }
 
@@ -50,8 +52,8 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
     this.watchRequestState(request);
 
     request.then(
-      () => this.notifier.notify(new Notification('request.success', ['success'])),
-      (err) => console.log('import error', err)
+      () => this.notify.notify(new Notification('request.success', ['success'])),
+      (err) => this.logger.error('ImportFormComponent@import', err)
     );
   }
 

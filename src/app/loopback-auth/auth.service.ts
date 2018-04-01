@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../utility/backend.service';
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { timeout } from 'rxjs/operators/timeout';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from './user';
 import { Role } from './role';
 
 @Injectable()
 export class AuthService {
+  public static readonly timeout = 5000;
+
   public isUserInitialized = false;
 
   // redirect for login (used by guards)
@@ -29,7 +33,7 @@ export class AuthService {
   public loadUser(): Promise<User> {
     if (this.isUserInitialized) {
       return Promise.resolve(this.userSubject.getValue());
-    }else {
+    } else {
       return this.authenticateUser().then(
         (user) => {
           this.isUserInitialized = true;
@@ -52,7 +56,7 @@ export class AuthService {
       'email': user.mail,
       'password': user.password
     })
-    .timeout(5000)
+    .pipe(timeout(AuthService.timeout))
     .toPromise()
     .then(
       (data) => {
@@ -63,9 +67,9 @@ export class AuthService {
       (err) => {
         if (err === 'Timeout') {
           throw err;
-        }else if (err.status === 401) {
+        } else if (err.status === 401) {
           return Promise.reject('wrong credentials');
-        }else {
+        } else {
           throw new Error('unexpected result 34343-AuthService');
         }
       }
@@ -74,7 +78,7 @@ export class AuthService {
 
   public logout(): Promise<any> {
     return this.http.post(this.backend.authUrl('AppUsers/logout', this.token), {})
-     .timeout(5000)
+     .pipe(timeout(AuthService.timeout))
      .toPromise()
      .then(
        () => {
@@ -100,7 +104,7 @@ export class AuthService {
     return this.http.post(url, {
       'email': user.mail
     })
-    .timeout(5000)
+    .pipe(timeout(AuthService.timeout))
     .toPromise();
   }
 
@@ -112,7 +116,7 @@ export class AuthService {
       'email': user.mail,
       'password': user.password
     })
-    .timeout(5000)
+    .pipe(timeout(AuthService.timeout))
     .toPromise()
     .then(
       () => {
@@ -126,7 +130,7 @@ export class AuthService {
 
     if (this.token === null || userID === null) {
       return Promise.reject<Role[]>('no local user data found');
-    }else {
+    } else {
       return this.http.get<Array<any>>(url)
       .toPromise()
       .then(
@@ -147,17 +151,17 @@ export class AuthService {
     }
   }
 
-  public get token(): string{
+  public get token(): string {
     return localStorage.getItem('token');
   }
-  public set token(id: string){
+  public set token(id: string) {
     localStorage.setItem('token', id);
   }
 
-  public get userID(): string{
+  public get userID(): string {
     return localStorage.getItem('userID');
   }
-  public set userID(id: string){
+  public set userID(id: string) {
     localStorage.setItem('userID', id);
   }
 
@@ -171,7 +175,7 @@ export class AuthService {
 
     if (this.token === null || this.userID === null) {
       return Promise.reject<User>('no local user data found');
-    }else {
+    } else {
       return this.http.get(url)
       .toPromise()
       .then(

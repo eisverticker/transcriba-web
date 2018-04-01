@@ -16,7 +16,7 @@ export class ImageViewerService {
     const token = this.authService.token;
     const url = this.backendService.authUrl('TranscribaObjects/' + id + '/zoomsteps', token);
 
-    return this.http.get(url)
+    return this.http.get<number>(url)
     .toPromise();
   }
 

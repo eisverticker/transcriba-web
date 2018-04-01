@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../utility/backend.service';
+import { AuthService } from './auth.service';
+
 import { User } from './user';
 import { Role } from './role';
 
-import { AuthService } from './auth.service';
+import { timeout } from 'rxjs/operators/timeout';
+import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class UserService {
+
+  public static readonly timeout = 5000;
 
   constructor(
     private http: HttpClient,
@@ -20,7 +25,7 @@ export class UserService {
     const url = this.backend.authUrl('AppUsers/count', token);
 
     return this.http.get(url)
-    .map(data => data['count'])
+    .pipe(map(data => data['count']))
     .toPromise();
   }
 
@@ -33,7 +38,7 @@ export class UserService {
     );
 
     return this.http.get<Array<any>>(url)
-    .timeout(5000)
+    .pipe(timeout(UserService.timeout))
     .toPromise()
     .then(
       (users) => {
@@ -74,7 +79,9 @@ export class UserService {
     const token = this.auth.token;
     const url = this.backend.authUrl('AppUsers/' + user.id, token);
 
-    return this.http.delete(url).timeout(5000).toPromise();
+    return this.http.delete(url)
+    .pipe(timeout(UserService.timeout))
+    .toPromise();
   }
 
   /**
@@ -90,7 +97,7 @@ export class UserService {
           (roles) => {
             if (roles.length === 0) {
               u.roles = [new Role('none')];
-            }else {
+            } else {
               u.roles = roles;
             }
             return this.includeUserRoles(users, currentUser + 1);

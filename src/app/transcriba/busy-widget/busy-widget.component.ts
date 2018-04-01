@@ -4,6 +4,7 @@ import { AuthService } from '../../loopback-auth/auth.service';
 import { TranscribaObject } from '../transcriba-object';
 import { BackendService } from '../../utility/backend.service';
 import { TranscribaService } from '../transcriba.service';
+import { LoggerService } from '../../utility/logger.service';
 
 @Component({
   selector: 'tr-busy-widget',
@@ -11,6 +12,7 @@ import { TranscribaService } from '../transcriba.service';
   styleUrls: ['./busy-widget.component.scss']
 })
 export class BusyWidgetComponent implements OnInit {
+  private logger = LoggerService.getCustomLogger('BusyWidgetComponent');
 
   object: TranscribaObject;
 
@@ -29,15 +31,15 @@ export class BusyWidgetComponent implements OnInit {
               if (isBusy) {
                 this.transcriba.loadCurrentlyOccupiedObject().then(// load object if busy
                   object => this.object = object,
-                  err => console.log(err)
+                  error => this.logger.error(error)
                 );
               }
             },
-            err => console.log(err)
+            error => this.logger.error(error)
           );
         }
       },
-      err => console.log(err)
+      error => this.logger.error(error)
     );
   }
 

@@ -5,6 +5,8 @@ import { AuthService } from '../loopback-auth/auth.service';
 import { Injectable } from '@angular/core';
 import { Source } from './source';
 
+import { map } from 'rxjs/operators/map';
+
 @Injectable()
 export class SourceService {
 
@@ -19,19 +21,23 @@ export class SourceService {
     const url = this.backend.authUrl('Sources', token);
 
     return this.http.get<Array<any>>(url)
-    .toPromise()
-    .then(
-      (data) => data.map( s => new Source(
-        s.title,
-        s.url,
-        s.info_url,
-        s.logo_url,
-        s.api_type,
-        s.sync,
-        s.activated,
-        s.id
-      ))
-    );
+    .pipe(
+      map(
+        (data) => data.map(
+          s => new Source(
+            s.title,
+            s.url,
+            s.info_url,
+            s.logo_url,
+            s.api_type,
+            s.sync,
+            s.activated,
+            s.id
+          )
+        )
+      )
+    )
+    .toPromise();
   }
 
   loadByID(id: any): Promise<Source> {
@@ -39,19 +45,21 @@ export class SourceService {
     const url = this.backend.authUrl('Sources/' + id, token);
 
     return this.http.get(url)
-    .toPromise()
-    .then(
-      s => new Source(
-        s['title'],
-        s['url'],
-        s['info_url'],
-        s['logo_url'],
-        s['api_type'],
-        s['sync'],
-        s['activated'],
-        s['id']
+    .pipe(
+      map(
+        s => new Source(
+          s['title'],
+          s['url'],
+          s['info_url'],
+          s['logo_url'],
+          s['api_type'],
+          s['sync'],
+          s['activated'],
+          s['id']
+        )
       )
-    );
+    )
+    .toPromise();
   }
 
   loadSummaryByID(id: any): Promise<Source> {
@@ -59,19 +67,21 @@ export class SourceService {
     const url = this.backend.authUrl('Sources/' + id + '/summary', token);
 
     return this.http.get(url)
-    .toPromise()
-    .then(
-      s => new Source(
-        s['title'],
-        '',
-        s['info_url'],
-        s['logo_url'],
-        '',
-        false,
-        false,
-        s['id']
+    .pipe(
+      map(
+        s => new Source(
+          s['title'],
+          '',
+          s['info_url'],
+          s['logo_url'],
+          '',
+          false,
+          false,
+          s['id']
+        )
       )
-    );
+    )
+    .toPromise();
   }
 
   save(source: Source): Promise<any> {
@@ -80,7 +90,7 @@ export class SourceService {
 
     if (source.id === undefined) {
       url = this.backend.authUrl('Sources', token);
-    }else {
+    } else {
       url = this.backend.authUrl('Sources/' + source.id, token);
     }
 
@@ -106,21 +116,22 @@ export class SourceService {
      const requestUrl = this.backend.authUrl('Sources/metadata', token, {
        'url': url
      });
-     console.log('metadata url', requestUrl);
 
      return this.http.get(requestUrl)
-     .toPromise()
-     .then(
-       o => new Source(
-         o['name'], // title
-         o['manuscriptUrl'], // url
-         o['linkUrl'], // info_url
-         '', // logo_url
-         'TranscribaJSON', // type
-         o['capabilities']['synchronisation'], // sync
-         true // activated
+     .pipe(
+       map(
+         o => new Source(
+           o['name'], // title
+           o['manuscriptUrl'], // url
+           o['linkUrl'], // info_url
+           '', // logo_url
+           'TranscribaJSON', // type
+           o['capabilities']['synchronisation'], // sync
+           true // activated
+         )
        )
-     );
+     )
+     .toPromise();
    }
 
 }

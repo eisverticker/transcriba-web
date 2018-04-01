@@ -3,8 +3,7 @@ import { Component,
   ElementRef,
   AfterViewInit,
   AfterViewChecked,
-  ViewChild,
-  Renderer
+  ViewChild
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -27,9 +26,7 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
   private _value = '';
   private isViewInitialized = false;
 
-  constructor(
-    private renderer: Renderer
-  ) {}
+  constructor() {}
 
   ngAfterViewInit() {
     this.isViewInitialized = true;
@@ -39,11 +36,11 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
     this.grow();
   }
 
-  get value(){
+  get value() {
     return this._value;
   }
 
-  set value(value: any){
+  set value(value: any) {
     if (value !== this._value) {
       this._value = value;
       this.propagateChange(value);

@@ -4,8 +4,25 @@ import { AuthService } from '../loopback-auth/auth.service';
 
 import { Injectable } from '@angular/core';
 import { InfoPage } from './info-page';
-import { DiscussionService } from '../discussion/discussion.service';
 
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators/map';
+
+/**
+ * Pure Operator which creates a info page from raw json
+ */
+const jsonToInfoPage = <T>(json: Observable<T>) =>
+  json.pipe(
+    map(
+      p => new InfoPage(
+        p['name'],
+        p['content'],
+        p['show_discussion'],
+        p['discussionId'],
+        p['id']
+      )
+    )
+  );
 
 @Injectable()
 export class InfoPageService {
@@ -13,8 +30,7 @@ export class InfoPageService {
   constructor(
     private http: HttpClient,
     private backend: BackendService,
-    private auth: AuthService,
-    private discuss: DiscussionService
+    private auth: AuthService
   ) {}
 
   loadAll(): Promise<InfoPage[]> {
@@ -25,7 +41,13 @@ export class InfoPageService {
     .toPromise()
     .then(
       (data) => data.map(
-        p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, p.id)
+        p => new InfoPage(
+          p.name,
+          p.content,
+          p.show_discussion,
+          p.discussionId,
+          p.id
+        )
       )
     );
   }
@@ -35,16 +57,8 @@ export class InfoPageService {
     const url = this.backend.authUrl('InfoPages/' + id, token);
 
     return this.http.get(url)
-    .toPromise()
-    .then(
-      p => new InfoPage(
-        p['name'],
-        p['content'],
-        p['show_discussion'],
-        p['discussionId'],
-        id
-      )
-    );
+    .pipe(jsonToInfoPage)
+    .toPromise();
   }
 
   loadOneByName(name: string): Promise<InfoPage> {
@@ -52,16 +66,8 @@ export class InfoPageService {
     const url = this.backend.authUrl('InfoPages/' + name + '/parsed', token);
 
     return this.http.get(url)
-    .toPromise()
-    .then(
-      pageData => new InfoPage(
-        pageData['name'],
-        pageData['content'],
-        pageData['show_discussion'],
-        pageData['discussionId'],
-        pageData['id']
-      )
-    );
+    .pipe(jsonToInfoPage)
+    .toPromise();
   }
 
   save(page: InfoPage): Promise<any> {
@@ -79,7 +85,7 @@ export class InfoPageService {
 
       return this.http.put(url, data).toPromise();
 
-    }else {
+    } else {
       url = this.backend.authUrl('InfoPages/' + page.id, token);
       data['discussionId'] = page.discussionID;
 
