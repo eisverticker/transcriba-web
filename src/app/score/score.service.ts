@@ -34,7 +34,7 @@ export class ScoreService {
     private http: HttpClient,
     private backend: BackendService,
     private auth: AuthService,
-    private notificationService: NotificationService
+    private notify: NotificationService
   ) {
     // init by reset
     this.reset();
@@ -99,7 +99,7 @@ export class ScoreService {
       },
       (err) => {
         // notify the user about an error
-        this.notificationService.notify(Notification.timeout());
+        this.notify.notify(Notification.timeout());
       }
     );
   }
