@@ -1,15 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
 import { BackendService } from '../utility/backend.service';
 import { AuthService } from '../loopback-auth/auth.service';
 
-import { Injectable } from '@angular/core';
 import { Discussion } from './discussion';
 import { Comment } from './comment';
-
 import { User } from '../loopback-auth/user';
+
+import { map } from 'rxjs/operators/map';
+import { timeout } from 'rxjs/operators/timeout';
 
 @Injectable()
 export class DiscussionService {
+
+  public static readonly timeout = 5000;
 
   constructor(
     private http: HttpClient,
@@ -25,10 +29,12 @@ export class DiscussionService {
     const url = this.backend.authUrl('Discussions/' + id, token);
 
     return this.http.get(url)
-    .toPromise()
-    .then(
-      (data) => new Discussion(data['title'], id)
-    );
+    .pipe(
+      map(
+        (data) => new Discussion(data['title'], id)
+      )
+    )
+    .toPromise();
   }
 
   loadCommentPage(discussion: Discussion, page: number, itemsPerPage: number): Promise<Comment[]> {
@@ -42,7 +48,9 @@ export class DiscussionService {
     );
 
     return this.http.get<Array<any>>(url)
-    .timeout(5000)
+    .pipe(
+      timeout(DiscussionService.timeout)
+    )
     .toPromise()
     .then(
       (comments) => {
@@ -66,7 +74,9 @@ export class DiscussionService {
     const url = this.backend.authUrl('Discussions/' + discussion.id + '/comments/count', token);
 
     return this.http.get(url)
-    .map(data => data['count'])
+    .pipe(
+      map(data => data['count'])
+    )
     .toPromise();
   }
 

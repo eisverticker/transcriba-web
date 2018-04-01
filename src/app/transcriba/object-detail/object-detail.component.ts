@@ -13,7 +13,8 @@ import { DiscussionService } from '../../discussion/discussion.service';
 import { SourceService } from '../../source/source.service';
 import { BackendService } from '../../utility/backend.service';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { zip } from 'rxjs/observable/zip';
 
 @Component({
   selector: 'tr-object-detail',
@@ -43,10 +44,10 @@ export class ObjectDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    Observable.zip(
+    zip(
       this.route.params,
       this.route.data,
-      function(params, data){
+      function(params, data) {
         return {
           'params': params,
           'data': data

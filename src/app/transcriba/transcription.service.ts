@@ -4,8 +4,9 @@ import { AuthService } from '../loopback-auth/auth.service';
 
 import { Injectable } from '@angular/core';
 import { Revision } from './revision';
-
 import { TeiElement } from '../editor/tei-element';
+
+import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class TranscriptionService {
@@ -26,18 +27,20 @@ export class TranscriptionService {
     const url = this.backend.authUrl('TranscribaObjects/' + objId + '/occupy', token);
 
     return this.http.post(url, {})
-    .toPromise()
-    .then(
-      data => new Revision(
-        data['id'],
-        data['approved'],
-        data['createdAt'],
-        data['metadata'],
-        data['content'],
-        data['published'],
-        data['ownerId']
+    .pipe(
+      map(
+        data => new Revision(
+          data['id'],
+          data['approved'],
+          data['createdAt'],
+          data['metadata'],
+          data['content'],
+          data['published'],
+          data['ownerId']
+        )
       )
-    );
+    )
+    .toPromise();
   }
 
   /**
@@ -70,7 +73,7 @@ export class TranscriptionService {
     const token = this.auth.token;
     const url = this.backend.authUrl('TranscribaObjects/free', token);
 
-    return this.http.post(url, {})
+    return this.http.post<boolean>(url, {})
     .toPromise();
   }
 

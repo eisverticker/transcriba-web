@@ -1,16 +1,34 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../utility/backend.service';
 import { AuthService } from '../loopback-auth/auth.service';
 import { User } from '../loopback-auth/user';
 
-import { Injectable } from '@angular/core';
 import { TranscribaObject } from './transcriba-object';
 import { Revision } from './revision';
 import { Collection } from './collection';
 import { Source } from '../source/source';
 
+import { map } from 'rxjs/operators/map';
+import { timeout } from 'rxjs/operators/timeout';
+
+class ChronicItem {
+  id: string;
+  username: string;
+  createdAt: string;
+  published: boolean;
+  approved: boolean;
+}
+
+class RevisionPermission {
+  allowVote: boolean;
+  details: any;
+}
+
 @Injectable()
 export class TranscribaService {
+
+  public static readonly timeout = 5000;
 
   constructor(
     private http: HttpClient,
@@ -25,20 +43,22 @@ export class TranscribaService {
     const token = this.auth.token;
     const url = this.backend.authUrl('TranscribaObjects/' + id, token);
 
-    return this.http.get(url)
-    .toPromise()
-    .then(
-      o => new TranscribaObject(
-        o['title'],
-        o['externalID'],
-        o['sourceId'],
-        o['discussionId'],
-        o['id'],
-        o['status'],
-        o['stage'],
-        o['publicTags']
+    return this.http.get<any>(url)
+    .pipe(
+      map(
+        o => new TranscribaObject(
+          o['title'],
+          o['externalID'],
+          o['sourceId'],
+          o['discussionId'],
+          o['id'],
+          o['status'],
+          o['stage'],
+          o['publicTags']
+        )
       )
-    );
+    )
+    .toPromise()
   }
 
   /**
@@ -53,14 +73,16 @@ export class TranscribaService {
       let searchFilter: string;
       if (searchTerm && searchTerm.length > 1) {
         searchFilter = 'where[title][like]=' + searchTerm;
-      }else {
+      } else {
         searchFilter = '';
       }
 
       const url = this.backend.authUrl('TranscribaObjects/count', token, searchFilter);
 
       return this.http.get(url)
-      .map(data => data['count'])
+      .pipe(
+        map(data => data['count'])
+      )
       .toPromise();
   }
 
@@ -93,7 +115,7 @@ export class TranscribaService {
     const token = this.auth.token;
     const url = this.backend.authUrl('TranscribaObjects/import', token);
 
-    return this.http.post(url, {
+    return this.http.post<string>(url, {
       'sourceId': source.id,
       'externalId': foreignID
     })
@@ -141,7 +163,7 @@ export class TranscribaService {
     );
 
     return this.http.get<Array<any>>(url)
-    .timeout(5000)
+    .pipe(timeout(TranscribaService.timeout))
     .toPromise()
     .then(
       (objects) => {
@@ -172,7 +194,7 @@ export class TranscribaService {
     );
 
     return this.http.get<Array<any>>(url)
-    .timeout(5000)
+    .pipe(timeout(TranscribaService.timeout))
     .toPromise()
     .then(
       (objects) => {
@@ -204,7 +226,7 @@ export class TranscribaService {
     );
 
     return this.http.get<Array<any>>(url)
-    .timeout(5000)
+    .pipe(timeout(TranscribaService.timeout))
     .toPromise()
     .then(
       (collections) => {
@@ -226,12 +248,12 @@ export class TranscribaService {
   /**
    * Loads the revision chronic of a TranscribaObject with the given id
    */
-  loadChronic(objId: any): Promise<Array<{id: string, username: string, createdAt: string, published: boolean, approved: boolean}>> {
+  loadChronic(objId: any): Promise<ChronicItem[]> {
     const token = this.auth.token;
     const url = this.backend.authUrl('TranscribaObjects/' + objId + '/chronic', token);
 
-    return this.http.get(url)
-    .timeout(5000)
+    return this.http.get<ChronicItem[]>(url)
+    .pipe(timeout(TranscribaService.timeout))
     .toPromise();
   }
 
@@ -239,14 +261,21 @@ export class TranscribaService {
     return Promise.resolve(0);
   }*/
 
-  loadLatestRevision(objId: any): Promise<Revision> {
+  /**
+   * Loads a revision with the specified tag
+   * the tag must be supported by the server's rest api
+   */
+  private loadRevision(trObjectId: any, tag: 'latest' | 'stable'): Promise<Revision>{
     const token = this.auth.token;
-    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest', token);
+    const url = this.backend.authUrl(
+      'TranscribaObjects/' + trObjectId + '/' + tag,
+      token
+    );
 
     return this.http.get(url)
-    .timeout(5000)
-    .toPromise()
-    .then(
+    .pipe(
+      timeout(TranscribaService.timeout),
+      map(
         data => new Revision(
           data['id'],
           data['approved'],
@@ -256,41 +285,31 @@ export class TranscribaService {
           data['published'],
           data['ownerId']
         )
-    );
+      )
+    )
+    .toPromise()
+  }
+
+  loadLatestRevision(trObjectId: any): Promise<Revision> {
+    return this.loadRevision(trObjectId, 'latest');
   }
 
   /**
    * Returns the latest stable revision of an object
    */
-  loadStableRevision(objId: any): Promise<Revision> {
-    const token = this.auth.token;
-    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/stable', token);
-
-    return this.http.get(url)
-    .timeout(5000)
-    .toPromise()
-    .then(
-        data => new Revision(
-          data['id'],
-          data['approved'],
-          data['createdAt'],
-          data['metadata'],
-          data['content'],
-          data['published'],
-          data['ownerId']
-        )
-    );
+  loadStableRevision(trObjectId: any): Promise<Revision> {
+    return this.loadRevision(trObjectId, 'stable');
   }
 
   /**
    * Returns the latest revision (including unpublished and not yet accepted ones)
    */
-  loadLatestRevisionPermissions(objId: any): Promise<{allowVote: boolean, details: any}> {
+  loadLatestRevisionPermissions(objId: any): Promise<RevisionPermission> {
     const token = this.auth.token;
     const url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest/permissions', token);
 
-    return this.http.get(url)
-    .timeout(5000)
+    return this.http.get<RevisionPermission>(url)
+    .pipe(timeout(TranscribaService.timeout))
     .toPromise();
   }
 
@@ -302,8 +321,8 @@ export class TranscribaService {
      const token = this.auth.token;
      const url = this.backend.authUrl('TranscribaObjects/occupied', token);
 
-     return this.http.get(url)
-     .timeout(5000)
+     return this.http.get<TranscribaObject>(url)
+     .pipe(timeout(TranscribaService.timeout))
      .toPromise();
    }
 
@@ -311,8 +330,8 @@ export class TranscribaService {
      const token = this.auth.token;
      const url = this.backend.authUrl('AppUsers/busy', token);
 
-     return this.http.get(url)
-     .timeout(5000)
+     return this.http.get<boolean>(url)
+     .pipe(timeout(TranscribaService.timeout))
      .toPromise();
    }
 
@@ -321,7 +340,7 @@ export class TranscribaService {
      const url = this.backend.authUrl('AppUsers/tutorial', token);
 
      return this.http.post<void>(url, {})
-     .timeout(5000)
+     .pipe(timeout(TranscribaService.timeout))
      .toPromise()
      .then(
        () => this.auth.reload()

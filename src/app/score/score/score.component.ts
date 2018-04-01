@@ -5,7 +5,7 @@ import { ScoreService } from '../score.service';
 import { NotificationService } from '../../utility/notification.service';
 import { Notification } from '../../utility/notification';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Score } from '../score';
 
 @Component({

@@ -13,7 +13,7 @@ export class ProgressPillsComponent implements OnChanges {
   @Input() size: number;
   @Input() current: number;
   @Input() stageNames: Array<string>;
-  private pills: Array<boolean>;
+  pills: Array<boolean>;
 
   constructor() { }
 

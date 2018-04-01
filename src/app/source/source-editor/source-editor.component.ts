@@ -31,7 +31,7 @@ export class SourceEditorComponent implements OnInit {
         if (params['id'] === 'new') {
           this.mode = 'metadataMode';
           this.currentSource = Source.createEmptySource();
-        }else {
+        } else {
           this.mode = 'detailMode';
           this.sourceService.loadByID(params['id']).then(
             (source) => this.currentSource = source,

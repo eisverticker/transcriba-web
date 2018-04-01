@@ -12,7 +12,7 @@ export class Role {
         new Role('registered'),
         new Role('administrator')
       ];
-    }else {
+    } else {
       return environment.roles.map( role => new Role(role) );
     }
   }

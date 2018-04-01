@@ -80,7 +80,7 @@ export class ExplorerComponent implements OnInit {
 
     if (this.filter.latestSearchTerm.length < 2) {
       searchValue = undefined;
-    }else {
+    } else {
       searchValue = this.filter.latestSearchTerm;
     }
 

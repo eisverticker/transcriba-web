@@ -18,7 +18,7 @@ export class SourceMetadataComponent implements OnInit {
 
   constructor(
     private logger: LoggerService,
-    private SourceService: SourceService,
+    private sourceService: SourceService,
     private router: Router
   ) { }
 
@@ -26,7 +26,7 @@ export class SourceMetadataComponent implements OnInit {
 
   importMetadata() {
     this.isLoading = true;
-    return this.SourceService.loadMetadata(this.metadataUrl).then(
+    return this.sourceService.loadMetadata(this.metadataUrl).then(
       (source) => {
         this.done.emit(source);
         this.isLoading = false;

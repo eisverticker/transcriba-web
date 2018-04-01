@@ -141,7 +141,7 @@ export class TeiElementComponent extends TeiBase implements OnInit {
       tei.children.forEach(
         (childTei) => text += childTei.properties.value
       );
-    }else if (tei.type === 'paragraph') {
+    } else if (tei.type === 'paragraph') {
       tei.children.forEach(
         el => text += this.toText(el) + '\n'
       );
