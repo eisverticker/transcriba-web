@@ -4,7 +4,6 @@ import { MatCardModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material';
 
 // components
-import { ScoreComponent } from './score/score.component';
 import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 
 const routes: Routes = [

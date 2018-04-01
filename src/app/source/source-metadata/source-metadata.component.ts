@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoggerService } from '../../utility/logger.service';
 import { SourceService } from '../source.service';
 import { Source } from '../source';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'src-source-metadata',
@@ -18,8 +17,7 @@ export class SourceMetadataComponent implements OnInit {
 
   constructor(
     private logger: LoggerService,
-    private sourceService: SourceService,
-    private router: Router
+    private sourceService: SourceService
   ) { }
 
   ngOnInit() {}

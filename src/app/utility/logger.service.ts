@@ -13,6 +13,11 @@ export class LoggerService {
     console.log(context, message);
   }
 
+  error(context: string, message: any) {
+    this.logs.push(context + ':' + message);
+    console.error(context, message);
+  }
+
   printLogs() {
     console.log(this.logs);
   }

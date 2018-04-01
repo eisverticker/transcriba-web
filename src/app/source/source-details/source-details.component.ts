@@ -4,8 +4,6 @@ import { Source } from '../source';
 import { SourceService } from '../source.service';
 import { NotificationService } from '../../utility/notification.service';
 import { Notification } from '../../utility/notification';
-import { LoggerService } from '../../utility/logger.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'src-source-details',
@@ -21,11 +19,8 @@ export class SourceDetailsComponent implements OnInit {
   public isLastSaveFailed = false;
 
   constructor(
-    private logger: LoggerService,
     private sourceService: SourceService,
-    private notify: NotificationService,
-    private route: ActivatedRoute,
-    private router: Router
+    private notify: NotificationService
   ) {}
 
   ngOnInit() {}

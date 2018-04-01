@@ -5,14 +5,14 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { TranscribaObject } from '../transcriba-object';
-import { Discussion } from '../../discussion/discussion';
-import { Source } from '../../source/source';
-
-import { TranscribaService } from '../transcriba.service';
 import { DiscussionService } from '../../discussion/discussion.service';
 import { SourceService } from '../../source/source.service';
 import { BackendService } from '../../utility/backend.service';
+import { LoggerService } from '../../utility/logger.service';
+
+import { TranscribaObject } from '../transcriba-object';
+import { Discussion } from '../../discussion/discussion';
+import { Source } from '../../source/source';
 
 @Component({
   selector: 'tr-overview',
@@ -25,20 +25,20 @@ export class OverviewComponent implements OnChanges {
   source: Source;
 
   constructor(
-    private transcriba: TranscribaService,
     public backend: BackendService,
     private sourceService: SourceService,
-    private discussionService: DiscussionService
+    private discussionService: DiscussionService,
+    private logger: LoggerService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.discussionService.loadByID(this.object.discussionID).then(
-      (discussion) => this.discussion = discussion,
-      err => console.log(err)
+      discussion => this.discussion = discussion,
+      err => this.logger.error('OverviewComponent', err)
     );
     this.sourceService.loadSummaryByID(this.object.sourceID).then(
       source => this.source = source,
-      err => console.log('error', err)
+      err => this.logger.error('OverviewComponent', err)
     );
   }
 

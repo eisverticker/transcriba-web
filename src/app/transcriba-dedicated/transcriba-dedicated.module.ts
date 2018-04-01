@@ -18,7 +18,6 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatToolbarModule,
-  MatIconRegistry,
   MatIconModule,
   MatDialogModule
 } from '@angular/material';

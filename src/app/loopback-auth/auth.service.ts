@@ -10,8 +10,9 @@ import { Role } from './role';
 
 @Injectable()
 export class AuthService {
-  public isUserInitialized = false;
   public static readonly timeout = 5000;
+
+  public isUserInitialized = false;
 
   // redirect for login (used by guards)
   public redirectUrl = '/';

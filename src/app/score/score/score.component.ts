@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '../../loopback-auth/auth.service';
 import { ScoreService } from '../score.service';
 import { NotificationService } from '../../utility/notification.service';
 import { Notification } from '../../utility/notification';
@@ -19,8 +18,7 @@ export class ScoreComponent implements OnInit {
 
   constructor(
     private scoreService: ScoreService,
-    private notifier: NotificationService,
-    private auth: AuthService
+    private notifier: NotificationService
   ) {}
 
   ngOnInit() {
