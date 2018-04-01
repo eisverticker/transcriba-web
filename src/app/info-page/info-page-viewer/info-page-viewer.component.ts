@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 import { InfoPage } from '../info-page';
 import { InfoPageService } from '../info-page.service';
@@ -61,7 +61,7 @@ export class InfoPageViewerComponent implements OnInit {
         },
       ];
       this.discussionLink = '/info/' + page.name + '/discussion';
-    }else {
+    } else {
       this.navItems = [];
     }
   }

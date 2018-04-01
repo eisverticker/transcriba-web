@@ -8,21 +8,27 @@ import { Score } from './score';
 import { Notification } from '../utility/notification';
 import { NotificationService } from '../utility/notification.service';
 
-import {
-  Observable,
-  BehaviorSubject,
-  Subscription
-} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subscription } from 'rxjs/Subscription';
+import { interval } from 'rxjs/observable/interval';
+import { timeout } from 'rxjs/operators/timeout';
+
+class UserScore {
+  username: string;
+  score: number;
+}
 
 @Injectable()
 export class ScoreService {
+  public static readonly timeout = 5000;
 
   score: Observable<Score | boolean>;
   user: Observable<User>;
   private scoreSubject: BehaviorSubject<Score | boolean>;
   lastScore: number; // init in reset()
   isIntervalStarted = false;
-  intervalSubscription: Subscription = null;
+  intervalSubscription: Subscription | null = null;
 
   constructor(
     private http: HttpClient,
@@ -64,10 +70,7 @@ export class ScoreService {
     if (this.isIntervalStarted) { return; }
 
     this.isIntervalStarted = true;
-    this.intervalSubscription = Observable
-    .interval(20000)
-    .timeInterval()
-    .subscribe(
+    this.intervalSubscription = interval(20000).subscribe(
       () => this.updateScore()
     );
   }
@@ -110,8 +113,8 @@ export class ScoreService {
         const token = this.auth.token;
         const url = this.backend.authUrl('AppUsers/score', token);
 
-        return this.http.get(url)
-        .timeout(5000)
+        return this.http.get<number>(url)
+        .pipe(timeout(ScoreService.timeout))
         .toPromise();
       }
     );
@@ -120,12 +123,12 @@ export class ScoreService {
   /**
    * Get Users which are in the leaderboard and their score
    */
-  loadBestScorers(maxNumOfUsers = 10): Promise<{username: string, score: number}[]> {
+  loadBestScorers(maxNumOfUsers = 10): Promise<UserScore[]> {
         const token = this.auth.token;
         const url = this.backend.authUrl('AppUsers/leaderboard', token);
 
-        return this.http.get(url)
-        .timeout(5000)
+        return this.http.get<UserScore[]>(url)
+        .pipe(timeout(ScoreService.timeout))
         .toPromise();
   }
 

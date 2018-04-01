@@ -30,7 +30,7 @@ export class InfoPageEditComponent implements OnInit {
       (params) => {
         if (params['id'] === 'new') {
           this.page = InfoPage.createEmptyPage();
-        }else {
+        } else {
           this.pageService.loadOneByID(params['id']).then(
             (page) => this.page = page,
             (err) => {

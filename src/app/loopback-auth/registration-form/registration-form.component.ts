@@ -43,7 +43,7 @@ export class RegistrationFormComponent {
           this.isRegistering = false;
           if (err === 'Timeout') {
             this.notify.notify(Notification.timeout());
-          }else {
+          } else {
             this.notify.notify(new Notification('request.registrationFailed', ['fail']));
           }
         }

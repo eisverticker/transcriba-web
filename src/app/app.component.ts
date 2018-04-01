@@ -84,7 +84,7 @@ export class AppComponent implements OnInit {
       notification => {
         if (notification.tags.indexOf('untranslated') !== -1) {
           this.processNotificationMessage(notification.message, notification.tags);
-        }else {
+        } else {
           this.translate.get(notification.message).subscribe(
             (translatedMessage) =>
             this.processNotificationMessage(

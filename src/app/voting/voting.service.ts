@@ -6,6 +6,8 @@ import { User } from '../loopback-auth/user';
 import { Injectable } from '@angular/core';
 import { VotingContext } from './voting-context';
 
+import { map } from 'rxjs/operators/map';
+
 @Injectable()
 export class VotingService {
 
@@ -57,7 +59,9 @@ export class VotingService {
     );
 
     return this.http.get(url)
-    .map(response => response['count'])
+    .pipe(
+      map(response => response['count'])
+    )
     .toPromise();
   }
 
@@ -74,14 +78,17 @@ export class VotingService {
     );
 
     return this.http.get<Array<any>>(url)
-    .toPromise()
-    .then(
-      (votings) => votings.map(voting => voting['appUser']) // map to appUser
-    ).then(
-      (users) => users.map(
-        user => new User(user.username, user.email, '', [], user.id)
+    .pipe(
+      map(
+        (votings) => votings.map(voting => voting['appUser']) // map to appUser
+      ),
+      map(
+        (users) => users.map(
+          user => new User(user.username, user.email, '', [], user.id)
+        )
       )
-    );
+    )
+    .toPromise();
   }
 
   /**
@@ -107,7 +114,7 @@ export class VotingService {
       (votings) => {
         if (votings['length'] === 0) {
           return 'none';
-        }else {
+        } else {
           return votings[0].vote;
         }
       }
@@ -132,7 +139,9 @@ export class VotingService {
        }
      ).then(// return the id only
        () => this.http.get(url)
-        .map(response => response['id'])
+        .pipe(
+          map(response => response['id'])
+        )
         .toPromise()
      );
    }

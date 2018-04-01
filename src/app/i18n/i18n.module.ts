@@ -4,12 +4,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   TranslateModule,
   TranslateLoader,
-  MissingTranslationHandler
+  MissingTranslationHandler,
+  ɵa as TranslateStore // WORKAROUND (see #21)
 } from '@ngx-translate/core';
 
 // WORKAROUND (see #21)
-import { TranslateStore } from '@ngx-translate/core/src/translate.store';
-
 import { I18nHelperService } from './i18n-helper.service';
 import { SimpleMissingTranslationHandler } from './simple-missing-translation-handler';
 
@@ -35,8 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   declarations: [],
   providers: [
-    TranslateStore, // WORKAROUND (see #21)
-    I18nHelperService
+    I18nHelperService,
+    TranslateStore // WORKAROUND (see #21)
   ],
   exports: [
     TranslateModule

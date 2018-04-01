@@ -79,7 +79,7 @@ export class InfoPageService {
 
       return this.http.put(url, data).toPromise();
 
-    }else {
+    } else {
       url = this.backend.authUrl('InfoPages/' + page.id, token);
       data['discussionId'] = page.discussionID;
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Subject, Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { Notification } from './notification';
 
 @Injectable()

@@ -25,7 +25,13 @@ export class TutorialComponent implements OnInit {
       {
         title: 'Zweck der Arbeit',
         imageFileName: 'schiller.jpg',
-        description: 'Auf Transcriba hilfst du dabei die alte Handschrift auf den Manuskripten zu entschlüsseln und wissenschaftlich nutzbar zu machen. Auf dem Bild siehst du beispielsweise ein Manuskript von Friedrich Schiller (An die Freude).'
+        description: `
+        Auf Transcriba hilfst du dabei
+        die alte Handschrift auf den Manuskripten zu entschlüsseln
+        und wissenschaftlich nutzbar zu machen. #
+        Auf dem Bild siehst du beispielsweise ein Manuskript
+        von Friedrich Schiller (An die Freude).
+        `
       },
       {
         title: 'Hallo Welt',

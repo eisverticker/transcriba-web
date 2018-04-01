@@ -80,7 +80,7 @@ export class SourceService {
 
     if (source.id === undefined) {
       url = this.backend.authUrl('Sources', token);
-    }else {
+    } else {
       url = this.backend.authUrl('Sources/' + source.id, token);
     }
 

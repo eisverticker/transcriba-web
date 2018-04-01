@@ -13,7 +13,8 @@ import { AuthService } from '../../loopback-auth/auth.service';
 import { Discussion } from '../discussion';
 import { Comment } from '../comment';
 import { User } from '../../loopback-auth/user';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { zip } from 'rxjs/observable/zip';
 
 @Component({
   selector: 'disc-discussion',
@@ -61,11 +62,11 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
   }
 
   private loadDiscussionAndUserData(): Observable<any> {
-    return Observable.zip(
+    return zip(
       this.auth.loadUser(),
       this.discuss.loadNumOfComments(this.discussion),
       this.discuss.loadCommentPage(this.discussion, this.currentPage, this.itemsPerPage),
-      function(user, numOfComments, comments){
+      function(user, numOfComments, comments) {
         return {
           'user': user,
           'numOfComments': numOfComments,

@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   isRegistered(): boolean {
     if (this.user && this.user.isRegistered()) {
       return true;
-    }else {
+    } else {
       return false;
     }
   }
