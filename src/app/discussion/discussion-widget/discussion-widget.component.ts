@@ -5,6 +5,7 @@ import {
   Input
 } from '@angular/core';
 
+import { LoggerService } from '../../utility/logger.service';
 import { DiscussionService } from '../discussion.service';
 import { Comment } from '../comment';
 
@@ -14,6 +15,8 @@ import { Comment } from '../comment';
   styleUrls: ['./discussion-widget.component.scss']
 })
 export class DiscussionWidgetComponent implements OnChanges {
+  private logger = LoggerService.getCustomLogger('DiscussionWidgetComponent');
+
   @Input() discussionId: any;
   @Input() numOfItems: number;
 
@@ -28,7 +31,7 @@ export class DiscussionWidgetComponent implements OnChanges {
       discussion => this.discussionService.loadCommentPage(discussion, 0, this.numOfItems).then(
           comments => this.comments = comments
       ),
-      err => console.log(err)
+      error => this.logger.error(error)
     );
   }
 

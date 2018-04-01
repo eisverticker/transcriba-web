@@ -9,6 +9,7 @@ import { FormRequestHandling } from '../../utility/form-request-handling';
 
 import { DiscussionService } from '../discussion.service';
 import { AuthService } from '../../loopback-auth/auth.service';
+import { LoggerService } from '../../utility/logger.service';
 
 import { Discussion } from '../discussion';
 import { Comment } from '../comment';
@@ -24,8 +25,10 @@ import { zip } from 'rxjs/observable/zip';
 export class DiscussionComponent extends FormRequestHandling implements OnChanges {
   @Input() discussionId: any;
   @Input() itemsPerPage: number;
-  user: User;
 
+  logger = LoggerService.getCustomLogger('DiscussionService');
+
+  user: User;
   currentPage = 0;
   numOfComments: number;
   newComment: Comment = Comment.createEmptyComment();
@@ -57,7 +60,7 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
         this.newComment = Comment.createEmptyComment();
         return this.update();
       },
-      (err) => console.log('fehler beim kommentieren', err)
+      (err) => this.logger.error('addComment', err)
     );
   }
 
@@ -87,11 +90,11 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
             this.user = data.user;
             this.numOfComments = data.numOfComments;
           },
-          err => console.log(err)
+          err => this.logger.error(err)
         );
       },
       (err) => {
-        console.log('update fehlgeschlagen', err);
+        this.logger.error('update', err);
         return Promise.reject(err);
       }
     );

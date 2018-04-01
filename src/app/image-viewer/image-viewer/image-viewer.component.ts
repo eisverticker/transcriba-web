@@ -7,6 +7,7 @@ import {
 
 import { BackendService } from '../../utility/backend.service';
 import { ImageViewerService } from '../image-viewer.service';
+import { LoggerService } from '../../utility/logger.service';
 
 @Component({
   selector: 'iv-image-viewer',
@@ -14,6 +15,7 @@ import { ImageViewerService } from '../image-viewer.service';
   styleUrls: ['./image-viewer.component.scss']
 })
 export class ImageViewerComponent implements OnChanges {
+  private logger = LoggerService.getCustomLogger('ImageViewerComponent');
 
   @Input() objectId: any;
   zoomSteps: number;
@@ -30,7 +32,7 @@ export class ImageViewerComponent implements OnChanges {
         this.zoomSteps = numOfZooms - 1;
         this.url = this.backend.unAuthUrl('TranscribaObjects/' + this.objectId + '/tiles/{z}/{x}/{y}');
       },
-      err => console.log(err)
+      error => this.logger.error(error)
     );
   }
 

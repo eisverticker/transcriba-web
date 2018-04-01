@@ -4,6 +4,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { I18nModule } from '../i18n/i18n.module';
+import { UtilityModule } from '../utility/utility.module';
 
 // Third-Party components
 import {
@@ -32,6 +33,8 @@ import { ProgressPillsComponent } from './progress-pills/progress-pills.componen
     FormsModule,
     RouterModule,
     I18nModule,
+    UtilityModule,
+    // material design
     MatButtonModule, // delete button component i.a.
     MatIconModule,
     MatProgressSpinnerModule,

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranscribaObject } from '../transcriba-object';
 import { BackendService } from '../../utility/backend.service';
 import { TranscribaService } from '../transcriba.service';
+import { LoggerService } from '../../utility/logger.service';
 
 @Component({
   selector: 'tr-voting-suggestion',
@@ -10,6 +11,7 @@ import { TranscribaService } from '../transcriba.service';
   styleUrls: ['./voting-suggestion.component.scss']
 })
 export class VotingSuggestionComponent implements OnInit {
+  private logger = LoggerService.getCustomLogger('VotingSuggestionComponent');
 
   objects: Array<TranscribaObject>;
   page = 0;
@@ -36,7 +38,7 @@ export class VotingSuggestionComponent implements OnInit {
   updateObjects() {
     this.transcriba.loadObjectPage(this.page, 3, undefined, undefined, 'voting').then(
       objects => this.objects = objects,
-      err => console.log(err)
+      error => this.logger.error(error)
     );
   }
 
