@@ -1,9 +1,9 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var mergeJson = require('gulp-merge-json');
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const mergeJson = require('gulp-merge-json');
 
 
-var paths = {
+const paths = {
   npmDir: './node_modules',
   resourcesDir: './app/Resources/',
   localeDest: 'src/assets/locales/'
@@ -36,11 +36,15 @@ gulp.task('localesRu', function() {
 });
 
 // copy web-assets for ahead of time compilation
-gulp.task('copy', [], function() {
+gulp.task('copy', function() {
   return gulp.src(['web/**/*', 'web/**/*'], {})
     .pipe(cleanDest('dist/web'))
     .pipe(gulp.dest('dist/web'));
 });
 
 // the default task (called when you run `gulp` from cli)
-gulp.task('default', ['localesDe', 'localesEn', 'localesRu']);
+gulp.task('default', 
+  gulp.series(
+    gulp.parallel(['localesDe', 'localesEn', 'localesRu'])
+  )
+);
