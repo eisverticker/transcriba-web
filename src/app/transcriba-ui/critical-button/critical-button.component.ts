@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./critical-button.component.scss']
 })
 export class CriticalButtonComponent {
-  @Input('type') type: string;
+  @Input() type: string;
   @Output() xclick: EventEmitter<any> = new EventEmitter();
   @Input() disabled: any;
 

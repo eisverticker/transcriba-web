@@ -5,8 +5,7 @@ import {
   TranslateModule,
   TranslateLoader,
   MissingTranslationHandler,
-  TranslateStore,
-  TranslateCompiler
+  TranslateStore
 } from '@ngx-translate/core';
 
 // WORKAROUND (see #21)
