@@ -4,7 +4,6 @@ import { Source } from '../source';
 import { SourceService } from '../source.service';
 import { NotificationService } from '../../utility/notification.service';
 import { Notification } from '../../utility/notification';
-import { LoggerService } from '../../utility/logger.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -17,7 +16,6 @@ export class SourceEditorComponent implements OnInit {
   public mode: string;
 
   constructor(
-    private logger: LoggerService,
     private sourceService: SourceService,
     private notify: NotificationService,
     private route: ActivatedRoute,
@@ -27,7 +25,6 @@ export class SourceEditorComponent implements OnInit {
   ngOnInit() {
     return this.route.params.subscribe(
       (params) => {
-        this.logger.log('route params source details', params);
         if (params['id'] === 'new') {
           this.mode = 'metadataMode';
           this.currentSource = Source.createEmptySource();
@@ -52,7 +49,6 @@ export class SourceEditorComponent implements OnInit {
   }
 
   completeMetadataImport($source) {
-    this.logger.log('source', $source);
     this.setSource($source);
     this.mode = 'detailMode';
   }

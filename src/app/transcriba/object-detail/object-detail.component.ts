@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { TranscribaObject } from '../transcriba-object';
 import { TranscribaService } from '../transcriba.service';
-
-import { ActivatedRoute } from '@angular/router';
-
-import { LoggerService } from '../../utility/logger.service';
-
 import { zip } from 'rxjs/observable/zip';
+import { LoggerService } from '../../utility/logger.service';
 
 @Component({
   selector: 'tr-object-detail',
@@ -15,6 +12,7 @@ import { zip } from 'rxjs/observable/zip';
   styleUrls: ['./object-detail.component.scss']
 })
 export class ObjectDetailComponent implements OnInit {
+  static logger = LoggerService.getCustomLogger(ObjectDetailComponent.name);
 
   object: TranscribaObject;
   navItems: Array<any> = [];
@@ -23,30 +21,30 @@ export class ObjectDetailComponent implements OnInit {
 
   constructor(
     private transcribaService: TranscribaService,
-    private route: ActivatedRoute,
-    private logger: LoggerService
-  ) {
-
-  }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     zip(
-      this.route.params,
-      this.route.data,
-      function(params, data) {
-        return {
-          'params': params,
-          'data': data
-        };
-      }
-    ).subscribe( d => {
-      const id = d.params['id'];
+        this.route.params,
+        this.route.data
+    ).subscribe(
+      (route) => {
+        if (route.length !== 2) {
+          throw new Error('invalid argument exception');
+        }
+        const params = route[0];
+        const routeData = route[1];
+        const id = params['id'];
 
-      // load object
-      this.transcribaService.loadByID(id).then(
+        // load object
+        this.transcribaService.loadByID(id).then(
           obj => {
-            this.mode = d.data['mode'];
+            this.mode = routeData['mode'];
             this.object = obj;
+            ObjectDetailComponent.logger.info(
+              'Transcriba-Object loaded:' + JSON.stringify(obj)
+            );
 
             switch (this.mode) {
               case 'viewer':
@@ -54,11 +52,9 @@ export class ObjectDetailComponent implements OnInit {
                break;
             }
           },
-          err => this.logger.log('ObjectDetailComponent', err)
-      );
-    });
-
+          err => ObjectDetailComponent.logger.error('ObjectDetailComponent', err)
+        );
+      }
+    );
   }
-
-
 }

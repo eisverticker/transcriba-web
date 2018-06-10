@@ -3,7 +3,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { TeiElement } from './tei-element';
 
 
-export class TeiBase implements ControlValueAccessor {
+export abstract class TeiBase implements ControlValueAccessor {
 
   public tei: any = new TeiElement('page', {}, []);
 
@@ -15,7 +15,7 @@ export class TeiBase implements ControlValueAccessor {
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    //
   }
 
   setDisabledState(isDisabled: boolean): void {
@@ -23,13 +23,8 @@ export class TeiBase implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any) {
-      this.onTouchedCallback = fn;
+    //
   }
 
-  private propagateChange: (value: any) => void = (value) => { /* NOP */ };
-
-  // Placeholders for the callbacks which are later provided
-  // by the Control Value Accessor
-  private onTouchedCallback: (value: any) => void = (value) => { /* NOP */ };
 
 }

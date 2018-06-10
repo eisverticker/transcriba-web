@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AppService } from './app.service';
 import { BackendService } from './backend.service';
 import { NotificationService } from './notification.service';
-import { LoggerService } from './logger.service';
 
 import { EmailValidatorDirective } from './email-validator.directive';
 
@@ -16,8 +15,7 @@ import { EmailValidatorDirective } from './email-validator.directive';
   providers: [
     AppService,
     BackendService,
-    NotificationService,
-    LoggerService
+    NotificationService
   ]
 })
 export class UtilityModule { }
