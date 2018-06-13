@@ -1,34 +1,19 @@
-import { Injectable } from '@angular/core';
-import { LoggerFactory, LFService } from 'typescript-logging';
+import { LFService, LoggerFactoryOptions, LogGroupRule, LogLevel } from 'typescript-logging';
 
-/* tslint:disable:no-console */
-@Injectable()
 export class LoggerService {
-  static loggerFactory = LFService.createLoggerFactory();
-
-  private logs: Array<any>;
-
-  constructor() {
-    this.logs = [];
-  }
+  private static logLevel = LogLevel.Debug;
+  private static loggerFactory = LoggerService.createLoggerFactory();
 
   static getCustomLogger(category: string) {
-    const logger = this.loggerFactory.getLogger(category);
-    return logger;
+    return LoggerService.loggerFactory.getLogger(category);
   }
 
-  log(context: string, message: any) {
-    this.logs.push(context + ':' + message);
-    console.log(context, message);
-  }
-
-  error(context: string, message: any) {
-    this.logs.push(context + ':' + message);
-    console.error(context, message);
-  }
-
-  printLogs() {
-    console.log(this.logs);
+  private static createLoggerFactory() {
+    return LFService.createLoggerFactory(
+      new LoggerFactoryOptions().addLogGroupRule(
+        new LogGroupRule(/.+/, LoggerService.logLevel)
+      )
+    );
   }
 
 }

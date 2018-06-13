@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { TranscribaObject } from '../transcriba-object';
 import { TranscribaService } from '../transcriba.service';
-
-import { ActivatedRoute } from '@angular/router';
-
-import { LoggerService } from '../../utility/logger.service';
-
 import { zip } from 'rxjs/observable/zip';
+import { LoggerService } from '../../utility/logger.service';
+import { map } from 'rxjs/operators';
+import { Params } from '@angular/router';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'tr-object-detail',
@@ -15,6 +15,7 @@ import { zip } from 'rxjs/observable/zip';
   styleUrls: ['./object-detail.component.scss']
 })
 export class ObjectDetailComponent implements OnInit {
+  static logger = LoggerService.getCustomLogger(ObjectDetailComponent.name);
 
   object: TranscribaObject;
   navItems: Array<any> = [];
@@ -23,29 +24,28 @@ export class ObjectDetailComponent implements OnInit {
 
   constructor(
     private transcribaService: TranscribaService,
-    private route: ActivatedRoute,
-    private logger: LoggerService
-  ) {
-
-  }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     zip(
-      this.route.params,
-      this.route.data,
-      function(params, data) {
-        return {
-          'params': params,
-          'data': data
-        };
-      }
-    ).subscribe( d => {
-      const id = d.params['id'];
+      [
+        this.route.params,
+        this.route.data
+      ]
+    ).pipe(
+      map(
+        (routePair) => ({params: routePair[0], data: routePair[1]})
+      )
+    ).subscribe(
+      (route) => {
+        ObjectDetailComponent.logger.info('Route' + JSON.stringify(route));
+        const id = route.params['id'];
 
-      // load object
-      this.transcribaService.loadByID(id).then(
+        // load object
+        this.transcribaService.loadByID(id).then(
           obj => {
-            this.mode = d.data['mode'];
+            this.mode = route.data['mode'];
             this.object = obj;
 
             switch (this.mode) {
@@ -54,11 +54,9 @@ export class ObjectDetailComponent implements OnInit {
                break;
             }
           },
-          err => this.logger.log('ObjectDetailComponent', err)
-      );
-    });
-
+          err => ObjectDetailComponent.logger.error('ObjectDetailComponent', err)
+        );
+      }
+    );
   }
-
-
 }

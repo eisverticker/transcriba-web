@@ -68,7 +68,7 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
   }
 
   setDisabledState(isDisabled: boolean): void {
-    // empty
+    this.textarea.nativeElement.disabled = isDisabled;
   }
 
   registerOnTouched(fn: any) {
@@ -77,7 +77,7 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
 
   // default callbacks which do nothing (they are being replaced when
   //  someone binds a value to ngModel)
-  private propagateChange: (value: any) => void = (value) => { /*nop*/ };
-  private propagateTouch: (value: any) => void = (value) => {  /*nop*/  };
+  propagateChange: (value: any) => void = (value) => { /*nop*/ };
+  propagateTouch: (value: any) => void = (value) => {  /*nop*/  };
 
 }

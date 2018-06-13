@@ -15,6 +15,7 @@ import { Notification } from '../../utility/notification';
   styleUrls: ['./import-form.component.scss']
 })
 export class ImportFormComponent extends FormRequestHandling implements OnInit {
+  static logger = LoggerService.getCustomLogger(ImportFormComponent.name);
 
   public sources: Array<Source>;
   public foreignID: string;
@@ -23,8 +24,7 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
   constructor(
     private transcriba: TranscribaService,
     private sourceService: SourceService,
-    private notify: NotificationService,
-    private logger: LoggerService
+    private notify: NotificationService
   ) {
     super();
   }
@@ -41,7 +41,7 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
           this.selectedSourceID = this.sources[0].id;
         }
       },
-      err => this.logger.error('ImportFormComponent@ngOnInit', err)
+      err => ImportFormComponent.logger.error('ImportFormComponent@ngOnInit', err)
     );
   }
 
@@ -53,7 +53,7 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
 
     request.then(
       () => this.notify.notify(new Notification('request.success', ['success'])),
-      (err) => this.logger.error('ImportFormComponent@import', err)
+      (err) => ImportFormComponent.logger.error('ImportFormComponent@import', err)
     );
   }
 

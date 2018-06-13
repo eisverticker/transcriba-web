@@ -20,6 +20,8 @@ import { Source } from '../../source/source';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnChanges {
+  static logger = LoggerService.getCustomLogger(OverviewComponent.name);
+
   @Input() object: TranscribaObject;
   discussion: Discussion;
   source: Source;
@@ -27,18 +29,17 @@ export class OverviewComponent implements OnChanges {
   constructor(
     public backend: BackendService,
     private sourceService: SourceService,
-    private discussionService: DiscussionService,
-    private logger: LoggerService
+    private discussionService: DiscussionService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     this.discussionService.loadByID(this.object.discussionID).then(
       discussion => this.discussion = discussion,
-      err => this.logger.error('OverviewComponent', err)
+      err => OverviewComponent.logger.error('OverviewComponent', err)
     );
     this.sourceService.loadSummaryByID(this.object.sourceID).then(
       source => this.source = source,
-      err => this.logger.error('OverviewComponent', err)
+      err => OverviewComponent.logger.error('OverviewComponent', err)
     );
   }
 

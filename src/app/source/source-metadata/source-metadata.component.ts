@@ -9,6 +9,8 @@ import { Source } from '../source';
   styleUrls: ['./source-metadata.component.scss']
 })
 export class SourceMetadataComponent implements OnInit {
+  static logger = LoggerService.getCustomLogger(SourceMetadataComponent.name);
+
   @Output() done = new EventEmitter<Source>();
   @Output() abort = new EventEmitter<void>();
 
@@ -16,7 +18,6 @@ export class SourceMetadataComponent implements OnInit {
   public isLoading = false;
 
   constructor(
-    private logger: LoggerService,
     private sourceService: SourceService
   ) { }
 
@@ -30,7 +31,7 @@ export class SourceMetadataComponent implements OnInit {
         this.isLoading = false;
       },
       (error) => {
-        this.logger.log('source loaded', 'error');
+        SourceMetadataComponent.logger.error('error while loading metadata', error);
         this.isLoading = false;
       }
     );
