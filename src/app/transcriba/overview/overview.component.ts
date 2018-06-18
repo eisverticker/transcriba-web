@@ -38,7 +38,7 @@ export class OverviewComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.discussionService.loadByID(this.object.discussionID).then(
       discussion => this.discussion = discussion,
-      err => this.notificationService.notify(Notification.error('discussion not found'))
+      err => this.notificationService.notify(Notification.error('request.discussionCouldNotBeLoaded'))
     );
     this.sourceService.loadSummaryByID(this.object.sourceID).then(
       source => this.source = source,

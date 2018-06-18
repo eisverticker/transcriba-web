@@ -17,7 +17,9 @@
   </mat-tab>
   <mat-tab [label]="'general.discussion' | translate">
     <div *ngIf="currentTab==3" class="tr-container">
-      <disc-discussion [itemsPerPage]="'10'" [discussionId]="object.discussionID">
+      <disc-discussion
+      [itemsPerPage]="DISCUSSION_MAX_NUM_OF_ITEMS_PER_PAGE"
+      [discussionId]="object.discussionID">
       </disc-discussion>
     </div>
   </mat-tab>
