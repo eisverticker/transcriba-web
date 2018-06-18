@@ -23,10 +23,8 @@
     [currentPage]="pagination.currentPage">
   </tui-pagination-bar>
 
-  <div class="row">
-    <div *ngFor="let object of objects" class="col">
-      <tr-object [object]="object"></tr-object>
-    </div>
+  <div class="explorer-card-container">
+    <tr-object class="explorer-card" *ngFor="let object of objects" [object]="object"></tr-object>
   </div>
 
   <tui-pagination-bar

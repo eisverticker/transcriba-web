@@ -51,7 +51,8 @@
       "registrationSucceeded": "Registrierung abgeschlossen!",
       "logoutFailed": "Du konntest auf dem Server nicht abgemeldet werden!",
       "timeout": "Der Server konnte nicht erreicht werden.",
-      "successfulRemoved": "Das Objekt wurde erfolgreich gelöscht!"
+      "successfulRemoved": "Das Objekt wurde erfolgreich gelöscht!",
+      "discussionCouldNotBeLoaded": "Die Diskussion konnte nicht geladen werden"
     },
     "message": {
       "confirmDelete": "Du bist dabei dieses Objekt endgültig zu löschen!",

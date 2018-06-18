@@ -13,6 +13,7 @@ import { LoggerService } from '../../utility/logger.service';
 })
 export class ObjectDetailComponent implements OnInit {
   static logger = LoggerService.getCustomLogger(ObjectDetailComponent.name);
+  static DISCUSSION_MAX_NUM_OF_ITEMS_PER_PAGE = 10;
 
   object: TranscribaObject;
   navItems: Array<any> = [];
