@@ -5,9 +5,6 @@ import { TranscribaObject } from '../transcriba-object';
 import { TranscribaService } from '../transcriba.service';
 import { zip } from 'rxjs/observable/zip';
 import { LoggerService } from '../../utility/logger.service';
-import { map } from 'rxjs/operators';
-import { Params } from '@angular/router';
-import { Data } from '@angular/router';
 
 @Component({
   selector: 'tr-object-detail',
@@ -29,24 +26,25 @@ export class ObjectDetailComponent implements OnInit {
 
   ngOnInit() {
     zip(
-      [
         this.route.params,
         this.route.data
-      ]
-    ).pipe(
-      map(
-        (routePair) => ({params: routePair[0], data: routePair[1]})
-      )
     ).subscribe(
       (route) => {
-        ObjectDetailComponent.logger.info('Route' + JSON.stringify(route));
-        const id = route.params['id'];
+        if (route.length !== 2) {
+          throw new Error('invalid argument exception');
+        }
+        const params = route[0];
+        const routeData = route[1];
+        const id = params['id'];
 
         // load object
         this.transcribaService.loadByID(id).then(
           obj => {
-            this.mode = route.data['mode'];
+            this.mode = routeData['mode'];
             this.object = obj;
+            ObjectDetailComponent.logger.info(
+              'Transcriba-Object loaded:' + JSON.stringify(obj)
+            );
 
             switch (this.mode) {
               case 'viewer':
