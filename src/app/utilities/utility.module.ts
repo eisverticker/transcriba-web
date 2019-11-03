@@ -20,11 +20,12 @@ import { FormsModule }   from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 import { ConfigurationModule  } from '../config/configuration.module';
 import { I18nModule  } from '../i18n/i18n.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [BePatientComponent, EmailValidatorDirective, ReplaceIfEmptyPipe],
     exports: [BePatientComponent, EmailValidatorDirective, ReplaceIfEmptyPipe],
-    imports:      [BrowserModule, FormsModule, ConfigurationModule, I18nModule],
+    imports:      [BrowserModule, FormsModule, ConfigurationModule, I18nModule, FontAwesomeModule],
     bootstrap:    [],
     providers: [BackendHelper, LoggerService, NotificationService, AppService]
 })
