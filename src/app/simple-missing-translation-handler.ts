@@ -1,7 +1,7 @@
-import { MissingTranslationHandler } from 'ng2-translate/ng2-translate';
+import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 
 export class SimpleMissingTranslationHandler implements MissingTranslationHandler {
-  handle(key: string) {
-      return key;
+  handle(params: MissingTranslationHandlerParams) {
+      return params.key;
   }
 }

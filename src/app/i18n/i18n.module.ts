@@ -2,22 +2,24 @@ import { NgModule } from '@angular/core';
 import {
   TranslateModule,
   TranslateLoader,
-  TranslateStaticLoader
-} from 'ng2-translate';
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { I18nHelperService } from './i18n-helper.service';
 
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
-export function createTranslateLoader(http: Http) {
-    return new TranslateStaticLoader(http, '/web/locales', '.json');
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/locales/', '.json');
 }
 
 @NgModule({
   imports:      [
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
     })
   ],
   declarations: [],

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ToastyService, ToastyConfig } from 'ng2-toasty';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 import { I18nHelperService } from './i18n/i18n-helper.service';
 import { NotificationService } from './utilities/notification.service';
-// import { Notification } from './utilities/notification';
+import { Notification } from './utilities/notification';
 import { AppService, LayoutType } from './utilities/app.service';
 import { AuthService } from './loopback-auth/auth.service';
 import { User } from './loopback-auth/user';
@@ -40,15 +40,15 @@ export class AppComponent implements OnInit {
 
     // watch whether user is logged in or not
     this.auth.user.subscribe(
-      (user) => this.user = user
+      (user: User) => this.user = user
     );
     this.auth.loadUser().then(
-      (user) => this.user = user
+      (user: User) => this.user = user
     );
 
     // watch if a module needs a wide page
     this.app.layout.subscribe(
-      type => {
+      (type: LayoutType) => {
         if (type === LayoutType.wide) {
           this.isWideLayout = true;
         }else {
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
 
   private initNotificationHandler() {
     this.notify.messages.subscribe(
-      notification => {
+      (notification: Notification) => {
         if (notification.tags.indexOf('untranslated') !== -1) {
           this.processNotificationMessage(notification.message, notification.tags);
         }else {
