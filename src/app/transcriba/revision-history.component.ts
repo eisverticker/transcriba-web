@@ -17,8 +17,8 @@ import { TranscribaService } from './transcriba.service';
     <tr *ngFor="let item of items">
       <td>{{ item.username }}</td>
       <td>{{ item.createdAt }}</td>
-      <td><i class="fa fa-check" *ngIf="item.published" aria-hidden="true"></i></td>
-      <td><i class="fa fa-check" *ngIf="item.approved" aria-hidden="true"></i></td>
+      <td><fa-icon [icon]="check" *ngIf="item.published"></fa-icon></td>
+      <td><fa-icon [icon]="check" *ngIf="item.approved"></fa-icon></td>
     </tr>
   `
 })

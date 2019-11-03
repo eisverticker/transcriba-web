@@ -21,8 +21,8 @@
             <a class="thumbnail" [routerLink]="'/obj/'+item.id" class="btn btn-default">
               <img [src]="backend.unAuthUrl('TranscribaObjects/'+item.id+'/thumbnail')" alt="thumbnail">
               <span style="opacity: 0.6;position: absolute;margin-left: -20px;margin-top: 5px;">
-                <i *ngIf="item.status == 'occupied'" class="fa fa-pencil" aria-hidden="true"></i>
-                <i *ngIf="item.status == 'voting'" class="fa fa-question" aria-hidden="true"></i>
+                <fa-icon [icon]="pencil" *ngIf="item.status == 'occupied'"></fa-icon>
+                <fa-icon [icon]="question" *ngIf="item.status == 'voting'"></fa-icon>
               </span>
             </a>
             <div class="caption">

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 @Component({
   selector:    'ut-be-patient',
   template:
   `
   <div *ngIf="isStarted" class="text-center">
-    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+    <fa-icon [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
     <span class="sr-only">{{ 'message.pleaseWait' | translate }} yeah</span>
   </div>
   `,

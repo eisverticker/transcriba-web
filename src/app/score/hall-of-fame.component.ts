@@ -14,7 +14,7 @@ import { ScoreService } from './score.service';
       <ul class="list-group">
         <li *ngFor="let scorer of scorers" class="list-group-item">
           <span class="badge">
-          <i class="fa fa-trophy fa-lg" aria-hidden="true"></i>
+          <fa-icon [icon]="trophy"></fa-icon>
           {{ scorer.score }}
           </span>
           {{ scorer.username }}

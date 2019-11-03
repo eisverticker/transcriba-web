@@ -21,6 +21,7 @@ import { EditorModule } from './editor/editor.module';
 import { ScoreModule } from './score/score.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -38,7 +39,8 @@ import { ToastrModule } from 'ngx-toastr';
     TranscribaModule,
     EditorModule,
     ToastrModule.forRoot(),
-    ScoreModule
+    ScoreModule,
+    FontAwesomeModule
   ],
   declarations: [
     AppComponent,

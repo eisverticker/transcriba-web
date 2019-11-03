@@ -18,7 +18,7 @@ import { TeiElement } from './tei-element';
       [index]="i"
       [(ngModel)]="tei.children[i]">
       </tr-tei-element>
-      <div class="well" *ngIf="tei.children.length == 0">Diese Transkription ist leer <i class="fa fa-frown-o" aria-hidden="true"></i></div>
+      <div class="well" *ngIf="tei.children.length == 0">Diese Transkription ist leer <fa-icon [icon]="frown-o"></fa-icon></div>
       <button *ngIf="editable" (click)="addPage()" class="btn btn-link">Seite hinzufügen</button>
     </div>
   `,
