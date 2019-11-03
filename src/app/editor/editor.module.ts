@@ -18,6 +18,7 @@ import { ImageViewerModule } from '../image-viewer/image-viewer.module';
 
 // services
 import { EditorService } from './editor.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // routing
 
@@ -36,7 +37,8 @@ import { EditorService } from './editor.service';
       I18nModule,
       UtilityModule,
       GadgetModule,
-      ImageViewerModule
+      ImageViewerModule,
+      FontAwesomeModule
     ],
     exports: [EditorComponent],
     bootstrap:  [],

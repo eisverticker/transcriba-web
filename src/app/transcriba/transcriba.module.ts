@@ -33,6 +33,7 @@ import { RevisionVotingService } from './revision-voting.service';
 // routing
 import { transcribaRouting } from './transcriba.routing';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { HttpClientModule } from '@angular/common/http';
       ScoreModule,
       EditorModule,
       ImageViewerModule,
-      VotingModule
+      VotingModule,
+      FontAwesomeModule
     ],
     exports: [
       ImportFormComponent,
