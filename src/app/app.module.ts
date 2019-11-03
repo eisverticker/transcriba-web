@@ -10,7 +10,7 @@ import { routing } from './app.routing';
 
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule }     from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UtilityModule } from './utilities/utility.module';
 import { AuthModule } from './loopback-auth/auth.module';
 import { I18nModule } from './i18n/i18n.module';
@@ -18,8 +18,9 @@ import { SourceModule } from './source/source.module';
 import { InfoPageModule } from './info-page/info-page.module';
 import { TranscribaModule } from './transcriba/transcriba.module';
 import { EditorModule } from './editor/editor.module';
-import { ToastyModule } from 'ng2-toasty';
 import { ScoreModule } from './score/score.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -27,7 +28,8 @@ import { ScoreModule } from './score/score.module';
   imports: [
     BrowserModule,
     routing,
-    HttpModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     UtilityModule,
     AuthModule,
     I18nModule,
@@ -35,7 +37,7 @@ import { ScoreModule } from './score/score.module';
     InfoPageModule,
     TranscribaModule,
     EditorModule,
-    ToastyModule.forRoot(),
+    ToastrModule.forRoot(),
     ScoreModule
   ],
   declarations: [

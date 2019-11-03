@@ -14,46 +14,6 @@ const paths = {
   localeDest: 'web/locales/'
 };
 
-async function scriptsGeneral() {
-  return src([
-      paths.npmDir + '/jquery/dist/jquery.js',
-      paths.npmDir + '/bootstrap/dist/js/bootstrap.js',
-      paths.npmDir + '/core-js/client/shim.min.js',
-      paths.npmDir + '/zone.js/dist/zone.js'
-    ])
-    .pipe(concat('static.js'))
-    .pipe(dest(paths.scriptDest));
-}
-
-async function scriptsJustInTime() {
-  return src([
-      paths.npmDir + '/systemjs/dist/system.src.js'
-    ])
-    .pipe(concat('static-jit.js'))
-    .pipe(dest(paths.scriptDest));
-}
-
-function cssGeneral() {
-  return src([
-      paths.npmDir + '/bootstrap/dist/css/bootstrap.css',
-      paths.npmDir + '/font-awesome/css/font-awesome.css',
-      paths.npmDir + '/leaflet/dist/leaflet.css',
-      paths.npmDir + '/ng2-toasty/style-bootstrap.css',
-      'forms.css',
-      'style.css'
-    ])
-    .pipe(concat('static.css'))
-    .pipe(dest(paths.cssDest));
-}
-
-function fonts() {
-  return src([
-      paths.npmDir + '/bootstrap/dist/fonts/*.*',
-      paths.npmDir + '/font-awesome/fonts/*.*',
-    ])
-    .pipe(dest(paths.fontDest));
-}
-
 // put together locale strings
 function localesDe() {
   return src('locales/**/de.json')
@@ -90,8 +50,6 @@ function copy() {
 // the default task (called when you run `gulp` from cli)
 exports.default = series(
   parallel(
-    // scriptsGeneral,
-    // scriptsJustInTime,
     cssGeneral,
     fonts,
     localesDe,
