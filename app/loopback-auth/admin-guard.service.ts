@@ -18,7 +18,7 @@ export class AdminGuardService implements CanActivate {
         if (!user.isAdministrator()) {
           this.router.navigate(['403']);
         }
-        return Promise.resolve(user.isAdministrator());
+        return user.isAdministrator();
       }
     );
 

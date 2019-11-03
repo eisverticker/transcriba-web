@@ -18,7 +18,7 @@ export class AuthGuardService implements CanActivate {
         if (!user.isRegistered()) {
           this.router.navigate(['403']);
         }
-        return Promise.resolve(user.isRegistered());
+        return user.isRegistered();
       }
     );
 

@@ -93,7 +93,7 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
       },
       (err) => {
         console.log('update fehlgeschlagen', err);
-        return Promise.reject(err);
+        throw err;
       }
     );
   }
