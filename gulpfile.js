@@ -90,8 +90,8 @@ function copy() {
 // the default task (called when you run `gulp` from cli)
 exports.default = series(
   parallel(
-    scriptsGeneral,
-    scriptsJustInTime,
+    // scriptsGeneral,
+    // scriptsJustInTime,
     cssGeneral,
     fonts,
     localesDe,
