@@ -1,11 +1,4 @@
-import { Component,
-  forwardRef,
-  ElementRef,
-  AfterViewInit,
-  AfterViewChecked,
-  ViewChild,
-  Renderer
-} from '@angular/core';
+import { Component, forwardRef, ElementRef, AfterViewInit, AfterViewChecked, ViewChild, Renderer2 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -29,7 +22,7 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
   private isViewInitialized = false;
 
   constructor(
-    private renderer: Renderer
+    private renderer: Renderer2
   ) {}
 
   ngAfterViewInit() {

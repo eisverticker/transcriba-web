@@ -16,7 +16,7 @@ import { RouterModule }   from '@angular/router';
 import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
-import { GadgetModule } from '../gadgets/gadget.module':
+import { GadgetModule } from '../gadgets/gadget.module';
 import { DiscussionModule } from '../discussion/discussion.module';
 
 // services

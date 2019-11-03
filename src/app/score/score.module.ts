@@ -16,6 +16,7 @@ import { ScoreService } from './score.service';
 
 // routing
 import { scoreRouting } from './score.routing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { scoreRouting } from './score.routing';
       BrowserModule,
       FormsModule,
       AuthModule,
-      scoreRouting
+      scoreRouting,
+      FontAwesomeModule
     ],
     exports: [ScoreComponent, HallOfFameComponent],
     bootstrap:  [],
