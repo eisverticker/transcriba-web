@@ -1,4 +1,3 @@
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 
@@ -7,12 +6,14 @@ import { Discussion } from './discussion';
 import { Comment } from './comment';
 
 import { User } from '../loopback-auth/user';
+import { HttpClient } from '@angular/common/http';
+import { timeout } from 'rxjs/operators';
 
 @Injectable()
 export class DiscussionService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService
   ) {}
@@ -24,8 +25,7 @@ export class DiscussionService {
     let token = this.auth.token;
     let url = this.backend.authUrl('Discussions/' + id, token);
 
-    return this.http.get(url)
-    .map(data => data.json())
+    return this.http.get<any>(url)
     .toPromise()
     .then(
       (data) => new Discussion(data.title, id)
@@ -42,9 +42,9 @@ export class DiscussionService {
       '&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
+    return this.http.get<any[]>(url).pipe(
+      timeout(5000)
+    )
     .toPromise()
     .then(
       (comments) => {
@@ -67,8 +67,7 @@ export class DiscussionService {
     let token = this.auth.token;
     let url = this.backend.authUrl('Discussions/' + discussion.id + '/comments/count', token);
 
-    return this.http.get(url)
-    .map(data => data.json().count)
+    return this.http.get<number>(url)
     .toPromise();
   }
 

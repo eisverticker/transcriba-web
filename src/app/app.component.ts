@@ -9,9 +9,6 @@ import { AppService, LayoutType } from './utilities/app.service';
 import { AuthService } from './loopback-auth/auth.service';
 import { User } from './loopback-auth/user';
 
-// Add the RxJS Observable operators we need in this app.
-import './rxjs-operators';
-
 @Component({
   moduleId:     module.id,
   selector: 'tr-app',

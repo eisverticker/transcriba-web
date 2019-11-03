@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { timeout } from 'rxjs/operators';
 
 // import { AuthAction } from './auth-action';
 
@@ -13,7 +14,7 @@ export class ScoreService {
   private scoreSubject: BehaviorSubject<number>;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService
   ) {
@@ -25,18 +26,11 @@ export class ScoreService {
   /**
    * Loads score value of currently logged in user
    */
-  loadScore(): Promise<number> {
-    return this.auth.loadUser().then(
-      (user) => {
-        let token = this.auth.token;
-        let url = this.backend.authUrl('AppUsers/score', token);
-
-        return this.http.get(url)
-        .timeout(5000)
-        .map(data => data.json())
-        .toPromise();
-      }
-    );
+  async loadScore(): Promise<number> {
+    let token = this.auth.token;
+    let url = this.backend.authUrl('AppUsers/score', token);
+    return this.http.get<number>(url).pipe(timeout(5000))
+      .toPromise();
   }
 
   /**
@@ -46,9 +40,10 @@ export class ScoreService {
         let token = this.auth.token;
         let url = this.backend.authUrl('AppUsers/leaderboard', token);
 
-        return this.http.get(url)
-        .timeout(5000)
-        .map(data => data.json())
+        return this.http.get<any>(url)
+        .pipe(
+          timeout(5000)
+        )
         .toPromise();
   }
 

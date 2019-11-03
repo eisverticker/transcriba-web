@@ -1,4 +1,3 @@
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 import { User } from '../loopback-auth/user';
@@ -8,13 +7,15 @@ import { TranscribaObject } from './transcriba-object';
 import { Revision } from './revision';
 import { Collection } from './collection';
 import { Source } from '../source/source';
+import { HttpClient } from '@angular/common/http';
+import { timeout } from 'rxjs/operators';
 
 
 @Injectable()
 export class TranscribaService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService
   ) {}
@@ -22,25 +23,13 @@ export class TranscribaService {
   /**
    * Returns the TranscribaObject with the given id as Promise
    */
-  loadByID(id: any): Promise<TranscribaObject> {
+  async loadByID(id: any): Promise<TranscribaObject> {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/' + id, token);
 
-    return this.http.get(url)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      o => {
-        return new TranscribaObject(
-          o.title,
-          o.externalID,
-          o.sourceId,
-          o.discussionId,
-          o.id,
-          o.status
-        );
-      }
-    );
+    const o = await this.http.get<any>(url)
+      .toPromise();
+    return new TranscribaObject(o.title, o.externalID, o.sourceId, o.discussionId, o.id, o.status);
   }
 
   /**
@@ -61,8 +50,7 @@ export class TranscribaService {
 
       let url = this.backend.authUrl('TranscribaObjects/count', token, searchFilter);
 
-      return this.http.get(url)
-      .map(data => data.json().count)
+      return this.http.get<any>(url)
       .toPromise();
   }
 
@@ -95,11 +83,10 @@ export class TranscribaService {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/import', token);
 
-    return this.http.post(url, {
+    return this.http.post<any>(url, {
       'sourceId': source.id,
       'externalId': foreignID
     })
-    .map(data => data.json())
     .toPromise();
   }
 
@@ -114,7 +101,7 @@ export class TranscribaService {
   /**
    * Loads an array of objects which belong to the given page
    */
-  loadObjectPage(
+  async loadObjectPage(
     page: number,
     itemsPerPage: number,
     searchTerm?: string,
@@ -143,22 +130,14 @@ export class TranscribaService {
       filters
     );
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      (objects) => {
-        return objects.map(
-          (data) => {
-            return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id, data.status);
-          }
-        );
-      }
-    );
+    const objects = await this.http.get<Array<any>>(url).pipe(timeout(5000))
+      .toPromise();
+    return objects.map((data) => {
+      return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id, data.status);
+    });
   }
 
-  loadObjectPageFromCollection(page: number, itemsPerPage: number, collectionId: any, searchTerm?: string): Promise<TranscribaObject[]> {
+  async loadObjectPageFromCollection(page: number, itemsPerPage: number, collectionId: any, searchTerm?: string): Promise<TranscribaObject[]> {
     let token = this.auth.token;
     let url = this.backend.authUrl(
       'Collections/' + collectionId + '/transcribaObjects',
@@ -168,22 +147,14 @@ export class TranscribaService {
       '&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      (objects) => {
-        return objects.map(
-          (data) => {
-            return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id, data.status);
-          }
-        );
-      }
-    );
+    const objects = await this.http.get<Array<any>>(url).pipe(timeout(5000))
+      .toPromise();
+    return objects.map((data) => {
+      return new TranscribaObject(data.title, data.externalID, data.sourceId, data.discussionId, data.id, data.status);
+    });
   }
 
-  loadCollectionPage(page: number, itemsPerPage: number, rootCollection?: Collection): Promise<Collection[]> {
+  async loadCollectionPage(page: number, itemsPerPage: number, rootCollection?: Collection): Promise<Collection[]> {
     let token = this.auth.token;
     let url = this.backend.authUrl(
       'Collections',
@@ -193,20 +164,12 @@ export class TranscribaService {
       '&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      (collections) => {
-        console.log(collections);
-        return collections.map(
-          (data) => {
-            return new Collection(data.name, data.description, data.public, data.locked, data.id);
-          }
-        );
-      }
-    );
+    const collections = await this.http.get<Array<any>>(url).pipe(timeout(5000))
+      .toPromise();
+    console.log(collections);
+    return collections.map((data) => {
+      return new Collection(data.name, data.description, data.public, data.locked, data.id);
+    });
   }
 
   /**
@@ -216,9 +179,9 @@ export class TranscribaService {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/' + objId + '/chronic', token);
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
+    return this.http.get<any>(url).pipe(
+      timeout(5000)
+    )
     .toPromise();
   }
 
@@ -226,49 +189,25 @@ export class TranscribaService {
     return Promise.resolve(0);
   }*/
 
-  loadLatestRevision(objId: any): Promise<Revision> {
+  async loadLatestRevision(objId: any): Promise<Revision> {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest', token);
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-        data => new Revision(
-          data.id,
-          data.approved,
-          data.createdAt,
-          data.metadata,
-          data.content,
-          data.published,
-          data.ownerId
-        )
-    );
+    const data = await this.http.get<any>(url).pipe(timeout(5000))
+      .toPromise();
+    return new Revision(data.id, data.approved, data.createdAt, data.metadata, data.content, data.published, data.ownerId);
   }
 
   /**
    * Returns the latest stable revision of an object
    */
-  loadStableRevision(objId: any): Promise<Revision> {
+  async loadStableRevision(objId: any): Promise<Revision> {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/' + objId + '/stable', token);
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-        data => new Revision(
-          data.id,
-          data.approved,
-          data.createdAt,
-          data.metadata,
-          data.content,
-          data.published,
-          data.ownerId
-        )
-    );
+    const data = await this.http.get<any>(url).pipe(timeout(5000))
+      .toPromise();
+    return new Revision(data.id, data.approved, data.createdAt, data.metadata, data.content, data.published, data.ownerId);
   }
 
   /**
@@ -278,9 +217,9 @@ export class TranscribaService {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest/permissions', token);
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
+    return this.http.get<any>(url).pipe(
+      timeout(5000)
+    )
     .toPromise();
   }
 
@@ -292,9 +231,9 @@ export class TranscribaService {
      let token = this.auth.token;
      let url = this.backend.authUrl('TranscribaObjects/occupied', token);
 
-     return this.http.get(url)
-     .timeout(5000)
-     .map(data => data.json())
+     return this.http.get<any>(url).pipe(
+      timeout(5000)
+    )
      .toPromise();
    }
 
@@ -302,9 +241,9 @@ export class TranscribaService {
      let token = this.auth.token;
      let url = this.backend.authUrl('AppUsers/busy', token);
 
-     return this.http.get(url)
-     .timeout(5000)
-     .map(data => data.json())
+     return this.http.get<any>(url).pipe(
+      timeout(5000)
+     )
      .toPromise();
    }
 

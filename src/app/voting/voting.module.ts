@@ -7,10 +7,10 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
-import { HttpModule } from '@angular/http';
 
 // services
 import { VotingService } from './voting.service';
+import { HttpClientModule } from '@angular/common/http';
 
 // routing
 // ..
@@ -19,7 +19,7 @@ import { VotingService } from './voting.service';
     declarations: [],
     imports:      [
       BrowserModule,
-      HttpModule,
+      HttpClientModule,
       UtilityModule,
       AuthModule
     ],

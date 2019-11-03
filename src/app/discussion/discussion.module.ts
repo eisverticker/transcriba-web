@@ -13,11 +13,11 @@ import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
 import { GadgetModule } from '../gadgets/gadget.module';
-import { HttpModule } from '@angular/http';
 
 // services
 import { DiscussionService } from './discussion.service';
 import { CommentVotingService } from './comment-voting.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -29,7 +29,7 @@ import { CommentVotingService } from './comment-voting.service';
       BrowserModule,
       FormsModule,
       I18nModule,
-      HttpModule,
+      HttpClientModule,
       UtilityModule,
       AuthModule,
       VotingModule,

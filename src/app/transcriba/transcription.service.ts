@@ -1,4 +1,3 @@
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 
@@ -6,12 +5,13 @@ import { Injectable } from '@angular/core';
 import { Revision } from './revision';
 
 import { TeiElement } from '../editor/tei-element';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class TranscriptionService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService
   ) {}
@@ -25,8 +25,7 @@ export class TranscriptionService {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/' + objId + '/occupy', token);
 
-    return this.http.post(url, {})
-    .map(data => data.json())
+    return this.http.post<any>(url, {})
     .toPromise()
     .then(
       data => new Revision(
@@ -49,7 +48,6 @@ export class TranscriptionService {
     let url = this.backend.authUrl('TranscribaObjects/' + objId + '/save', token);
 
     return this.http.post(url, content)
-    .map(data => data.json())
     .toPromise();
   }
 
@@ -61,7 +59,6 @@ export class TranscriptionService {
     let url = this.backend.authUrl('TranscribaObjects/' + objId + '/publish', token);
 
     return this.http.post(url, content)
-    .map(data => data.json())
     .toPromise();
   }
 
@@ -74,7 +71,6 @@ export class TranscriptionService {
     let url = this.backend.authUrl('TranscribaObjects/free', token);
 
     return this.http.post(url, {})
-    .map(data => data.json())
     .toPromise();
   }
 

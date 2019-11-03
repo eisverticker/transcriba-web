@@ -8,7 +8,7 @@ import { AuthService } from '../loopback-auth/auth.service';
 import { Discussion } from './discussion';
 import { Comment } from './comment';
 import { User } from '../loopback-auth/user';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 
 @Component({

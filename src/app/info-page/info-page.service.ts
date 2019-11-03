@@ -1,17 +1,17 @@
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 
 import { Injectable } from '@angular/core';
 import { InfoPage } from './info-page';
 import { DiscussionService } from '../discussion/discussion.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class InfoPageService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService,
     private discuss: DiscussionService
@@ -21,8 +21,7 @@ export class InfoPageService {
     let token = this.auth.token;
     let url = this.backend.authUrl('InfoPages', token);
 
-    return this.http.get(url)
-    .map(data => data.json())
+    return this.http.get<any[]>(url)
     .toPromise()
     .then(
       (data) => data.map(
@@ -35,8 +34,7 @@ export class InfoPageService {
     let token = this.auth.token;
     let url = this.backend.authUrl('InfoPages/' + id, token);
 
-    return this.http.get(url)
-    .map(data => data.json())
+    return this.http.get<any>(url)
     .toPromise()
     .then(
       p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, id)
@@ -47,8 +45,7 @@ export class InfoPageService {
     let token = this.auth.token;
     let url = this.backend.authUrl('InfoPages/parsed/' + name, token);
 
-    return this.http.get(url)
-    .map(data => data.json())
+    return this.http.get<any>(url)
     .toPromise()
     .then(
       data => {

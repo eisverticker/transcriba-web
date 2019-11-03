@@ -5,7 +5,7 @@ import { AuthService } from '../loopback-auth/auth.service';
 import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tr-score-value',

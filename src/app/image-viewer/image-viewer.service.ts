@@ -1,15 +1,15 @@
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class ImageViewerService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService
   ) {}
@@ -18,8 +18,7 @@ export class ImageViewerService {
     let token = this.auth.token;
     let url = this.backend.authUrl('TranscribaObjects/' + id + '/zoomsteps', token);
 
-    return this.http.get(url)
-    .map(data => data.json())
+    return this.http.get<number>(url)
     .toPromise();
   }
 

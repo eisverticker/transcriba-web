@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { User } from './user';
 import { Role } from './role';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { timeout } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
   public user: Observable<User>;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper
   ) {
     // Initalize Reactive Components (Observables)
@@ -51,12 +52,12 @@ export class AuthService {
     return this.http.post(this.backend.unAuthUrl('AppUsers/login'), {
       'email': user.mail,
       'password': user.password
-    })
-    .timeout(5000)
+    }).pipe(
+      timeout(5000)
+    )
     .toPromise()
     .then(
-      (res) => {
-         let data = res.json();
+      (data: any) => {
          this.userID = data.userId;
          this.token = data.id; // save token to localStorage
          this.loadUser(); // reinitalize user
@@ -74,7 +75,9 @@ export class AuthService {
   }
   public logout(): Promise<any> {
     return this.http.post(this.backend.authUrl('AppUsers/logout', this.token), {})
-     .timeout(5000)
+     .pipe(
+       timeout(5000)
+     )
      .toPromise()
      .then(
        () => {
@@ -98,8 +101,9 @@ export class AuthService {
 
     return this.http.post(url, {
       'email': user.mail
-    })
-    .timeout(5000)
+    }).pipe(
+      timeout(5000)
+    )
     .toPromise();
   }
 
@@ -126,8 +130,7 @@ export class AuthService {
     if (this.token === null || userID === null) {
       return Promise.reject<Role[]>('no local user data found');
     }else {
-      return this.http.get(url)
-      .map(data => data.json() )
+      return this.http.get<any[]>(url)
       .toPromise()
       .then(
         (roles) => {
@@ -172,8 +175,7 @@ export class AuthService {
     if (this.token === null || this.userID === null) {
       return Promise.reject<User>('no local user data found');
     }else {
-      return this.http.get(url)
-      .map(data => data.json())
+      return this.http.get<any>(url)
       .toPromise()
       .then(
         (data) => {

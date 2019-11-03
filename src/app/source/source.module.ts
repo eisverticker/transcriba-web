@@ -12,13 +12,13 @@ import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';
 import { GadgetModule } from '../gadgets/gadget.module';
-import { HttpModule } from '@angular/http';
 
 // services
 import { SourceService } from './source.service';
 
 // routing
 import { sourceRouting } from './source.routing';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -29,7 +29,7 @@ import { sourceRouting } from './source.routing';
       BrowserModule,
       FormsModule,
       I18nModule,
-      HttpModule,
+      HttpClientModule,
       UtilityModule,
       AuthModule,
       RouterModule,

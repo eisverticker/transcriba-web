@@ -1,29 +1,26 @@
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { AuthService } from '../loopback-auth/auth.service';
 
 import { Injectable } from '@angular/core';
 import { Source } from './source';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SourceService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService
   ) {}
 
-  loadAllSources(): Promise<Source[]> {
+  async loadAllSources(): Promise<Source[]> {
     let token = this.auth.token;
     let url = this.backend.authUrl('Sources', token);
 
-    return this.http.get(url)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      (data) => data.map( s => new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id) )
-    );
+    const data = await this.http.get<any>(url)
+      .toPromise();
+    return data.map((s:any) => new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id));
   }
 
   // deprecated (alias for loadByID)
@@ -32,28 +29,22 @@ export class SourceService {
     return this.loadByID(id);
   }
 
-  loadByID(id: any): Promise<Source> {
+  async loadByID(id: any): Promise<Source> {
     let token = this.auth.token;
     let url = this.backend.authUrl('Sources/' + id, token);
 
-    return this.http.get(url)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      s => new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id)
-    );
+    const s = await this.http.get<any>(url)
+      .toPromise();
+    return new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id);
   }
 
-  loadSummaryByID(id: any): Promise<Source> {
+  async loadSummaryByID(id: any): Promise<Source> {
     let token = this.auth.token;
     let url = this.backend.authUrl('Sources/' + id + '/summary', token);
 
-    return this.http.get(url)
-    .map(data => data.json())
-    .toPromise()
-    .then(
-      s => new Source(s.title, '', s.info_url, s.logo_url, '', false, false, s.id)
-    );
+    const s = await this.http.get<any>(url)
+      .toPromise();
+    return new Source(s.title, '', s.info_url, s.logo_url, '', false, false, s.id);
   }
 
   save(source: Source): Promise<any> {

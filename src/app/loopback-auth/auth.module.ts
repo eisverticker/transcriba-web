@@ -19,8 +19,6 @@ import { UtilityModule } from '../utilities/utility.module';
 import { I18nModule } from '../i18n/i18n.module';
 import { GadgetModule } from '../gadgets/gadget.module';
 
-import { HttpModule } from '@angular/http';
-
 // services
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
@@ -33,6 +31,7 @@ import { TrustedGuardService } from './trusted-guard.service';
 
 // routing
 import { authRouting } from './auth.routing';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -51,7 +50,7 @@ import { authRouting } from './auth.routing';
       UtilityModule,
       RouterModule,
       I18nModule,
-      HttpModule,
+      HttpClientModule,
       GadgetModule,
       authRouting
     ],

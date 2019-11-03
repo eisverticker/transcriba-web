@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { BackendHelper } from '../utilities/backend-helper';
 import { User } from './user';
 import { Role } from './role';
 
 import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
+import { map, timeout } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private backend: BackendHelper,
     private auth: AuthService
   ) {}
@@ -19,8 +20,9 @@ export class UserService {
     let token = this.auth.token;
     let url = this.backend.authUrl('AppUsers/count', token);
 
-    return this.http.get(url)
-    .map(data => data.json().count)
+    return this.http.get(url).pipe(
+      map((data: any) => data.count)
+    )
     .toPromise();
   }
 
@@ -32,12 +34,12 @@ export class UserService {
       'filter[order]=username&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
-    return this.http.get(url)
-    .timeout(5000)
-    .map(data => data.json())
+    return this.http.get(url).pipe(
+      timeout(5000)
+    )
     .toPromise()
     .then(
-      (users) => {
+      (users: Array<any>) => {
         users = users.map(
           (u) => new User(u.username, u.email, '', [], u.id)
         );
@@ -80,7 +82,9 @@ export class UserService {
     let token = this.auth.token;
     let url = this.backend.authUrl('AppUsers/' + user.id, token);
 
-    return this.http.delete(url).timeout(5000).toPromise();
+    return this.http.delete(url).pipe(
+      timeout(5000)
+    ).toPromise();
   }
 
   /**

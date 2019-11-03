@@ -13,7 +13,7 @@ import { DiscussionService } from '../discussion/discussion.service';
 import { SourceService } from '../source/source.service';
 import { BackendHelper } from '../utilities/backend-helper';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 @Component({
   moduleId:     module.id,

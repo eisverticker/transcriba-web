@@ -15,6 +15,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { I18nModule } from '../i18n/i18n.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,7 @@ import { I18nModule } from '../i18n/i18n.module';
       SubNavbarComponent,
       GrowingTextareaComponent
     ],
-    imports: [BrowserModule, FormsModule, I18nModule, RouterModule],
+    imports: [BrowserModule, FormsModule, I18nModule, RouterModule, FontAwesomeModule],
     exports: [
       FailNotifierComponent,
       DeleteButtonComponent,
