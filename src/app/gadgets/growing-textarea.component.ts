@@ -16,7 +16,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked {
-   @ViewChild('textfield') textarea: ElementRef;
+   @ViewChild('textfield', { static: true }) textarea: ElementRef;
 
   private _value = '';
   private isViewInitialized = false;

@@ -48,8 +48,8 @@ export class TeiContainerComponent implements AfterViewInit {
   @Output() publish: EventEmitter<any> = new EventEmitter();
   @Output() abort: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('container') container: ElementRef;
-  @ViewChild('contentContainer') contentContainer: ElementRef;
+  @ViewChild('container', { static: true }) container: ElementRef;
+  @ViewChild('contentContainer', { static: true }) contentContainer: ElementRef;
 
   @HostListener('window:resize', ['$event'])
   onResize($event) {

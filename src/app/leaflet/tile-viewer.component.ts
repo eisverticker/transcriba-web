@@ -21,7 +21,7 @@ import * as L from 'leaflet';
 export class TileViewerComponent implements AfterViewInit {
   @Input() url: string;
   @Input() maxZoomLevel: number;
-  @ViewChild('container') container: ElementRef;
+  @ViewChild('container', { static: true }) container: ElementRef;
   @HostListener('window:resize', ['$event'])
   onResize($event) {
     this.fitViewPort();
