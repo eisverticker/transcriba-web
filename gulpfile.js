@@ -1,13 +1,10 @@
-var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var minify = require('gulp-minify');
-var concat = require('gulp-concat');
-var notify = require('gulp-notify');
-var mergeJson = require('gulp-merge-json');
-var cleanDest = require('gulp-clean-dest');
+const { series, parallel, src, dest } = require('gulp');
+const concat = require('gulp-concat');
+const mergeJson = require('gulp-merge-json');
+const cleanDest = require('gulp-clean-dest');
 
 
-var paths = {
+const paths = {
   bowerDir: './bower_components',
   npmDir: './node_modules',
   scriptDest: './web/js/',
@@ -17,32 +14,27 @@ var paths = {
   localeDest: 'web/locales/'
 };
 
-
-// javascript files
-gulp.task('scriptsGeneral', function() {
-  return gulp.src([
+async function scriptsGeneral() {
+  return src([
       paths.npmDir + '/jquery/dist/jquery.js',
       paths.npmDir + '/bootstrap/dist/js/bootstrap.js',
       paths.npmDir + '/core-js/client/shim.min.js',
       paths.npmDir + '/zone.js/dist/zone.js'
     ])
     .pipe(concat('static.js'))
-		//.pipe(uglify())
-    .pipe(gulp.dest(paths.scriptDest));
-});
+    .pipe(dest(paths.scriptDest));
+}
 
-gulp.task('scriptsJustInTime', function() {
-  return gulp.src([
-      //paths.npmDir + '/reflect-metadata/Reflect.js',
+async function scriptsJustInTime() {
+  return src([
       paths.npmDir + '/systemjs/dist/system.src.js'
     ])
     .pipe(concat('static-jit.js'))
-    .pipe(gulp.dest(paths.scriptDest));
-});
+    .pipe(dest(paths.scriptDest));
+}
 
-// general stylesheet files
-gulp.task('cssGeneral', function() {
-  return gulp.src([
+function cssGeneral() {
+  return src([
       paths.npmDir + '/bootstrap/dist/css/bootstrap.css',
       paths.npmDir + '/font-awesome/css/font-awesome.css',
       paths.npmDir + '/leaflet/dist/leaflet.css',
@@ -51,43 +43,60 @@ gulp.task('cssGeneral', function() {
       'style.css'
     ])
     .pipe(concat('static.css'))
-    .pipe(gulp.dest(paths.cssDest));
-});
+    .pipe(dest(paths.cssDest));
+}
 
-// fonts
-gulp.task('fonts', function() {
-  return gulp.src([
+function fonts() {
+  return src([
       paths.npmDir + '/bootstrap/dist/fonts/*.*',
       paths.npmDir + '/font-awesome/fonts/*.*',
     ])
-    .pipe(gulp.dest(paths.fontDest));
-});
+    .pipe(dest(paths.fontDest));
+}
 
 // put together locale strings
-gulp.task('localesDe', function() {
-  return gulp.src('locales/**/de.json')
-    .pipe(mergeJson('de.json'))
-    .pipe(gulp.dest(paths.localeDest));
-});
+function localesDe() {
+  return src('locales/**/de.json')
+    .pipe(mergeJson({
+      fileName: 'de.json'
+    }))
+    .pipe(dest(paths.localeDest));
+}
 
-gulp.task('localesEn', function() {
-  return gulp.src('locales/**/en.json')
-    .pipe(mergeJson('en.json'))
-    .pipe(gulp.dest(paths.localeDest));
-});
+function localesEn() {
+  return src('locales/**/en.json')
+  .pipe(mergeJson({
+    fileName: 'en.json'
+  }))
+    .pipe(dest(paths.localeDest));
+}
 
-gulp.task('localesRu', function() {
-  return gulp.src('locales/**/ru.json')
-    .pipe(mergeJson('ru.json'))
-    .pipe(gulp.dest(paths.localeDest));
-});
+function localesRu() {
+  return src('locales/**/ru.json')
+    .pipe(mergeJson({
+      fileName: 'ru.json'
+    }))
+    .pipe(dest(paths.localeDest));
+}
 
 // copy web-assets for ahead of time compilation
-gulp.task('copy', [], function() {
-  return gulp.src(['web/**/*', 'web/**/*'], {})
+function copy() {
+  return src(['web/**/*', 'web/**/*'], {})
     .pipe(cleanDest('dist/web'))
-    .pipe(gulp.dest('dist/web'));
-});
+    .pipe(dest('dist/web'));
+}
+
 
 // the default task (called when you run `gulp` from cli)
-gulp.task('default', ['scriptsGeneral', 'scriptsJustInTime' /*, 'scriptsAdditional'*/ , 'cssGeneral', 'fonts', 'localesDe', 'localesEn', 'localesRu', 'copy']);
+exports.default = series(
+  parallel(
+    scriptsGeneral,
+    scriptsJustInTime,
+    cssGeneral,
+    fonts,
+    localesDe,
+    localesEn,
+    localesRu,
+  ),
+  copy
+);
