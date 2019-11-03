@@ -1,0 +1,108 @@
+{
+	"text": {
+		"intro": "Dieses Projekt hat die Aufgabe, die vielen alten Schriften in den Archiven für die Öffentlichkeit zugänglich zu machen. Und wer könnte dabei besser helfen, als die Öffentlichkeit selbst? Falls du dich für diese Schriften interessierst, kannst du gerne dabei helfen unsere Sammlung zu vergrößern, indem du an den Transkriptionen mitarbeitest."
+	},
+	"title": {
+		"eMailConfirmation": "Bestätigung Ihrer E-Mail-Adresse",
+		"pageNotFound": "Seite nicht gefunden",
+		"login": "Anmeldung",
+		"register": "Registrierung",
+		"userinfo": "Nutzerinformationen",
+		"authorizationRequired": "Fehlende Rechte!",
+		"welcomeTo": "Willkommen zu {{ object }}!",
+		"sourceManagement": "Quellenverwaltung",
+		"pageManagement": "Seitenverwaltung",
+		"editPage": "Seite bearbeiten",
+		"editSource": "Quelle bearbeiten",
+		"import": "Objekt importieren",
+		"userManagement": "Nutzerverwaltung"
+	},
+	"command": {
+		"pleaseVerifyYourEMailAccount": "Nach der Registrierung wurde Ihnen ein Bestätigungslink per E-Mail zugesandt, bitte klicken Sie auf diesen Link, um zu bestätigen, dass diese E-Mail-Adresse Ihnen gehört.",
+		"pleaseTryAgain": "Bitte versuchen Sie es erneut!"
+	},
+	"action": {
+		"send": "Abschicken",
+		"abort": "Abbrechen",
+		"login": "Anmelden",
+		"logout": "Abmelden",
+		"register": "Registrieren",
+		"forgottenPassword": "Passwort vergessen",
+		"newAccount": "Neues Konto anlegen",
+		"deactivate": "Deaktivieren",
+		"activate": "Aktivieren",
+		"createNewSource": "Neue Quelle erstellen",
+		"createNewPage": "Neue Seite erstellen",
+		"save": "Speichern",
+		"edit": "Bearbeiten",
+		"show": "Anzeigen",
+		"import": "Importieren",
+		"publish": "Veröffentlichen"
+	},
+	"general": {
+		"error": "Fehler",
+		"pigNose": "Schweinenase",
+		"name": "Name",
+		"page": "Seite",
+		"discussion": "Diskussion",
+		"source": "Quelle",
+		"foreignID": "Externe ID",
+		"collections": "Sammlungen",
+		"objects": "Objekte",
+		"overview": "Überblick",
+		"transcription": "Transkription",
+		"viewer": "Betrachter",
+		"versionHistory": "Versionshistorie",
+		"metadata": "Metadaten"
+	},
+	"state": {
+		"done": "fertig"
+	},
+	"auth": {
+		"username": "Benutzername",
+		"password": "Passwort",
+		"email": "E-Mail-Adresse",
+		"passwordRepeat": "Passwort wiederholen",
+		"roles": {
+			"registered": "Registrierter",
+			"administrator": "Administrator",
+			"none": "Keine",
+			"trusted": "Vertrauter",
+			"employee": "Mitarbeiter"
+		}
+	},
+	"request": {
+		"fail": "Fehlgeschlagen!",
+		"success": "Fertig!",
+		"loginFailed": "Anmeldung fehlgeschlagen!",
+		"registrationFailed": "Registrierung fehlgeschlagen!",
+		"registrationSucceeded": "Registrierung abgeschlossen!",
+		"logoutFailed": "Du konntest auf dem Server nicht abgemeldet werden!",
+		"timeout": "Der Server konnte nicht erreicht werden.",
+		"successfulRemoved": "Das Objekt wurde erfolgreich gelöscht!"
+	},
+	"message": {
+		"confirmDelete": "Du bist dabei dieses Objekt endgültig zu löschen!",
+		"error": "Es ist ein Fehler aufgetreten",
+		"pleaseWait": "Bitte warten Sie einen Augenblick",
+		"emailSent": "E-Mail wurde versandt!",
+		"goodbye": "Bis bald!",
+		"welcome": "Willkommen!",
+		"greetSomeone": "Willkommen {{ name }}!",
+		"hello": "Hallo",
+		"helloSomeone": "Hallo {{ name }}!",
+		"pageNotFound": "Diese Seite existiert leider nicht",
+		"notAccessable": "Du hast keinen Zugriff auf diese Ressource",
+		"searchTitle": "Suchen...",
+		"noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
+		"readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet."
+	},
+	"sources": {
+		"apiUrl": "API-URL",
+		"apiType": "API-Typ",
+		"syncSupport": "Server unterstützt Synchronisierung"
+	},
+	"form": {
+		"showDiscussion": "Diskussion anzeigen"
+	}
+}
