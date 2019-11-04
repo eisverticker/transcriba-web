@@ -6,7 +6,6 @@ import { AuthService } from '../loopback-auth/auth.service';
 import { User } from '../loopback-auth/user';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-simple-comment',
   templateUrl: 'comment.component.html',
   styleUrls: []
@@ -23,69 +22,70 @@ export class CommentComponent implements OnChanges {
     private auth: AuthService
   ) {}
 
-  updateVotings() {
-    return this.auth.loadUser().then(
-      (user) => this.user = user
-    ).then(
-      () => this.voting.loadVotings(this.comment.id).then(
-        (votings) => {
-          this.votings = votings;
-          return this.voting.loadVote(this.comment.id);
-        }
-      ).then(
-        (vote) => {
-          this.currentVote = vote;
-        }
-      )
-    );
+  async updateVotings() {
+    const user = await this.auth.loadUser();
+    this.user = user;
+    const votings = await this.voting.loadVotings(this.comment.id);
+    this.votings = votings;
+    const vote = await this.voting.loadVote(this.comment.id);
+    this.currentVote = vote;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.updateVotings();
   }
 
-  like() {
+  async like() {
     if (this.currentVote === 'like') {
-      return this.voting.unvote(this.comment.id).then(
-        () => this.updateVotings(),
-        err => console.log(err)
-      );
+      try {
+        await this.voting.unvote(this.comment.id);
+        return await this.updateVotings();
+      } catch (err) {
+        return console.log(err);
+      }
     } else {
-      return this.voting.like(this.comment.id)
-      .then(
-        () => this.updateVotings(),
-        err => console.log(err)
-      );
+      try {
+        await this.voting.like(this.comment.id);
+        return await this.updateVotings();
+      } catch (err_1) {
+        return console.log(err_1);
+      }
     }
   }
 
-  dislike() {
+  async dislike() {
     if (this.currentVote === 'dislike') {
-      return this.voting.unvote(this.comment.id).then(
-        () => this.updateVotings(),
-        err => console.log(err)
-      );
+      try {
+        await this.voting.unvote(this.comment.id);
+        return await this.updateVotings();
+      } catch (err) {
+        return console.log(err);
+      }
     } else {
-      return this.voting.dislike(this.comment.id)
-      .then(
-        () => this.updateVotings(),
-        err => console.log(err)
-      );
+      try {
+        await this.voting.dislike(this.comment.id);
+        return await this.updateVotings();
+      } catch (err_1) {
+        return console.log(err_1);
+      }
     }
   }
 
-  unwanted() {
+  async unwanted() {
     if (this.currentVote === 'unwanted') {
-      return this.voting.unvote(this.comment.id).then(
-        () => this.updateVotings(),
-        err => console.log(err)
-      );
+      try {
+        await this.voting.unvote(this.comment.id);
+        return await this.updateVotings();
+      } catch (err) {
+        return console.log(err);
+      }
     } else {
-      return this.voting.unwanted(this.comment.id)
-      .then(
-        () => this.updateVotings(),
-        err => console.log(err)
-      );
+      try {
+        await this.voting.unwanted(this.comment.id);
+        return await this.updateVotings();
+      } catch (err_1) {
+        return console.log(err_1);
+      }
     }
   }
 

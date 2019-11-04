@@ -10,7 +10,6 @@ import { AuthService } from './loopback-auth/auth.service';
 import { User } from './loopback-auth/user';
 
 @Component({
-  moduleId:     module.id,
   selector: 'tr-app',
   templateUrl: 'app.component.html'
 })

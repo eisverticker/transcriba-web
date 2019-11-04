@@ -1,4 +1,4 @@
-import { NgModule }       from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { ConfigurationService } from './configuration.service';
 import { ConfigurationPipe } from './configuration.pipe';

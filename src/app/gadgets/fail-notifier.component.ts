@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  moduleId:     module.id,
   selector:    'ut-fail-notifier',
   template: `
   <div *ngIf="activated" class="alert  alert-danger">

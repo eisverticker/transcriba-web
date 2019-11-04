@@ -21,18 +21,16 @@ export class DiscussionService {
   /**
    * Loads a discussion from the server by id
    */
-  loadByID(id: any): Promise<Discussion> {
+  async loadByID(id: any): Promise<Discussion> {
     const token = this.auth.token;
     const url = this.backend.authUrl('Discussions/' + id, token);
 
-    return this.http.get<any>(url)
-    .toPromise()
-    .then(
-      (data) => new Discussion(data.title, id)
-    );
+    const data = await this.http.get<any>(url)
+      .toPromise();
+    return new Discussion(data.title, id);
   }
 
-  loadCommentPage(discussion: Discussion, page: number, itemsPerPage: number): Promise<Comment[]> {
+  async loadCommentPage(discussion: Discussion, page: number, itemsPerPage: number): Promise<Comment[]> {
     const token = this.auth.token;
     const url = this.backend.authUrl(
       'Discussions/' + discussion.id + '/comments',
@@ -42,25 +40,15 @@ export class DiscussionService {
       '&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
-    return this.http.get<any[]>(url).pipe(
-      timeout(5000)
-    )
-    .toPromise()
-    .then(
-      (comments) => {
-        return comments.filter(
-          (c) => c.appUser !== undefined
-        ).map(
-          (c) => {
-            const user = User.createEmptyUser();
-            user.name = c.appUser.username;
-            user.id = c.appUser.id;
-            user.mail = c.appUser.email;
-            return new Comment(c.content, user, c.createdAt, c.id);
-          }
-        );
-      }
-    );
+    const comments = await this.http.get<any[]>(url).pipe(timeout(5000))
+      .toPromise();
+    return comments.filter((c) => c.appUser !== undefined).map((c) => {
+      const user = User.createEmptyUser();
+      user.name = c.appUser.username;
+      user.id = c.appUser.id;
+      user.mail = c.appUser.email;
+      return new Comment(c.content, user, c.createdAt, c.id);
+    });
   }
 
   loadNumOfComments(discussion: Discussion): Promise<number> {

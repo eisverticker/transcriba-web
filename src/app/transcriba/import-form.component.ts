@@ -9,7 +9,6 @@ import { Notification } from '../utilities/notification';
 import { NotificationService } from '../utilities/notification.service';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-transcriba-import',
   templateUrl: 'import-form.component.html',
   styleUrls: []

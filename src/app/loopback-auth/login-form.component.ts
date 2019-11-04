@@ -6,7 +6,6 @@ import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
 @Component({
-  moduleId:     module.id,
   selector:    'usr-login',
   templateUrl: 'login-form.component.html',
   styleUrls: []

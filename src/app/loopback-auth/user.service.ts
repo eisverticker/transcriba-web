@@ -26,7 +26,7 @@ export class UserService {
     .toPromise();
   }
 
-  loadUserPage(page: number, itemsPerPage: number): Promise<User[]> {
+  async loadUserPage(page: number, itemsPerPage: number): Promise<User[]> {
     const token = this.auth.token;
     const url = this.backend.authUrl(
       'AppUsers',
@@ -34,18 +34,22 @@ export class UserService {
       'filter[order]=username&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
     );
 
-    return this.http.get(url).pipe(
+    const users = await this.http.get<any[]>(url)
+    .pipe(
+      map(
+        (usersRaw) => usersRaw.map(
+          (data) => new User(
+            data.username,
+            data.email,
+            '',
+            [],
+            data.id
+          )
+        )
+      ),
       timeout(5000)
-    )
-    .toPromise()
-    .then(
-      (users: Array<any>) => {
-        users = users.map(
-          (u) => new User(u.username, u.email, '', [], u.id)
-        );
-        return this.includeUserRoles(users, 0);
-      }
-    );
+    ).toPromise();
+    return this.includeUserRoles(users, 0);
   }
 
   giveUserRole(user: User, roleName: string): Promise<any> {
@@ -92,20 +96,16 @@ export class UserService {
    *  Necessary becaus of some loopback-mongodb-connector bug which
    *  hinders us from using include filters for user requests
    */
-  private includeUserRoles(users: Array<User>, currentUser: number): Promise<User[]> {
+  private async includeUserRoles(users: Array<User>, currentUser: number): Promise<User[]> {
     if (currentUser <= users.length - 1) {
-        const u: User = users[currentUser];
-
-        return this.auth.getRoles(u.id).then(
-          (roles) => {
-            if (roles.length === 0) {
-              u.roles = [new Role('none')];
-            } else {
-              u.roles = roles;
-            }
-            return this.includeUserRoles(users, currentUser + 1);
-          }
-        );
+      const u: User = users[currentUser];
+      const roles = await this.auth.getRoles(u.id);
+      if (roles.length === 0) {
+        u.roles = [new Role('none')];
+      } else {
+        u.roles = roles;
+      }
+      return this.includeUserRoles(users, currentUser + 1);
     } else {
       return Promise.resolve(users);
     }

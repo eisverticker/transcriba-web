@@ -36,7 +36,7 @@ export class CommentVotingService {
     return this.voting.unvote(votingContext);
   }
 
-  loadVotings(id: any): Promise<{ likes: Array<User>, dislikes: Array<User>, unwanted: Array<User> }> {
+  async loadVotings(id: any): Promise<{ likes: Array<User>, dislikes: Array<User>, unwanted: Array<User> }> {
     const votingContext = new VotingContext('Comment', id);
     const res = {
       likes: [],
@@ -44,23 +44,13 @@ export class CommentVotingService {
       unwanted: []
     };
 
-    return this.voting.loadUsers(votingContext, 'like')
-    .then(
-      (users) => {
-        res.likes = users;
-        return this.voting.loadUsers(votingContext, 'dislike');
-      }
-    ).then(
-      (users) => {
-        res.dislikes = users;
-        return this.voting.loadUsers(votingContext, 'unwanted');
-      }
-    ).then(
-      (users) => {
-        res.unwanted = users;
-        return res;
-      }
-    );
+    const users = await this.voting.loadUsers(votingContext, 'like');
+    res.likes = users;
+    const users_1 = await this.voting.loadUsers(votingContext, 'dislike');
+    res.dislikes = users_1;
+    const users_2 = await this.voting.loadUsers(votingContext, 'unwanted');
+    res.unwanted = users_2;
+    return res;
   }
 
   loadVote(id: any): Promise<string> {

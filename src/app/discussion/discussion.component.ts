@@ -8,11 +8,11 @@ import { AuthService } from '../loopback-auth/auth.service';
 import { Discussion } from './discussion';
 import { Comment } from './comment';
 import { User } from '../loopback-auth/user';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-simple-discussion',
   templateUrl: 'discussion.component.html',
   styleUrls: []
@@ -59,17 +59,18 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
   }
 
   private loadDiscussionAndUserData(): Observable<any> {
-    return Observable.zip(
+    return zip([
       this.auth.loadUser(),
       this.discuss.loadNumOfComments(this.discussion),
-      this.discuss.loadCommentPage(this.discussion, this.currentPage, this.itemsPerPage),
-      function(user, numOfComments, comments) {
-        return {
-          'user': user,
-          'numOfComments': numOfComments,
-          'comments': comments
-        };
-      }
+      this.discuss.loadCommentPage(this.discussion, this.currentPage, this.itemsPerPage)
+    ]).pipe(
+      map(
+        ([user, numOfComments, comments]) => ({
+          user,
+          numOfComments,
+          comments
+        })
+      )
     );
   }
 
@@ -77,25 +78,20 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
     this.numOfPages = Math.ceil(this.numOfComments / this.itemsPerPage);
   }
 
-  private update() {
-    return this.discuss.loadByID(this.discussionId).then(
-      (discussion) => {
-        this.discussion = discussion;
-        this.loadDiscussionAndUserData().subscribe(
-          (data) => {
-            this.comments = data.comments;
-            this.user = data.user;
-            this.numOfComments = data.numOfComments;
-            this.setNumberOfPages();
-          },
-          err => console.log(err)
-        );
-      },
-      (err) => {
-        console.log('update fehlgeschlagen', err);
-        throw err;
-      }
-    );
+  private async update() {
+    try {
+      const discussion = await this.discuss.loadByID(this.discussionId);
+      this.discussion = discussion;
+      this.loadDiscussionAndUserData().subscribe((data) => {
+        this.comments = data.comments;
+        this.user = data.user;
+        this.numOfComments = data.numOfComments;
+        this.setNumberOfPages();
+      }, err => console.log(err));
+    } catch (err) {
+      console.log('update fehlgeschlagen', err);
+      throw err;
+    }
   }
 
 }

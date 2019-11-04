@@ -5,7 +5,6 @@ import { User } from './loopback-auth/user';
 import { AuthService } from './loopback-auth/auth.service';
 
 @Component({
-  moduleId:     module.id,
   selector: 'tr-general-dashboard',
   templateUrl: 'dashboard.component.html'
 })

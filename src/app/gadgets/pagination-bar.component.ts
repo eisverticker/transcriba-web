@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 
 @Component({
-  moduleId:     module.id,
   selector:    'ut-pagination-bar',
   templateUrl: 'pagination-bar.component.html',
   styleUrls: []

@@ -8,7 +8,6 @@ import { Notification } from '../utilities/notification';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-source-details',
   templateUrl: 'source-details.component.html',
   styleUrls: []

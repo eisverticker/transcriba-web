@@ -8,7 +8,6 @@ import { Notification } from '../utilities/notification';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-info-page-edit',
   templateUrl: 'info-page-edit.component.html',
   styleUrls: []

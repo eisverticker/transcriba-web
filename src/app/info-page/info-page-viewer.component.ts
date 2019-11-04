@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { InfoPage } from './info-page';
 import { InfoPageService } from './info-page.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-info-page-viewer',
   template: `
     <ut-sub-navbar [items]="navItems"></ut-sub-navbar>
@@ -32,7 +32,7 @@ export class InfoPageViewerComponent implements OnInit {
     this.route.data.subscribe(
       (data) => {
         this.mode = data['mode'];
-        this.route.params.first().subscribe(
+        this.route.params.pipe(first()).subscribe(
           params => this.pageService.loadOneByName(params['id']).then(
             (page) => {
               this.page = page;

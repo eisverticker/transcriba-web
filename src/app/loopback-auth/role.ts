@@ -1,4 +1,4 @@
-import { configData } from '../config';
+import { environment } from 'src/environments/environment';
 
 export class Role {
   constructor(
@@ -7,13 +7,13 @@ export class Role {
   ) {}
 
   static getAvailableRoles(): Array<Role> {
-    if (configData.roles === undefined) {
+    if (environment.rbac.roles === undefined) {
       return [
         new Role('registered'),
         new Role('administrator')
       ];
     } else {
-      return configData.roles.map( role => new Role(role) );
+      return environment.rbac.roles.map( role => new Role(role) );
     }
   }
 }

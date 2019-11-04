@@ -8,7 +8,6 @@ import { EditorService } from './editor.service';
 
 
 @Component({
-  moduleId:     module.id,
   selector: 'tr-tei-element',
   templateUrl: 'tei-element.component.html',
   providers: [

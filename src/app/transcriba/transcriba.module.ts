@@ -1,4 +1,4 @@
-import { NgModule }       from '@angular/core';
+import { NgModule } from '@angular/core';
 
 // components
 import { ImportFormComponent } from './import-form.component';
@@ -12,8 +12,8 @@ import { BusyWidgetComponent } from './busy-widget.component';
 
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
-import { RouterModule }   from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { I18nModule } from '../i18n/i18n.module';
 import { UtilityModule } from '../utilities/utility.module';
 import { AuthModule } from '../loopback-auth/auth.module';

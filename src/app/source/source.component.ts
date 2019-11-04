@@ -6,7 +6,6 @@ import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-table-of-sources',
   templateUrl: 'source.component.html',
   styleUrls: []
@@ -24,11 +23,13 @@ export class SourceComponent implements OnInit {
     this.updateSources();
   }
 
-  updateSources(): Promise<any> {
-    return this.sourceService.loadAllSources().then(
-      (sources) => this.sources = sources,
-      (err) => this.notify.notify(new Notification('request.fail', ['fail']))
-    );
+  async updateSources(): Promise<any> {
+    try {
+      const sources = await this.sourceService.loadAllSources();
+      return this.sources = sources;
+    } catch (err) {
+      return this.notify.notify(new Notification('request.fail', ['fail']));
+    }
   }
 
   deactivate(source: Source) {

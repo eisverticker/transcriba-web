@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 
 @Component({
-  selector:    'ut-be-patient',
+  selector: 'ut-be-patient',
   template:
   `
   <div *ngIf="isStarted" class="text-center">
@@ -17,7 +17,7 @@ export class BePatientComponent implements OnInit {
 
   ngOnInit() {
     // wait 200 ms before showing the template (less anoying)
-    Observable.timer(200).subscribe(
+    timer(200).subscribe(
       () => {
         this.isStarted = true;
       }

@@ -137,7 +137,12 @@ export class TranscribaService {
     });
   }
 
-  async loadObjectPageFromCollection(page: number, itemsPerPage: number, collectionId: any, searchTerm?: string): Promise<TranscribaObject[]> {
+  async loadObjectPageFromCollection(
+    page: number,
+    itemsPerPage: number,
+    collectionId: any,
+    searchTerm?: string
+  ): Promise<TranscribaObject[]> {
     const token = this.auth.token;
     const url = this.backend.authUrl(
       'Collections/' + collectionId + '/transcribaObjects',

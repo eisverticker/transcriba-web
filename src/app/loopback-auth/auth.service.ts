@@ -27,67 +27,56 @@ export class AuthService {
 
   }
 
-  public loadUser(): Promise<User> {
+  public async loadUser(): Promise<User> {
     if (this.isUserInitialized) {
       return Promise.resolve(this.userSubject.getValue());
     } else {
-      return this.authenticateUser().then(
-        (user) => {
-          this.isUserInitialized = true;
-          this.userSubject.next(user);
-          return user;
-        },
-        () => {
-          this.isUserInitialized = true;
-          return this.userSubject.getValue();
-        }
-      );
+      try {
+        const user = await this.authenticateUser();
+        this.isUserInitialized = true;
+        this.userSubject.next(user);
+        return user;
+      } catch (e) {
+        this.isUserInitialized = true;
+        return this.userSubject.getValue();
+      }
     }
   }
 
-  public login(user: User): Promise<void> {
+  public async login(user: User): Promise<void> {
     this.reset(); // delete current token and userid
     this.isUserInitialized = false; // reinitalize user later
 
-    return this.http.post(this.backend.unAuthUrl('AppUsers/login'), {
-      'email': user.mail,
-      'password': user.password
-    }).pipe(
-      timeout(5000)
-    )
-    .toPromise()
-    .then(
-      (data: any) => {
-         this.userID = data.userId;
-         this.token = data.id; // save token to localStorage
-         this.loadUser(); // reinitalize user
-      },
-      (err) => {
-        if (err === 'Timeout') {
-          throw err;
-        } else if (err.status === 401) {
-          return Promise.reject('wrong credentials');
-        } else {
-          throw new Error('unexpected result 34343-AuthService');
-        }
+    try {
+      const data = await this.http.post<any>(this.backend.unAuthUrl('AppUsers/login'), {
+        'email': user.mail,
+        'password': user.password
+      })
+      .pipe(timeout(5000))
+      .toPromise();
+      this.userID = data.userId;
+      this.token = data.id; // save token to localStorage
+      this.loadUser(); // reinitalize user
+    } catch (err) {
+      if (err === 'Timeout') {
+        throw err;
+      } else if (err.status === 401) {
+        return Promise.reject('wrong credentials');
+      } else {
+        throw new Error('unexpected result 34343-AuthService');
       }
-    );
+    }
   }
-  public logout(): Promise<any> {
-    return this.http.post(this.backend.authUrl('AppUsers/logout', this.token), {})
-     .pipe(
-       timeout(5000)
-     )
-     .toPromise()
-     .then(
-       () => {
-         this.reset();
-         this.userSubject.next(User.createGuest());
-       },
-       (err) => {
-         return this.loadUser();
-       }
-     );
+  public async logout(): Promise<any> {
+    try {
+      await this.http.post(this.backend.authUrl('AppUsers/logout', this.token), {})
+        .pipe(timeout(5000))
+        .toPromise();
+      this.reset();
+      this.userSubject.next(User.createGuest());
+    } catch (err) {
+      return this.loadUser();
+    }
   }
   public verify(code: string): Promise<any> {
     const url = 'AppUsers/confirm?uid=' + this.userID + '&token=' + code;
@@ -107,46 +96,35 @@ export class AuthService {
     .toPromise();
   }
 
-  public register(user: User): Promise<void> {
+  public async register(user: User): Promise<void> {
     const url = this.backend.unAuthUrl('AppUsers');
 
-    return this.http.post(url, {
+    await this.http.post(url, {
       'username': user.name,
       'email': user.mail,
       'password': user.password
-    })
-    .timeout(5000)
-    .toPromise()
-    .then(
-      () => {
-        return;
-      }
-    );
+    }).pipe(timeout(5000))
+      .toPromise();
+    return;
   }
 
-  public getRoles(userID: any): Promise<Role[]> {
+  public async getRoles(userID: any): Promise<Role[]> {
     const url = this.backend.authUrl('AppUsers/' + userID + '/roles', this.token);
 
     if (this.token === null || userID === null) {
       return Promise.reject<Role[]>('no local user data found');
     } else {
-      return this.http.get<any[]>(url)
-      .toPromise()
-      .then(
-        (roles) => {
-          const roleNames: Array<string> = roles.map( role => role.name );
-
-          const rolesInOrder = Role.getAvailableRoles().filter(
-            (role) => {
-              return roleNames.indexOf(role.name) !== -1;
-            }
-          );
-          return rolesInOrder;
-        },
-        (res) => {
-          return Promise.reject<Role[]>(res);
-        }
-      );
+      try {
+        const roles = await this.http.get<any[]>(url)
+          .toPromise();
+        const roleNames: Array<string> = roles.map(role => role.name);
+        const rolesInOrder = Role.getAvailableRoles().filter((role) => {
+          return roleNames.indexOf(role.name) !== -1;
+        });
+        return rolesInOrder;
+      } catch (res) {
+        return Promise.reject<Role[]>(res);
+      }
     }
   }
 
@@ -169,30 +147,23 @@ export class AuthService {
     localStorage.removeItem('userID');
   }
 
-  private authenticateUser(): Promise<User> {
+  private async authenticateUser(): Promise<User> {
     const url = this.backend.authUrl('AppUsers/' + this.userID, this.token);
 
     if (this.token === null || this.userID === null) {
       return Promise.reject<User>('no local user data found');
     } else {
-      return this.http.get<any>(url)
-      .toPromise()
-      .then(
-        (data) => {
-          const user = new User(data.username, data.email, '', [], data.id);
-
-          return this.getRoles(this.userID).then(
-            roles => {
-              user.roles = user.roles.concat(roles);
-              return user;
-            }
-          );
-        },
-        (res) => {
-          this.reset();
-          return Promise.reject<User>(res);
-        }
-      );
+      try {
+        const data = await this.http.get<any>(url)
+          .toPromise();
+        const user = new User(data.username, data.email, '', [], data.id);
+        const roles = await this.getRoles(this.userID);
+        user.roles = user.roles.concat(roles);
+        return user;
+      } catch (res) {
+        this.reset();
+        return Promise.reject<User>(res);
+      }
     }
   }
 

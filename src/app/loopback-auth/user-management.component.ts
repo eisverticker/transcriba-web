@@ -7,7 +7,6 @@ import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
 @Component({
-  moduleId:     module.id,
   selector:    'usr-management',
   templateUrl: 'user-management.component.html',
   styleUrls: []

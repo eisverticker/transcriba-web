@@ -5,7 +5,6 @@ import { ImageViewerService } from './image-viewer.service';
 
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-image-viewer',
   template:
   `

@@ -1,22 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { TranscribaObject } from './transcriba-object';
 import { TranscribaService } from './transcriba.service';
-import { TranscriptionService } from './transcription.service';
-import { RevisionVotingService } from './revision-voting.service';
-import { NotificationService } from '../utilities/notification.service';
-
-import { ActivatedRoute, Router } from '@angular/router';
-
-import { AuthService } from '../loopback-auth/auth.service';
-import { DiscussionService } from '../discussion/discussion.service';
-import { SourceService } from '../source/source.service';
-import { BackendHelper } from '../utilities/backend-helper';
-
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { zip } from 'rxjs';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-object-detail',
   templateUrl: 'object-detail.component.html',
   styleUrls: []
@@ -29,36 +17,17 @@ export class ObjectDetailComponent implements OnInit {
 
   constructor(
     private transcriba: TranscribaService,
-    private transcription: TranscriptionService,
-    private notify: NotificationService,
     private route: ActivatedRoute,
-    private router: Router,
-    private discussionService: DiscussionService,
-    private auth: AuthService,
-    private backend: BackendHelper,
-    private sourceService: SourceService,
-    private voting: RevisionVotingService
   ) {
 
   }
 
   ngOnInit() {
-    Observable.zip(
-      this.route.params,
-      this.route.data,
-      function(params, data) {
-        return {
-          'params': params,
-          'data': data
-        };
-      }
-    ).subscribe( d => {
-      const id = d.params['id'];
-
-      // load object
-      this.transcriba.loadByID(id).then(
+    zip([this.route.params, this.route.data])
+    .subscribe( ([params, data]) => {
+      this.transcriba.loadByID(params['id']).then(
           obj => {
-            this.mode = d.data['mode'];
+            this.mode = data['mode'];
             this.initNavigation(obj);
             this.object = obj;
           },

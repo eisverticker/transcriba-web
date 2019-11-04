@@ -17,42 +17,32 @@ export class InfoPageService {
     private discuss: DiscussionService
   ) {}
 
-  loadAll(): Promise<InfoPage[]> {
+  async loadAll(): Promise<InfoPage[]> {
     const token = this.auth.token;
     const url = this.backend.authUrl('InfoPages', token);
 
-    return this.http.get<any[]>(url)
-    .toPromise()
-    .then(
-      (data) => data.map(
-        p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, p.id)
-      )
-    );
+    const data = await this.http.get<any[]>(url)
+      .toPromise();
+    return data.map(p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, p.id));
   }
 
-  loadOneByID(id: any): Promise<InfoPage> {
+  async loadOneByID(id: any): Promise<InfoPage> {
     const token = this.auth.token;
     const url = this.backend.authUrl('InfoPages/' + id, token);
 
-    return this.http.get<any>(url)
-    .toPromise()
-    .then(
-      p => new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, id)
-    );
+    const p = await this.http.get<any>(url)
+      .toPromise();
+    return new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, id);
   }
 
-  loadOneByName(name: string): Promise<InfoPage> {
+  async loadOneByName(name: string): Promise<InfoPage> {
     const token = this.auth.token;
     const url = this.backend.authUrl('InfoPages/parsed/' + name, token);
 
-    return this.http.get<any>(url)
-    .toPromise()
-    .then(
-      data => {
-        const p = data.page;
-        return new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, p.id);
-      }
-    );
+    const data = await this.http.get<any>(url)
+      .toPromise();
+    const p = data.page;
+    return new InfoPage(p.name, p.content, p.show_discussion, p.discussionId, p.id);
   }
 
   save(page: InfoPage): Promise<any> {
@@ -67,18 +57,10 @@ export class InfoPageService {
 
     if (page.id === undefined) {
       url = this.backend.authUrl('InfoPages', token);
-      /*return this.discuss.startDiscussion().then(
-        (discussion) => {
-          data['discussionId'] = discussion.id;
-
-        }
-      );*/
       return this.http.put(url, data).toPromise();
-
     } else {
       url = this.backend.authUrl('InfoPages/' + page.id, token);
       data['discussionId'] = page.discussionID;
-
       return this.http.put(url, data).toPromise();
     }
   }

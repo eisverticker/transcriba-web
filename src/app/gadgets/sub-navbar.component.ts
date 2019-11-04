@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  moduleId:     module.id,
   selector:    'ut-sub-navbar',
   template: `
     <ul style="margin-bottom: 20px;" class="nav nav-pills">

@@ -1,4 +1,4 @@
-import { NgModule }       from '@angular/core';
+import { NgModule } from '@angular/core';
 
 // components
 import { AuthComponent } from './auth.component';
@@ -13,8 +13,8 @@ import { UserManagementComponent } from './user-management.component';
 
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
-import { RouterModule }   from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { UtilityModule } from '../utilities/utility.module';
 import { I18nModule } from '../i18n/i18n.module';
 import { GadgetModule } from '../gadgets/gadget.module';

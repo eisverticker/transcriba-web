@@ -1,11 +1,11 @@
-import { NgModule }       from '@angular/core';
+import { NgModule } from '@angular/core';
 
 // components
 import { ImageViewerComponent } from './image-viewer.component';
 
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AuthModule } from '../loopback-auth/auth.module';
 import { LeafletModule } from '../leaflet/leaflet.module';
 

@@ -1,4 +1,4 @@
-import { NgModule }       from '@angular/core';
+import { NgModule } from '@angular/core';
 
 // components
 import { BePatientComponent } from './be-patient.component';
@@ -16,7 +16,7 @@ import { NotificationService } from './notification.service';
 import { AppService } from './app.service';
 
 // modules
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule  } from '@angular/platform-browser';
 import { ConfigurationModule  } from '../config/configuration.module';
 import { I18nModule  } from '../i18n/i18n.module';

@@ -10,8 +10,7 @@ import {
 import * as L from 'leaflet';
 
 @Component({
-  moduleId:     module.id,
-  selector:    'tr-tile-viewer',
+  selector: 'tr-tile-viewer',
   template:
   `
     <div #container id="tileViewer" style="width: 100%;"></div>

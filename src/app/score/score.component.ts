@@ -5,7 +5,7 @@ import { AuthService } from '../loopback-auth/auth.service';
 import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
-import { Observable } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'tr-score-value',
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class ScoreComponent implements OnInit {
 
   score: number;
+  scoreSubscription: Subscription;
 
   constructor(
     private scoreService: ScoreService,
@@ -23,16 +24,12 @@ export class ScoreComponent implements OnInit {
 
   ngOnInit() {
     this.loadScore();
-    const scoreWatcher = Observable.interval(10000) // ms
-      .timeInterval()
-      .subscribe(
-        () => this.loadScore(),
-        (err) => console.log(err)
-      );
+    this.scoreSubscription = interval(10000).subscribe(
+      () => this.loadScore(),
+      (err) => console.log(err)
+    );
     this.auth.user.subscribe(
-      user => {
-        this.score = undefined;
-      }
+      _ => this.score = undefined
     );
   }
 

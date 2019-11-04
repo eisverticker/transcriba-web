@@ -6,7 +6,6 @@ import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-table-of-pages',
   templateUrl: 'info-page-management.component.html',
   styleUrls: []
@@ -24,11 +23,13 @@ export class InfoPageManagementComponent implements OnInit {
     this.updateSources();
   }
 
-  updateSources(): Promise<any> {
-    return this.pageService.loadAll().then(
-      (pages) => this.pages = pages,
-      (err) => this.notify.notify(new Notification('request.fail', ['fail']))
-    );
+  async updateSources(): Promise<any> {
+    try {
+      const pages = await this.pageService.loadAll();
+      return this.pages = pages;
+    } catch (err) {
+      return this.notify.notify(new Notification('request.fail', ['fail']));
+    }
   }
 
   deletePage(page: InfoPage) {

@@ -1,4 +1,4 @@
-import { NgModule }       from '@angular/core';
+import { NgModule } from '@angular/core';
 
 // components
 import { ScoreComponent } from './score.component';
@@ -8,7 +8,7 @@ import { HallOfFameComponent } from './hall-of-fame.component';
 
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AuthModule } from '../loopback-auth/auth.module';
 
 // services

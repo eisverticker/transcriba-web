@@ -9,7 +9,6 @@ import { BackendHelper } from '../utilities/backend-helper';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-transcriba-explorer',
   templateUrl: 'explorer.component.html',
   styleUrls: []

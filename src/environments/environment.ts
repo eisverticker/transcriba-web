@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  backend: {
+    baseApiUrl: 'http://localhost:3001/api/'
+  },
+  rbac: {
+    roles: [
+      'registered',
+      'trusted',
+      'employee',
+      'administrator'
+    ]
+  }
 };
 
 /*

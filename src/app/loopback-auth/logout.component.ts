@@ -6,7 +6,6 @@ import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
 @Component({
-  moduleId:     module.id,
   selector:    'usr-logout',
   templateUrl: 'logout.component.html',
   styleUrls: []

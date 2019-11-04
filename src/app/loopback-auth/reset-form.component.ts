@@ -7,7 +7,6 @@ import { NotificationService } from '../utilities/notification.service';
 import { Notification } from '../utilities/notification';
 
 @Component({
-  moduleId:     module.id,
   selector:    'usr-password-reset',
   templateUrl: 'reset-form.component.html',
   styleUrls: []

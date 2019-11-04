@@ -4,7 +4,6 @@ import { DiscussionService } from '../discussion/discussion.service';
 import { Comment } from './comment';
 
 @Component({
-  moduleId:     module.id,
   selector:    'tr-latest-comments',
   template:
   `
