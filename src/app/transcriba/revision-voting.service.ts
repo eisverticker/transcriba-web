@@ -14,26 +14,26 @@ export class RevisionVotingService {
   ) {}
 
   accept(id: any): Promise<any> {
-    let votingContext = new VotingContext('Revision', id);
+    const votingContext = new VotingContext('Revision', id);
 
     return this.voting.vote(votingContext, 'accept');
   }
 
   refuse(id: any): Promise<any> {
-    let votingContext = new VotingContext('Revision', id);
+    const votingContext = new VotingContext('Revision', id);
 
     return this.voting.vote(votingContext, 'refuse');
   }
 
   unvote(id: any): Promise<any> {
-    let votingContext = new VotingContext('Revision', id);
+    const votingContext = new VotingContext('Revision', id);
 
     return this.voting.unvote(votingContext);
   }
 
   loadVotings(id: any): Promise<{ accept: Array<User>, refuse: Array<User>}> {
-    let votingContext = new VotingContext('Revision', id);
-    let res = {
+    const votingContext = new VotingContext('Revision', id);
+    const res = {
       accept: [],
       refuse: []
     };
@@ -53,7 +53,7 @@ export class RevisionVotingService {
   }
 
   loadVote(id: any): Promise<string> {
-    let votingContext = new VotingContext('Revision', id);
+    const votingContext = new VotingContext('Revision', id);
 
     return this.voting.loadVote(votingContext);
   }

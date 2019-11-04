@@ -65,7 +65,7 @@ export class EditorComponent implements OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.contents && this.contents.length > 2) {
-      throw 'too many contents given';
+      throw new Error('too many contents given');
     }
     this.app.setLayoutType(LayoutType.wide);
   }

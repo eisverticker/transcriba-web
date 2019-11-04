@@ -33,24 +33,24 @@ export class TileViewerComponent implements AfterViewInit {
   }
 
   private fitViewPort() {
-    let rect = this.container.nativeElement.getBoundingClientRect();
-    let viewPortHeight = window.innerHeight;
+    const rect = this.container.nativeElement.getBoundingClientRect();
+    const viewPortHeight = window.innerHeight;
     this.container.nativeElement.style.height = (viewPortHeight - rect.top - 35) + 'px';
   }
 
   private showViewer() {
 
-    let viewer = L.map('tileViewer',  {
+    const viewer = L.map('tileViewer',  {
       crs: L.CRS.Simple,
       attributionControl: false
     });
 
-    let A = viewer.unproject([0, 0], 0);
-    let C = viewer.unproject([256, 256], 0);
+    const A = viewer.unproject([0, 0], 0);
+    const C = viewer.unproject([256, 256], 0);
 
     viewer.fitBounds(L.latLngBounds(A, C), {});
 
-    let tileLayerOptions = {
+    const tileLayerOptions = {
       minZoom: 0,
       maxZoom: this.maxZoomLevel + 1,
       maxNativeZoom: this.maxZoomLevel,

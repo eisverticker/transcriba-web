@@ -46,7 +46,7 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
   }
 
   addComment() {
-    let commentRequest = this.discuss.saveComment(this.discussion, this.newComment);
+    const commentRequest = this.discuss.saveComment(this.discussion, this.newComment);
     this.watchRequestState(commentRequest);
 
     commentRequest.then(
@@ -63,7 +63,7 @@ export class DiscussionComponent extends FormRequestHandling implements OnChange
       this.auth.loadUser(),
       this.discuss.loadNumOfComments(this.discussion),
       this.discuss.loadCommentPage(this.discussion, this.currentPage, this.itemsPerPage),
-      function(user, numOfComments, comments){
+      function(user, numOfComments, comments) {
         return {
           'user': user,
           'numOfComments': numOfComments,

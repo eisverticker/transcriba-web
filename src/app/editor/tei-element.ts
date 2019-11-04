@@ -4,7 +4,7 @@ export class TeiElement {
   public isFocused = false;
 
   static fromObject(obj): TeiElement {
-    let children: Array<TeiElement> = obj.children.map(
+    const children: Array<TeiElement> = obj.children.map(
       child => TeiElement.fromObject(child)
     );
 

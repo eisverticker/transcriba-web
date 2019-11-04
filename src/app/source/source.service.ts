@@ -15,12 +15,12 @@ export class SourceService {
   ) {}
 
   async loadAllSources(): Promise<Source[]> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('Sources', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('Sources', token);
 
     const data = await this.http.get<any>(url)
       .toPromise();
-    return data.map((s:any) => new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id));
+    return data.map((s: any) => new Source(s.title, s.url, s.info_url, s.logo_url, s.api_type, s.sync, s.activated, s.id));
   }
 
   // deprecated (alias for loadByID)
@@ -30,8 +30,8 @@ export class SourceService {
   }
 
   async loadByID(id: any): Promise<Source> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('Sources/' + id, token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('Sources/' + id, token);
 
     const s = await this.http.get<any>(url)
       .toPromise();
@@ -39,8 +39,8 @@ export class SourceService {
   }
 
   async loadSummaryByID(id: any): Promise<Source> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('Sources/' + id + '/summary', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('Sources/' + id + '/summary', token);
 
     const s = await this.http.get<any>(url)
       .toPromise();
@@ -48,16 +48,16 @@ export class SourceService {
   }
 
   save(source: Source): Promise<any> {
-    let token = this.auth.token;
+    const token = this.auth.token;
     let url: string;
 
     if (source.id === undefined) {
       url = this.backend.authUrl('Sources', token);
-    }else {
+    } else {
       url = this.backend.authUrl('Sources/' + source.id, token);
     }
 
-    let data = {
+    const data = {
       'title': source.title,
       'url': source.url,
       'info_url': source.info_url,

@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
       (type: LayoutType) => {
         if (type === LayoutType.wide) {
           this.isWideLayout = true;
-        }else {
+        } else {
           this.isWideLayout = false;
         }
       }
@@ -59,13 +59,13 @@ export class AppComponent implements OnInit {
     if (tags.indexOf('success') !== -1) {
       // this.toastr.success(message);
       this.toastrService.success(message);
-    }else if (
+    } else if (
       tags.indexOf('fail') !== -1 ||
       tags.indexOf('error') !== -1
     ) {
       // this.toastr.error(message);
       this.toastrService.error(message);
-    }else {
+    } else {
       // this.toastr.info(message);
       this.toastrService.info(message);
     }
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
       (notification: Notification) => {
         if (notification.tags.indexOf('untranslated') !== -1) {
           this.processNotificationMessage(notification.message, notification.tags);
-        }else {
+        } else {
           this.translate.get(notification.message).subscribe(
             (translatedMessage) => this.processNotificationMessage(translatedMessage, notification.tags)
           );

@@ -20,8 +20,8 @@ export class VotingService {
    * Vote for something
    */
   vote(context: VotingContext, voteType: string): Promise<any> {
-    let token = this.auth.token;
-    let url: string = this.backend.authUrl('Votings/vote', token);
+    const token = this.auth.token;
+    const url: string = this.backend.authUrl('Votings/vote', token);
 
     return this.http.post(url, {
       'objectType': context.objectType,
@@ -35,7 +35,7 @@ export class VotingService {
    * Remove the given vote from the server
    */
   async unvote(context: VotingContext): Promise<any> {
-    let token = this.auth.token;
+    const token = this.auth.token;
     let url: string;
 
     const id = await this.loadVotingIdentifier(context);
@@ -47,8 +47,8 @@ export class VotingService {
    * Count votings for something
    */
   count(context: VotingContext, voteType: string): Promise<number> {
-    let token = this.auth.token;
-    let url: string = this.backend.authUrl('Votings/count', token,
+    const token = this.auth.token;
+    const url: string = this.backend.authUrl('Votings/count', token,
     'filter[where][objectType]=' + context.objectType +
     '&filter[where][objectId]=' + context.objectId +
     '&filter[where][vote]=' + voteType
@@ -64,8 +64,8 @@ export class VotingService {
    * Load all users who have voted for a given voteType
    */
   async loadUsers(context: VotingContext, voteType: string): Promise<User[]> {
-    let token = this.auth.token;
-    let url: string = this.backend.authUrl('Votings', token,
+    const token = this.auth.token;
+    const url: string = this.backend.authUrl('Votings', token,
     'filter[where][objectType]=' + context.objectType +
     '&filter[where][objectId]=' + context.objectId +
     '&filter[where][vote]=' + voteType +
@@ -84,7 +84,7 @@ export class VotingService {
    * if the user didn't vote for anything then the returned state is 'none'
    */
   async loadVote(context: VotingContext): Promise<string> {
-    let token = this.auth.token;
+    const token = this.auth.token;
     let url: string;
 
     // we need the userId of the currently logged in user for the query first
@@ -96,8 +96,7 @@ export class VotingService {
       .toPromise();
     if (votings.length === 0) {
       return 'none';
-    }
-    else {
+    } else {
       return votings[0].vote;
     }
   }
@@ -107,7 +106,7 @@ export class VotingService {
    * and voting context
    */
    private async loadVotingIdentifier(context: VotingContext): Promise<any> {
-     let token = this.auth.token;
+     const token = this.auth.token;
      let url: string;
 
      // we need the userId of the currently logged in user for the query first

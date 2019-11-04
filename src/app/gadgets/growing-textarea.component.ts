@@ -33,11 +33,11 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
     this.grow();
   }
 
-  get value(){
+  get value() {
     return this._value;
   }
 
-  set value(value: any){
+  set value(value: any) {
     if (value !== this._value) {
       this._value = value;
       this.propagateChange(value);
@@ -45,7 +45,7 @@ export class GrowingTextareaComponent implements AfterViewInit, AfterViewChecked
   }
 
   grow() {
-    let ta = this.textarea.nativeElement;
+    const ta = this.textarea.nativeElement;
 
     if (ta.scrollHeight > ta.clientHeight) {
       ta.style.height = ta.scrollHeight + 'px';

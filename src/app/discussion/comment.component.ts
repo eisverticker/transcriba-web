@@ -65,7 +65,7 @@ export class CommentComponent implements OnChanges {
         () => this.updateVotings(),
         err => console.log(err)
       );
-    }else {
+    } else {
       return this.voting.dislike(this.comment.id)
       .then(
         () => this.updateVotings(),
@@ -80,7 +80,7 @@ export class CommentComponent implements OnChanges {
         () => this.updateVotings(),
         err => console.log(err)
       );
-    }else {
+    } else {
       return this.voting.unwanted(this.comment.id)
       .then(
         () => this.updateVotings(),

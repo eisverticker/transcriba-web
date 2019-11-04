@@ -11,7 +11,7 @@ export class BackendHelper {
   public authUrl(ressourceUri: string, token: string, filter?: string) {
     if (filter === undefined) {
       filter = '';
-    }else {
+    } else {
       filter = '&' + filter;
     }
     return this.config.get('backendApiUrl', 'http://localhost:3001/api/') + ressourceUri + '?access_token=' + token + filter;
@@ -20,7 +20,7 @@ export class BackendHelper {
   public unAuthUrl(ressourceUri: string, filter?: string): string {
     if (filter === undefined) {
       filter = '';
-    }else {
+    } else {
       filter = '?' + filter;
     }
     return this.config.get('backendApiUrl', 'http://localhost:3001/api/') + ressourceUri + filter;

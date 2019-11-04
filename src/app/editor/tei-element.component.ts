@@ -72,19 +72,19 @@ export class TeiElementComponent extends TeiBase implements OnInit {
   }
 
   addLine() {
-    let defaultTextPart = new TeiElement('textPartOrdinary', { value: 'Text' }, []);
+    const defaultTextPart = new TeiElement('textPartOrdinary', { value: 'Text' }, []);
     this.tei.children.push(new TeiElement('line', {}, [defaultTextPart]));
   }
 
   addParagraph() {
-    let defaultTextPart = new TeiElement('textPartOrdinary', { value: 'Text' }, []);
-    let defaultLinePart = new TeiElement('line', {}, [defaultTextPart]);
+    const defaultTextPart = new TeiElement('textPartOrdinary', { value: 'Text' }, []);
+    const defaultLinePart = new TeiElement('line', {}, [defaultTextPart]);
 
     this.tei.children.push(new TeiElement('paragraph', {}, [defaultLinePart], true));
   }
 
   addHeading() {
-    let defaultTextPart = new TeiElement('textPartOrdinary', { value: 'Text' }, [], true);
+    const defaultTextPart = new TeiElement('textPartOrdinary', { value: 'Text' }, [], true);
 
     this.tei.children.push(new TeiElement('heading', {}, [defaultTextPart]));
   }
@@ -110,7 +110,7 @@ export class TeiElementComponent extends TeiBase implements OnInit {
   }
 
   showHeading() {
-    let lineString: string = this.value.trim();
+    const lineString: string = this.value.trim();
     this.value = ''; // empty value
 
     this.tei.children = [
@@ -135,7 +135,7 @@ export class TeiElementComponent extends TeiBase implements OnInit {
       tei.children.forEach(
         (childTei) => text += childTei.properties.value
       );
-    }else if (tei.type === 'paragraph') {
+    } else if (tei.type === 'paragraph') {
       tei.children.forEach(
         el => text += this.toText(el) + '\n'
       );

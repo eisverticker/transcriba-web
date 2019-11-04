@@ -27,8 +27,8 @@ export class ScoreService {
    * Loads score value of currently logged in user
    */
   async loadScore(): Promise<number> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('AppUsers/score', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('AppUsers/score', token);
     return this.http.get<number>(url).pipe(timeout(5000))
       .toPromise();
   }
@@ -37,8 +37,8 @@ export class ScoreService {
    *
    */
   loadBestScorers(maxNumOfUsers = 10): Promise<{username: string, score: number}[]> {
-        let token = this.auth.token;
-        let url = this.backend.authUrl('AppUsers/leaderboard', token);
+        const token = this.auth.token;
+        const url = this.backend.authUrl('AppUsers/leaderboard', token);
 
         return this.http.get<any>(url)
         .pipe(

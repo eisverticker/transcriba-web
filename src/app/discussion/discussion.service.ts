@@ -22,8 +22,8 @@ export class DiscussionService {
    * Loads a discussion from the server by id
    */
   loadByID(id: any): Promise<Discussion> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('Discussions/' + id, token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('Discussions/' + id, token);
 
     return this.http.get<any>(url)
     .toPromise()
@@ -33,8 +33,8 @@ export class DiscussionService {
   }
 
   loadCommentPage(discussion: Discussion, page: number, itemsPerPage: number): Promise<Comment[]> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl(
+    const token = this.auth.token;
+    const url = this.backend.authUrl(
       'Discussions/' + discussion.id + '/comments',
       token,
       'filter[order]=createdAt DESC' +
@@ -52,7 +52,7 @@ export class DiscussionService {
           (c) => c.appUser !== undefined
         ).map(
           (c) => {
-            let user = User.createEmptyUser();
+            const user = User.createEmptyUser();
             user.name = c.appUser.username;
             user.id = c.appUser.id;
             user.mail = c.appUser.email;
@@ -64,8 +64,8 @@ export class DiscussionService {
   }
 
   loadNumOfComments(discussion: Discussion): Promise<number> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('Discussions/' + discussion.id + '/comments/count', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('Discussions/' + discussion.id + '/comments/count', token);
 
     return this.http.get<number>(url)
     .toPromise();
@@ -75,8 +75,8 @@ export class DiscussionService {
    * Adds a comment to the discussion that was given
    */
   saveComment(discussion: Discussion, comment: Comment): Promise<any> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('Discussions/' + discussion.id + '/comments', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('Discussions/' + discussion.id + '/comments', token);
 
     return this.http.post(url, {
       'content': comment.content,

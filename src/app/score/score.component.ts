@@ -23,7 +23,7 @@ export class ScoreComponent implements OnInit {
 
   ngOnInit() {
     this.loadScore();
-    let scoreWatcher = Observable.interval(10000) // ms
+    const scoreWatcher = Observable.interval(10000) // ms
       .timeInterval()
       .subscribe(
         () => this.loadScore(),
@@ -39,16 +39,16 @@ export class ScoreComponent implements OnInit {
   loadScore() {
     if (!this.auth.token) {
       return;
-    };
+    }
 
     this.scoreService.loadScore().then(
       score => {
         if (this.score === undefined) {
           this.score = score;
-        }else if (this.score < score) {
+        } else if (this.score < score) {
           this.notifier.notify(new Notification('+ ' + (score - this.score), ['success', 'untranslated']));
           this.score = score;
-        }else if (this.score > score) {
+        } else if (this.score > score) {
           this.notifier.notify(new Notification('- ' + (score - this.score), ['fail', 'untranslated']));
           this.score = score;
         }

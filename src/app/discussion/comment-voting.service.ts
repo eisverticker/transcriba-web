@@ -13,32 +13,32 @@ export class CommentVotingService {
   ) {}
 
   like(id: any): Promise<any> {
-    let votingContext = new VotingContext('Comment', id);
+    const votingContext = new VotingContext('Comment', id);
 
     return this.voting.vote(votingContext, 'like');
   }
 
   dislike(id: any): Promise<any> {
-    let votingContext = new VotingContext('Comment', id);
+    const votingContext = new VotingContext('Comment', id);
 
     return this.voting.vote(votingContext, 'dislike');
   }
 
   unwanted(id: any): Promise<any> {
-    let votingContext = new VotingContext('Comment', id);
+    const votingContext = new VotingContext('Comment', id);
 
     return this.voting.vote(votingContext, 'unwanted');
   }
 
   unvote(id: any): Promise<any> {
-    let votingContext = new VotingContext('Comment', id);
+    const votingContext = new VotingContext('Comment', id);
 
     return this.voting.unvote(votingContext);
   }
 
   loadVotings(id: any): Promise<{ likes: Array<User>, dislikes: Array<User>, unwanted: Array<User> }> {
-    let votingContext = new VotingContext('Comment', id);
-    let res = {
+    const votingContext = new VotingContext('Comment', id);
+    const res = {
       likes: [],
       dislikes: [],
       unwanted: []
@@ -64,7 +64,7 @@ export class CommentVotingService {
   }
 
   loadVote(id: any): Promise<string> {
-    let votingContext = new VotingContext('Comment', id);
+    const votingContext = new VotingContext('Comment', id);
 
     return this.voting.loadVote(votingContext);
   }

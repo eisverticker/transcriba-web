@@ -184,14 +184,14 @@ export class TranscriptionViewerComponent implements OnChanges {
           if (latestRevision.ownerId === this.auth.userID) {
             this.editable = true;
             this.contents = [latestRevision.content];
-          }else {
+          } else {
             this.editable = false;
             this.contents = [latestRevision.content];
           }
         },
         err => console.log('can\'t load revision data', err)
       );
-    }else { // status isn't occupied
+    } else { // status isn't occupied
 
       this.transcriba.loadStableRevision(this.object.id).then(
         stableRevision => {
@@ -223,7 +223,7 @@ export class TranscriptionViewerComponent implements OnChanges {
               },
               err => console.log('can\'t load revision data', err)
             );
-          }else if (this.object.status === 'free') {
+          } else if (this.object.status === 'free') {
             this.contents = [stableRevision.content];
             this.editable = false;
           }

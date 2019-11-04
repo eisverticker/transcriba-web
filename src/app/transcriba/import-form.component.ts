@@ -44,8 +44,8 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
   }
 
   import() {
-    let selectedSource = this.getSourceById(this.selectedSourceID);
-    let request = this.transcriba.import(selectedSource, this.foreignID);
+    const selectedSource = this.getSourceById(this.selectedSourceID);
+    const request = this.transcriba.import(selectedSource, this.foreignID);
 
     this.watchRequestState(request);
 
@@ -61,7 +61,7 @@ export class ImportFormComponent extends FormRequestHandling implements OnInit {
         return this.sources[i];
       }
     }
-    throw 'source id not found';
+    throw new Error('source id not found');
   }
 
 }

@@ -20,19 +20,19 @@ export abstract class PaginationComponent {
   }
 
   // Custom Getter and Setter
-  set numOfItems(value: number){
+  set numOfItems(value: number) {
     this._numOfItems = value;
   }
 
-  get numOfItems(): number{
+  get numOfItems(): number {
     return this._numOfItems;
   }
 
-  set itemsPerPage(value: number){
+  set itemsPerPage(value: number) {
     this._itemsPerPage = value;
   }
 
-  get itemsPerPage(): number{
+  get itemsPerPage(): number {
     return this._itemsPerPage;
   }
 

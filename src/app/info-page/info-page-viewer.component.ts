@@ -59,7 +59,7 @@ export class InfoPageViewerComponent implements OnInit {
           route: '/info/' + page.name + '/discussion'
         },
       ];
-    }else {
+    } else {
       this.navItems = [];
     }
   }

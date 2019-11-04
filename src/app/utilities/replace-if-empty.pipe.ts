@@ -7,7 +7,7 @@ export class ReplaceIfEmptyPipe implements PipeTransform {
   transform(value: string): string {
     if (value.trim() === '' || value === undefined || value === null) {
       return 'Leer';
-    }else {
+    } else {
       return value;
     }
   }

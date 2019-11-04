@@ -31,7 +31,7 @@ export class SourceDetailsComponent implements OnInit {
       (params) => {
         if (params['id'] === 'new') {
           this.source = Source.createEmptySource();
-        }else {
+        } else {
           this.sourceService.loadByID(params['id']).then(
             (source) => this.source = source,
             (err) => {

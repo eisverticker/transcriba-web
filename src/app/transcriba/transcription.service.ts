@@ -22,8 +22,8 @@ export class TranscriptionService {
    * new cloned revision (which the user has write permissions to)
    */
   start(objId: any): Promise<Revision> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/occupy', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/occupy', token);
 
     return this.http.post<any>(url, {})
     .toPromise()
@@ -44,8 +44,8 @@ export class TranscriptionService {
    * Saves editor data to the latest revision
    */
   save(objId: any, content: TeiElement): Promise<any> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/save', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/save', token);
 
     return this.http.post(url, content)
     .toPromise();
@@ -55,8 +55,8 @@ export class TranscriptionService {
    * Finish the work on the current revision
    */
   publish(objId: any, content: TeiElement): Promise<any> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/publish', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/publish', token);
 
     return this.http.post(url, content)
     .toPromise();
@@ -67,8 +67,8 @@ export class TranscriptionService {
    * (deletes revision and frees object/user)
    */
   abort(): Promise<any> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/free', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/free', token);
 
     return this.http.post(url, {})
     .toPromise();

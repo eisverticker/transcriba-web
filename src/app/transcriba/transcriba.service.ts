@@ -24,8 +24,8 @@ export class TranscribaService {
    * Returns the TranscribaObject with the given id as Promise
    */
   async loadByID(id: any): Promise<TranscribaObject> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + id, token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + id, token);
 
     const o = await this.http.get<any>(url)
       .toPromise();
@@ -39,16 +39,16 @@ export class TranscribaService {
    * (usefull for explorer)
    */
   loadObjectCount(searchTerm?: string): Promise<number> {
-      let token = this.auth.token;
+      const token = this.auth.token;
 
       let searchFilter: string;
       if (searchTerm && searchTerm.length > 1) {
         searchFilter = 'where[title][like]=' + searchTerm;
-      }else {
+      } else {
         searchFilter = '';
       }
 
-      let url = this.backend.authUrl('TranscribaObjects/count', token, searchFilter);
+      const url = this.backend.authUrl('TranscribaObjects/count', token, searchFilter);
 
       return this.http.get<any>(url)
       .toPromise();
@@ -58,14 +58,14 @@ export class TranscribaService {
    * Removes an object from the database
    */
   delete(obj: TranscribaObject): Promise<any> {
-    throw 'not implemented yet';
+    throw new Error('not implemented yet');
   }
 
   /**
    * Returns all users who are considered participants of the object
    */
   loadParticipatingUsers(user: User): Promise<User[]> {
-    throw 'not implemented yet';
+    throw new Error('not implemented yet');
   }
 
   /**
@@ -80,8 +80,8 @@ export class TranscribaService {
    * the specified source (external id)
    */
   import(source: Source, foreignID: string): Promise<string> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/import', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/import', token);
 
     return this.http.post<any>(url, {
       'sourceId': source.id,
@@ -109,7 +109,7 @@ export class TranscribaService {
     status?: string
   ): Promise<TranscribaObject[]> {
 
-    let token = this.auth.token;
+    const token = this.auth.token;
 
     let filters =
       'filter[order]=createdAt DESC' +
@@ -124,7 +124,7 @@ export class TranscribaService {
       filters += '&filter[where][status]=' + status;
     }
 
-    let url = this.backend.authUrl(
+    const url = this.backend.authUrl(
       'TranscribaObjects',
       token,
       filters
@@ -138,8 +138,8 @@ export class TranscribaService {
   }
 
   async loadObjectPageFromCollection(page: number, itemsPerPage: number, collectionId: any, searchTerm?: string): Promise<TranscribaObject[]> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl(
+    const token = this.auth.token;
+    const url = this.backend.authUrl(
       'Collections/' + collectionId + '/transcribaObjects',
       token,
       'filter[order]=createdAt DESC' +
@@ -155,8 +155,8 @@ export class TranscribaService {
   }
 
   async loadCollectionPage(page: number, itemsPerPage: number, rootCollection?: Collection): Promise<Collection[]> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl(
+    const token = this.auth.token;
+    const url = this.backend.authUrl(
       'Collections',
       token,
       'filter[order]=createdAt DESC' +
@@ -176,8 +176,8 @@ export class TranscribaService {
    * Loads the revision chronic of a TranscribaObject with the given id
    */
   loadChronic(objId: any): Promise<Array<{id: string, username: string, createdAt: string, published: boolean, approved: boolean}>> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/chronic', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/chronic', token);
 
     return this.http.get<any>(url).pipe(
       timeout(5000)
@@ -190,8 +190,8 @@ export class TranscribaService {
   }*/
 
   async loadLatestRevision(objId: any): Promise<Revision> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest', token);
 
     const data = await this.http.get<any>(url).pipe(timeout(5000))
       .toPromise();
@@ -202,8 +202,8 @@ export class TranscribaService {
    * Returns the latest stable revision of an object
    */
   async loadStableRevision(objId: any): Promise<Revision> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/stable', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/stable', token);
 
     const data = await this.http.get<any>(url).pipe(timeout(5000))
       .toPromise();
@@ -214,8 +214,8 @@ export class TranscribaService {
    * Returns the latest revision (including unpublished and not yet accepted ones)
    */
   loadLatestRevisionPermissions(objId: any): Promise<{allowVote: boolean, details: any}> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest/permissions', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + objId + '/latest/permissions', token);
 
     return this.http.get<any>(url).pipe(
       timeout(5000)
@@ -228,8 +228,8 @@ export class TranscribaService {
    * revision. This method returns that object
    */
    loadCurrentlyOccupiedObject(): Promise<TranscribaObject> {
-     let token = this.auth.token;
-     let url = this.backend.authUrl('TranscribaObjects/occupied', token);
+     const token = this.auth.token;
+     const url = this.backend.authUrl('TranscribaObjects/occupied', token);
 
      return this.http.get<any>(url).pipe(
       timeout(5000)
@@ -238,8 +238,8 @@ export class TranscribaService {
    }
 
    isUserBusy(): Promise<boolean> {
-     let token = this.auth.token;
-     let url = this.backend.authUrl('AppUsers/busy', token);
+     const token = this.auth.token;
+     const url = this.backend.authUrl('AppUsers/busy', token);
 
      return this.http.get<any>(url).pipe(
       timeout(5000)

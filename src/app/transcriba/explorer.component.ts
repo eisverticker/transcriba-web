@@ -90,7 +90,7 @@ export class ExplorerComponent implements OnInit {
 
     if (this.searchTerm.length < 2) {
       searchValue = undefined;
-    }else {
+    } else {
       searchValue = this.searchTerm;
     }
     // Create usable columnified (multi array) data from collection and transcribaObject objects
@@ -105,7 +105,7 @@ export class ExplorerComponent implements OnInit {
           this.isLoading = false;
         }
       );
-    }else if (this.mode === 'object') {
+    } else if (this.mode === 'object') {
       return this.transcriba.loadObjectCount(searchValue).then(
         count => {
           this.numOfItems = count;
@@ -128,7 +128,7 @@ export class ExplorerComponent implements OnInit {
         err => console.log(err)
       );
 
-    }else if (this.mode === 'insideCollection') {
+    } else if (this.mode === 'insideCollection') {
       return this.transcriba
       .loadObjectPageFromCollection(this.currentPage, this.itemsPerPage, this.collectionId)
       .then(

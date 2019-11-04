@@ -17,8 +17,8 @@ export class UserService {
   ) {}
 
   loadUserCount(): Promise<number> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('AppUsers/count', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('AppUsers/count', token);
 
     return this.http.get(url).pipe(
       map((data: any) => data.count)
@@ -27,8 +27,8 @@ export class UserService {
   }
 
   loadUserPage(page: number, itemsPerPage: number): Promise<User[]> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl(
+    const token = this.auth.token;
+    const url = this.backend.authUrl(
       'AppUsers',
       token,
       'filter[order]=username&filter[limit]=' + itemsPerPage + '&filter[skip]=' + itemsPerPage * page
@@ -51,8 +51,8 @@ export class UserService {
   giveUserRole(user: User, roleName: string): Promise<any> {
     console.log('giveUserRole', user);
 
-    let token = this.auth.token;
-    let url = this.backend.authUrl(
+    const token = this.auth.token;
+    const url = this.backend.authUrl(
       'AppUsers/roles',
       token
     );
@@ -77,10 +77,10 @@ export class UserService {
 
   delete(user: User): Promise<any> {
     if (user.id === undefined) {
-      throw 'can\'t remove a user without userId';
+      throw new Error('can\'t remove a user without userId');
     }
-    let token = this.auth.token;
-    let url = this.backend.authUrl('AppUsers/' + user.id, token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('AppUsers/' + user.id, token);
 
     return this.http.delete(url).pipe(
       timeout(5000)
@@ -94,19 +94,19 @@ export class UserService {
    */
   private includeUserRoles(users: Array<User>, currentUser: number): Promise<User[]> {
     if (currentUser <= users.length - 1) {
-        let u: User = users[currentUser];
+        const u: User = users[currentUser];
 
         return this.auth.getRoles(u.id).then(
           (roles) => {
             if (roles.length === 0) {
               u.roles = [new Role('none')];
-            }else {
+            } else {
               u.roles = roles;
             }
             return this.includeUserRoles(users, currentUser + 1);
           }
         );
-    }else {
+    } else {
       return Promise.resolve(users);
     }
   }

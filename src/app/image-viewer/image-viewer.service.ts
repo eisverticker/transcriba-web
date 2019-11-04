@@ -15,8 +15,8 @@ export class ImageViewerService {
   ) {}
 
   loadNumOfZoomLevels(id: any): Promise<number> {
-    let token = this.auth.token;
-    let url = this.backend.authUrl('TranscribaObjects/' + id + '/zoomsteps', token);
+    const token = this.auth.token;
+    const url = this.backend.authUrl('TranscribaObjects/' + id + '/zoomsteps', token);
 
     return this.http.get<number>(url)
     .toPromise();

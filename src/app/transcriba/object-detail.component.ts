@@ -46,14 +46,14 @@ export class ObjectDetailComponent implements OnInit {
     Observable.zip(
       this.route.params,
       this.route.data,
-      function(params, data){
+      function(params, data) {
         return {
           'params': params,
           'data': data
         };
       }
     ).subscribe( d => {
-      let id = d.params['id'];
+      const id = d.params['id'];
 
       // load object
       this.transcriba.loadByID(id).then(

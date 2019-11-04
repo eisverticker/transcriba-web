@@ -19,7 +19,7 @@ export class User {
     public password: string,
     public roles: Array<Role> = [],
     public id?: any
-  ) {};
+  ) {}
 
   public equals(user: User): boolean {
     return this.name === user.name;

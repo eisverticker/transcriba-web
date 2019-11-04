@@ -4,7 +4,7 @@ export class Role {
   constructor(
     public name: string,
     public id?: any
-  ) {};
+  ) {}
 
   static getAvailableRoles(): Array<Role> {
     if (configData.roles === undefined) {
@@ -12,7 +12,7 @@ export class Role {
         new Role('registered'),
         new Role('administrator')
       ];
-    }else {
+    } else {
       return configData.roles.map( role => new Role(role) );
     }
   }

@@ -30,7 +30,7 @@ export class AuthService {
   public loadUser(): Promise<User> {
     if (this.isUserInitialized) {
       return Promise.resolve(this.userSubject.getValue());
-    }else {
+    } else {
       return this.authenticateUser().then(
         (user) => {
           this.isUserInitialized = true;
@@ -65,10 +65,10 @@ export class AuthService {
       (err) => {
         if (err === 'Timeout') {
           throw err;
-        }else if (err.status === 401) {
+        } else if (err.status === 401) {
           return Promise.reject('wrong credentials');
-        }else {
-          throw 'unexpected result 34343-AuthService';
+        } else {
+          throw new Error('unexpected result 34343-AuthService');
         }
       }
     );
@@ -90,14 +90,14 @@ export class AuthService {
      );
   }
   public verify(code: string): Promise<any> {
-    let url = 'AppUsers/confirm?uid=' + this.userID + '&token=' + code;
+    const url = 'AppUsers/confirm?uid=' + this.userID + '&token=' + code;
 
     return this.http.get(this.backend.authUrl(url, this.token))
     .toPromise();
   }
 
   public resetPassword(user: User): Promise<any> {
-    let url = this.backend.unAuthUrl('AppUsers/reset');
+    const url = this.backend.unAuthUrl('AppUsers/reset');
 
     return this.http.post(url, {
       'email': user.mail
@@ -108,7 +108,7 @@ export class AuthService {
   }
 
   public register(user: User): Promise<void> {
-    let url = this.backend.unAuthUrl('AppUsers');
+    const url = this.backend.unAuthUrl('AppUsers');
 
     return this.http.post(url, {
       'username': user.name,
@@ -125,18 +125,18 @@ export class AuthService {
   }
 
   public getRoles(userID: any): Promise<Role[]> {
-    let url = this.backend.authUrl('AppUsers/' + userID + '/roles', this.token);
+    const url = this.backend.authUrl('AppUsers/' + userID + '/roles', this.token);
 
     if (this.token === null || userID === null) {
       return Promise.reject<Role[]>('no local user data found');
-    }else {
+    } else {
       return this.http.get<any[]>(url)
       .toPromise()
       .then(
         (roles) => {
-          let roleNames: Array<string> = roles.map( role => role.name );
+          const roleNames: Array<string> = roles.map( role => role.name );
 
-          let rolesInOrder = Role.getAvailableRoles().filter(
+          const rolesInOrder = Role.getAvailableRoles().filter(
             (role) => {
               return roleNames.indexOf(role.name) !== -1;
             }
@@ -150,17 +150,17 @@ export class AuthService {
     }
   }
 
-  public get token(): string{
+  public get token(): string {
     return localStorage.getItem('token');
   }
-  public set token(id: string){
+  public set token(id: string) {
     localStorage.setItem('token', id);
   }
 
-  public get userID(): string{
+  public get userID(): string {
     return localStorage.getItem('userID');
   }
-  public set userID(id: string){
+  public set userID(id: string) {
     localStorage.setItem('userID', id);
   }
 
@@ -170,16 +170,16 @@ export class AuthService {
   }
 
   private authenticateUser(): Promise<User> {
-    let url = this.backend.authUrl('AppUsers/' + this.userID, this.token);
+    const url = this.backend.authUrl('AppUsers/' + this.userID, this.token);
 
     if (this.token === null || this.userID === null) {
       return Promise.reject<User>('no local user data found');
-    }else {
+    } else {
       return this.http.get<any>(url)
       .toPromise()
       .then(
         (data) => {
-          let user = new User(data.username, data.email, '', [], data.id);
+          const user = new User(data.username, data.email, '', [], data.id);
 
           return this.getRoles(this.userID).then(
             roles => {
