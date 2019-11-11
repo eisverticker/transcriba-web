@@ -1,0 +1,149 @@
+import { HttpClient } from '@angular/common/http';
+import { BackendService } from '../utility/backend.service';
+import { AuthService } from '../loopback-auth/auth.service';
+import { User } from '../loopback-auth/user';
+
+import { Injectable } from '@angular/core';
+import { VotingContext } from './voting-context';
+
+import { map } from 'rxjs/operators/map';
+
+@Injectable()
+export class VotingService {
+
+  constructor(
+    private http: HttpClient,
+    private backend: BackendService,
+    private auth: AuthService
+  ) {}
+
+  /**
+   * Vote for something
+   */
+  vote(context: VotingContext, voteType: string): Promise<any> {
+    const token = this.auth.token;
+    const url: string = this.backend.authUrl('Votings/vote', token);
+
+    return this.http.post(url, {
+      'objectType': context.objectType,
+      'objectId': context.objectId,
+      'vote': voteType
+    })
+    .toPromise();
+  }
+
+  /**
+   * Remove the given vote from the server
+   */
+  unvote(context: VotingContext): Promise<any> {
+    const token = this.auth.token;
+    let url: string;
+
+    return this.loadVotingIdentifier(context).then(
+      (id) => {
+        url = this.backend.authUrl('Votings/' + id, token);
+        return this.http.delete(url).toPromise();
+      }
+    );
+  }
+
+  /**
+   * Count votings for something
+   */
+  count(context: VotingContext, voteType: string): Promise<number> {
+    const token = this.auth.token;
+    const url: string = this.backend.authUrl('Votings/count', token,
+    'filter[where][objectType]=' + context.objectType +
+    '&filter[where][objectId]=' + context.objectId +
+    '&filter[where][vote]=' + voteType
+    );
+
+    return this.http.get(url)
+    .pipe(
+      map(response => response['count'])
+    )
+    .toPromise();
+  }
+
+  /**
+   * Load all users who have voted for a given voteType
+   */
+  loadUsers(context: VotingContext, voteType: string): Promise<User[]> {
+    const token = this.auth.token;
+    const url: string = this.backend.authUrl('Votings', token,
+    'filter[where][objectType]=' + context.objectType +
+    '&filter[where][objectId]=' + context.objectId +
+    '&filter[where][vote]=' + voteType +
+    '&filter[include]=appUser'
+    );
+
+    return this.http.get<Array<any>>(url)
+    .pipe(
+      map(
+        (votings) => votings.map(voting => voting['appUser']) // map to appUser
+      ),
+      map(
+        (users) => users.map(
+          user => new User(user.username, user.email, '', [], user.id)
+        )
+      )
+    )
+    .toPromise();
+  }
+
+  /**
+   * Returns in a promise the voting state of the current user
+   * if the user didn't vote for anything then the returned state is 'none'
+   */
+  loadVote(context: VotingContext): Promise<string> {
+    const token = this.auth.token;
+    let url: string;
+
+    // we need the userId of the currently logged in user for the query first
+    return this.auth.loadUser().then(
+      (user) => {
+        url = this.backend.authUrl('Votings', token,
+        'filter[where][objectType]=' + context.objectType +
+        '&filter[where][objectId]=' + context.objectId +
+        '&filter[where][userId]=' + user['id']);
+      }
+    ).then(// find the user and return the id only
+      () => this.http.get(url)
+       .toPromise()
+    ).then(
+      (votings) => {
+        if (votings['length'] === 0) {
+          return 'none';
+        } else {
+          return votings[0].vote;
+        }
+      }
+    );
+  }
+
+  /**
+   * Loads the id of the database entity which belongs to the current user
+   * and voting context
+   */
+   private loadVotingIdentifier(context: VotingContext): Promise<any> {
+     const token = this.auth.token;
+     let url: string;
+
+     // we need the userId of the currently logged in user for the query first
+     return this.auth.loadUser().then(
+       (user) => {
+         url = this.backend.authUrl('Votings/findOne', token,
+         'filter[where][objectType]=' + context.objectType +
+         '&filter[where][objectId]=' + context.objectId +
+         '&filter[where][userId]=' + user['id']);
+       }
+     ).then(// return the id only
+       () => this.http.get(url)
+        .pipe(
+          map(response => response['id'])
+        )
+        .toPromise()
+     );
+   }
+
+}

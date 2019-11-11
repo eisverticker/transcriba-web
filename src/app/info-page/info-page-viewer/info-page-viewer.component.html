@@ -1,0 +1,25 @@
+<mat-toolbar *ngIf="(user | async).isEmployee()">
+  {{ 'general.infoPage' | translate: { value: page?.name } }}
+  <span class="toolbar-spacer"></span>
+  <button mat-button [routerLink]="['/pages',page?.id]">
+    {{ 'action.edit' | translate }}
+  </button>
+</mat-toolbar>
+
+<div class="tr-container">
+  <div *ngIf="page" [ngSwitch]="mode">
+    <tui-loading-indicator *ngSwitchCase="'loading'"></tui-loading-indicator>
+    <div *ngSwitchCase="'viewer'">
+      <inf-info-page [page]="page" *ngSwitchCase="'viewer'"></inf-info-page>
+      <section *ngIf="page.show_discussion">
+        <hr />
+        <h3>{{ 'title.recentComments' | translate }}</h3>
+        <disc-discussion-widget [discussionId]="page.discussionID" [numOfItems]="2"></disc-discussion-widget>
+        <button mat-button [routerLink]="discussionLink">
+          {{ 'action.showAllComments' | translate }}
+        </button>
+      </section>
+    </div>
+    <inf-info-page-discussion [page]="page" *ngSwitchCase="'discussion'"></inf-info-page-discussion>
+  </div>
+</div>

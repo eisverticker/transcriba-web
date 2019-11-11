@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  {{ 'title.pageManagement' | translate }}
+</mat-toolbar>
+
+<div class="tr-container">
+  <div class="card">
+    <div class="card-header">
+      <button mat-raised-button [routerLink]="['/pages', 'new']">{{ 'action.createNewPage' | translate }}</button>
+    </div>
+    <table class="table table-striped">
+      <tr *ngFor="let page of pages">
+        <td>{{ page.name }}</td>
+        <td class="text-right">
+          <button mat-raised-button [routerLink]="['/info',page.name]">{{ 'action.show' | translate }}</button>
+          <button mat-raised-button [routerLink]="['/pages',page.id]">{{ 'action.edit' | translate }}</button>
+          <tui-critical-button [type]="'delete'" (xclick)="deletePage(page)"></tui-critical-button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

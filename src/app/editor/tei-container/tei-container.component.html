@@ -1,0 +1,26 @@
+<div #container class="card" [class.panel-primary]="editable" [class.panel-default]="!editable">
+  <div class="card-header">
+    {{ 'title.transcriptionEditor' | translate }} <span *ngIf="label">- {{ label }}</span>
+    <span class="toolbar-spacer"></span>
+    <button *ngIf="editable" (click)="openHelp()" mat-icon-button>
+      <mat-icon>help</mat-icon>
+    </button>
+  </div>
+  <div #contentContainer class="editor-page-container card-body bg-light">
+    <tr-root [markDirty]="markDirty" [editable]="editable" *ngIf="content" [(ngModel)]="content">
+    </tr-root>
+  </div>
+  <div class="card-footer" *ngIf="editable">
+    <div>
+      <button (click)="saveContent()" mat-raised-button>
+        {{ 'action.save' | translate }}
+      </button>
+      <button (click)="publishContent()" mat-raised-button color="accent">
+        {{ 'action.publish' | translate }}
+      </button>
+      <button (click)="abortTranscription()" mat-raised-button color="warn">
+        {{ 'action.abort' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

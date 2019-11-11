@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+  {{ 'title.import' | translate }}
+  <span class="toolbar-spacer"></span>
+  <button mat-button [routerLink]="['/sources']">
+    {{ 'title.sourceManagement' | translate }}
+  </button>
+</mat-toolbar>
+
+<div class="tr-container">
+  <form *ngIf="sources" class="card" (ngSubmit)="import()" #form="ngForm">
+    <div class="card-header">
+      {{ 'title.import' | translate }}
+    </div>
+    <div class="card-body">
+
+      <tui-fail-indicator [activated]="!isRequestPending && isLastRequestFailed">
+      </tui-fail-indicator>
+
+      <!-- Form Elements-->
+      <div class="form-group">
+        <label for="type">{{ 'general.source' | translate }}</label>
+        <select [(ngModel)]="selectedSourceID" name="type" class="form-control" required>
+          <option *ngFor="let s of sources" [value]="s.id">{{ s.title }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="foreignID">{{ 'general.foreignID' | translate }}</label>
+        <div class="input-group">
+          <input [(ngModel)]="foreignID" name="foreignID" #foreign="ngModel" class="form-control" required>
+        </div>
+      </div>
+      <button mat-raised-button color="accent" [disabled]="!form.valid" type="submit">
+        <span>{{ 'action.import' | translate }}</span>
+        <tui-inline-spinner [active]="isRequestPending"></tui-inline-spinner>
+      </button>
+    </div>
+  </form>
+  <tui-fail-indicator [activated]="!sources">
+  </tui-fail-indicator>
+</div>

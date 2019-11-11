@@ -1,0 +1,31 @@
+<tui-loading-indicator *ngIf="!object"></tui-loading-indicator>
+<mat-tab-group [(selectedIndex)]="currentTab" [dynamicHeight]="'1'">
+  <mat-tab *ngIf="object" [label]="'general.overview' | translate">
+    <div *ngIf="currentTab==0" class="tr-container">
+      <tr-overview [object]="object"></tr-overview>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="'general.transcription' | translate">
+    <div *ngIf="currentTab==1" class="tr-container-big">
+      <tr-transcription-viewer [objectId]="object.id"></tr-transcription-viewer>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="'general.versionHistory' | translate">
+    <div *ngIf="currentTab==2" class="tr-container">
+      <tr-revision-history [objectId]="object.id"></tr-revision-history>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="'general.discussion' | translate">
+    <div *ngIf="currentTab==3" class="tr-container">
+      <disc-discussion
+      [itemsPerPage]="DISCUSSION_MAX_NUM_OF_ITEMS_PER_PAGE"
+      [discussionId]="object.discussionID">
+      </disc-discussion>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="'general.viewer' | translate">
+    <div *ngIf="currentTab==4" class="tr-container-big">
+      <iv-image-viewer [objectId]="object.id"></iv-image-viewer>
+    </div>
+  </mat-tab>
+</mat-tab-group>

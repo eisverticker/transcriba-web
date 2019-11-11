@@ -1,0 +1,16 @@
+<div *ngIf="tei">
+  <tr-tei-element
+  [markDirty]="markDirty"
+  [editable]="editable"
+  (killMe)="deleteChild($event)"
+  *ngFor="let child of tei.children; let i = index"
+  [index]="i"
+  [(ngModel)]="tei.children[i]">
+  </tr-tei-element>
+  <div class="alert alert-info" *ngIf="tei.children.length == 0">
+    {{ 'message.emptyTranscription' | translate }}
+  </div>
+  <button mat-button *ngIf="editable" (click)="addPage()">
+    {{ 'action.addPage' | translate}}
+  </button>
+</div>

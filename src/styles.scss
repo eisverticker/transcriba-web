@@ -1,0 +1,238 @@
+/* == Global Fonts == */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* === Handwritten Style === */
+// Alternatives: Sacramento, Reenie+Beanie, Covered+By+Your+Grace
+@import url('https://fonts.googleapis.com/css?family=Homemade+Apple');
+
+/* == Global Styles == */
+
+/* === Material Design Theme === */
+
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$tr-primary: mat-palette($mat-grey, 200, 400,600);
+$tr-accent:  mat-palette($mat-amber);
+
+// The warn palette is optional (defaults to red).
+$tr-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$tr-theme: mat-light-theme($tr-primary, $tr-accent, $tr-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($tr-theme);
+
+
+/* === Bootstrap Theme === */
+/*$body-bg:       map-get($mat-amber, 'A400');*/
+//@import '../node_modules/bootstrap/scss/functions', '../node_modules/bootstrap/scss/variables';
+
+/* ==== Theme Color Profile ==== */
+// mapping material design colors to theme colors of bootstrap
+$theme-colors: (
+  //primary: map-get($mat-amber, 700),
+  primary: map-get($tr-primary, default),
+  //secondary: map-get($mat-grey, 800),
+  secondary: map-get($tr-accent, default),
+  success: map-get($mat-green, 500),
+  info: map-get($mat-cyan, 500),
+  warning: map-get($mat-yellow, 300),
+  danger: map-get($tr-warn, default),
+  light: map-get($mat-grey, 200),
+  dark: map-get($mat-grey, 900)
+);
+
+/* ==== Options ==== */
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-rounded:            true;
+$enable-shadows:            true;
+$enable-gradients:          false;
+$enable-transitions:        true;
+$enable-hover-media-query:  false;
+$enable-grid-classes:       true;
+$enable-print-styles:       true;
+
+/* ==== Bootstrap Default Sass ==== */
+
+@import "~bootstrap/scss/bootstrap";
+
+/* === Icon Package (Font Awesome) === */
+// without the following line sass will not be able to build
+$fa-font-path: "../node_modules/font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
+
+/* === Other Third Party Libs === */
+
+@import "~leaflet/dist/leaflet.css";
+
+/* === Custom CSS === */
+// allows us to push some buttons/links
+// to the right of the card-header easily
+// see mat-toolbar
+blockquote {
+  margin-left: 1rem;
+  padding-left: 0.3rem;
+  border-left: 3px solid map-get($tr-accent, default);
+}
+
+.card-header {
+  display: flex;
+}
+
+footer.jumbotron {
+  margin-bottom: 0;
+}
+
+.alert {
+  margin-top: 0.5rem;
+}
+
+.tr-handwritten {
+  font-family: Homemade Apple;
+}
+
+h1.tr-handwritten {
+  font-size: 4.5rem;
+  span.badge {
+    //font-family: sans-serif;
+  }
+}
+
+// Fixed Nav-Bar Space
+body {
+  padding-top: 3.6rem;
+}
+
+.container-spaced {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.tr-container {
+  @extend .container;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.tr-container-big {
+  @extend .container-fluid;
+  padding-top: 20px;
+}
+
+.sub-nav-bar {
+  margin: 1rem 1rem;
+}
+
+.card-spaced {
+  margin-bottom: 1.5rem;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.card-title-big {
+  font-size: 1.5rem;
+}
+
+footer.jumbotron {
+  padding: 2rem 2rem;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-slide-toggle {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.comment-page-container {
+  margin: 1rem 0;
+}
+
+.comment-add-form {
+  margin-bottom: 2rem;
+}
+
+/*
+ * Transcription Editor Styles
+ */
+ .editor-page {
+   margin-bottom: 10px;
+ }
+
+ .editor-page-container  {
+   overflow-y: auto;
+ }
+
+/*
+ * Object Overview
+ */
+ h1.compact {
+   font-size: 1.5rem;
+ }
+
+ h2.compact {
+   font-size: 1.3rem;
+ }
+
+ div.overview-summary {
+   margin-bottom: 1rem;
+   .picture {
+     flex: 0;
+   }
+
+   .info {
+     flex: 1;
+   }
+ }
+
+ /*
+  * Misc
+  */
+.tr-explorer-card {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 300px;
+  max-width: 300px;
+}
+
+.tr-explorer-thumbnail {
+  width: 200px;
+  cursor: pointer;
+}
+
+.tr-img-highlighted {
+  border: 4px solid yellowgreen;
+  -webkit-filter: grayscale(85%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(85%);
+}
+
+// using bootstrap grid in material cards
+.row-mat-card {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.progress-pill {
+  border: 1px solid grey;
+  border-radius: 3px;
+  margin: 0 0.2rem;
+  height: 10px;
+}

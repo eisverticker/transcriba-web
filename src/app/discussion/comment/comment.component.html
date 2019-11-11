@@ -1,0 +1,37 @@
+<mat-card *ngIf="user && comment && currentVote != 'loading'" [class.comment-hidden]="currentVote=='unwanted'" [class.comment-highlighted]="comment.user.id==user.id">
+  <mat-card-header>
+    <mat-card-title>
+      {{ comment.user.name }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ comment.createdAt | date }}
+    </mat-card-subtitle>
+    <i mat-card-avatar class="fa fa-user-o fa-2x"></i>
+  </mat-card-header>
+
+  <mat-card-content>
+    <span *ngIf="currentVote != 'unwanted'">{{ comment.content }}</span>
+    <span *ngIf="currentVote == 'unwanted'">{{ 'message.commentDisabled' | translate }}
+      <button mat-raised-button (click)="unwanted()">
+        {{ 'action.undo' | translate }}
+      </button>
+    </span>
+  </mat-card-content>
+  <mat-card-actions *ngIf="currentVote != 'loading'">
+    <button mat-button [disabled]="!user.isRegistered()  || comment.user.id==user.id" (click)="like()" class="btn btn-default" [class.btn-primary]="currentVote == 'like'">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-thumbs-up"></mat-icon>
+      <span class="badge">{{ votings.likes.length }}</span>
+    </button>
+    <button mat-button [disabled]="!user.isRegistered() || comment.user.id==user.id" (click)="dislike()" class="btn btn-default" [class.btn-primary]="currentVote == 'dislike'">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-thumbs-down"></mat-icon>
+      <span class="badge">{{ votings.dislikes.length }}</span>
+    </button>
+    <button mat-button [disabled]="!user.isRegistered() || comment.user.id==user.id" (click)="unwanted()" class="btn btn-default" [class.btn-primary]="currentVote == 'unwanted'">
+      <mat-icon fontSet="fontawesome" fontIcon="fa-trash"></mat-icon>
+      <span class="badge">{{ votings.unwanted.length }}</span>
+    </button>
+  </mat-card-actions>
+  <mat-card-footer *ngIf="currentVote == 'loading'">
+      <tui-inline-spinner [active]="'true'"></tui-inline-spinner>
+  </mat-card-footer>
+</mat-card>

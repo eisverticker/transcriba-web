@@ -1,0 +1,55 @@
+<div *ngIf="object">
+  <div class="editor-navigation hidden-xs">
+    <div *ngIf="latestRevision && object.status == 'voting' && user.isRegistered() && (hasVoted != undefined && !hasVoted)">
+      <div *ngIf="user.id != latestRevision.ownerId" class="alert alert-info">
+        <strong>{{ 'message.caution' | translate }}</strong>
+        {{ 'message.pleaseTakeThisSurvey' | translate }}
+      </div>
+      <div *ngIf="false && !permissions.details.eligibleVoter && !permissions.details.isOwner" class="alert alert-warning">
+        <strong>{{ 'message.sorry' | translate }}</strong>
+        {{ 'message.youAreNoEligibleVoter' | translate }}
+      </div>
+      <div *ngIf="permissions.details.maximumVotesReached" class="alert alert-warning">
+        <strong></strong>
+        {{ 'message.maximumVotesReached' | translate }}
+      </div>
+      <div *ngIf="false && permissions.details.isOwner" class="alert alert-info">
+        <strong>{{ 'message.thanksForEffort' | translate }}</strong>
+        {{ 'message.workWillBeChecked' | translate }}
+
+      </div>
+      <mat-toolbar>
+        {{ 'title.revisionComparision' | translate }}
+        <span *ngIf="false">{{ 'title.newVersion' | translate }}</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-raised-button
+        [disabled]="!permissions.allowVote"
+        (click)="voteInFavor()">
+          {{ 'action.accept' | translate }}
+          <span *ngIf="votings" class="badge">
+            {{ votings.accept.length }}
+          </span>
+        </button>
+        <button mat-raised-button
+        [disabled]="!permissions.allowVote"
+        (click)="voteAgainst()">
+        {{ 'action.dismiss' | translate }}
+        <span *ngIf="votings" class="badge">{{ votings.refuse.length }}
+        </span>
+        </button>
+      </mat-toolbar>
+    </div>
+  </div>
+  <tr-editor
+    (save)="save($event)"
+    (publish)="publish($event)"
+    (abort)="abort()"
+    (start)="transcribe()"
+    [enableStarter]="object.status == 'free' && user.isRegistered()"
+    [editable]="editable"
+    [contents]="contents"
+    [objectId]="object.id"
+    [markDirty]="markDirty"
+    [labels]="labels">
+  </tr-editor>
+</div>

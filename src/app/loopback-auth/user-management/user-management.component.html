@@ -1,0 +1,30 @@
+<div *ngIf="isReleased">
+  <tui-pagination-bar
+    (pageChanged)="setPage($event)"
+    [numOfItems]="numOfItems"
+    [itemsPerPage]="itemsPerPage"
+    [currentPage]="page">
+  </tui-pagination-bar>
+
+  <div class="card">
+    <div class="card-header">
+      {{ 'title.userManagement' | translate }}
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>
+            <select class="form-control" (change)="changeRole($event, user)" [(ngModel)]="user.roles[user.roles.length-1].name" [disabled]="isLocked">
+              <option [value]="role.name" *ngFor="let role of roles;">{{ 'auth.roles.'+role.name  | translate }}</option>
+            </select>
+          </td>
+          <td class="text-right">
+            <tui-critical-button [type]="'delete'" [disabled]="isLocked" (xclick)="deleteUser(user)">
+            </tui-critical-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

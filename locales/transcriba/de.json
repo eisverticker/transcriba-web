@@ -1,16 +1,33 @@
 {
+  "navigation": {
+    "landingPage": "Start",
+    "discover": "Entdecken",
+    "import": "Importieren"
+  },
   "title": {
+    "comments": "Kommentare",
+    "recentComments": "Zuletzt geschriebene Kommentare",
     "welcomeTo": "Willkommen zu {{ object }}!",
     "sourceManagement": "Quellenverwaltung",
     "pageManagement": "Seitenverwaltung",
     "editPage": "Seite bearbeiten",
     "editSource": "Quelle bearbeiten",
     "import": "Objekt importieren",
-    "userManagement": "Nutzerverwaltung"
+    "userManagement": "Nutzerverwaltung",
+    "account": "Konto",
+    "tutorial": "Einführung",
+    "newVersion": "Neue Version",
+    "transcriptionEditor": "Transcriba-Editor",
+    "revisionComparision": "Ungeprüfte Version",
+    "openVotings": "Offene Abstimmungen",
+    "currentManuscript": "Aktuelle Manuskripte",
+    "administration": "Administration"
   },
   "general": {
     "name": "Name",
     "page": "Seite",
+    "paragraph": "Absatz",
+    "heading": "Überschrift",
     "discussion": "Diskussion",
     "source": "Quelle",
     "foreignID": "Externe ID",
@@ -19,8 +36,12 @@
     "overview": "Überblick",
     "transcription": "Transkription",
     "viewer": "Betrachter",
-    "versionHistory": "Versionshistorie",
-    "metadata": "Metadaten"
+    "versionHistory": "Änderungsprotokoll",
+    "metadata": "Metadaten",
+    "username": "Benuzter",
+    "score": "Punktzahl",
+    "tutorial": "Tutorial",
+    "infoPage": "Informationsseite {{ value }}"
   },
   "action": {
     "deactivate": "Deaktivieren",
@@ -31,25 +52,59 @@
     "edit": "Bearbeiten",
     "show": "Anzeigen",
     "import": "Importieren",
-    "publish": "Veröffentlichen"
+    "publish": "Veröffentlichen",
+    "accept": "Akzeptieren",
+    "dismiss": "Ablehnen",
+    "ok": "Alles klar!",
+    "transcribe": "An Transkription weiterarbeiten",
+    "addPage": "Seite hinzufügen",
+    "undo": "Rückgängig",
+    "learnMore": "Mehr erfahren",
+    "removePage": "Seite entfernen",
+    "addParagraph": "Absatz hinzufügen",
+    "addHeading": "Überschrift hinzufügen",
+    "showAllComments": "Vollständige Diskussion anzeigen"
   },
   "sources": {
     "apiUrl": "API-URL",
+    "infoUrl": "Info-URL",
+    "logoUrl": "Logo-URL",
     "apiType": "API-Typ",
     "syncSupport": "Server unterstützt Synchronisierung"
   },
+  "stage": {
+    "unprocessed": "Unbearbeitet",
+    "transcription": "Bearbeitungsphase",
+    "review": "Überprüfungsphase",
+    "reviewed": "Überprüft"
+  },
   "auth": {
     "roles": {
+      "registered": "Registrierter",
       "trusted": "Vertrauter",
-      "employee": "Mitarbeiter"
+      "employee": "Mitarbeiter",
+      "administrator": "Administrator"
     }
   },
   "form": {
     "showDiscussion": "Diskussion anzeigen"
   },
   "message": {
+    "tutorialFirst": "Als Einsteiger musst du zunächst das Tutorial abschließen.",
+    "noOpenVotings": "Es sind im Moment keine Abstimmungen verfügbar.",
     "searchTitle": "Suchen...",
     "noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
-    "readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet."
+    "readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet.",
+    "caution": "Achtung!",
+    "pleaseTakeThisSurvey": "Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese.",
+    "maximumVotesReached": "Du hast die maximale Anzahl an Abstimmungen für heute erreicht. Du kannst aber zu einem späteren Zeitpunkt gerne weitermachen.",
+    "youAreNoEligibleVoter": "Als Anfänger darfst du hier noch nicht abstimmen. Sammle erst Erfahrung indem du Schriften transkribierst.",
+    "thanksForEffort": "Danke für deine Mühe!",
+    "workWillBeChecked": "Du hast dieses Objekt bearbeitet. Deine Arbeit wird von der Community überprüft.",
+    "sorry": "Entschuldigung",
+    "timeoutDetailed": "  Entschuldigung, die Verbindung zum Server ist fehlgeschlagen, bitte laden Sie die Seite neu und versuchen es erneut. Überprüfen Sie auch ihre Internetkonnektivität.",
+    "emptyTranscription": "Zu diesem Manuskript wurden noch keine Seiten hinzugefügt.",
+    "commentDisabled": "Dieser Kommentar wurde ausgeblendet.",
+    "transcribaIntro": "Hilf uns alte Manuskripte digital zu erschließen und unser kulturelles Erbe zu erhalten!"
   }
 }

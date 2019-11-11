@@ -1,0 +1,45 @@
+<mat-toolbar>
+  {{ 'title.editPage' | translate }}: {{ page.name }}
+</mat-toolbar>
+
+<div class="tr-container">
+  <form class="card" (ngSubmit)="save()" #form="ngForm">
+    <div class="card-header">
+      {{ 'title.editPage' | translate }}
+    </div>
+    <div class="card-body">
+
+      <div *ngIf="isLastAttemptFailed && !isSaving" class="alert  alert-danger">
+          <strong>{{ 'request.fail' | translate }}</strong> {{ 'command.pleaseTryAgain' | translate }}
+      </div>
+
+      <!-- Form Elements-->
+      <div class="form-group">
+        <label for="name">{{ 'general.name' | translate }}</label>
+        <div class="input-group">
+          <input [(ngModel)]="page.name" name="name" #name="ngModel" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="url">Inhalt</label>
+        <textarea rows="10" [(ngModel)]="page.content" name="content" #content="ngModel" class="form-control" required>
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="show_discussion">
+          <input type="checkbox" [(ngModel)]="page.show_discussion" name="show_disussion" #discussion="ngModel" />
+          {{ 'form.showDiscussion' | translate }}
+        </label>
+
+      </div>
+
+      <button mat-raised-button [disabled]="!form.valid" type="submit">
+        <span>{{ 'action.save' | translate }}</span>
+        <tui-inline-spinner [active]="isSaving"></tui-inline-spinner>
+      </button>
+      <button mat-raised-button [routerLink]="['/pages']">{{ 'action.abort' | translate }}</button>
+    </div>
+  </form>
+</div>

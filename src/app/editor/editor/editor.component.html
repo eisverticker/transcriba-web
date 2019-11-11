@@ -1,0 +1,23 @@
+<div *ngIf="objectId && contents" class="row">
+  <div class="hidden-xs" [class.col-sm-6]="contents.length==1" [class.col-sm-4]="contents.length==2">
+    <iv-image-viewer [objectId]="objectId"></iv-image-viewer>
+  </div>
+  <div *ngFor="let content of contents; let i = index"
+  [class.col-sm-6]="contents.length==1"
+  [class.col-sm-4]="contents.length==2">
+    <div *ngIf="enableStarter" class="mb-3">
+      <button (click)="starter()" mat-raised-button>
+        {{ 'action.transcribe' | translate }}
+      </button>
+    </div>
+    <tr-tei-container
+      (save)="saveContent($event)"
+      (publish)="publishContent($event)"
+      (abort)="abortTranscription()"
+      [label]="labels[i]"
+      [content]="contents[i]"
+      [markDirty]="markDirty[i]"
+      [editable]="editable">
+    </tr-tei-container>
+  </div>
+</div>

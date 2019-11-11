@@ -1,0 +1,7 @@
+<textarea
+  #textfield
+  class="growing-textarea"
+  (change)="propagateChange($event)"
+  (blur)="propagateTouch($event)"
+  [(ngModel)]="value">
+</textarea>

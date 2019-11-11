@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+    <input matInput
+    (change)="find()"
+    type="text"
+    [(ngModel)]="filter.latestSearchTerm"
+    class="form-control"
+    [placeholder]="'message.searchTitle' | translate" />
+</mat-toolbar>
+
+<div class="tr-container-big">
+
+  <section>
+    <mat-checkbox [(ngModel)]="filter.stage.unprocessed">{{ 'stage.unprocessed' | translate }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.stage.transcription">{{ 'stage.transcription' | translate }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.stage.review">{{ 'stage.review' | translate }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filter.stage.reviewed">{{ 'stage.reviewed' | translate }}</mat-checkbox>
+  </section>
+
+  <tui-pagination-bar
+    (pageChanged)="setPage($event)"
+    [numOfItems]="pagination.numOfItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [currentPage]="pagination.currentPage">
+  </tui-pagination-bar>
+
+  <div class="explorer-card-container">
+    <tr-object class="explorer-card" *ngFor="let object of objects" [object]="object"></tr-object>
+  </div>
+
+  <tui-pagination-bar
+    (pageChanged)="setPage($event)"
+    [numOfItems]="pagination.numOfItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [currentPage]="pagination.currentPage">
+  </tui-pagination-bar>
+
+</div>

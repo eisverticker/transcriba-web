@@ -1,0 +1,12 @@
+<mat-card class="card-spaced tr-explorer-card">
+  <mat-card-content>
+    {{ object.title }}
+    <mat-icon *ngIf="object.status === 'occupied'">lock</mat-icon>
+    <mat-icon *ngIf="object.status == 'free'">lock_open</mat-icon>
+    <mat-icon *ngIf="object.status == 'voting'" fontSet="fontawesome" fontIcon="fa-question-circle" class=""></mat-icon>    
+  </mat-card-content>
+  <img [routerLink]="'/obj/'+object.id" class="tr-explorer-thumbnail" mat-card-image [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/thumbnail')" alt="thumbnail">
+  <mat-card-actions>
+    <tui-progress-pills [stageNames]="['Unbearbeitet', 'Transkription', 'Überprüfung','Überprüft']" [size]="3" [current]="object.stage"></tui-progress-pills>
+  </mat-card-actions>
+</mat-card>

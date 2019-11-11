@@ -1,0 +1,163 @@
+{
+	"text": {
+		"intro": "Dieses Projekt hat die Aufgabe, die vielen alten Schriften in den Archiven für die Öffentlichkeit zugänglich zu machen. Und wer könnte dabei besser helfen, als die Öffentlichkeit selbst? Falls du dich für diese Schriften interessierst, kannst du gerne dabei helfen unsere Sammlung zu vergrößern, indem du an den Transkriptionen mitarbeitest."
+	},
+	"title": {
+		"eMailConfirmation": "Bestätigung Ihrer E-Mail-Adresse",
+		"pageNotFound": "Seite nicht gefunden",
+		"login": "Anmeldung",
+		"register": "Registrierung",
+		"userinfo": "Nutzerinformationen",
+		"authorizationRequired": "Fehlende Rechte!",
+		"passwordReset": "Passwort zurücksetzen",
+		"comments": "Kommentare",
+		"recentComments": "Zuletzt geschriebene Kommentare",
+		"welcomeTo": "Willkommen zu {{ object }}!",
+		"sourceManagement": "Quellenverwaltung",
+		"pageManagement": "Seitenverwaltung",
+		"editPage": "Seite bearbeiten",
+		"editSource": "Quelle bearbeiten",
+		"import": "Objekt importieren",
+		"userManagement": "Nutzerverwaltung",
+		"account": "Konto",
+		"tutorial": "Einführung",
+		"newVersion": "Neue Version",
+		"transcriptionEditor": "Transcriba-Editor",
+		"revisionComparision": "Ungeprüfte Version",
+		"openVotings": "Offene Abstimmungen",
+		"currentManuscript": "Aktuelle Manuskripte",
+		"administration": "Administration"
+	},
+	"command": {
+		"pleaseVerifyYourEMailAccount": "Nach der Registrierung wurde Ihnen ein Bestätigungslink per E-Mail zugesandt, bitte klicken Sie auf diesen Link, um zu bestätigen, dass diese E-Mail-Adresse Ihnen gehört.",
+		"pleaseTryAgain": "Bitte versuchen Sie es erneut!"
+	},
+	"action": {
+		"send": "Abschicken",
+		"abort": "Abbrechen",
+		"login": "Anmelden",
+		"logout": "Abmelden",
+		"register": "Registrieren",
+		"forgottenPassword": "Passwort vergessen",
+		"newAccount": "Neues Konto anlegen",
+		"deactivate": "Deaktivieren",
+		"activate": "Aktivieren",
+		"createNewSource": "Neue Quelle erstellen",
+		"createNewPage": "Neue Seite erstellen",
+		"save": "Speichern",
+		"edit": "Bearbeiten",
+		"show": "Anzeigen",
+		"import": "Importieren",
+		"publish": "Veröffentlichen",
+		"accept": "Akzeptieren",
+		"dismiss": "Ablehnen",
+		"ok": "Alles klar!",
+		"transcribe": "An Transkription weiterarbeiten",
+		"addPage": "Seite hinzufügen",
+		"undo": "Rückgängig",
+		"learnMore": "Mehr erfahren",
+		"removePage": "Seite entfernen",
+		"addParagraph": "Absatz hinzufügen",
+		"addHeading": "Überschrift hinzufügen",
+		"showAllComments": "Vollständige Diskussion anzeigen"
+	},
+	"general": {
+		"error": "Fehler",
+		"email": "E-Mail-Adresse",
+		"name": "Name",
+		"page": "Seite",
+		"paragraph": "Absatz",
+		"heading": "Überschrift",
+		"discussion": "Diskussion",
+		"source": "Quelle",
+		"foreignID": "Externe ID",
+		"collections": "Sammlungen",
+		"objects": "Objekte",
+		"overview": "Überblick",
+		"transcription": "Transkription",
+		"viewer": "Betrachter",
+		"versionHistory": "Änderungsprotokoll",
+		"metadata": "Metadaten",
+		"username": "Benuzter",
+		"score": "Punktzahl",
+		"tutorial": "Tutorial",
+		"infoPage": "Informationsseite {{ value }}"
+	},
+	"state": {
+		"done": "fertig"
+	},
+	"auth": {
+		"username": "Benutzername",
+		"password": "Passwort",
+		"email": "E-Mail-Adresse",
+		"passwordRepeat": "Passwort wiederholen",
+		"roles": {
+			"registered": "Registrierter",
+			"administrator": "Administrator",
+			"none": "Keine",
+			"trusted": "Vertrauter",
+			"employee": "Mitarbeiter"
+		}
+	},
+	"request": {
+		"fail": "Fehlgeschlagen!",
+		"success": "Fertig!",
+		"loginFailed": "Anmeldung fehlgeschlagen!",
+		"registrationFailed": "Registrierung fehlgeschlagen!",
+		"registrationSucceeded": "Registrierung abgeschlossen!",
+		"logoutFailed": "Du konntest auf dem Server nicht abgemeldet werden!",
+		"timeout": "Der Server konnte nicht erreicht werden.",
+		"successfulRemoved": "Das Objekt wurde erfolgreich gelöscht!",
+		"discussionCouldNotBeLoaded": "Die Diskussion konnte nicht geladen werden"
+	},
+	"message": {
+		"confirmDelete": "Du bist dabei dieses Objekt endgültig zu löschen!",
+		"error": "Es ist ein Fehler aufgetreten",
+		"pleaseWait": "Bitte warten Sie einen Augenblick",
+		"emailSent": "E-Mail wurde versandt!",
+		"goodbye": "Bis bald!",
+		"welcome": "Willkommen!",
+		"greetSomeone": "Willkommen {{ name }}!",
+		"hello": "Hallo",
+		"helloSomeone": "Hallo {{ name }}!",
+		"pageNotFound": "Diese Seite existiert leider nicht",
+		"notAccessable": "Du hast keinen Zugriff auf diese Ressource",
+		"tutorialFirst": "Als Einsteiger musst du zunächst das Tutorial abschließen.",
+		"noOpenVotings": "Es sind im Moment keine Abstimmungen verfügbar.",
+		"searchTitle": "Suchen...",
+		"noCommentsAvailable": "Hier gibt es leider noch keine Kommentare.",
+		"readOnlyMode": "Dieses Objekt ist nicht im Bearbeitungsmodus geöffnet.",
+		"caution": "Achtung!",
+		"pleaseTakeThisSurvey": "Für dieses Objekt ist eine neue Version verfügbar, bitte überprüfe diese.",
+		"maximumVotesReached": "Du hast die maximale Anzahl an Abstimmungen für heute erreicht. Du kannst aber zu einem späteren Zeitpunkt gerne weitermachen.",
+		"youAreNoEligibleVoter": "Als Anfänger darfst du hier noch nicht abstimmen. Sammle erst Erfahrung indem du Schriften transkribierst.",
+		"thanksForEffort": "Danke für deine Mühe!",
+		"workWillBeChecked": "Du hast dieses Objekt bearbeitet. Deine Arbeit wird von der Community überprüft.",
+		"sorry": "Entschuldigung",
+		"timeoutDetailed": "  Entschuldigung, die Verbindung zum Server ist fehlgeschlagen, bitte laden Sie die Seite neu und versuchen es erneut. Überprüfen Sie auch ihre Internetkonnektivität.",
+		"emptyTranscription": "Zu diesem Manuskript wurden noch keine Seiten hinzugefügt.",
+		"commentDisabled": "Dieser Kommentar wurde ausgeblendet.",
+		"transcribaIntro": "Hilf uns alte Manuskripte digital zu erschließen und unser kulturelles Erbe zu erhalten!"
+	},
+	"navigation": {
+		"landingPage": "Start",
+		"discover": "Entdecken",
+		"import": "Importieren"
+	},
+	"sources": {
+		"apiUrl": "API-URL",
+		"infoUrl": "Info-URL",
+		"logoUrl": "Logo-URL",
+		"apiType": "API-Typ",
+		"syncSupport": "Server unterstützt Synchronisierung"
+	},
+	"stage": {
+		"unprocessed": "Unbearbeitet",
+		"transcription": "Bearbeitungsphase",
+		"review": "Überprüfungsphase",
+		"reviewed": "Überprüft"
+	},
+	"form": {
+		"showDiscussion": "Diskussion anzeigen"
+	}
+}

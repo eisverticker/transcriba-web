@@ -1,0 +1,8 @@
+<div [ngSwitch]="mode">
+  <tui-loading-indicator *ngSwitchCase="'loading'"></tui-loading-indicator>
+  <lauth-login-form (done)="finishLogin()" *ngSwitchCase="'unauthenticated'"></lauth-login-form>
+  <lauth-logout (done)="finishLogout()" *ngSwitchCase="'authenticated'"></lauth-logout>
+  <lauth-registration-form (done)="finishRegistration()" *ngSwitchCase="'register'"></lauth-registration-form>
+  <lauth-verify *ngSwitchCase="'verify'"></lauth-verify>
+  <lauth-reset-form (done)="finishReset()" *ngSwitchCase="'reset'"></lauth-reset-form>
+</div>

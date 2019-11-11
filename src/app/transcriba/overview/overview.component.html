@@ -1,0 +1,30 @@
+<h1 class="compact mb-3 mt-3">{{ object.title }}</h1>
+<div class="overview-summary d-md-flex">
+  <div class="picture">
+    <a [routerLink]="'/obj/'+object.id+'/viewer'">
+      <img
+      style="height: 512px;"
+      class="img-responsive"
+      [src]="backend.unAuthUrl('TranscribaObjects/'+object.id+'/overview')"
+      alt="thumbnail"
+      />
+    </a>
+  </div>
+  <div class="info pl-4">
+    <dl *ngIf="source && object.tags">
+      <dt>{{ 'general.source' | translate }}</dt>
+      <dd>{{ source.title }} (ID: {{ object.externalID }})</dd>
+      <dt *ngIf="object.tags.length > 0">Tags</dt>
+      <dd *ngIf="object.tags.length > 0">
+        <span *ngFor="let tag of object.tags" class="badge badge-info">{{ tag }}</span>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<h2 class="compact mt-4 mb-3">{{ 'title.recentComments' | translate }}</h2>
+<disc-discussion-widget
+  *ngIf="discussion"
+  [numOfItems]="3"
+  [discussionId]="discussion.id">
+</disc-discussion-widget>
