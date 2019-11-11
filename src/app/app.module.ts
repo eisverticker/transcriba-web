@@ -22,6 +22,7 @@ import { ScoreModule } from './score/score.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -34,6 +35,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     UtilityModule,
     AuthModule,
     I18nModule,
+    TranslateModule.forRoot(),
     SourceModule,
     InfoPageModule,
     TranscribaModule,
